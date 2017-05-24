@@ -1,0 +1,31 @@
+<!--   HEADER   -->
+<div class="w3-top">
+  <!-- Navbar on large screens -->
+  <div class="w3-bar w3-theme-d2 w3-left-align w3-row">
+    <div class="w3-col m1 w3-container"></div>
+    <div class="w3-col m10 w3-container">
+      <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-hover-white w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+      <a href="#" class="w3-bar-item w3-button w3-teal"><h4><i class="fa fa-home w3-margin-right"></i>CQPROJ</h4></a>
+      <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><h4>About Us</h4></a>
+      <a [routerLink]="/secretary/list" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><h4>Secretaries</h4></a>
+    </div>
+    <div class="w3-col m1 w3-container"></div>
+  </div>
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium">
+    <a href="#" class="w3-bar-item w3-button">About Us</a>
+  </div>
+</div>
+<!-- End HEADER -->
+
+<!--    BODY    -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+  <router-outlet></router-outlet>
+</div>
+<!--  End BODY  -->
+
+<!--   FOOTER   -->
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <p>{{ today | date : "y" }} - {{footer}}</p>
+</footer>
+<!-- End FOOTER -->
