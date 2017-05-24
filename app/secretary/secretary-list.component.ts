@@ -1,29 +1,30 @@
 import { Component, OnInit } from "@angular/core";
-import { SecretaryService } from './secretary.service';
-
 import 'rxjs/add/operator/switchMap';
+import { SecretaryService } from './secretary.service';
 import { ISecretaryList } from '../interfaces';
 
 @Component({
-    templateUrl: "app/groups/group-list.component.html",
-    providers: [Service]
+    templateUrl: "app/secretary/secretary-list.component.html",
+    providers: [SecretaryService]
 })
 
-export class GroupListComponent implements OnInit {
+export class SecretariesListComponent implements OnInit {
     // Attributes that will be used on views
     secretaries: ISecretaryList[];
-    errorMessage: string;
     searchFilter: string;
     title = 'DASHBOARD';
     subtitle = 'Secretariat';
     
-    constructor( private _service: Service ) { }
+    constructor( private _service: SecretaryService ) { }
 
     // Method that is called on initialization of the page
     ngOnInit(): void {
         this._service.listSecretaries().subscribe(
-                secretaries => this.secretaries = secretaries , 
-                error => console.log("Impossível carregar lista de grupos" )
+                secretaries => {
+                    this.secretaries = secretaries 
+                    console.log(this.secretaries)
+                }, 
+                error => console.log("Error to load Secretaries" )
             );
     }   
 }

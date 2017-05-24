@@ -15,17 +15,28 @@ export class SecretaryService {
     options: RequestOptions;
     apiURL = API.url;
 
-    constructor(private _http: Http) { }
+    constructor(private _http: Http) {
+        this.headers = new Headers();
+        this.headers.append('Content-Type', 'application/json');
+        this.options = new RequestOptions({ headers: this.headers });
+    }
 
 
-    listSecretaries(): Observable<ISecretaryList[]> { 
+    listSecretaries(): Observable<ISecretaryList[]> {
         return this._http
-            .get(this.apiURL+'/secretary')
-            .map((response: Response) => <ISecretaryList[]> response.json().data )
+            .get(this.apiURL + '/secretary', this.options)
+            .map((response: Response) => <ISecretaryList[]>response.json())
             .catch(this.handleError);
     }
 
-    private handleError(error: Response){
+    getSecretary(id: number): Observable<ISecretaryProfile> {
+        return this._http
+            .get(this.apiURL+`/secretary/${id}`, this.options)
+            .map((response: Response) => <ISecretaryProfile> response.json())
+            .catch(this.handleError);
+    }
+
+    private handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || "Server error");
     }

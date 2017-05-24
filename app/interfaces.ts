@@ -1,29 +1,29 @@
 export interface ISecretaryList{
-    id:Number;
-    name:String;
-    email:String;
-    photo:String;
+    Id:Number;
+    Photo:String;
+    Name:String;
+    Email:String;
 }
 
 export interface ISecretaryProfile{
-    id:Number;
-    name:String;
-    email:String;
-    photo:String;
-    startWorkTime:Date;
-    endWorkTime:Date;
-    fiscalNumber:String;
-    citizenCard:String;
-    phone:String;
-    address:String;
-    createdDate:Date;
-    isActive:Boolean;
+    Id:Number;
+    Name:String;
+    Email:String;
+    Photo:String;
+    StartWorkTime:Date;
+    EndWorkTime:Date;
+    FiscalNumber:String;
+    CitizenCard:String;
+    Phone:String;
+    Address:String;
+    CreatedDate:Date;
+    IsActive:Boolean;
 }
 
 export interface IAction{
-    id: Number;
-    executionHour:Date;
-    description:String;
-    userId:Number;
-    userName:String;
+    Id: Number;
+    ExecutionHour:Date;
+    Description:String;
+    UserId:Number;
+    UserName:String;
 }
