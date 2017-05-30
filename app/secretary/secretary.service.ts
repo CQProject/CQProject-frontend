@@ -6,7 +6,7 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 
 import { API } from '../main';
-import { ISecretaryList, ISecretaryProfile } from '../interfaces';
+import { ISecretaryProfile } from '../interfaces';
 
 @Injectable()
 export class SecretaryService {
@@ -21,18 +21,10 @@ export class SecretaryService {
         this.options = new RequestOptions({ headers: this.headers });
     }
 
-
-    listSecretaries(): Observable<ISecretaryList[]> {
-        return this._http
-            .get(this.apiURL + '/secretary', this.options)
-            .map((response: Response) => <ISecretaryList[]>response.json())
-            .catch(this.handleError);
-    }
-
     getSecretary(id: number): Observable<ISecretaryProfile> {
         return this._http
             .get(this.apiURL+`/secretary/${id}`, this.options)
-            .map((response: Response) => <ISecretaryProfile> response.json())
+            .map((response: Response) =><ISecretaryProfile> response.json())
             .catch(this.handleError);
     }
 

@@ -25,13 +25,13 @@ export class SecretaryProfileComponent implements OnInit {
     // Method that is called on initialization of the page
     ngOnInit(): void {
         this._route.params
-            .switchMap((params: Params) => this._service.getSecretary(params['Id']))
+            .switchMap((params: Params) => this._service.getSecretary(params['id']))
             .subscribe(
                 secretary => {
                     this.secretary = secretary
                     console.log(this.secretary)
                 },
-                error => console.log("Erro to load Secretary Profile")
+                error => console.log("Error to load Secretary Profile")
             );
     }
 }

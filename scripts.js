@@ -8,6 +8,21 @@ function accordion(id) {
     }
 }
 
+var currentX;
+function inicCurrentList() {
+    currentX = document.getElementById("classes");
+    currentX.className = currentX.className.replace(" w3-hide", " w3-show");
+}
+
+function listChooser(id) {
+    var x = document.getElementById(id);
+    if (x != currentX) {
+        x.className = x.className.replace(" w3-show", " w3-hide");
+        currentX = x;
+        x.className = x.className.replace(" w3-hide", " w3-show");
+    }
+}
+
 var myIndex = 0;
 
 function carousel() {

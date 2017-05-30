@@ -7,7 +7,7 @@ import { HttpModule } from "@angular/http";
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
 import { NotFoundComponent } from "./home/nfound.component";
-import { SecretariesListComponent } from "./secretary/secretary-list.component";
+import { DashboardListComponent } from "./dashboard/dashboard-list.component";
 import { SecretaryProfileComponent } from "./secretary/secretary-profile.component";
 //Service
 //Pipes
@@ -23,7 +23,7 @@ import { CommonModule } from "@angular/common";
 		RouterModule.forRoot([
 			{ path: '', component: HomeComponent },
 			{ path: 'aboutus', component: HomeComponent },
-			{ path: 'secretary/list', component: SecretariesListComponent },
+			{ path: 'dashboard/list', component: DashboardListComponent },
 			{ path: 'secretary/profile/:id', component: SecretaryProfileComponent },
 			{ path: '**', component: NotFoundComponent }
 		])
@@ -36,7 +36,7 @@ import { CommonModule } from "@angular/common";
 		AppComponent,
 		HomeComponent,
 		NotFoundComponent,
-		SecretariesListComponent,
+		DashboardListComponent,
 		SecretaryProfileComponent,
 		//Pipe
 	],
