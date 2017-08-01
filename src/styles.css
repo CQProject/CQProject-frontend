@@ -1,8 +1,9 @@
 body{
-    background: url('assets/img/Kids.jpg') no-repeat fixed;
+    background: url('assets/img/bgExemple.jpg') no-repeat fixed;
     background-size: 100%;
     padding-top: 50px;
 }
+
 footer {
     bottom:0px; width: 100%;
     padding: 10px;
