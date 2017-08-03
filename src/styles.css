@@ -1,18 +1,8 @@
 body{
-    background: url('assets/img/bgExemple.jpg') no-repeat fixed;
+    background: url('assets/img/background.png') no-repeat fixed;
     background-size: 100%;
-    padding-top: 50px;
 }
 
-footer {
-    bottom:0px; width: 100%;
-    padding: 10px;
-}
-
-a{color: black;}
-        
-a:hover p{color: darkblue;}
-
-a, a:hover{
-    text-decoration: none;
+body footer{
+    max-height: 40px;
 }

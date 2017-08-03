@@ -4,11 +4,11 @@ import { Component } from "@angular/core";
 	 template: `
     <h2 style="color:#800">{{title}}</h2>
     <hr>
-    <p  style="color:#800">{{erro}}</p> 
+    <p  style="color:#800">{{error}}</p> 
   `
 })
 
 export class NotFoundComponent{
   title = '404';
-  erro = 'Página Não encontrada!'
-}
+  error = 'Página Não encontrada!'
+} 
