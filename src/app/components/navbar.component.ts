@@ -1,6 +1,7 @@
+import { concat } from 'rxjs/operator/concat';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from "@angular/router";
-import { LoginService } from "../services/login.service";
+import { AccountService } from "../services/account.service";
 import { IUser } from "../interfaces/user";
 
 @Component({
@@ -16,27 +17,30 @@ export class NavbarComponent {
     user: IUser
 
     constructor(
-        private _service: LoginService,
+        private _service: AccountService,
         private _router: Router,
         private _ngZone: NgZone,
     ) {
         this.authorized = false;
     }
 
-    ngOnInit() {
+    async ngOnInit() {
         if (localStorage.getItem('currentUser')) {
-            //necessita de um método da API para verificar se o token ainda é válido
-            this.user = JSON.parse(localStorage.getItem('currentUser'));
-            console.log(this.user)
-            this.authorized = true;
-            this.checkingNotifications();
+            if (await this._service.verifyToken()) {
+                this.user = JSON.parse(localStorage.getItem('currentUser'));
+                this.authorized = true;
+                this.checkingNotifications();
+            } else {
+                this.mail = JSON.parse(localStorage.getItem('currentUser')).email;
+                this.pass = JSON.parse(localStorage.getItem('currentUser')).password;
+                this.login();
+            }
+
         }
     }
 
     login() {
-        console.log("entrou no login - component")
         if (this.mail != null && this.pass != null) {
-
             this._service.login(this.mail, this.pass)
                 .subscribe(
                 result => {
@@ -55,12 +59,10 @@ export class NavbarComponent {
         this.user = null;
         localStorage.removeItem('currentUser');
         this.authorized = false;
-        console.log(JSON.parse(localStorage.getItem('currentUser')))
     }
 
 
     checkingNotifications() {
-        console.log(`check`);
         this._ngZone.runOutsideAngular(() => {
             this._check(() => {
                 // reenter the Angular zone and display done

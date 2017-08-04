@@ -12,7 +12,7 @@ import { IUser } from "../interfaces/user";
 import { API } from '../../main';
 
 @Injectable()
-export class LoginService {
+export class AccountService {
 
 
     private _headers: Headers;
@@ -26,40 +26,49 @@ export class LoginService {
     }
 
     public login(email: String, password: String): Observable<IUser> {
+        
         var toPost = JSON.stringify({
             "email": email,
             "password": password
         });
+
         return this._http
             .post(this._apiURL + '/account/login', toPost, this._options)
             .map((res: Response) => {
                 let json = res.json();
-                if(json.result=="success"){
+                if (json.result) {
                     return {
                         "email": email,
                         "password": password,
                         "token": json.data.token,
                         "userID": json.data.userID,
-                        "roles":json.data.roles,
+                        "roles": json.data.roles,
                         "classID": json.data.classID,
-                        "name":json.data.name,
-                        "photo":"../../assets/img/"+json.data.photo
+                        "name": json.data.name,
+                        "photo": "../../assets/img/" + json.data.photo
                     }
-                }else{
+                } else {
                     return null;
                 }
             })
             .catch(this._handleError);
     }
 
+    public async verifyToken(): Promise<Boolean> {
+
+        this._headers.append('Authorization', <string> JSON.parse(localStorage.getItem('currentUser')).token);
+        this._options = new RequestOptions({ headers: this._headers });
+        
+        let res = await this._http
+            .get(this._apiURL + '/account/verifytoken', this._options)
+            .toPromise();
+
+        return res.json().result ? res.json().data : res.json().result;
+    }
+
     private _handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server Error');
-    }
-
-    public logout(): void {
-        // clear token remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
     }
 
 }

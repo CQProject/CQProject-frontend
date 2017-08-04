@@ -13,7 +13,7 @@ import { NavbarComponent } from "./components/navbar.component";
 import { NotFoundComponent } from "./components/nfound.component";
 //Service
 import { HomeService } from "./services/home.service";
-import { LoginService } from "./services/login.service";
+import { AccountService } from "./services/account.service";
 //Pipes
 
 
@@ -23,7 +23,6 @@ import { LoginService } from "./services/login.service";
     FormsModule,
     HttpModule,
     CommonModule,
-
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'home', component: HomeComponent },
@@ -42,7 +41,7 @@ import { LoginService } from "./services/login.service";
   providers: [
     //Service
     HomeService,
-    LoginService,
+    AccountService
   ],
   bootstrap: [AppComponent]
 })
