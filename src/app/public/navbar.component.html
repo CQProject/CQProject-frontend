@@ -1,35 +1,29 @@
-<div class="w3-bar w3-blue-gray w3-row">
+<div class="w3-bar w3-teal w3-row">
   <div class="w3-col l1  w3-container"></div>
   <div class="w3-col l10 w3-container">
-    <h4 class="w3-bar-item w3-deep-orange"><i class="fa fa-home w3-margin-right"></i>CQProject</h4>
-    <div *ngIf="!authorized">
-      <button onclick="document.getElementById('loginModal').style.display='block'" class="w3-bar-item w3-button w3-right">
-        <h4>Login</h4>
-      </button>
-    </div>
-  </div>
-  <div class="w3-col l1  w3-container"></div>
-</div>
+    <h4 class="w3-bar-item"><span class="w3-tag w3-padding w3-round-large w3-deep-orange w3-center">CQProject</span></h4>
 
-<div id="loginModal" class="w3-modal">
-  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width: 500px;">
-    <div *ngIf="!autenticated">
-      <form>
-        <header class="w3-container w3-teal">
-          <span onclick="document.getElementById('loginModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-        </header>
-        <div class="w3-container">
-          <br>
-          <p>
-            <i class="fa fa-user"></i>
-            <input class="w3-input" type="text" [(ngModel)]="mail" name="mail" placeholder="Email" required></p>
-          <p>
-            <i class="fa fa-lock"></i>
-            <input class="w3-input" type="password" [(ngModel)]="pass" name="pass" placeholder="Password" required></p>
-          <p>
-            <button (click)="login()" id="btUserLogin" [disabled]="loading" class="w3-btn w3-teal" style="width: 100%;">Entrar</button></p>
-        </div>
+    <div *ngIf="!authorized">
+      <form class="w3-padding-24">
+        <a (click)="login()" id="btUserLogin" class="w3-bar-item w3-button w3-right w3-hover-blue-gray w3-margin-left">Entrar</a>
+        <input class="w3-input w3-bar-item w3-right" type="password" [(ngModel)]="pass" name="pass" placeholder="Password" required>
+        <i class="fa fa-lock w3-bar-item w3-right"></i>
+        <input class="w3-input w3-bar-item w3-right " type="text" [(ngModel)]="mail" name="mail" placeholder="Email" required>
+        <i class="fa fa-user w3-bar-item w3-right"></i>
       </form>
     </div>
+
+    <div *ngIf="authorized">
+      <div class="w3-bar-item w3-right w3-dropdown-hover w3-teal">
+        <img [src]="user.photo" class="w3-image" style="max-height: 70px;">
+        <div class="w3-dropdown-content w3-bar-block w3-card-4" >
+          <a href="#" class="w3-bar-item w3-button">Notificações </a>
+          <a (click)="logout()" class="w3-bar-item w3-button">Logout</a>
+          <a href="#" class="w3-bar-item w3-button">Link 3</a>
+        </div>
+      </div>
+    </div>
+
   </div>
+  <div class="w3-col l1  w3-container"></div>
 </div>

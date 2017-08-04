@@ -30,10 +30,25 @@ export class LoginService {
             "email": email,
             "password": password
         });
-
         return this._http
             .post(this._apiURL + '/account/login', toPost, this._options)
-            .map((res: Response) => res.json().data)
+            .map((res: Response) => {
+                let json = res.json();
+                if(json.result=="success"){
+                    return {
+                        "email": email,
+                        "password": password,
+                        "token": json.data.token,
+                        "userID": json.data.userID,
+                        "roles":json.data.roles,
+                        "classID": json.data.classID,
+                        "name":json.data.name,
+                        "photo":"../../assets/img/"+json.data.photo
+                    }
+                }else{
+                    return null;
+                }
+            })
             .catch(this._handleError);
     }
 

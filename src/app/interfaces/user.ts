@@ -1,4 +1,6 @@
 export interface IUser {
+    email:String;
+    password:String;
     token:String;
     userID: Number;
     roles: Number[];
