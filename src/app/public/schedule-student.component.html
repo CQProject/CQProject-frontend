@@ -1,0 +1,77 @@
+<div class="w3-hide-small ">
+    <div class="w3-row-padding w3-card w3-round w3-pale-red">
+        <div class="w3-col w3-hide-medium" style="width:10%">
+            <div class="w3-row w3-section">
+                <div class="w3-col schedule"></div>
+                <div class="w3-col schedule ">
+                    <div class="w3-round w3-teal w3-small">09h00<br>09h45</div>
+                </div>
+                <div class="w3-col schedule ">
+                    <div class="w3-round w3-teal w3-small">10h05<br>10h50</div>
+                </div>
+                <div class="w3-col schedule  ">
+                    <div class="w3-round w3-teal w3-small">11h00<br>11h45</div>
+                </div>
+                <div class="w3-col schedule ">
+                    <div class="w3-round w3-teal w3-small">13h15<br>14h00</div>
+                </div>
+                <div class="w3-col schedule ">
+                    <div class="w3-round w3-teal w3-small">14h15<br>15h00</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w3-col" style="width:90%">
+            <div class="w3-row-padding w3-section">
+                <div class="w3-col" style="width:20%">
+                    <div id="bigMonday" class="w3-row">
+                        <div class="w3-col schedule w3-round w3-deep-orange">Segunda</div>
+                        <a class="w3-col w3-round-large w3-button schedule w3-hover-blue-gray"><b>Matemática</b></a>
+                    </div>
+                </div>
+                <div class="w3-col" style="width:20%">
+                    <div id="bigTuesday" class="w3-row">
+                        <div class="w3-col schedule w3-round w3-deep-orange">Terça</div>
+                    </div>
+                </div>
+                <div class="w3-col" style="width:20%">
+                    <div id="bigWednesday" class="w3-row">
+                        <div class="w3-col schedule w3-round w3-deep-orange">Quarta</div>
+                    </div>
+                </div>
+                <div class="w3-col" style="width:20%">
+                    <div id="bigThursday" class="w3-row">
+                        <div class="w3-col schedule w3-round w3-deep-orange">Quinta</div>
+                    </div>
+                </div>
+                <div class="w3-col" style="width:20%">
+                    <div id="bigFriday" class="w3-row">
+                        <div class="w3-col schedule w3-round w3-deep-orange">Sexta</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="w3-hide-medium w3-hide-large">
+
+    <div>
+        <a (click)="accordion('smallMonday')" class="w3-btn w3-col schedule w3-round w3-deep-orange">Segunda</a>
+        <div id="smallMonday" class="w3-hide w3-container w3-row">
+            <a class="w3-col w3-round-large w3-button schedule w3-pale-red w3-hover-blue-gray"><b>Matemática</b></a>
+        </div>
+        <a (click)="accordion('smallTuesday')" class="w3-btn w3-col schedule w3-round w3-deep-orange">Terça</a>
+        <div id="smallTuesday" class="w3-hide w3-container w3-row">
+        </div>
+        <a (click)="accordion('smallWednesday')" class="w3-btn w3-col schedule w3-round w3-deep-orange">Quarta</a>
+        <div id="smallWednesday" class="w3-hide w3-container w3-row">
+        </div>
+        <a (click)="accordion('smallThursday')" class="w3-btn w3-col schedule w3-round w3-deep-orange">Quinta</a>
+        <div id="smallThursday" class="w3-hide w3-container w3-row">
+        </div>
+        <a (click)="accordion('smallFriday')" class="w3-btn w3-col schedule w3-round w3-deep-orange">Sexta</a>
+        <div id="smallFriday" class="w3-hide w3-container w3-row">
+        </div>
+    </div>
+</div>

@@ -22,7 +22,6 @@ export class AccountService {
     constructor(private _http: Http) {
         this._headers = new Headers();
         this._headers.append('Content-Type', 'application/json; charset=utf-8');
-        this._options = new RequestOptions({ headers: this._headers });
     }
 
     public login(email: String, password: String): Observable<IUser> {
@@ -31,6 +30,8 @@ export class AccountService {
             "email": email,
             "password": password
         });
+
+        this._options = new RequestOptions({ headers: this._headers });
 
         return this._http
             .post(this._apiURL + '/account/login', toPost, this._options)

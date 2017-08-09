@@ -11,9 +11,9 @@ import { IUser } from "../interfaces/user";
 
 export class NavbarComponent {
 
-    mail: String;
-    pass: String;
-    authorized: Boolean;
+    mail: string;
+    pass: string;
+    authorized: boolean;
     user: IUser
 
     constructor(
@@ -77,6 +77,15 @@ export class NavbarComponent {
             window.setTimeout(() => this._check(doneCallback), 10000);
         } else {
             doneCallback();
+        }
+    }
+
+    dropdown(elementID: string) {
+        var element = document.getElementById(elementID);
+        if (element.className.indexOf("w3-show") == -1) {
+            element.className += " w3-show";
+        } else {
+            element.className = element.className.replace(" w3-show", "");
         }
     }
 
