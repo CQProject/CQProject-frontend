@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-    templateUrl: "../public/lesson-schedule.component.html",
-    styleUrls: ['../public/student-schedule.component.css']
+    templateUrl: "./lesson-teacher.component.html"
 })
 
-export class LessonScheduleComponent {
+export class LessonTeacherComponent {
 
     index: number;
 

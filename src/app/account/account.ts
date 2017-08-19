@@ -1,4 +1,4 @@
-export interface IUser {
+export interface Account {
     email:String;
     password:String;
     token:String;

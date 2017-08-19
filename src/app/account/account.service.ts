@@ -8,7 +8,7 @@ import "rxjs/add/operator/do";
 import "rxjs/add/operator/catch";
 import 'rxjs/add/operator/toPromise';
 
-import { IUser } from "../interfaces/user";
+import { Account } from "./account";
 import { API } from '../../main';
 
 @Injectable()
@@ -24,7 +24,7 @@ export class AccountService {
         this._headers.append('Content-Type', 'application/json; charset=utf-8');
     }
 
-    public login(email: String, password: String): Observable<IUser> {
+    public login(email: String, password: String): Observable<Account> {
         
         var toPost = JSON.stringify({
             "email": email,
@@ -36,17 +36,17 @@ export class AccountService {
         return this._http
             .post(this._apiURL + '/account/login', toPost, this._options)
             .map((res: Response) => {
-                let json = res.json();
-                if (json.result) {
+                if (res.json().result) {
+                    let data = res.json().data;
                     return {
                         "email": email,
                         "password": password,
-                        "token": json.data.token,
-                        "userID": json.data.userID,
-                        "roles": json.data.roles,
-                        "classID": json.data.classID,
-                        "name": json.data.name,
-                        "photo": "../../assets/img/" + json.data.photo
+                        "token": data.token,
+                        "userID": data.userID,
+                        "roles": data.roles,
+                        "classID": data.classID,
+                        "name": data.name,
+                        "photo": "../../assets/img/" + data.photo
                     }
                 } else {
                     return null;

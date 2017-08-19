@@ -2,22 +2,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, EmailValidator } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule, Routes } from "@angular/router";
+import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import 'zone.js';
 import 'reflect-metadata';
 //Component
 import { AppComponent } from "./app.component";
-import { HomeComponent } from "./components/home.component";
-import { NavbarComponent } from "./components/navbar.component";
-import { NotFoundComponent } from "./components/nfound.component";
+import { AccountNavbarComponent } from "./account/account-navbar.component";
+import { AccountHomeComponent } from "./account/account-home.component";
 
-import { LessonScheduleComponent } from "./components/lesson-schedule.component";
-import { ScheduleStudentComponent } from "./components/schedule-student.component";
+import { NotFoundComponent } from "./notfound/nfound.component";
+import { SchoolHomeComponent } from "./schools/school-home.component";
+import { LessonTeacherComponent } from "./lessons/lesson-teacher.component";
+import { ScheduleStudentComponent } from "./schedules/schedule-student.component";
 
 //Service
-import { HomeService } from "./services/home.service";
-import { AccountService } from "./services/account.service";
+import { SchoolService } from "./schools/school.service";
+import { AccountService } from "./account/account.service";
+import { AuthGuard } from "./account/auth-guard.service";
+import { NotificationService } from "./notifications/notification.service";
 //Pipes
 
 
@@ -28,10 +31,11 @@ import { AccountService } from "./services/account.service";
     HttpModule,
     CommonModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
-      { path: 'home', component: HomeComponent },
-      { path: 'schedule/day', component: ScheduleStudentComponent },
-      { path: 'schedule/lesson', component: LessonScheduleComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: AccountHomeComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
+      { path: 'schools', component: SchoolHomeComponent },
+      { path: 'schedules/student', component: ScheduleStudentComponent, canActivate: [AuthGuard], data: { roles: [1, 3, 5, 6] } },
+      { path: 'lessons/teacher', component: LessonTeacherComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 6] } },
       { path: '**', component: NotFoundComponent }
     ])
   ],
@@ -39,17 +43,19 @@ import { AccountService } from "./services/account.service";
   declarations: [
     //Component
     AppComponent,
-    HomeComponent,
+    AccountNavbarComponent,
+    AccountHomeComponent,
     NotFoundComponent,
-    NavbarComponent,
+    SchoolHomeComponent,
     ScheduleStudentComponent,
-    LessonScheduleComponent,
+    LessonTeacherComponent,
     //Pipe
   ],
   providers: [
-    //Service
-    HomeService,
-    AccountService
+    AuthGuard,
+    SchoolService,
+    AccountService,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })

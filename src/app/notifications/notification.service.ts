@@ -8,11 +8,12 @@ import "rxjs/add/operator/do";
 import "rxjs/add/operator/catch";
 import 'rxjs/add/operator/toPromise';
 
-import { ISchool } from "../interfaces/school";
+import { Notification } from "./notification";
 import { API } from '../../main';
 
 @Injectable()
-export class HomeService {
+export class NotificationService {
+
 
     private _headers: Headers;
     private _options: RequestOptions;
@@ -21,13 +22,18 @@ export class HomeService {
     constructor(private _http: Http) {
         this._headers = new Headers();
         this._headers.append('Content-Type', 'application/json; charset=utf-8');
+        this._headers.append('Authorization', <string> JSON.parse(localStorage.getItem('currentUser')).token);
         this._options = new RequestOptions({ headers: this._headers });
     }
 
-    getSchools(): Observable<ISchool[]> {
+    count(): Observable<Number> {
         return this._http
-            .get(this._apiURL+'/school/home', this._options)
-            .map((res: Response) => res.json())
+            .get(this._apiURL+'/notification/unreadcount', this._options)
+            .map((res: Response) => {
+                if(res.json().result){
+                    return res.json().data;
+                }
+            })
             .catch(this.handleError);
     }
 
@@ -35,4 +41,5 @@ export class HomeService {
         console.error(error);
         return Observable.throw(error.json().error || "Server error");
     }
+
 }

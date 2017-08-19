@@ -35,7 +35,7 @@
 
     <div *ngIf="authorized">
       <div class="w3-bar-item w3-right w3-dropdown-click w3-teal">
-        <a (click)="dropdown('options')" class=""><img [src]="user.photo" class="w3-image" style="max-height: 50px;"></a>
+        <a (click)="dropdown('options')" class=""><div class="w3-panel"><i class="fa fa-user-circle w3-xlarge"></i></div></a>
         <div id="options" class="w3-dropdown-content w3-bar-block w3-card-4">
           <a href="#" class="w3-bar-item w3-button">Notificações </a>
           <a (click)="logout()" class="w3-bar-item w3-button">Logout</a>
