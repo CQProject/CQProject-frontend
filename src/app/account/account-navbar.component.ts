@@ -3,7 +3,6 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from "@angular/router";
 import { AccountService } from "./account.service";
 import { Account } from "./account";
-import { NotificationService } from "../notifications/notification.service";
 
 @Component({
     selector: 'navbar',
@@ -15,12 +14,10 @@ export class AccountNavbarComponent {
     mail: string;
     pass: string;
     authorized: boolean;
-    user: Account
-    notifications:Number;
+    user: Account;
 
     constructor(
         private _service: AccountService,
-        private _notifService: NotificationService,
         private _router: Router,
         private _ngZone: NgZone,
     ) {
@@ -33,7 +30,6 @@ export class AccountNavbarComponent {
             if (await this._service.verifyToken()) {
                 this.user = JSON.parse(localStorage.getItem('currentUser'));
                 this.authorized = true;
-                this.checkingNotifications();
             } else {
                 this.mail = JSON.parse(localStorage.getItem('currentUser')).email;
                 this.pass = JSON.parse(localStorage.getItem('currentUser')).password;
@@ -51,7 +47,6 @@ export class AccountNavbarComponent {
                     console.log(data);
                     localStorage.setItem('currentUser', JSON.stringify(this.user));
                     this.authorized = true;
-                    this.checkingNotifications();
                     this._router.navigate(['home']);
                 },
                 error => {
@@ -65,30 +60,6 @@ export class AccountNavbarComponent {
         localStorage.removeItem('currentUser');
         this.authorized = false;
         this._router.navigate(['schools']);
-    }
-
-
-    checkingNotifications() {
-        this._ngZone.runOutsideAngular(() => {
-            this._check(() => {
-                // reenter the Angular zone and display done
-                this._ngZone.run(() => { });
-            })
-        });
-    }
-
-    _check(doneCallback: () => void) {
-        if (this.authorized) {
-            
-            this._notifService.count()
-            .subscribe(
-                count => {this.notifications = count; console.log(this.notifications);},
-                error => console.log("Impossível obter contagem de notificações"));
-
-            window.setTimeout(() => this._check(doneCallback), 10000);
-        } else {
-            doneCallback();
-        }
     }
 
     dropdown(elementID: string) {

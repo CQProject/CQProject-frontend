@@ -10,7 +10,7 @@ import 'reflect-metadata';
 import { AppComponent } from "./app.component";
 import { AccountNavbarComponent } from "./account/account-navbar.component";
 import { AccountHomeComponent } from "./account/account-home.component";
-
+import { NotificationCounterComponent } from "./notifications/notification-counter.component";
 import { NotFoundComponent } from "./notfound/nfound.component";
 import { SchoolHomeComponent } from "./schools/school-home.component";
 import { LessonTeacherComponent } from "./lessons/lesson-teacher.component";
@@ -49,6 +49,7 @@ import { NotificationService } from "./notifications/notification.service";
     SchoolHomeComponent,
     ScheduleStudentComponent,
     LessonTeacherComponent,
+    NotificationCounterComponent
     //Pipe
   ],
   providers: [
