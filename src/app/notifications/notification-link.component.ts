@@ -5,7 +5,7 @@ import { NotificationService } from "../notifications/notification.service";
 
 @Component({
     selector: 'notifications',
-    templateUrl: "./notification-counter.component.html"
+    templateUrl: "./notification-link.component.html"
 })
 
 export class NotificationCounterComponent {
@@ -18,7 +18,7 @@ export class NotificationCounterComponent {
         private _ngZone: NgZone,
     ) { }
 
-    ngOnInit() {
+    public ngOnInit() {
         this._ngZone.runOutsideAngular(() => {
             this._check(() => {
                 // reenter the Angular zone and display done
@@ -27,13 +27,10 @@ export class NotificationCounterComponent {
         });
     }
 
-    private _check(doneCallback: () => void) {
-        if (<Account>JSON.parse(localStorage.getItem('currentUser'))!=null) {
-            this._service.count()
-                .subscribe(
-                count => { this.notifications = count; console.log(this.notifications); },
-                error => console.log("Impossível obter contagem de notificações"));
-
+    private async _check(doneCallback: () => void) {
+        if (<Account>JSON.parse(localStorage.getItem('currentUser')) != null) {
+            this.notifications = await this._service.count();
+            console.log(this.notifications);
             window.setTimeout(() => this._check(doneCallback), 10000);
         } else {
             doneCallback();

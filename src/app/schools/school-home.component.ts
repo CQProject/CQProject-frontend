@@ -1,13 +1,13 @@
 import {Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SchoolService } from './school.service';
-import { ISchool } from "./school";
+import { School } from "./iSchool";
 
 @Component({ templateUrl: "./school-home.component.html" })
 
 export class SchoolHomeComponent{
 
-    public schools: ISchool[];
+    public schools: School[];
 
     constructor(
         private _service: SchoolService,

@@ -8,7 +8,7 @@ import "rxjs/add/operator/do";
 import "rxjs/add/operator/catch";
 import 'rxjs/add/operator/toPromise';
 
-import { Account } from "./account";
+import { Account } from "./iAccount";
 import { API } from '../../main';
 
 @Injectable()
@@ -25,14 +25,11 @@ export class AccountService {
     }
 
     public login(email: String, password: String): Observable<Account> {
-        
         var toPost = JSON.stringify({
             "email": email,
             "password": password
         });
-
         this._options = new RequestOptions({ headers: this._headers });
-
         return this._http
             .post(this._apiURL + '/account/login', toPost, this._options)
             .map((res: Response) => {
@@ -49,6 +46,7 @@ export class AccountService {
                         "photo": "../../assets/img/" + data.photo
                     }
                 } else {
+                    console.log(res.json().info);
                     return null;
                 }
             })

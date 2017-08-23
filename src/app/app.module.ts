@@ -10,16 +10,17 @@ import 'reflect-metadata';
 import { AppComponent } from "./app.component";
 import { AccountNavbarComponent } from "./account/account-navbar.component";
 import { AccountHomeComponent } from "./account/account-home.component";
-import { NotificationCounterComponent } from "./notifications/notification-counter.component";
+import { NotificationCounterComponent } from "./notifications/notification-link.component";
 import { NotFoundComponent } from "./notfound/nfound.component";
 import { SchoolHomeComponent } from "./schools/school-home.component";
 import { LessonTeacherComponent } from "./lessons/lesson-teacher.component";
 import { ScheduleStudentComponent } from "./schedules/schedule-student.component";
-
+import { NotificationMenuComponent } from "./notifications/notification-menu.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
 import { AuthGuard } from "./account/auth-guard.service";
+import { UserService } from "./users/user.service";
 import { NotificationService } from "./notifications/notification.service";
 //Pipes
 
@@ -36,6 +37,7 @@ import { NotificationService } from "./notifications/notification.service";
       { path: 'schools', component: SchoolHomeComponent },
       { path: 'schedules/student', component: ScheduleStudentComponent, canActivate: [AuthGuard], data: { roles: [1, 3, 5, 6] } },
       { path: 'lessons/teacher', component: LessonTeacherComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 6] } },
+      { path: 'notifications', component: NotificationMenuComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       { path: '**', component: NotFoundComponent }
     ])
   ],
@@ -49,14 +51,16 @@ import { NotificationService } from "./notifications/notification.service";
     SchoolHomeComponent,
     ScheduleStudentComponent,
     LessonTeacherComponent,
-    NotificationCounterComponent
+    NotificationCounterComponent,
+    NotificationMenuComponent
     //Pipe
   ],
   providers: [
     AuthGuard,
     SchoolService,
     AccountService,
-    NotificationService
+    NotificationService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

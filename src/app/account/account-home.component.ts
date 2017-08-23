@@ -2,7 +2,7 @@ import { concat } from 'rxjs/operator/concat';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from "@angular/router";
 import { AccountService } from "./account.service";
-import { Account } from "./account";
+import { Account } from "./iAccount";
 
 @Component({
     templateUrl: "./account-home.component.html"

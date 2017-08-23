@@ -1,4 +1,4 @@
-export interface ISchool {
+export interface School {
     ID: Number;
     Name: String;
     Logo: String;
