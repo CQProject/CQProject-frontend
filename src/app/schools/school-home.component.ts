@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SchoolService } from './school.service';
 import { School } from "./iSchool";
+import { AssistantGuard, SecretaryGuard } from "../account/auth-guard.service"
 
 @Component({ templateUrl: "./school-home.component.html" })
 
@@ -11,7 +12,9 @@ export class SchoolHomeComponent {
 
     constructor(
         private _service: SchoolService,
-        private _route: Router
+        private _route: Router,
+        private _assistantGuard:AssistantGuard,
+        private _secretaryGuard:SecretaryGuard
     ) { }
 
     public ngOnInit() {

@@ -19,6 +19,7 @@ export class NotificationCounterComponent {
     ) { }
 
     public ngOnInit() {
+        this.notifications=1;
         this._ngZone.runOutsideAngular(() => {
             this._check(() => {
                 // reenter the Angular zone and display done

@@ -19,7 +19,7 @@ import { NotificationMenuComponent } from "./notifications/notification-menu.com
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
-import { AuthGuard } from "./account/auth-guard.service";
+import { AuthGuard, AdminGuard, AssistantGuard, GuardianGuard, SecretaryGuard, StudentrGuard, TeacherGuard } from "./account/auth-guard.service";
 import { UserService } from "./users/user.service";
 import { NotificationService } from "./notifications/notification.service";
 //Pipes
@@ -57,10 +57,16 @@ import { NotificationService } from "./notifications/notification.service";
   ],
   providers: [
     AuthGuard,
-    SchoolService,
+    AssistantGuard,
+    AdminGuard,
+    TeacherGuard,
+    StudentrGuard,
+    GuardianGuard,
+    SecretaryGuard,
     AccountService,
+    UserService,
     NotificationService,
-    UserService
+    SchoolService,
   ],
   bootstrap: [AppComponent]
 })

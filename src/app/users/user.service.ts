@@ -29,7 +29,6 @@ export class UserService {
         let response = await this._http
             .get(this._apiURL + `/user/profile/${userID}`, this._options)
             .toPromise();
-
         if (response.json().result) return response.json().data;
         else {
             console.log(response.json().info);
@@ -41,5 +40,4 @@ export class UserService {
         console.error(error);
         return Observable.throw(error.json().error || "Server error");
     }
-
 }

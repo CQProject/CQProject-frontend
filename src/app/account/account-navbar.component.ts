@@ -65,14 +65,14 @@ export class AccountNavbarComponent {
         this._router.navigate(['schools']);
     }
 
-    public dropdown(elementID: string) {
+    public dropdownIn(elementID: string) {
         var element = document.getElementById(elementID);
-        if (element.className.indexOf("w3-show") == -1) {
             element.className += " w3-show";
-        } else {
-            element.className = element.className.replace(" w3-show", "");
-        }
     }
 
+    public dropdownOut(elementID: string) {
+        var element = document.getElementById(elementID);
+            element.className = element.className.replace(" w3-show", "");
+    }
 
 }

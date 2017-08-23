@@ -17,18 +17,23 @@
 <div *ngFor="let school of schools">
   <div id="{{school?.ID}}" class="w3-modal">
     <div class="w3-modal-content">
-      <header class="w3-container w3-teal">
-        <span (click)="hide(school?.ID)" class="w3-button w3-display-topright">&times;</span>
-        <div class="w3-row">
-          <div class="w3-col s3"><img src="{{school?.Logo}}" style="max-height: 60px"></div>
-          <div class="w3-col s9"><h2>{{school?.Name}}</h2></div>
-          </div>
-      </header>
+      <div class="w3-container w3-deep-orange">
+        <span (click)="hide(school?.ID)" class="w3-btn w3-display-topright">&times;</span>
+      </div>
+      <div class="w3-row">
+        <div class="w3-col s3"><img src="{{school?.Logo}}" style="max-height: 90px"></div>
+        <div class="w3-col s9 w3-margin-top w3-left-align">
+          <h2>{{school?.Name}}</h2>
+        </div>
+      </div>
       <div class="w3-container">
-          <img src="{{school?.ProfilePicture}}" style=" max-height: 500px">
+        <img src="{{school?.ProfilePicture}}" style=" max-height: 500px">
         <p>{{school?.About}}</p>
       </div>
-      <footer class="w3-container w3-teal"></footer>
+      <div class="w3-container w3-teal">
+        <div *ngIf="_assistantGuard.canActivate()">está visivel a administradores e assistentes</div>
+        <div *ngIf="_secretaryGuard.canActivate()">está visivel a administradores e secretários</div>
+      </div>
     </div>
   </div>
 </div>
