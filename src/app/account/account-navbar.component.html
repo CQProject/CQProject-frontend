@@ -1,13 +1,13 @@
-<div class="w3-bar w3-teal w3-row" style="max-height: 66px;">
+<div class="w3-bar w3-green w3-row" style="max-height: 66px;">
   <div class="w3-col l1  w3-container"></div>
   <div class="w3-col l10 w3-container">
-    <a href="#" class="w3-bar-item w3-btn w3-deep-orange">
-      <h4><i class="fa fa-home w3-margin-right"></i>CQPROJ</h4>
+    <a href="#" class="w3-bar-item w3-btn w3-lime">
+      <h4 class="w3-text-white"><i class="fa fa-home w3-margin-right"></i>CQPROJ</h4>
     </a>
 
     <div *ngIf="!authorized" class="w3-hide-medium w3-hide-small">
       <form class="w3-padding-16">
-        <a (click)="login()" id="btUserLogin" class="w3-bar-item w3-button w3-right w3-hover-blue-gray w3-margin-left">Entrar</a>
+        <a (click)="login()" id="btUserLogin" class="w3-bar-item w3-button w3-right w3-hover-lime w3-hover-text-white w3-margin-left">Entrar</a>
         <input class="w3-input w3-bar-item w3-right" type="password" [(ngModel)]="pass" name="pass" placeholder="Password" required>
         <i class="fa fa-lock w3-bar-item w3-right"></i>
         <input class="w3-input w3-bar-item w3-right " type="text" [(ngModel)]="mail" name="mail" placeholder="Email" required>
@@ -33,8 +33,8 @@
     </div>
 
     <div *ngIf="authorized">
-      <div (mouseenter)="dropdownIn('userDropdown')" (mouseleave)="dropdownOut('userDropdown')" class="w3-bar-item w3-right w3-circle w3-deep-orange w3-btn w3-margin-top">
-        <i class="fa fa-user-circle w3-xlarge"></i>
+      <div (mouseenter)="dropdownIn('userDropdown')" (mouseleave)="dropdownOut('userDropdown')" class="w3-bar-item w3-right w3-circle w3-lime w3-btn w3-margin-top">
+        <i class="fa fa-user-circle w3-xlarge w3-text-white"></i>
         <div id="userDropdown" class="w3-bar-block w3-card-4 w3-hide w3-white">
           <notifications></notifications>
           <a (click)="logout()" class="w3-bar-item w3-button">Logout</a>
