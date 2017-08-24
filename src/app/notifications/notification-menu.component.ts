@@ -93,4 +93,9 @@ export class NotificationMenuComponent {
         }
         console.log(this.sentValidations);
     }
+
+    public chooseOption(id: string){
+        var information;
+        information = document.getElementsByClassName("information");
+    }
 }

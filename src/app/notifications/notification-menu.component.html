@@ -2,3 +2,32 @@
 <button (click)="getSentNotifications()">Notificações enviadas</button>
 
 <button (click)="getSentValidations(33)">Validações enviadas</button>
+
+<div class="w3-row w3-center"> 
+    <div class="w3-col l2 w3-container"></div> 
+    <div class="w3-col l8 w3-container">
+    <a class="w3-half w3-border-right" style="cursor:pointer" (click)="chooseOption('receivedMessages')">
+        <div class="tablink w3-green w3-text-white w3-hover-lime w3-hover-text-white w3-bottombar w3-border-white w3-padding info">
+            Mensagens Recebidas
+        </div>
+    </a>
+    <a class="w3-half w3-border-left" style="cursor:pointer" (click)="chooseOption('sentMessages')">
+        <div class="tablink w3-green w3-text-white w3-hover-lime w3-hover-text-white w3-bottombar w3-padding info">
+            Mensagens Enviadas
+        </div>
+    </a>
+    </div> 
+    <div class="w3-col l2 w3-container"></div> 
+</div>
+
+<div id="receivedMessages" class="information w3-animate-bottom w3-show">
+    <div class="w3-row">
+            <div class="w3-col l1 w3-container"></div>
+            <div class="w3-col l10 w3-container">
+                <div class="w3-container" *ngFor="let recNot of receivedNotifications">
+
+                </div>
+            </div>
+            <div class="w3-col l1 w3-container"></div>
+    </div>
+</div>
