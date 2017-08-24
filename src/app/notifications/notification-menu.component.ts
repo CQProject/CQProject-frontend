@@ -33,6 +33,7 @@ export class NotificationMenuComponent {
     public async getReceivedNotifications() {
         this.receivedNotifications = [];
         let validations = await this._service.getValidationsByPage(this.receivedPage);
+        console.log(validations);
         if (validations != null) {
             for (let validation of validations) {
                 this._getReceivedNotification(validation);
@@ -44,6 +45,8 @@ export class NotificationMenuComponent {
     private async _getReceivedNotification(validation: Validation) {
         let notification = await this._service.getReceivedNotification(validation.NotificationFK);
         let sender = await this._userService.getProfile(notification.UserFK);
+        console.log(notification);
+        console.log(sender);
         this.receivedNotifications.push({
             "ID": notification.ID,
             "Hour": notification.Hour,

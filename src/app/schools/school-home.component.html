@@ -31,7 +31,7 @@
         <p>{{school?.About}}</p>
       </div>
       <div class="w3-container w3-teal">
-        <div *ngIf="_assistantGuard.canActivate()">está visivel a administradores e assistentes</div>
+        <div *ngIf="_assistantGuard.canActivate()"><button [routerLink]="['/floor/school', school?.ID]">Edifícios</button></div>
         <div *ngIf="_secretaryGuard.canActivate()">está visivel a administradores e secretários</div>
       </div>
     </div>

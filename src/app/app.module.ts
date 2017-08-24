@@ -16,12 +16,14 @@ import { SchoolHomeComponent } from "./schools/school-home.component";
 import { LessonTeacherComponent } from "./lessons/lesson-teacher.component";
 import { ScheduleStudentComponent } from "./schedules/schedule-student.component";
 import { NotificationMenuComponent } from "./notifications/notification-menu.component";
+import { FloorMapComponent } from "./Floors/floor-map.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
 import { AuthGuard, AdminGuard, AssistantGuard, GuardianGuard, SecretaryGuard, StudentrGuard, TeacherGuard } from "./account/auth-guard.service";
 import { UserService } from "./users/user.service";
 import { NotificationService } from "./notifications/notification.service";
+import { FloorService } from "./Floors/floor.service";
 //Pipes
 
 
@@ -38,8 +40,9 @@ import { NotificationService } from "./notifications/notification.service";
       { path: 'schedules/student', component: ScheduleStudentComponent, canActivate: [AuthGuard], data: { roles: [1, 3, 5, 6] } },
       { path: 'lessons/teacher', component: LessonTeacherComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 6] } },
       { path: 'notifications', component: NotificationMenuComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
+      { path: 'floor/school/:id', component: FloorMapComponent, canActivate: [AuthGuard], data: { roles: [ 4, 6] } },
       { path: '**', component: NotFoundComponent }
-    ])
+    ], { useHash: true })
   ],
   exports: [RouterModule],
   declarations: [
@@ -52,7 +55,8 @@ import { NotificationService } from "./notifications/notification.service";
     ScheduleStudentComponent,
     LessonTeacherComponent,
     NotificationCounterComponent,
-    NotificationMenuComponent
+    NotificationMenuComponent,
+    FloorMapComponent
     //Pipe
   ],
   providers: [
@@ -67,6 +71,7 @@ import { NotificationService } from "./notifications/notification.service";
     UserService,
     NotificationService,
     SchoolService,
+    FloorService,
   ],
   bootstrap: [AppComponent]
 })
