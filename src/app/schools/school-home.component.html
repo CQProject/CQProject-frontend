@@ -5,7 +5,7 @@
     <div *ngFor="let school of schools">
       <a class="w3-btn w3-col s6 m4 l3 w3-animate-bottom" (click)="show(school?.ID)">
         <div class="w3-card-2 w3-display-container">
-          <img src="{{school?.ProfilePicture}}" style="width:100%">
+          <img [attr.src]="school?.ProfilePicture" style="width:100%">
           <div class="w3-display-bottommiddle w3-large">{{school?.Acronym}}</div>
         </div>
       </a>
@@ -21,13 +21,13 @@
         <span (click)="hide(school?.ID)" class="w3-btn w3-display-topright">&times;</span>
       </div>
       <div class="w3-row">
-        <div class="w3-col s3"><img src="{{school?.Logo}}" style="max-height: 90px"></div>
+        <div class="w3-col s3"><img [attr.src]="school?.Logo" style="max-height: 90px"></div>
         <div class="w3-col s9 w3-margin-top w3-left-align">
           <h2>{{school?.Name}}</h2>
         </div>
       </div>
       <div class="w3-container">
-        <img src="{{school?.ProfilePicture}}" style=" max-height: 500px">
+        <img [attr.src]="school?.ProfilePicture" style=" max-height: 500px">
         <p>{{school?.About}}</p>
       </div>
       <div class="w3-container w3-teal">
@@ -37,3 +37,6 @@
     </div>
   </div>
 </div>
+
+<button (click)="download()">Download</button>
+<iframe width="500" height="600" [attr.src]="pdf" type="application/pdf"></iframe>

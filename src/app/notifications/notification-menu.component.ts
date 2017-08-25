@@ -5,6 +5,8 @@ import { NotificationService } from "./notification.service";
 import { UserService } from "../users/user.service";
 import { Notification, ReceivedNotification } from "./iNotifications";
 import { Validation, SentValidation } from "./iValidations";
+import { UserProfile } from "../users/iUsers";
+
 @Component({
     templateUrl: "./notification-menu.component.html"
 })
@@ -44,9 +46,10 @@ export class NotificationMenuComponent {
 
     private async _getReceivedNotification(validation: Validation) {
         let notification = await this._service.getReceivedNotification(validation.NotificationFK);
+        console.log("notf: "+notification.UserFK)
         let sender = await this._userService.getProfile(notification.UserFK);
-        console.log(notification);
-        console.log(sender);
+        console.log("user: "+sender.ID)
+        //while(sender==null){sender = await this._userService.getProfile(notification.UserFK);}
         this.receivedNotifications.push({
             "ID": notification.ID,
             "Hour": notification.Hour,
@@ -97,7 +100,7 @@ export class NotificationMenuComponent {
         console.log(this.sentValidations);
     }
 
-    public chooseOption(id: string){
+    public chooseOption(id: string) {
         var information;
         information = document.getElementsByClassName("information");
     }

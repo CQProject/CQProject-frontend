@@ -24,18 +24,18 @@ export class SchoolService {
         this._options = new RequestOptions({ headers: this._headers });
     }
 
-    public getSchools(): Observable<School[]> {
-        return this._http
-            .get(this._apiURL+'/school', this._options)
-            .map((res: Response) => {
-                if(res.json().result){
-                    return res.json().data;
-                }
-            })
-            .catch(this.handleError);
+    public async getSchools(): Promise<School[]> {
+        let response = await this._http
+            .get(this._apiURL + '/school', this._options)
+            .toPromise();
+        if (response.json().result) return response.json().data;
+        else {
+            console.log(response.json().info);
+            return null;
+        }
     }
 
-    public async getSchool(schoolID:Number): Promise<School> {
+    public async getSchool(schoolID: Number): Promise<School> {
         let response = await this._http
             .get(this._apiURL + `/school/${schoolID}`, this._options)
             .toPromise();

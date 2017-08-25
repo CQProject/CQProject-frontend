@@ -7,4 +7,5 @@ export interface Account {
     classID:Number;
     name:String;
     photo:String;
+    image:File;
 }

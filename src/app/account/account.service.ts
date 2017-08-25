@@ -43,7 +43,7 @@ export class AccountService {
                         "roles": data.roles,
                         "classID": data.classID,
                         "name": data.name,
-                        "photo": "../../assets/img/" + data.photo
+                        "photo": data.photo
                     }
                 } else {
                     console.log(res.json().info);

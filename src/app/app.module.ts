@@ -20,10 +20,11 @@ import { FloorMapComponent } from "./Floors/floor-map.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
-import { AuthGuard, AdminGuard, AssistantGuard, GuardianGuard, SecretaryGuard, StudentrGuard, TeacherGuard } from "./account/auth-guard.service";
+import { AuthGuard, AdminGuard, AssistantGuard, GuardianGuard, SecretaryGuard, StudentrGuard, TeacherGuard } from "./utils/auth-guard.service";
 import { UserService } from "./users/user.service";
 import { NotificationService } from "./notifications/notification.service";
 import { FloorService } from "./Floors/floor.service";
+import {FileService } from "./utils/files.service";
 //Pipes
 
 
@@ -72,6 +73,7 @@ import { FloorService } from "./Floors/floor.service";
     NotificationService,
     SchoolService,
     FloorService,
+    FileService
   ],
   bootstrap: [AppComponent]
 })

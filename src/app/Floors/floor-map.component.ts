@@ -2,7 +2,7 @@ import { Component, OnInit, Renderer } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FloorService } from './floor.service';
 import { SchoolService } from "../schools/school.service";
-import { AssistantGuard } from "../account/auth-guard.service"
+import { AssistantGuard } from "../utils/auth-guard.service"
 import { Floor } from "./iFloor";
 import { Sensor } from "./iSensor";
 import { School } from '../schools/iSchool';

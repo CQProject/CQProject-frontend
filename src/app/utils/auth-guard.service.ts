@@ -1,7 +1,6 @@
-import { forEach } from '@angular/router/src/utils/collection';
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
-import { Account } from './iAccount';
+import { Account } from '../Account/iAccount';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
