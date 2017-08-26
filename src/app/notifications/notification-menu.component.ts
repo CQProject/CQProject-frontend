@@ -100,6 +100,10 @@ export class NotificationMenuComponent {
         console.log(this.sentValidations);
     }
 
+    public async readNotification(notificationID: Number){
+        this._service.read(notificationID).subscribe();
+    }
+
     public chooseOption(id: String) {
         var information, tablink;
         information = document.getElementsByClassName("information");
@@ -124,6 +128,7 @@ export class NotificationMenuComponent {
     }
 
     public closeNotifDetails(id: String) {
+        //window.location.reload();
         var notif = document.getElementById(id + "").style.display = "none";
     }
 }

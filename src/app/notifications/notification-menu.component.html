@@ -48,7 +48,9 @@
                         <span class="w3-padding w3-text-teal">{{notification.Subject}}</span><br>
                     </div>
                     <div class="w3-col w3-half">
-                        <h6><button class="w3-button w3-block w3-text-teal w3-medium w3-pale-green w3-hover-green" (click)="showNotifDetails('notifReceived')">Ver Notificação</button></h6>
+                        <h6>
+                            <button type="submit" class="w3-button w3-block w3-text-teal w3-medium w3-pale-green w3-hover-green" (click)="showNotifDetails('notifReceived');readNotification(notification.ID)">Ver Notificação</button>
+                        </h6>
                     </div>
                 </div>
             </div>
@@ -56,7 +58,29 @@
                 <div class="w3-modal-content w3-card-4 w3-animate-bottom">
                     <header class="w3-container w3-green w3-center">
                         <h3>{{notification.Subject}}</h3>
+                        <span (click)="closeNotifDetails('notifReceived')" class="w3-button w3-display-topright w3-hover-lime w3-hover-text-white">&times;</span>
                     </header>
+                    <div class="w3-container w3-margin">
+                        <div class="w3-margin w3-left-align">
+                            <p>
+                                <label class="w3-green">Data:</label> {{notification.Hour}}
+                            </p>
+                            <p>
+                                <label class="w3-green">Remetente:</label> {{notification.Sender}}
+                            </p>
+                            <p>
+                                <label class="w3-green">Descrição:</label> {{notification.Description}}
+                            </p>
+                            <div class="w3-row w3-center" *ngIf="notification.Approval">   
+                                <a class="w3-button w3-lime w3-hover-light-green w3-text-white w3-hover-text-white w3-circle" checked>
+                                    <i class="fa fa-check"></i>
+                                </a>
+                                <a class="w3-button w3-deep-orange w3-hover-red w3-circle">
+                                    <i class="fa fa-remove"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

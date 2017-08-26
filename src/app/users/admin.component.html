@@ -1,0 +1,529 @@
+<!--***************************** TAB ************************* -->
+<div class="w3-row w3-center">
+    <a href="javascript:void(0)">
+        <div value="Escola" class="w3-quarter w3-border-green tablink w3-deep-orange w3-hover-teal w3-bottombar w3-padding info"
+            onclick="chooseOption(event,'Escolas')">Escolas</div>
+    </a>
+    <a href="javascript:void(0)">
+        <div value="Professor" class="w3-quarter tablink w3-bottombar w3-deep-orange w3-hover-teal w3-padding info w3-dropdown-hover">
+            <div onclick="chooseOption(event,'listarProfessores')">Professores</div>
+            <div class="w3-dropdown-content w3-bar-block w3-col">
+                <a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-green w3-deep-orange" onclick="chooseOption(event,'criarProfessor')">Criar Professor</a>
+                <a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-green w3-deep-orange" onclick="chooseOption(event,'desativarProfessor')">Desativar Professor</a>
+            </div>
+        </div>
+    </a>
+    <a href="javascript:void(0)">
+        <div value="Estudante" class="w3-quarter tablink w3-bottombar w3-deep-orange w3-hover-teal w3-padding info w3-dropdown-hover">
+            <div onclick="chooseOption(event,'listarEstudantes')">Estudantes</div>
+            <div class="w3-dropdown-content w3-bar-block w3-col">
+                <a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-green w3-deep-orange" onclick="chooseOption(event,'criarEstudantes')">Criar Estudante</a>
+                <a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-green w3-deep-orange" onclick="chooseOption(event,'desativarEstudante')">Desativar Estudante</a>
+            </div>
+        </div>
+    </a>
+    <a href="javascript:void(0)">
+        <div value="Assistente" class="w3-quarter tablink w3-bottombar w3-deep-orange w3-hover-teal w3-padding info w3-dropdown-hover"
+            onclick="chooseOption(event,'Assistentes')">Assistentes
+            <div class="w3-dropdown-content w3-bar-block w3-col">
+                <a href="javascript:void(0)" class="w3-bar-item w3-button">a</a>
+            </div>
+        </div>
+    </a>
+</div>
+
+<!--********************************* informacao sobre escolas *********************************-->
+
+<div id="Escolas" class="information w3-animate-bottom w3-show ">
+    <div class="w3-display-top w3-margin-top w3-large w3-center">
+        <h1>Lista de Escolas</h1>
+    </div>
+    <div class="w3-row w3-center ">
+        <div class="w3-col l2 w3-container"></div>
+        <div class="w3-col l8 w3-container">
+            <!-- <div *ngFor="let school of school"> -->
+            <a class="w3-btn w3-col s6 m4 l3" onclick="listChooser()">
+                <div class="w3-card-2 w3-display-container">
+                    <img src="https://placehold.it/80x80?text=IMAGE" style="width:100%">
+                    <div class="w3-display-bottommiddle w3-large">{{school?.Name}}</div>
+                </div>
+            </a>
+        </div>
+        <div class="w3-col l2 w3-container"></div>
+    </div>
+</div>
+
+<!--********************************* lista de Professores *********************************-->
+<div id="listarProfessores" class="information w3-display-top w3-margin-top w3-hide w3-animate-bottom">
+    <h1 class="w3-center">Lista de Professores</h1>
+    <div class="w3-row w3-center">
+        <div class="w3-col l2 w3-container"></div>
+        <div class="w3-col l8 w3-container">
+            <div class="w3-responsive">
+                <input id="procProfs" class="w3-input w3-border w3-padding" type="text" placeholder="Procura rápida de um professor" onkeyup="searchTable('lisProfs','procProfs')"
+                />
+                <table class="w3-table w3-border w3-bordered" id="lisProfs">
+                    <tr>
+                        <th class="w3-panel w3-teal">Nome</th>
+                        <th class="w3-panel w3-teal">Email</th>
+                        <th class="w3-panel w3-teal">Data de registo no sistema</th>
+                        <th class="w3-panel w3-teal">Estado</th>
+                    </tr>
+                    <!--<tr *ngFor=let teacher of teachers>-->
+                    <tr>
+                        <td>{{teacher.name}}</td>
+                        <td>{{teacher.email}}</td>
+                        <td>{{teacher.registerDate}}</td>
+                        <td>{{teacher.isActive}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="w3-col l2 w3-container"></div>
+    </div>
+</div>
+
+<!--********************************* criar professor *********************************-->
+<div id="criarProfessor" value="Criar um Professor" class="information w3-display-top w3-margin-top w3-hide w3-animate-bottom">
+    <div class="w3-row">
+        <div class="w3-col l2 w3-container"></div>
+        <div class="w3-col l8 w3-container">
+            <div class="w3-card-4">
+                <div class="w3-container w3-teal w3-center">
+                    <h2>Criar uma conta para um professor</h2>
+                </div>
+                <form class="w3-container w3-row">
+                    <!--*************************Nome*****************************************-->
+                    <div class="w3-col w3-half">
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="width:30px">
+                                <i class="w3-xlarge fa fa-user"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="Name" placeholder="Nome do Professor" required/>
+                            </div>
+                        </div>
+                        <!--*************************Password*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-key"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="Password" placeholder="Password" required/>
+                            </div>
+                        </div>
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-key"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="confirmPassword" placeholder="Confirmar Password" required/>
+                            </div>
+                        </div>
+                        <!--*************************Email*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-envelope"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="Email" placeholder="Email" required/>
+                            </div>
+                        </div>
+                        <!--*************************DateOfBirth*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-birthday-cake"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="DateOfBirth" placeholder="Data de Nascimento" />
+                            </div>
+                        </div>
+                        <!--*************************Function*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-wrench"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="Function" placeholder="Função" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w3-col w3-half">
+                        <!--*************************Address*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-home"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="Address" placeholder="Morada" />
+                            </div>
+                        </div>
+                        <!--*************************CitizenCard*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-id-card"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="CitizenCard" placeholder="Cartão do Cidadão" />
+                            </div>
+                        </div>
+                        <!--*************************FiscalNumber*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-id-card-o"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="FiscalNumber" placeholder="Número de Contribuinte" />
+                            </div>
+                        </div>
+                        <!--*************************Curriculum*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-file-text-o"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="file" name="Curriculum" placeholder="Currículo" />
+                            </div>
+                        </div>
+                        <!--*************************Phone Number*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-mobile"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="PhoneNumber" placeholder="Número de Telefone / Telemóvel" />
+                            </div>
+                        </div>
+                        <!--*************************Photo*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-photo"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="file" name="Photo" placeholder="Foto" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="w3-container w3-center w3-margin">
+                    <a class="w3-button w3-deep-orange w3-round-large w3-center">Submit</a>
+                </div>
+            </div>
+        </div>
+        <div class="w3-col l2 w3-container"></div>
+    </div>
+</div>
+
+<!--********************************* desativar professor *********************************-->
+
+<div id="desativarProfessor" value="Desativar um Professor" class="information w3-display-top w3-margin-top w3-hide w3-animate-bottom">
+    <h1 class="w3-center">Lista de Professores</h1>
+    <div class="w3-row w3-center">
+        <div class="w3-col l2 w3-container"></div>
+        <div class="w3-col l8 w3-container">
+            <div class="w3-responsive">
+                <input id="procProfs1" class="w3-input w3-border w3-padding" type="text" placeholder="Procura rápida de um professor" onkeyup="searchTable('lisProfs1','procProfs1')"
+                />
+                <table class="w3-table w3-border w3-bordered" id="lisProfs1">
+                    <tr>
+                        <th class="w3-panel w3-teal">Nome</th>
+                        <th class="w3-panel w3-teal">Email</th>
+                        <th class="w3-panel w3-teal w3-center">Desativar</th>
+                    </tr>
+                    <!--<tr *ngFor=let teacher of teachers>-->
+                    <tr>
+                        <td>{{teacher.name}}</td>
+                        <td>{{teacher.email}}</td>
+                        <td class="w3-center">
+                            <a class="w3-button w3-circle w3-teal w3-hover-deep-orange"><i class="fa fa-user-times"></i></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="w3-col l2 w3-container"></div>
+    </div>
+</div>
+
+<!--********************************* listar os estudantes *********************************-->
+
+<div id="listarEstudantes" value="Desativar um Professor" class="information w3-display-top w3-margin-top w3-hide w3-animate-bottom">
+    <h1 class="w3-center">Lista de Estudantes</h1>
+    <div class="w3-row w3-center">
+        <div class="w3-col l2 w3-container"></div>
+        <div class="w3-col l8 w3-container">
+            <div class="w3-responsive">
+                <input id="procEsts1" class="w3-input w3-border w3-padding" type="text" placeholder="Procura rápida de um estudante" onkeyup="searchTable('lisEsts1','procEsts1')"
+                />
+                <table class="w3-table w3-border w3-bordered" id="lisEsts1">
+                    <tr>
+                        <th class="w3-panel w3-teal">Nome</th>
+                        <th class="w3-panel w3-teal">Email</th>
+                        <th class="w3-panel w3-teal">Data de Registo no Sistema</th>
+                        <th class="w3-panel w3-teal">Estado</th>
+                    </tr>
+                    <!--<tr *ngFor=let teacher of teachers>-->
+                    <tr>
+                        <td>{{student.name}}</td>
+                        <td>{{student.email}}</td>
+                        <td>{{student.registerDate}}</td>
+                        <td>{{student.isActive}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="w3-col l2 w3-container"></div>
+    </div>
+</div>
+
+<!--********************************* criar um estudante *********************************-->
+
+<div id="criarEstudantes" value="Criar um estudante" class="information w3-display-top w3-margin-top w3-hide w3-animate-bottom">
+    <div class="w3-row w3-center">
+        <div class="w3-col l2 w3-container"></div>
+        <div class="w3-col l8 w3-container">
+            <div class="w3-card-4">
+                <div class="w3-container w3-teal w3-center">
+                    <h2>Criar uma conta para um estudante</h2>
+                </div>
+                <form class="w3-container w3-row">
+                    <!--*************************Nome*****************************************-->
+                    <div class="w3-col w3-half">
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="width:30px">
+                                <i class="w3-xlarge fa fa-user"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="Name" placeholder="Nome do Estudante" required/>
+                            </div>
+                        </div>
+                        <!--*************************Password*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-key"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="Password" placeholder="Password" required/>
+                            </div>
+                        </div>
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-key"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="confirmPassword" placeholder="Confirmar Password" required/>
+                            </div>
+                        </div>
+                        <!--*************************Email*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-envelope"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="Email" placeholder="Email" required/>
+                            </div>
+                        </div>
+                        <!--*************************DateOfBirth*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-birthday-cake"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="DateOfBirth" placeholder="Data de Nascimento" />
+                            </div>
+                        </div>
+                        <!--*************************Function*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-wrench"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="Function" placeholder="Função" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w3-col w3-half">
+                        <!--*************************Address*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-home"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="Address" placeholder="Morada" />
+                            </div>
+                        </div>
+                        <!--*************************CitizenCard*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-id-card"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="CitizenCard" placeholder="Cartão do Cidadão" />
+                            </div>
+                        </div>
+                        <!--*************************FiscalNumber*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-id-card-o"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="FiscalNumber" placeholder="Número de Contribuinte" />
+                            </div>
+                        </div>
+                        <!--*************************Phone Number*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-mobile"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="text" name="PhoneNumber" placeholder="Número de Telefone / Telemóvel" />
+                            </div>
+                        </div>
+                        <!--*************************Photo*****************************************-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-photo"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input class="w3-input" type="file" name="Photo" placeholder="Foto" />
+                            </div>
+                        </div>
+                        <!--Guardians-->
+                        <div class="w3-row w3-section">
+                            <div class="w3-col" style="max-width:30px">
+                                <i class="w3-xlarge fa fa-users"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <div class="w3-button w3-teal" onclick="document.getElementById('newGuardian').style.display='block'">
+                                    Adicionar Enc. Educação
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="w3-container w3-center w3-margin">
+                    <a class="w3-button w3-deep-orange w3-round-large w3-center">Submit</a>
+                </div>
+                <div class="w3-col l2 w3-container"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--********************************* criar um encarregado de educacao *********************************-->
+
+<div id="newGuardian" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-bottom">
+        <header class="w3-container w3-green w3-center">
+            <h2>Criar um Encarregado de Educação</h2>
+        </header>
+        <div class="w3-container">
+            <form class="w3-container w3-row">
+                <!--*************************Nome*****************************************-->
+                <div class="w3-col w3-half">
+                    <div class="w3-row w3-section">
+                        <div class="w3-col" style="width:30px">
+                            <i class="w3-xlarge fa fa-user"></i>
+                        </div>
+                        <div class="w3-rest">
+                            <input class="w3-input" type="text" name="Name" placeholder="Nome do Encarregado de Educação" required/>
+                        </div>
+                    </div>
+                    <!--*************************Password*****************************************-->
+                    <div class="w3-row w3-section">
+                        <div class="w3-col" style="max-width:30px">
+                            <i class="w3-xlarge fa fa-key"></i>
+                        </div>
+                        <div class="w3-rest">
+                            <input class="w3-input" type="text" name="Password" placeholder="Password" required/>
+                        </div>
+                    </div>
+                    <div class="w3-row w3-section">
+                        <div class="w3-col" style="max-width:30px">
+                            <i class="w3-xlarge fa fa-key"></i>
+                        </div>
+                        <div class="w3-rest">
+                            <input class="w3-input" type="text" name="confirmPassword" placeholder="Confirmar Password" required/>
+                        </div>
+                    </div>
+                    <!--*************************Email*****************************************-->
+                    <div class="w3-row w3-section">
+                        <div class="w3-col" style="max-width:30px">
+                            <i class="w3-xlarge fa fa-envelope"></i>
+                        </div>
+                        <div class="w3-rest">
+                            <input class="w3-input" type="text" name="Email" placeholder="Email" required/>
+                        </div>
+                    </div>
+                    <!--*************************Function*****************************************-->
+                    <div class="w3-row w3-section">
+                        <div class="w3-col" style="max-width:30px">
+                            <i class="w3-xlarge fa fa-wrench"></i>
+                        </div>
+                        <div class="w3-rest">
+                            <input class="w3-input" type="text" name="Function" placeholder="Função" />
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-col w3-half">
+                    <!--*************************Address*****************************************-->
+                    <div class="w3-row w3-section">
+                        <div class="w3-col" style="max-width:30px">
+                            <i class="w3-xlarge fa fa-home"></i>
+                        </div>
+                        <div class="w3-rest">
+                            <input class="w3-input" type="text" name="Address" placeholder="Morada" />
+                        </div>
+                    </div>
+                    <!--*************************CitizenCard*****************************************-->
+                    <div class="w3-row w3-section">
+                        <div class="w3-col" style="max-width:30px">
+                            <i class="w3-xlarge fa fa-id-card"></i>
+                        </div>
+                        <div class="w3-rest">
+                            <input class="w3-input" type="text" name="CitizenCard" placeholder="Cartão do Cidadão" />
+                        </div>
+                    </div>
+                    <!--*************************FiscalNumber*****************************************-->
+                    <div class="w3-row w3-section">
+                        <div class="w3-col" style="max-width:30px">
+                            <i class="w3-xlarge fa fa-id-card-o"></i>
+                        </div>
+                        <div class="w3-rest">
+                            <input class="w3-input" type="text" name="FiscalNumber" placeholder="Número de Contribuinte" />
+                        </div>
+                    </div>
+                    <!--*************************Phone Number*****************************************-->
+                    <div class="w3-row w3-section">
+                        <div class="w3-col" style="max-width:30px">
+                            <i class="w3-xlarge fa fa-mobile"></i>
+                        </div>
+                        <div class="w3-rest">
+                            <input class="w3-input" type="text" name="PhoneNumber" placeholder="Número de Telefone / Telemóvel" />
+                        </div>
+                    </div>
+                    <!--*************************Photo*****************************************-->
+                    <div class="w3-row w3-section">
+                        <div class="w3-col" style="max-width:30px">
+                            <i class="w3-xlarge fa fa-photo"></i>
+                        </div>
+                        <div class="w3-rest">
+                            <input class="w3-input" type="file" name="Photo" placeholder="Foto" />
+                        </div>
+                    </div>
+                    <!--Button Saida-->
+                    <div class="w3-row w3-section">
+                        <div class="w3-col" style="max-width:30px">
+                            <i></i>
+                        </div>
+                        <div class="w3-rest w3-center">
+                            <div class="w3-button w3-teal" onclick="document.getElementById('newGuardian').style.display='none'">
+                                Guardar
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
