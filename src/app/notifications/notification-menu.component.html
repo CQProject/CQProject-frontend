@@ -1,33 +1,90 @@
-<button (click)="getReceivedNotifications()">Notificações recebidas</button>
-<button (click)="getSentNotifications()">Notificações enviadas</button>
-
 <button (click)="getSentValidations(33)">Validações enviadas</button>
 
-<div class="w3-row w3-center"> 
-    <div class="w3-col l2 w3-container"></div> 
-    <div class="w3-col l8 w3-container">
-    <a class="w3-half w3-border-right" style="cursor:pointer" (click)="chooseOption('receivedMessages')">
-        <div class="tablink w3-green w3-text-white w3-hover-lime w3-hover-text-white w3-bottombar w3-border-white w3-padding info">
-            Mensagens Recebidas
-        </div>
-    </a>
-    <a class="w3-half w3-border-left" style="cursor:pointer" (click)="chooseOption('sentMessages')">
-        <div class="tablink w3-green w3-text-white w3-hover-lime w3-hover-text-white w3-bottombar w3-padding info">
-            Mensagens Enviadas
-        </div>
-    </a>
-    </div> 
-    <div class="w3-col l2 w3-container"></div> 
+<div class="w3-row w3-center">
+    <div class="w3-col l1 w3-container"></div>
+    <div class="w3-col l10 w3-container">
+        <a class="w3-half w3-border-right" style="cursor:pointer" (click)="chooseOption('receivedMessages');getReceivedNotifications()">
+            <div id="received" class="tablink w3-green w3-text-white w3-hover-lime w3-hover-text-white w3-bottombar w3-padding w3-border-white">
+                Mensagens Recebidas
+            </div>
+        </a>
+        <a class="w3-half w3-border-left" style="cursor:pointer" (click)="chooseOption('sentMessages');getSentNotifications()">
+            <div id="sent" class="tablink w3-green w3-text-white w3-hover-lime w3-hover-text-white w3-bottombar w3-padding">
+                Mensagens Enviadas
+            </div>
+        </a>
+    </div>
+    <div class="w3-col l1 w3-container"></div>
 </div>
 
 <div id="receivedMessages" class="information w3-animate-bottom w3-show">
-    <div class="w3-row">
-            <div class="w3-col l1 w3-container"></div>
-            <div class="w3-col l10 w3-container">
-                <div class="w3-container" *ngFor="let recNot of receivedNotifications">
-
+    <div class="w3-col l1 w3-container"></div>
+    <div class="w3-col l10 w3-container">
+        <div class="w3-container"></div>
+        <div *ngFor="let notification of receivedNotifications">
+            <div class="w3-card-4 w3-white w3-margin w3-display-container">
+                <header class="w3-container w3-green">
+                    <div class="w3-row">
+                        <div class="w3-col l6 m6 s12">
+                            <h6 class="w3-left"><a>{{notification.Sender}}</a></h6>
+                        </div>
+                        <div>
+                            <h6 class="w3-col l6 m6 s12">
+                                <div class="w3-row">
+                                    <div class="w3-col l10 m10 s10">
+                                        <i class="fa fa-calendar"></i><span> {{notification.Hour}}</span>
+                                    </div>
+                                    <div class="w3-col l2 m2 s2 w3-display-topright" style="margin-top:1%">
+                                        <div *ngIf="notification.Read"><i class="fa fa-envelope-open-o"></i></div>
+                                        <div *ngIf="!notification.Read"><i class="fa fa-envelope-o"></i></div>
+                                    </div>
+                                </div>
+                            </h6>
+                        </div>
+                    </div>
+                </header>
+                <div class="w3-row">
+                    <div class="w3-col w3-half">
+                        <span class="w3-padding w3-text-teal">{{notification.Subject}}</span><br>
+                    </div>
+                    <div class="w3-col w3-half">
+                        <h6><button class="w3-button w3-block w3-text-teal w3-medium w3-pale-green w3-hover-green" (click)="showNotifDetails('notifReceived')">Ver Notificação</button></h6>
+                    </div>
                 </div>
             </div>
-            <div class="w3-col l1 w3-container"></div>
+            <div id="notifReceived" class="w3-modal">
+                <div class="w3-modal-content w3-card-4 w3-animate-bottom">
+                    <header class="w3-container w3-green w3-center">
+                        <h3>{{notification.Subject}}</h3>
+                    </header>
+                </div>
+            </div>
+        </div>
+        <div class="w3-container"></div>
+        <div class="w3-col l1 w3-container"></div>
+    </div>
+</div>
+
+<div id="sentMessages" class="information w3-animate-bottom w3-hide">
+    <div class="w3-col l1 w3-container"></div>
+    <div class="w3-col l10 w3-container">
+        <div class="w3-container"></div>
+        <div *ngFor="let notification of sentNotifications">
+            <div class="w3-card-4 w3-white w3-margin w3-border-green">
+                <div class="">
+                    <div class="w3-row">
+                        <div class="w3-col w3-third">
+                            <b class="w3-left w3-text-teal w3-margin-left"><a><p>{{notification.Subject}}</p></a></b>
+                        </div>
+                        <div class="w3-col w3-third">
+                            <p><span class="w3-text-teal"> {{notification.Hour}}</span></p>
+                        </div>
+                        <div class="w3-col w3-third w3-right w3-container">
+                            <h6><button class="w3-button w3-block w3-text-teal w3-medium w3-pale-green w3-hover-green" (click)="showNotifDetails('notifReceived')">Ver Notificação</button></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
