@@ -63,6 +63,7 @@ export class AccountNavbarComponent {
         localStorage.removeItem('currentUser');
         this.authorized = false;
         this._router.navigate(['schools']);
+        window.location.reload();
     }
 
     public dropdownIn(elementID: string) {

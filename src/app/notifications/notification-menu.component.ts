@@ -35,20 +35,20 @@ export class NotificationMenuComponent {
     public async getReceivedNotifications() {
         this.receivedNotifications = [];
         let validations = await this._service.getValidationsByPage(this.receivedPage);
-        console.log(validations);
         if (validations != null) {
             for (let validation of validations) {
-                this._getReceivedNotification(validation);
+                await this._getReceivedNotification(validation);
             }
         }
-        console.log(this.receivedNotifications);
+
+
     }
 
     private async _getReceivedNotification(validation: Validation) {
         let notification = await this._service.getReceivedNotification(validation.NotificationFK);
-        console.log("notf: "+notification.UserFK)
+        console.log("notf: " + notification.UserFK)
         let sender = await this._userService.getProfile(notification.UserFK);
-        console.log("user: "+sender.ID)
+        console.log("user: " + sender.ID)
         //while(sender==null){sender = await this._userService.getProfile(notification.UserFK);}
         this.receivedNotifications.push({
             "ID": notification.ID,
@@ -100,8 +100,30 @@ export class NotificationMenuComponent {
         console.log(this.sentValidations);
     }
 
-    public chooseOption(id: string) {
-        var information;
+    public chooseOption(id: String) {
+        var information, tablink;
         information = document.getElementsByClassName("information");
+        for (var i = 0; i < information.length; i++) {
+            if (information[i].id == id) {
+                information[i].className = information[i].className.replace(" w3-hide", " w3-show");
+            } else {
+                information[i].className = information[i].className.replace(" w3-show", " w3-hide");
+            }
+        }
+        tablink = document.getElementsByClassName("tablink");
+        for (var i = 0; i < tablink.length; i++) {
+            tablink[i].className = tablink[i].className.replace("w3-border-white", " ");
+            if (id.includes(tablink[i].id)) {
+                tablink[i].className += " w3-border-white";
+            }
+        }
+    }
+
+    public showNotifDetails(id: String) {
+        var notif = document.getElementById(id + "").style.display = "block";
+    }
+
+    public closeNotifDetails(id: String) {
+        var notif = document.getElementById(id + "").style.display = "none";
     }
 }
