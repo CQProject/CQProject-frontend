@@ -8,6 +8,7 @@ import { Validation, SentValidation } from "./iValidations";
 import { UserProfile } from "../users/iUsers";
 
 @Component({
+    selector:"notification-menu",
     templateUrl: "./notification-menu.component.html"
 })
 
@@ -104,31 +105,36 @@ export class NotificationMenuComponent {
         this._service.read(notificationID).subscribe();
     }
 
-    public chooseOption(id: String) {
-        var information, tablink;
-        information = document.getElementsByClassName("information");
-        for (var i = 0; i < information.length; i++) {
-            if (information[i].id == id) {
-                information[i].className = information[i].className.replace(" w3-hide", " w3-show");
+    public chooseOptionNotif(id: String) {
+        var informationNotif, tablinkNotif;
+        informationNotif = document.getElementsByClassName("informationNotif");
+        for (var i = 0; i < informationNotif.length; i++) {
+            if (informationNotif[i].id == id) {
+                informationNotif[i].className = informationNotif[i].className.replace(" w3-hide", " w3-show");
             } else {
-                information[i].className = information[i].className.replace(" w3-show", " w3-hide");
+                informationNotif[i].className = informationNotif[i].className.replace(" w3-show", " w3-hide");
             }
         }
-        tablink = document.getElementsByClassName("tablink");
-        for (var i = 0; i < tablink.length; i++) {
-            tablink[i].className = tablink[i].className.replace("w3-border-white", " ");
-            if (id.includes(tablink[i].id)) {
-                tablink[i].className += " w3-border-white";
+        tablinkNotif = document.getElementsByClassName("tablinkNotif");
+        for (var i = 0; i < tablinkNotif.length; i++) {
+            tablinkNotif[i].className = tablinkNotif[i].className.replace("w3-border-white", " ");
+            if (id.includes(tablinkNotif[i].id)) {
+                tablinkNotif[i].className += " w3-border-white";
             }
         }
     }
 
-    public showNotifDetails(id: String) {
+    public showNotifDetails(id: String, idNotif?: Number) {
         var notif = document.getElementById(id + "").style.display = "block";
+        if(id=="notifSent"){
+            this.getSentValidations(idNotif);
+        }
     }
 
     public closeNotifDetails(id: String) {
-        //window.location.reload();
+        if(id=="receivedMessages"){
+        window.location.reload();
+        }
         var notif = document.getElementById(id + "").style.display = "none";
     }
 }

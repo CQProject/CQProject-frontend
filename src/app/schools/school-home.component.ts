@@ -6,7 +6,7 @@ import { AssistantGuard, SecretaryGuard } from "../utils/auth-guard.service";
 import { FileService } from "../utils/files.service";
 import { API } from '../../main';
 
-@Component({ templateUrl: "./school-home.component.html" })
+@Component({ selector:"schools-home",templateUrl: "./school-home.component.html" })
 
 export class SchoolHomeComponent {
 

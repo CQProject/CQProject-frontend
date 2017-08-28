@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
+    selector: "schedule-student",
     templateUrl: "./schedule-student.component.html",
     styleUrls: ['./student-schedule.component.css']
 })
