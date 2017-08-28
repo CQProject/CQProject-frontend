@@ -38,7 +38,7 @@ export class AccountNavbarComponent {
                 this.pass = JSON.parse(localStorage.getItem('currentUser')).password;
                 this.login();
             }
-        }else{console.log("não está autenticado");}
+        } else { console.log("não está autenticado"); }
     }
 
     public login() {
@@ -47,10 +47,14 @@ export class AccountNavbarComponent {
                 .subscribe(
                 data => {
                     this.user = data;
-                    console.log(data);
-                    localStorage.setItem('currentUser', JSON.stringify(this.user));
-                    this.authorized = true;
-                    this._router.navigate(['home']);
+                    if (data != null) {
+                        console.log(data);
+                        localStorage.setItem('currentUser', JSON.stringify(this.user));
+                        this.authorized = true;
+                        this._router.navigate(['home']);
+                    } else {
+                        console.log("Credenciais incorretas")
+                    }
                 },
                 error => {
                     console.log("Impossível entrar no sistema");
@@ -62,18 +66,18 @@ export class AccountNavbarComponent {
         this.user = null;
         localStorage.removeItem('currentUser');
         this.authorized = false;
-        this._router.navigate(['schools']);
         window.location.reload();
+        this._router.navigate(['schools']);
     }
 
     public dropdownIn(elementID: string) {
         var element = document.getElementById(elementID);
-            element.className += " w3-show";
+        element.className += " w3-show";
     }
 
     public dropdownOut(elementID: string) {
         var element = document.getElementById(elementID);
-            element.className = element.className.replace(" w3-show", "");
+        element.className = element.className.replace(" w3-show", "");
     }
 
 }

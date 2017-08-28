@@ -16,5 +16,24 @@ export class AccountHomeComponent {
         private _ngZone: NgZone,
     ) { }
 
+    public chooseOption(id: String) {
+        var information, tablink;
+        information = document.getElementsByClassName("information");
+        for (var i = 0; i < information.length; i++) {
+            if (information[i].id == id) {
+                information[i].className = information[i].className.replace(" w3-hide", " w3-show");
+            } else {
+                information[i].className = information[i].className.replace(" w3-show", " w3-hide");
+            }
+        }
+        tablink = document.getElementsByClassName("tablink");
+        for (var i = 0; i < tablink.length; i++) {
+            tablink[i].className = tablink[i].className.replace("w3-border-white", " ");
+            if (id.includes(tablink[i].id)) {
+                tablink[i].className += " w3-border-white";
+            }
+        }
+    }
+
 
 }

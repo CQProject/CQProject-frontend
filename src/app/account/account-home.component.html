@@ -1,4 +1,44 @@
-<button [routerLink]="['/schedules/student']">Horário</button>
-<button [routerLink]="['/lessons/teacher']">Licões</button>
-<button [routerLink]="['/notifications']">Notificações</button>
-<button [routerLink]="['/schools']">Escolas</button>
+<div class="w3-row w3-center">
+    <div class="w3-col l1 w3-container"></div>
+    <div class="w3-col l10 w3-container">
+        <a class="w3-quarter w3-border-right" style="cursor:pointer" (click)="chooseOption('Schedule');" [routerLink]="['/schedules/student']" style="text-decoration:none">
+            <div id="Schedule" class="tablink w3-green w3-text-white w3-hover-lime w3-hover-text-white w3-bottombar w3-padding w3-border-white">
+                Horário
+            </div>
+        </a>
+        <a class="w3-quarter w3-border-left w3-dropdown-hover" style="cursor:pointer;text-decoration:none">
+            <div id="Lesson" class="tablink w3-green w3-text-white w3-hover-lime w3-hover-text-white w3-bottombar w3-padding" (click)="chooseOption('Lessons');">
+                Lições
+            </div>
+        </a>
+        <a class="w3-quarter w3-border-left w3-dropdown-hover" style="cursor:pointer;text-decoration:none">
+            <div id="Notification" class="tablink w3-green w3-text-white w3-hover-lime w3-hover-text-white w3-bottombar w3-padding" (click)="chooseOption('Notifications');">
+                Notificações
+            </div>
+        </a>
+        <a class="w3-quarter w3-border-left w3-dropdown-hover" style="cursor:pointer;text-decoration:none">
+            <div id="School" class="tablink w3-green w3-text-white w3-hover-lime w3-hover-text-white w3-bottombar w3-padding" (click)="chooseOption('Schools');">
+                Escolas
+            </div>
+        </a>
+    </div>
+    <div class="w3-col l1 w3-container"></div>
+</div>
+
+
+
+<div id="Schedules" class="information w3-animate-bottom w3-show w3-margin">
+    <schedule-student></schedule-student>
+</div>
+
+<div id="Lessons" class="information w3-animate-bottom w3-hide">
+    <lessons></lessons>
+</div>
+
+<div id="Notifications" class="information w3-animate-bottom w3-hide">
+    <notification-menu></notification-menu>
+</div>
+
+<div id="Schools" class="information w3-animate-bottom w3-hide">
+        <schools-home></schools-home>
+</div>
