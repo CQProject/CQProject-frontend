@@ -28,7 +28,7 @@ export class AuthGuard implements CanActivate {
 }
 
 @Injectable()
-export class StudentrGuard implements CanActivate {
+export class StudentGuard implements CanActivate {
 
     constructor(private _router: Router) { }
 
