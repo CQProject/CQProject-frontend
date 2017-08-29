@@ -33,9 +33,10 @@
     </div>
 
     <div *ngIf="authorized">
-      <div (mouseenter)="dropdownIn('userDropdown')" (mouseleave)="dropdownOut('userDropdown')" class="w3-bar-item w3-right w3-circle w3-lime w3-btn w3-margin-top" [routerLink]="['/user/profile/', user.userID]">
+      <div (mouseenter)="dropdownIn('userDropdown')" (mouseleave)="dropdownOut('userDropdown')" class="w3-bar-item w3-right w3-circle w3-lime w3-btn w3-margin-top">
         <i class="fa fa-user-circle w3-xlarge w3-text-white"></i>
         <div id="userDropdown" class="w3-bar-block w3-card-4 w3-hide w3-white">
+          <a [routerLink]="['/user/profile/', user.userID]" class="w3-bar-item w3-button">{{user?.name}}</a>
           <notifications></notifications>
           <a (click)="logout()" class="w3-bar-item w3-button">Logout</a>
         </div>

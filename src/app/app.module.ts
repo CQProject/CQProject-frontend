@@ -21,7 +21,7 @@ import { FloorMapComponent } from "./floors/floor-map.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
-import { AuthGuard, AdminGuard, AssistantGuard, GuardianGuard, SecretaryGuard, StudentrGuard, TeacherGuard } from "./utils/auth-guard.service";
+import { AuthGuard, AdminGuard, AssistantGuard, GuardianGuard, SecretaryGuard, StudentGuard, TeacherGuard } from "./utils/auth-guard.service";
 import { UserService } from "./users/user.service";
 import { NotificationService } from "./notifications/notification.service";
 import { FloorService } from "./floors/floor.service";
@@ -68,7 +68,7 @@ import { FileService } from "./utils/files.service";
     AssistantGuard,
     AdminGuard,
     TeacherGuard,
-    StudentrGuard,
+    StudentGuard,
     GuardianGuard,
     SecretaryGuard,
     AccountService,

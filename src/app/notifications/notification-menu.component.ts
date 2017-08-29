@@ -105,6 +105,10 @@ export class NotificationMenuComponent {
         this._service.read(notificationID).subscribe();
     }
 
+    public accept(notificationID: Number) {
+        this._service.accept(notificationID).subscribe();
+    }
+
     public chooseOptionNotif(id: String) {
         var informationNotif, tablinkNotif;
         informationNotif = document.getElementsByClassName("informationNotif");
@@ -133,7 +137,7 @@ export class NotificationMenuComponent {
 
     public closeNotifDetails(id: String) {
         if(id=="receivedMessages"){
-        window.location.reload();
+            window.location.reload();
         }
         var notif = document.getElementById(id + "").style.display = "none";
     }

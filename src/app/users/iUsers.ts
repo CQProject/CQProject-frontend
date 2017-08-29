@@ -4,4 +4,5 @@ export interface UserProfile {
     Name: String;
     Email: String;
     IsActive: Boolean;
+    Function: String;
 }
