@@ -3,6 +3,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from "@angular/router";
 import { AccountService } from "./account.service";
 import { Account } from "./iAccount";
+import { UserProfile } from "../users/iUsers";
 
 @Component({
     selector: 'navbar',
@@ -15,6 +16,7 @@ export class AccountNavbarComponent {
     pass: string;
     authorized: boolean;
     user: Account;
+    profile: UserProfile;
 
     constructor(
         private _service: AccountService,
@@ -79,5 +81,4 @@ export class AccountNavbarComponent {
         var element = document.getElementById(elementID);
         element.className = element.className.replace(" w3-show", "");
     }
-
 }
