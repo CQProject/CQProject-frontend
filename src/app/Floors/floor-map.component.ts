@@ -1,10 +1,11 @@
 import { Component, OnInit, Renderer } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Resolve, Router } from '@angular/router';
 import { FloorService } from './floor.service';
 import { SchoolService } from "../schools/school.service";
 import { AssistantGuard } from "../utils/auth-guard.service"
 import { Floor } from "./iFloor";
 import { Sensor } from "./iSensor";
+import { Record, Resume } from "./iRecords";
 import { School } from '../schools/iSchool';
 
 @Component({ templateUrl: "./floor-map.component.html" })
@@ -13,7 +14,11 @@ export class FloorMapComponent {
 
     public floors: Floor[];
     public sensors: Sensor[][];
+    public selectedSensor: Sensor;
     public school: School;
+    public record: Record;
+    public average: Resume;
+    public historic: Record[];
 
     constructor(
         private _service: FloorService,
@@ -67,18 +72,13 @@ export class FloorMapComponent {
         this._renderer.listenGlobal(canvas, 'click', (event) => {
             var mousePos = this.getMousePos(canvas, event);
             for (var index = 0; index < this.sensors[floor].length; index++) {
-                if (this.isInside(mousePos, floor, index)) alert("Controler " + index);
+                if (this.isInside(mousePos, floor, index)) {
+                    this.info(floor, index);
+                }
             }
         });
-/*
-        canvas.listen('click', function (evt) {
-            var mousePos = this.getMousePos(canvas, evt);
-            for (var index = 0; index < this.sensors[floor].length; index++) {
-                if (this.isInside(mousePos, floor, index)) alert("Controler " + index);
-            }
-        }, false);
-        */
     }
+
 
     //Function to get the mouse position
     public getMousePos(canvas: any, event: any) {
@@ -94,4 +94,47 @@ export class FloorMapComponent {
         return false;
     }
 
+    public info(floor: number, index: number){
+        this.selectedSensor=this.sensors[floor][index];
+        this._service
+            .getSensorsValue(this.selectedSensor.ID)
+            .subscribe(data => {
+                this.record = data;
+                console.log(data);
+            });
+        this._service
+            .getSensorsResume(this.selectedSensor.ID)
+            .subscribe(data => {
+                this.average = data;
+                console.log(data);
+            });
+        this.show();
+    }
+
+    public history(){
+        this._service
+            .getSensorsHistory(this.selectedSensor.ID)
+            .subscribe(data => {
+                this.historic = data;
+                console.log(this.historic);
+            });
+    }
+
+    public show() {
+        document.getElementById("info").style.display = 'block';
+    }
+
+    public hide() {
+        document.getElementById("info").style.display = 'none';
+    }
+
+    public accordion(){
+        var x = document.getElementById("accordion");
+        if (x.className.indexOf("w3-show") == -1) {
+            this.history();
+            x.className += " w3-show";
+        } else { 
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
 }
