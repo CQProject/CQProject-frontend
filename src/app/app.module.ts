@@ -16,15 +16,15 @@ import { SchoolHomeComponent } from "./schools/school-home.component";
 import { LessonTeacherComponent } from "./lessons/lesson-teacher.component";
 import { ScheduleStudentComponent } from "./schedules/schedule-student.component";
 import { NotificationMenuComponent } from "./notifications/notification-menu.component";
-import { FloorMapComponent } from "./Floors/floor-map.component";
 import { UserProfileComponent} from "./users/user-profile.component";
+import { FloorMapComponent } from "./floors/floor-map.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
 import { AuthGuard, AdminGuard, AssistantGuard, GuardianGuard, SecretaryGuard, StudentrGuard, TeacherGuard } from "./utils/auth-guard.service";
 import { UserService } from "./users/user.service";
 import { NotificationService } from "./notifications/notification.service";
-import { FloorService } from "./Floors/floor.service";
+import { FloorService } from "./floors/floor.service";
 import { FileService } from "./utils/files.service";
 //Pipes
 

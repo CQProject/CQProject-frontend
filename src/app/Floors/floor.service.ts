@@ -10,6 +10,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { Floor } from "./iFloor";
 import { Sensor } from './iSensor';
+import { Record, Resume } from './iRecords';
 import { API } from '../../main';
 
 @Injectable()
@@ -26,7 +27,7 @@ export class FloorService {
         this._options = new RequestOptions({ headers: this._headers });
     }
 
-    public async getFloorsBySchool(schoolID:Number): Promise<Floor[]> {
+    public async getFloorsBySchool(schoolID: Number): Promise<Floor[]> {
         let response = await this._http
             .get(this._apiURL + `/floor/school/${schoolID}`, this._options)
             .toPromise();
@@ -37,7 +38,7 @@ export class FloorService {
         }
     }
 
-    public async getSensorsByFloor(floorID:Number): Promise<Sensor[]> {
+    public async getSensorsByFloor(floorID: Number): Promise<Sensor[]> {
         let response = await this._http
             .get(this._apiURL + `/sensor/floor/${floorID}`, this._options)
             .toPromise();
@@ -48,7 +49,46 @@ export class FloorService {
         }
     }
 
-    private handleError(error: Response) {
+    public getSensorsValue(sensorID: Number): Observable<Record> {
+        return this._http
+        .get(this._apiURL + `/sensor/last/${sensorID}`, this._options)
+        .map((res: Response) => {
+            if (res.json().result) return res.json().data;
+            else {
+                console.log(res.json().info);
+                return null;
+            }
+        })
+        .catch(this._handleError);
+    }
+
+    public getSensorsHistory(sensorID: Number): Observable<Record[]> {
+        return this._http
+            .get(this._apiURL + `/sensor/history/${sensorID}`, this._options)
+            .map((res: Response) => {
+                if (res.json().result) return res.json().data;
+                else {
+                    console.log(res.json().info);
+                    return null;
+                }
+            })
+            .catch(this._handleError);
+    }
+
+    public getSensorsResume(sensorID: Number): Observable<Resume> {
+        return this._http
+        .get(this._apiURL + `/sensor/resume/${sensorID}`, this._options)
+        .map((res: Response) => {
+            if (res.json().result) return res.json().data;
+            else {
+                console.log(res.json().info);
+                return null;
+            }
+        })
+        .catch(this._handleError);
+    }
+
+    private _handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || "Server error");
     }
