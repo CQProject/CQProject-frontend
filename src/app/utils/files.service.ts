@@ -23,6 +23,20 @@ export class FileService {
         private _sanitizer: DomSanitizer
     ) { }
 
+    public publicDownload(filename: String): Observable<any> {
+        this._options = new RequestOptions({ headers: new Headers(), responseType: ResponseContentType.Blob });
+
+        return this._http
+            .get(this._apiURL + `/download/public/${filename}`, this._options)
+            .map((res) => {
+                return this._sanitizer
+                    .bypassSecurityTrustResourceUrl(window.URL.createObjectURL(
+                        new Blob([res.blob()], { type: res.headers.get("Content-Type") })
+                    ));
+            })
+            .catch(this._handleError);
+    }
+
     public imageDownload(filename: String): Observable<any> {
         this._headers = new Headers();
         this._headers.append('Authorization', <string>JSON.parse(localStorage.getItem('currentUser')).token);

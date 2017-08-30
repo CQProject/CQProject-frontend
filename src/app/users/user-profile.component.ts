@@ -19,14 +19,8 @@ export class UserProfileComponent {
     ) {
     }
 
-    public async ngOnInit(){
-        this._route.params.subscribe( params => {
-            this.id = +params['id'];//+ converte string 'id' para numero
-        });
-        await this.getProfile(this.id);
-    }
-
-    public async getProfile(id: Number){
-        this.user = await this._userService.getProfile(id);
+    public async ngOnInit() {
+        this._route.params.subscribe(params => this.id = +params['id']);
+        this.user = await this._userService.getProfile(this.id);
     }
 }

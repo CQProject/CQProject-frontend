@@ -1,34 +1,36 @@
 <div class="w3-row w3-center">
     <div class="w3-col l1 w3-container"></div>
     <div class="w3-col l10 w3-container">
-        <a class="w3-quarter w3-border-right" style="cursor:pointer" (click)="chooseOption('Schedule');" [routerLink]="['/schedules/student']" style="text-decoration:none">
-            <div id="Schedule" class="tablink w3-green w3-text-white w3-hover-lime w3-hover-text-white w3-bottombar w3-padding w3-border-white">
-                Horário
+
+        <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
+            <div id="Schedule" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding w3-border-green" (click)="chooseOption('Schedules');">
+                <label class="w3-large">Horário</label>
             </div>
         </a>
-        <a class="w3-quarter w3-border-left w3-dropdown-hover" style="cursor:pointer;text-decoration:none">
-            <div id="Lesson" class="tablink w3-green w3-text-white w3-hover-lime w3-hover-text-white w3-bottombar w3-padding" (click)="chooseOption('Lessons');">
-                Lições
+        <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
+            <div id="Lesson" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('Lessons');">
+                    <label class="w3-large">Lições</label>
             </div>
         </a>
-        <a class="w3-quarter w3-border-left w3-dropdown-hover" style="cursor:pointer;text-decoration:none">
-            <div id="Notification" class="tablink w3-green w3-text-white w3-hover-lime w3-hover-text-white w3-bottombar w3-padding" (click)="chooseOption('Notifications');">
-                Notificações
+        <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
+            <div id="Notification" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('Notifications');">
+                    <label class="w3-large">Notificações</label>
             </div>
         </a>
-        <a class="w3-quarter w3-border-left w3-dropdown-hover" style="cursor:pointer;text-decoration:none">
-            <div id="School" class="tablink w3-green w3-text-white w3-hover-lime w3-hover-text-white w3-bottombar w3-padding" (click)="chooseOption('Schools');">
-                Escolas
+        <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
+            <div id="School" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('Schools');">
+                    <label class="w3-large">Escolas</label>
             </div>
         </a>
+
     </div>
     <div class="w3-col l1 w3-container"></div>
 </div>
 
 
 
-<div id="Schedules" class="information w3-animate-bottom w3-show w3-margin">
-    <schedule-student></schedule-student>
+<div id="Schedules" class="information w3-animate-bottom w3-hide w3-show w3-margin">
+    <schedule-class></schedule-class>
 </div>
 
 <div id="Lessons" class="information w3-animate-bottom w3-hide">
@@ -40,5 +42,5 @@
 </div>
 
 <div id="Schools" class="information w3-animate-bottom w3-hide">
-        <schools-home></schools-home>
+    <schools-home></schools-home>
 </div>

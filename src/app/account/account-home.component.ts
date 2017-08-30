@@ -28,9 +28,9 @@ export class AccountHomeComponent {
         }
         tablink = document.getElementsByClassName("tablink");
         for (var i = 0; i < tablink.length; i++) {
-            tablink[i].className = tablink[i].className.replace("w3-border-white", " ");
+            tablink[i].className = tablink[i].className.replace("w3-border-green", " ");
             if (id.includes(tablink[i].id)) {
-                tablink[i].className += " w3-border-white";
+                tablink[i].className += " w3-border-green";
             }
         }
     }

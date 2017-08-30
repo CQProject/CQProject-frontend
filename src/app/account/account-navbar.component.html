@@ -1,8 +1,8 @@
 <div class="w3-bar w3-green w3-row" style="max-height: 66px;">
   <div class="w3-col l1  w3-container"></div>
   <div class="w3-col l10 w3-container">
-    <a href="#" class="w3-bar-item w3-btn w3-lime">
-      <h4 class="w3-text-white"><i class="fa fa-home w3-margin-right"></i>CQPROJ</h4>
+    <a [routerLink]="['home']" class="w3-bar-item w3-btn w3-lime w3-hover-khaki">
+      <h4><i class="fa fa-home w3-margin-right"></i><b>CQPROJ</b></h4>
     </a>
 
     <div *ngIf="!authorized" class="w3-hide-medium w3-hide-small">

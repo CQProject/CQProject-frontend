@@ -1,0 +1,13 @@
+<div class="w3-row w3-center ">
+    <div class="w3-col l1  w3-container"></div>
+    <div class="w3-col l10 w3-container">
+
+        <div *ngFor="let class of classes">
+            <a class="w3-margin w3-card-2 w3-btn w3-col s6 m4 l3 w3-animate-bottom w3-lime w3-hover-khaki" [routerLink]="['/class/profile', class?.ID]">
+                <h2><b>{{class?.Year}} {{class?.ClassDesc}}</b></h2>
+            </a>
+        </div>
+        
+    </div>
+    <div class="w3-col l1  w3-container"></div>
+</div>

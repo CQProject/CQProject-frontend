@@ -1,0 +1,40 @@
+<div class="w3-card-2 w3-lime w3-row">
+    <div class="w3-col s4 w3-text-white">
+        <div class="w3-panel w3-green ">
+            <label class="w3-xxlarge">{{class?.Year}}{{class?.ClassDesc}}</label>
+        </div>
+    </div>
+    <div class="w3-col s8 w3-right-align">
+        <h4 class="w3-margin-right"><b>{{school?.Name}}</b></h4>
+        <label class="w3-margin-right w3-large">{{class?.SchoolYear}}</label>
+    </div>
+</div>
+
+<div class="w3-section w3-row">
+    <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
+        <div class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding w3-border-green" (click)="chooseOption('Schedules');">
+            <label class="w3-large">Horário</label>
+        </div>
+    </a>
+    <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
+        <div class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('Docs');">
+            <label class="w3-large">Documentos</label>
+        </div>
+    </a>
+    <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
+        <div class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding"  [routerLink]="['/student/class/', class?.ID]">
+            <label class="w3-large">Alunos</label>
+        </div>
+    </a>
+    <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
+        <div class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('Teachers');">
+            <label class="w3-large">Professores</label>
+        </div>
+    </a>
+</div>
+
+
+
+<div id="Schedules" class="information w3-animate-bottom w3-hide w3-show">
+    <schedule-class></schedule-class>
+</div>

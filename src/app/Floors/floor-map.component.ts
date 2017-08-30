@@ -126,6 +126,8 @@ export class FloorMapComponent {
 
     public hide() {
         document.getElementById("info").style.display = 'none';
+        var x = document.getElementById("accordion");
+        x.className = x.className.replace(" w3-show", "");
     }
 
     public accordion(){
