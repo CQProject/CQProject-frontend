@@ -17,8 +17,8 @@ export class NotificationMenuComponent {
     receivedNotifications: ReceivedNotification[];
     sentNotifications: Notification[];
     sentValidations: SentValidation[];
-    receivedPage: Number;
-    sentPage: Number;
+    receivedPage: number;
+    sentPage: number;
 
     constructor(
         private _service: NotificationService,
@@ -70,7 +70,7 @@ export class NotificationMenuComponent {
         console.log(this.sentNotifications);
     }
 
-    public async getSentValidations(notificationID: Number) {
+    public async getSentValidations(notificationID: number) {
         this.sentValidations = [];
         let validations = await this._service.getValidationsByNotification(notificationID);
         for (let validation of validations) {
@@ -101,11 +101,11 @@ export class NotificationMenuComponent {
         console.log(this.sentValidations);
     }
 
-    public async readNotification(notificationID: Number){
+    public async readNotification(notificationID: number){
         this._service.read(notificationID).subscribe();
     }
 
-    public accept(notificationID: Number) {
+    public accept(notificationID: number) {
         this._service.accept(notificationID).subscribe();
     }
 
@@ -128,14 +128,14 @@ export class NotificationMenuComponent {
         }
     }
 
-    public showNotifDetails(id: String, idNotif?: Number) {
+    public showNotifDetails(id: string, idNotif?: number) {
         var notif = document.getElementById(id + "").style.display = "block";
         if(id=="notifSent"){
             this.getSentValidations(idNotif);
         }
     }
 
-    public closeNotifDetails(id: String) {
+    public closeNotifDetails(id: string) {
         if(id=="receivedMessages"){
             window.location.reload();
         }

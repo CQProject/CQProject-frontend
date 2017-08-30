@@ -24,7 +24,7 @@ export class AccountService {
         this._headers.append('Content-Type', 'application/json; charset=utf-8');
     }
 
-    public login(email: String, password: String): Observable<Account> {
+    public login(email: string, password: string): Observable<Account> {
         var toPost = JSON.stringify({
             "email": email,
             "password": password
@@ -53,7 +53,7 @@ export class AccountService {
             .catch(this._handleError);
     }
 
-    public async verifyToken(): Promise<Boolean> {
+    public async verifyToken(): Promise<boolean> {
 
         this._headers.append('Authorization', <string> JSON.parse(localStorage.getItem('currentUser')).token);
         this._options = new RequestOptions({ headers: this._headers });

@@ -20,7 +20,7 @@ import { UserProfileComponent } from "./users/user-profile.component";
 import { FloorMapComponent } from "./floors/floor-map.component";
 import { ClassListComponent } from "./classes/class-list.component";
 import { ClassProfileComponent } from "./classes/class-profile.component";
-import {ClassStudentsComponent} from "./classes/class-students.component";
+import { ClassStudentsComponent } from "./classes/class-students.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
@@ -29,7 +29,9 @@ import { UserService } from "./users/user.service";
 import { NotificationService } from "./notifications/notification.service";
 import { FloorService } from "./floors/floor.service";
 import { FileService } from "./utils/files.service";
-import { ClassService } from "./classes/class.service"
+import { ClassService } from "./classes/class.service";
+import { RoomService } from "./floors/room.service";
+import { ScheduleService } from "./schedules/schedule.service";
 //Pipes
 
 
@@ -43,15 +45,15 @@ import { ClassService } from "./classes/class.service"
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: AccountHomeComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       { path: 'schools', component: SchoolHomeComponent },
-      { path: 'schedules/student', component: ScheduleClassComponent, canActivate: [AuthGuard], data: { roles: [1, 3, 5, 6] } },
       { path: 'lessons/teacher', component: LessonTeacherComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 6] } },
       { path: 'notifications', component: NotificationMenuComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       { path: 'floor/school/:id', component: FloorMapComponent, canActivate: [AuthGuard], data: { roles: [4, 6] } },
       { path: 'user/profile/:id', component: UserProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       { path: 'class/school/:id', component: ClassListComponent, canActivate: [AuthGuard], data: { roles: [3, 6] } },
       { path: 'class/profile/:id', component: ClassProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] } },
- { path: 'student/class/:id', component: ClassStudentsComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] } },
-
+      { path: 'student/class/:id', component: ClassStudentsComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] } },
+      { path: 'schedule/class/:id', component: ScheduleClassComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] } },
+      
       { path: '**', component: NotFoundComponent }
     ], { useHash: true })
   ],
@@ -88,7 +90,9 @@ import { ClassService } from "./classes/class.service"
     SchoolService,
     FloorService,
     FileService,
-    ClassService
+    ClassService,
+    ScheduleService,
+    RoomService
   ],
   bootstrap: [AppComponent]
 })

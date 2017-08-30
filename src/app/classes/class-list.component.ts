@@ -31,23 +31,4 @@ export class ClassListComponent {
                 console.log(this.classes);
             });
     }
-
-
-
-    public show() {
-        document.getElementById("info").style.display = 'block';
-    }
-
-    public hide() {
-        document.getElementById("info").style.display = 'none';
-    }
-
-    public accordion() {
-        var x = document.getElementById("accordion");
-        if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
-        } else {
-            x.className = x.className.replace(" w3-show", "");
-        }
-    }
 }

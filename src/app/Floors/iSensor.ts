@@ -1,7 +1,7 @@
 export interface Sensor {
-    ID: Number;
-    Name: String;
+    ID: number;
+    Name: string;
     XCoord: number;
     YCoord: number;
-    FloorFK: Number;
+    FloorFK: number;
 }

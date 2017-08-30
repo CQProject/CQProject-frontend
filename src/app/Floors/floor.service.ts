@@ -27,7 +27,7 @@ export class FloorService {
         this._options = new RequestOptions({ headers: this._headers });
     }
 
-    public async getFloorsBySchool(schoolID: Number): Promise<Floor[]> {
+    public async getFloorsBySchool(schoolID: number): Promise<Floor[]> {
         let response = await this._http
             .get(this._apiURL + `/floor/school/${schoolID}`, this._options)
             .toPromise();
@@ -38,7 +38,7 @@ export class FloorService {
         }
     }
 
-    public async getSensorsByFloor(floorID: Number): Promise<Sensor[]> {
+    public async getSensorsByFloor(floorID: number): Promise<Sensor[]> {
         let response = await this._http
             .get(this._apiURL + `/sensor/floor/${floorID}`, this._options)
             .toPromise();
@@ -49,7 +49,7 @@ export class FloorService {
         }
     }
 
-    public getSensorsValue(sensorID: Number): Observable<Record> {
+    public getSensorsValue(sensorID: number): Observable<Record> {
         return this._http
         .get(this._apiURL + `/sensor/last/${sensorID}`, this._options)
         .map((res: Response) => {
@@ -62,7 +62,7 @@ export class FloorService {
         .catch(this._handleError);
     }
 
-    public getSensorsHistory(sensorID: Number): Observable<Record[]> {
+    public getSensorsHistory(sensorID: number): Observable<Record[]> {
         return this._http
             .get(this._apiURL + `/sensor/history/${sensorID}`, this._options)
             .map((res: Response) => {
@@ -75,7 +75,7 @@ export class FloorService {
             .catch(this._handleError);
     }
 
-    public getSensorsResume(sensorID: Number): Observable<Resume> {
+    public getSensorsResume(sensorID: number): Observable<Resume> {
         return this._http
         .get(this._apiURL + `/sensor/resume/${sensorID}`, this._options)
         .map((res: Response) => {

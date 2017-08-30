@@ -1,6 +1,6 @@
 export interface Floor {
-    ID: Number;
-    Name: String;
-    Image: String;
-    SchoolFK: Number;
+    ID: number;
+    Name: string;
+    Image: string;
+    SchoolFK: number;
 }

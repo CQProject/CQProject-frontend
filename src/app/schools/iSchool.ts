@@ -1,8 +1,8 @@
 export interface School {
-    ID: Number;
-    Name: String;
-    Logo: String;
-    ProfilePicture : String;
-    Acronym : String;
-    About : String;
+    ID: number;
+    Name: string;
+    Logo: string;
+    ProfilePicture : string;
+    Acronym : string;
+    About : string;
 }

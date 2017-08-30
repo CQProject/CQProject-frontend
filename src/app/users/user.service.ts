@@ -25,7 +25,7 @@ export class UserService {
         this._options = new RequestOptions({ headers: this._headers });
     }
 
-    public async getProfile(userID: Number): Promise<UserProfile> {
+    public async getProfile(userID: number): Promise<UserProfile> {
         let response = await this._http
             .get(this._apiURL + `/user/profile/${userID}`, this._options)
             .toPromise();

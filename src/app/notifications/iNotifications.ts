@@ -1,22 +1,22 @@
 export interface Notification {
-    ID: Number;
+    ID: number;
     Hour: Date;
-    Subject: String;
-    Description: String;
-    Urgency: Boolean;
-    Approval: Boolean;
-    UserFK: Number;
+    Subject: string;
+    Description: string;
+    Urgency: boolean;
+    Approval: boolean;
+    UserFK: number;
 }
 
 export interface ReceivedNotification {
-    ID: Number;
+    ID: number;
     Hour: Date;
-    Subject: String;
-    Description: String;
-    Urgency: Boolean;
-    Approval: Boolean;
-    Sender: String;
-    SenderFK: Number;
-    Accepted: Boolean;
-    Read: Boolean;
+    Subject: string;
+    Description: string;
+    Urgency: boolean;
+    Approval: boolean;
+    Sender: string;
+    SenderFK: number;
+    Accepted: boolean;
+    Read: boolean;
 }

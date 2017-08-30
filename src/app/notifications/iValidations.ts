@@ -1,17 +1,17 @@
 export interface Validation {
-    ReceiverFK: Number;
-    StudentFK:Number;
-    NotificationFK: Number;
-    Accepted: Boolean;
-    Read: Boolean;
+    ReceiverFK: number;
+    StudentFK:number;
+    NotificationFK: number;
+    Accepted: boolean;
+    Read: boolean;
 }
 
 export interface SentValidation {
-    ReceiverFK: Number;
-    Receiver: String;
-    StudentFK:Number;
-    Student:String;
-    NotificationFK: Number;
-    Accepted: Boolean;
-    Read: Boolean;
+    ReceiverFK: number;
+    Receiver: string;
+    StudentFK:number;
+    Student:string;
+    NotificationFK: number;
+    Accepted: boolean;
+    Read: boolean;
 }

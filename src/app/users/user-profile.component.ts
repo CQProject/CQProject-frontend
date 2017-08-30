@@ -10,7 +10,7 @@ import { UserProfile } from "../users/iUsers";
 export class UserProfileComponent {
 
     public user: UserProfile;
-    id: Number;
+    id: number;
 
     constructor(
         private _router: Router,

@@ -1,11 +1,10 @@
 export interface Account {
-    email:String;
-    password:String;
-    token:String;
-    userID: Number;
-    roles: Number[];
-    classID:Number;
-    name:String;
-    photo:String;
-    image:File;
+    email:string;
+    password:string;
+    token:string;
+    userID: number;
+    roles: number[];
+    classID:number;
+    name:string;
+    photo:string;
 }

@@ -12,29 +12,38 @@
 
 <div class="w3-section w3-row">
     <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
-        <div class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding w3-border-green" (click)="chooseOption('Schedules');">
+        <div id="schedule" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding w3-border-green" (click)="chooseOption('schedules');">
             <label class="w3-large">Horário</label>
         </div>
     </a>
     <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
-        <div class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('Docs');">
+        <div id="evaluation" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('evaluations');">
+            <label class="w3-large">Avaliações</label>
+        </div>
+    </a>
+    <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
+        <div id="doc" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('docs');">
             <label class="w3-large">Documentos</label>
         </div>
     </a>
     <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
-        <div class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding"  [routerLink]="['/student/class/', class?.ID]">
+        <div id="student" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('students');">
             <label class="w3-large">Alunos</label>
-        </div>
-    </a>
-    <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
-        <div class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('Teachers');">
-            <label class="w3-large">Professores</label>
         </div>
     </a>
 </div>
 
 
 
-<div id="Schedules" class="information w3-animate-bottom w3-hide w3-show">
+<div id="schedules" class="information w3-animate-bottom w3-hide w3-show">
     <schedule-class></schedule-class>
+</div>
+<div id="students" class="information w3-animate-bottom w3-hide">
+    <class-students></class-students>
+</div>
+<div id="docs" class="information w3-animate-bottom w3-hide">
+
+</div>
+<div id="evaluations" class="information w3-animate-bottom w3-hide">
+
 </div>

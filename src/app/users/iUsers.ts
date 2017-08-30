@@ -1,8 +1,8 @@
 export interface UserProfile {
-    ID: Number;
-    Photo: String;
-    Name: String;
-    Email: String;
-    IsActive: Boolean;
-    Function: String;
+    ID: number;
+    Photo: string;
+    Name: string;
+    Email: string;
+    IsActive: boolean;
+    Function: string;
 }

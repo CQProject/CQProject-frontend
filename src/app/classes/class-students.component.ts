@@ -6,7 +6,10 @@ import { FileService } from '../utils/files.service';
 import { ClassService } from "./class.service";
 import { UserProfile } from '../users/iUsers';
 
-@Component({ templateUrl: "./class-students.component.html" })
+@Component({ 
+    selector: "class-students",
+    templateUrl: "./class-students.component.html" 
+})
 
 export class ClassStudentsComponent {
 
@@ -36,5 +39,8 @@ export class ClassStudentsComponent {
                     student.Photo = res;
                 });
         }
+        this.students.sort(function(a,b) {
+            return (a.Name > b.Name) ? 1 : ((b.Name > a.Name) ? -1 : 0);
+        }); 
     }
 }

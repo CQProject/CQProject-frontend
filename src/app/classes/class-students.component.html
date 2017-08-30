@@ -1,23 +1,17 @@
-<div class=" w3-center w3-row">
-    <div class="w3-col l1"></div>
-    <div class="w3-col l10">
+<div class=" w3-center">
 
-        <div *ngFor="let student of students">
-            <div class="w3-margin w3-row w3-animate-bottom w3-card-2 w3-khaki">
-                <div class=" w3-col s5 m3 w3-container">
-                    <img [attr.src]="student?.Photo" class="w3-image">
-                </div>
-                <div class="w3-col s7 m6 w3-left-align">
-                    <label>{{student?.Function}}</label>
-                    <hr>
-                    <label>{{student?.Name}}</label><br>
-                    <label>{{student?.Email}}</label>
-                </div>
-                <a class="w3-col m3 w3-btn">Detalhes</a>
-                <a class="w3-col m3 w3-btn">Enviar mensagem</a>
+    <div *ngFor="let student of students">
+        <div class="w3-margin w3-row w3-animate-bottom w3-card-2 w3-green">
+            <div class=" w3-col s5 m3 l2 w3-container">
+                <img [attr.src]="student?.Photo" class="w3-image" style="max-height: 75px;">
             </div>
+            <div class="w3-col s7 m6 l7 w3-left-align w3-rightbar" style="max-height: 75px;">
+                <label>{{student?.Function}}</label><br>
+                <label class="w3-large"><b>{{student?.Name}}</b></label><br>
+                <label class="w3-opacity"><b>{{student?.Email}}</b></label>
+            </div>
+            <a class="w3-col m3 w3-btn w3-lime w3-hover-khaki">Detalhes</a>
+            <a class="w3-col m3 w3-btn w3-lime w3-hover-khaki">Enviar mensagem</a>
         </div>
     </div>
-
-    <div class="w3-col l1"></div>
 </div>

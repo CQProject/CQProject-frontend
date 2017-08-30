@@ -26,7 +26,7 @@ export class NotificationService {
         this._options = new RequestOptions({ headers: this._headers });
     }
 
-    public async count(): Promise<Number> {
+    public async count(): Promise<number> {
         let response = await this._http
             .get(this._apiURL + '/notification/unreadcount', this._options)
             .toPromise();
@@ -34,7 +34,7 @@ export class NotificationService {
         return response.json().result ? response.json().data : 0;
     }
 
-    public async getValidationsByPage(pageID: Number): Promise<Validation[]> {
+    public async getValidationsByPage(pageID: number): Promise<Validation[]> {
         let response = await this._http
             .get(this._apiURL + `/notification/received/${pageID}`, this._options)
             .toPromise();
@@ -46,7 +46,7 @@ export class NotificationService {
         }
     }
 
-    public async getValidationsByNotification(notifID: Number): Promise<Validation[]> {
+    public async getValidationsByNotification(notifID: number): Promise<Validation[]> {
         let response = await this._http
             .get(this._apiURL + `/validation/notification/${notifID}`, this._options)
             .toPromise();
@@ -58,7 +58,7 @@ export class NotificationService {
         }
     }
 
-    public async getReceivedNotification(notifID: Number): Promise<Notification> {
+    public async getReceivedNotification(notifID: number): Promise<Notification> {
         let response = await this._http
             .get(this._apiURL + `/notification/message/${notifID}`, this._options)
             .toPromise();
@@ -70,7 +70,7 @@ export class NotificationService {
         }
     }
 
-    public async getSentNotification(pageID: Number): Promise<Notification[]> {
+    public async getSentNotification(pageID: number): Promise<Notification[]> {
         let response = await this._http
             .get(this._apiURL + `/notification/sent/${pageID}`, this._options)
             .toPromise();
@@ -82,7 +82,7 @@ export class NotificationService {
         }
     }
 
-    public sendToClass(subject: String, description: String, urgency: Boolean, approval: Boolean, classID: Number) {
+    public sendToClass(subject: string, description: string, urgency: boolean, approval: boolean, classID: number) {
         var toPost = JSON.stringify({
             "Subject": subject,
             "Description": description,
@@ -100,7 +100,7 @@ export class NotificationService {
             .catch(this._handleError);
     }
 
-    public sendToUser(subject: String, description: String, urgency: Boolean, approval: Boolean, userID: Number) {
+    public sendToUser(subject: string, description: string, urgency: boolean, approval: boolean, userID: number) {
         var toPost = JSON.stringify({
             "Subject": subject,
             "Description": description,
@@ -118,7 +118,7 @@ export class NotificationService {
             .catch(this._handleError);
     }
 
-    public read(notificationID: Number) {
+    public read(notificationID: number) {
         return this._http
             .put(this._apiURL + `/notification/read/${notificationID}`, null, this._options)
             .map((response: Response) => {
@@ -127,7 +127,7 @@ export class NotificationService {
             .catch(this._handleError);
     }
 
-    public accept(notificationID: Number) {
+    public accept(notificationID: number) {
         return this._http
             .put(this._apiURL + `/notification/accept/${notificationID}`, null, this._options)
             .map((response: Response) => {

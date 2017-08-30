@@ -10,7 +10,7 @@ import { NotificationService } from "../notifications/notification.service";
 
 export class NotificationCounterComponent {
 
-    notifications: Number;
+    notifications: number;
 
     constructor(
         private _service: NotificationService,

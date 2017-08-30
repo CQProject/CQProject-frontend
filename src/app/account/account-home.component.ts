@@ -16,7 +16,7 @@ export class AccountHomeComponent {
         private _ngZone: NgZone,
     ) { }
 
-    public chooseOption(id: String) {
+    public chooseOption(id: string) {
         var information, tablink;
         information = document.getElementsByClassName("information");
         for (var i = 0; i < information.length; i++) {

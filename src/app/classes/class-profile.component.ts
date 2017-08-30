@@ -36,22 +36,22 @@ export class ClassProfileComponent {
         console.log(this.school);
     }
 
-
-
-    public show() {
-        document.getElementById("info").style.display = 'block';
-    }
-
-    public hide() {
-        document.getElementById("info").style.display = 'none';
-    }
-
-    public accordion() {
-        var x = document.getElementById("accordion");
-        if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
-        } else {
-            x.className = x.className.replace(" w3-show", "");
+    public chooseOption(id: string) {
+        var information, tablink;
+        information = document.getElementsByClassName("information");
+        for (var i = 0; i < information.length; i++) {
+            if (information[i].id == id) {
+                information[i].className = information[i].className.replace(" w3-hide", " w3-show");
+            } else {
+                information[i].className = information[i].className.replace(" w3-show", " w3-hide");
+            }
+        }
+        tablink = document.getElementsByClassName("tablink");
+        for (var i = 0; i < tablink.length; i++) {
+            tablink[i].className = tablink[i].className.replace("w3-border-green", " ");
+            if (id.includes(tablink[i].id)) {
+                tablink[i].className += " w3-border-green";
+            }
         }
     }
 }

@@ -26,7 +26,7 @@ export class ClassService {
         this._options = new RequestOptions({ headers: this._headers });
     }
 
-    public getClassesBySchool(schoolID: Number): Observable<Class[]> {
+    public getClassesBySchool(schoolID: number): Observable<Class[]> {
         return this._http
             .get(this._apiURL + `/class/school/${schoolID}`, this._options)
             .map((res: Response) => {
@@ -39,7 +39,7 @@ export class ClassService {
             .catch(this._handleError);
     }
 
-    public async getStudentsByClass(classID: Number): Promise<Number[]> {
+    public async getStudentsByClass(classID: number): Promise<number[]> {
         let response = await this._http
             .get(this._apiURL + `/student/class/${classID}`, this._options)
             .toPromise();
@@ -50,7 +50,7 @@ export class ClassService {
         }
     }
 
-    public async getTeachersByClass(classID: Number): Promise<Number[]> {
+    public async getTeachersByClass(classID: number): Promise<number[]> {
         let response = await this._http
             .get(this._apiURL + `/teacher/class/${classID}`, this._options)
             .toPromise();
@@ -61,7 +61,7 @@ export class ClassService {
         }
     }
 
-    public async getClassProfile(classID: Number): Promise<Class> {
+    public async getClassProfile(classID: number): Promise<Class> {
         let response = await this._http
             .get(this._apiURL + `/class/profile/${classID}`, this._options)
             .toPromise();

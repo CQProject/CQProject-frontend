@@ -1,16 +1,16 @@
 export interface Record {
-    ID: Number;
+    ID: number;
     Hour: Date;
-    Temperature: Number;
-    Luminosity: Number;
-    Energy: Number;
-    Humidity: Number;
-    SensorFK: Number;
+    Temperature: number;
+    Luminosity: number;
+    Energy: number;
+    Humidity: number;
+    SensorFK: number;
 }
 
 export interface Resume {
-    LuminosityAVG: Number;
-    TemperatureAVG: Number;
-    EnergyAVG: Number;
-    HumidityAVG: Number;
+    LuminosityAVG: number;
+    TemperatureAVG: number;
+    EnergyAVG: number;
+    HumidityAVG: number;
 }

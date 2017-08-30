@@ -1,7 +1,7 @@
-export interface Class{
-    ID:Number;
-    SchoolYear:String;
-    Year:String;
-    ClassDesc: String;
-    SchoolFK:Number;
+export interface Class {
+    ID: number;
+    SchoolYear: string;
+    Year: string;
+    ClassDesc: string;
+    SchoolFK: number;
 }

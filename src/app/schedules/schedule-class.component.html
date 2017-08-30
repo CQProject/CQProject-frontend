@@ -1,43 +1,39 @@
 <div class="w3-hide-small ">
     <div class="w3-row w3-card w3-round w3-khaki">
         <div class="w3-col w3-hide-medium" style="width:10%">
-            <div class="w3-row w3-rightbar">
-                <div class="w3-col w3-khaki w3-bottombar" style="height: 50px;"></div>
-                <div class="w3-col w3-green w3-bottombar" style="height: 50px;">09h00<br>09h45</div>
-                <div class="w3-col w3-green w3-bottombar" style="height: 50px;">10h05<br>10h50</div>
-                <div class="w3-col w3-green w3-bottombar" style="height: 50px;">11h00<br>11h45</div>
-                <div class="w3-col w3-green w3-bottombar" style="height: 50px;">13h15<br>14h00</div>
-                <div class="w3-col w3-green w3-bottombar" style="height: 50px;">14h15<br>15h00</div>
-            </div>
+            <div id="hoursColumn" class="w3-row w3-border-right"></div>
         </div>
-
         <div class="w3-col" style="width:90%">
             <div class="w3-row">
                 <div class="w3-col" style="width:20%">
-                    <div id="bigMonday" class="w3-row w3-rightbar">
-                        <div class="w3-col w3-green w3-bottombar " style="height: 50px;"><h4>Segunda</h4></div>
-                        <a class="w3-col w3-button w3-hover-lime" style="height: 50px;"><b>Matemática</b></a>
+                    <div class="w3-col w3-green w3-border-bottom" style="height: 50px;">
+                        <h4>Segunda</h4>
                     </div>
+                    <div id="bigMonday" class="w3-row"></div>
                 </div>
                 <div class="w3-col" style="width:20%">
-                    <div id="bigTuesday" class="w3-row w3-rightbar">
-                        <div class="w3-col w3-green w3-bottombar" style="height: 50px;"> <h4>Terça</h4> </div>
+                    <div class="w3-col w3-green w3-border-bottom" style="height: 50px;">
+                        <h4>Terça</h4>
                     </div>
+                    <div id="bigTuesday" class="w3-row"></div>
                 </div>
                 <div class="w3-col" style="width:20%">
-                    <div id="bigWednesday" class="w3-row w3-rightbar">
-                        <div class="w3-col w3-green w3-bottombar" style="height: 50px;"><h4>Quarta</h4></div>
+                    <div class="w3-col w3-green w3-border-bottom" style="height: 50px;">
+                        <h4>Quarta</h4>
                     </div>
+                    <div id="bigWednesday" class="w3-row"></div>
                 </div>
                 <div class="w3-col" style="width:20%">
-                    <div id="bigThursday" class="w3-row w3-rightbar">
-                        <div class="w3-col w3-green w3-bottombar" style="height: 50px;"><h4>Quinta</h4></div>
+                    <div class="w3-col w3-green w3-border-bottom" style="height: 50px;">
+                        <h4>Quinta</h4>
                     </div>
+                    <div id="bigThursday" class="w3-row"></div>
                 </div>
                 <div class="w3-col" style="width:20%">
-                    <div id="bigFriday" class="w3-row w3-rightbar">
-                        <div class="w3-col w3-green w3-bottombar" style="height: 50px;"><h4>Sexta</h4></div>
+                    <div class="w3-col w3-green w3-border-bottom" style="height: 50px;">
+                        <h4>Sexta</h4>
                     </div>
+                    <div id="bigFriday" class="w3-row"></div>
                 </div>
             </div>
         </div>
@@ -46,21 +42,40 @@
 
 <div class="w3-hide-medium w3-hide-large">
     <div>
-        <a (click)="accordion('smallMonday')" class="w3-btn w3-col schedule w3-round w3-deep-orange">Segunda</a>
-        <div id="smallMonday" class="w3-hide w3-container w3-row">
-            <a class="w3-col w3-round-large w3-button schedule w3-pale-red w3-hover-blue-gray"><b>Matemática</b></a>
+        <a (click)="accordion('smallMonday')" class="w3-btn w3-col schedule w3-round w3-green">Segunda</a>
+        <div id="smallMonday" class="w3-hide w3-container w3-row"></div>
+        <a (click)="accordion('smallTuesday')" class="w3-btn w3-col schedule w3-round w3-green">Terça</a>
+        <div id="smallTuesday" class="w3-hide w3-container w3-row"></div>
+        <a (click)="accordion('smallWednesday')" class="w3-btn w3-col schedule w3-round w3-green">Quarta</a>
+        <div id="smallWednesday" class="w3-hide w3-container w3-row"></div>
+        <a (click)="accordion('smallThursday')" class="w3-btn w3-col schedule w3-round w3-green">Quinta</a>
+        <div id="smallThursday" class="w3-hide w3-container w3-row"></div>
+        <a (click)="accordion('smallFriday')" class="w3-btn w3-col schedule w3-round w3-green">Sexta</a>
+        <div id="smallFriday" class="w3-hide w3-container w3-row"></div>
+    </div>
+</div>
+
+<div id="scheduleModal" class="w3-modal">
+    <div class="w3-modal-content w3-card">
+        <div class="w3-container w3-deep-orange">
+            <span (click)="hide()" class="w3-btn w3-display-topright">&times;</span>
         </div>
-        <a (click)="accordion('smallTuesday')" class="w3-btn w3-col schedule w3-round w3-deep-orange">Terça</a>
-        <div id="smallTuesday" class="w3-hide w3-container w3-row">
-        </div>
-        <a (click)="accordion('smallWednesday')" class="w3-btn w3-col schedule w3-round w3-deep-orange">Quarta</a>
-        <div id="smallWednesday" class="w3-hide w3-container w3-row">
-        </div>
-        <a (click)="accordion('smallThursday')" class="w3-btn w3-col schedule w3-round w3-deep-orange">Quinta</a>
-        <div id="smallThursday" class="w3-hide w3-container w3-row">
-        </div>
-        <a (click)="accordion('smallFriday')" class="w3-btn w3-col schedule w3-round w3-deep-orange">Sexta</a>
-        <div id="smallFriday" class="w3-hide w3-container w3-row">
+        <div class="w3-panel w3-row w3-left-align">
+            <div class="w3-col"><i class="w3-badge w3-green fa fa-info w3-xlarge"></i></div>
+            <div class="w3-col m4 w3-lime"><label class="w3-margin-left">Disciplina:</label></div>
+            <div class="w3-col m8 w3-lime"><b>{{selected?.Subject}}</b></div>
+            <div class="w3-col m4 w3-khaki"><label class="w3-margin-left">Turma:</label></div>
+            <div class="w3-col m8 w3-khaki"><b>{{selected?.ClassName}}</b></div>
+            <div class="w3-col m4 w3-lime"><label class="w3-margin-left">Professor:</label></div>
+            <div class="w3-col m8 w3-lime"><b>{{selected?.Teacher}}</b></div>
+            <div class="w3-col m4 w3-khaki"><label class="w3-margin-left">Dia da semana:</label></div>
+            <div class="w3-col m8 w3-khaki"><b>{{day[selected?.DayOfWeek-1]}}</b></div>
+            <div class="w3-col m4 w3-lime"><label class="w3-margin-left">Hora:</label></div>
+            <div class="w3-col m8 w3-lime"><b>{{time[selected?.StartingTime]}}</b></div>
+            <div class="w3-col m4 w3-khaki"><label class="w3-margin-left">Sala:</label></div>
+            <div class="w3-col m8 w3-khaki"><b>{{selected?.Room}}</b></div>
+            <hr class="w3-col">
+            <a class="w3-col w3-btn w3-green w3-hover-lime w3-large">Lições</a>
         </div>
     </div>
 </div>
