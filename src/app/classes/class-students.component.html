@@ -1,11 +1,23 @@
-<div class=" w3-center ">
+<div class=" w3-center w3-row">
+    <div class="w3-col l1"></div>
+    <div class="w3-col l10">
 
-    <div class="w3-row-padding">
         <div *ngFor="let student of students">
-            <div class="w3-margin w3-col s6 m4 l3 w3-animate-bottom w3-card-2 w3-display-container">
-                <img [attr.src]="student?.Photo" style="max-width:100px">
-                <div class="w3-display-bottomleft w3-large w3-card-4 w3-gray">{{student?.Name}}</div>
+            <div class="w3-margin w3-row w3-animate-bottom w3-card-2 w3-khaki">
+                <div class=" w3-col s5 m3 w3-container">
+                    <img [attr.src]="student?.Photo" class="w3-image">
+                </div>
+                <div class="w3-col s7 m6 w3-left-align">
+                    <label>{{student?.Function}}</label>
+                    <hr>
+                    <label>{{student?.Name}}</label><br>
+                    <label>{{student?.Email}}</label>
+                </div>
+                <a class="w3-col m3 w3-btn">Detalhes</a>
+                <a class="w3-col m3 w3-btn">Enviar mensagem</a>
             </div>
         </div>
     </div>
+
+    <div class="w3-col l1"></div>
 </div>
