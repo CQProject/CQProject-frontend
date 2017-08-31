@@ -46,6 +46,17 @@ export class SchoolService {
         }
     }
 
+    public async createSchool(school: School): Observable<School>{
+
+        
+
+
+        var toPost = JSON.stringify({
+            "Name": school.Name,
+
+        });
+    }
+
     private handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || "Server error");

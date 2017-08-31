@@ -1,7 +1,7 @@
 <div class="w3-row w3-center ">
   <div class="w3-col l1  w3-container"></div>
   <div class="w3-col l10 w3-container">
-
+    <button *ngIf="_secretaryGuard.canActivate()" class="w3-button w3-block w3-green w3-margin w3-hover-lime" (click)="show('schoolForm')"><label class="w3-large">Criar uma nova escola</label></button>
     <div *ngFor="let school of schools">
       <a class="w3-btn w3-col s6 m4 l3 w3-animate-bottom" (click)="show(school?.ID)">
         <div class="w3-card-2 w3-display-container">
@@ -36,4 +36,8 @@
       </div>
     </div>
   </div>
+</div>
+
+<div id="schoolForm" class="w3-modal" *ngIf="_secretaryGuard.canActivate()">
+  <school-form></school-form>
 </div>
