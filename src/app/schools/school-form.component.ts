@@ -12,8 +12,8 @@ import { API } from '../../main';
 export class SchoolFormComponent{
 
     school: SchoolToPost;
-    logo: FileList;
-    image: FileToPost;
+    logo: File;
+    profile: File;
 
     constructor(
         private _service: SchoolService,
@@ -33,7 +33,19 @@ export class SchoolFormComponent{
         document.getElementById(elementID).style.display = 'none';
     }
 
-    public createSchool(event: Event){
-        alert(event.target)
+    public getLogoImage(event){
+        this.logo = event.target.files[0];
+    }
+
+    public getProfileImage(event){
+        this.profile = event.target.files[0];
+    }
+
+    public async createSchool(){
+        this.school.Logo = await this._fileService.publicImageUpload(this.logo);
+        this.school.ProfilePicture = await this._fileService.publicImageUpload(this.profile);
+        let res = await this._service.createSchool(this.school);
+        //if(res==null)
+        await location.reload();
     }
 }

@@ -67,58 +67,78 @@ export class FileService {
                             new Blob([res.blob()], { type: 'application/pdf' })
                         ));
                 } else {
-                   return this._sanitizer
-                    .bypassSecurityTrustResourceUrl(window.URL.createObjectURL(
-                        new Blob([res.blob()], { type: res.headers.get("Content-Type") })
-                    ));
+                    return this._sanitizer
+                        .bypassSecurityTrustResourceUrl(window.URL.createObjectURL(
+                            new Blob([res.blob()], { type: res.headers.get("Content-Type") })
+                        ));
                 }
             })
             .catch(this._handleError);
     }
 
 
-    public fileUpload(toPost: FormData): Observable<String> {
+    public async fileUpload(toPost: FormData): Promise<string> {
         this._headers = new Headers();
-        this._headers.append('Content-Type', 'multipart/form-data');
+       // this._headers.append('Content-Type', 'multipart/form-data');
         this._headers.append('Authorization', <string>JSON.parse(localStorage.getItem('currentUser')).token);
         this._options = new RequestOptions({ headers: this._headers });
 
-        return this._http
+        let response = await this._http
             .post(this._apiURL + '/upload/doc', toPost, this._options)
-            .map((res: Response) => {
-                if (res.json().result) {
-                    return res.json().data;
-                } else {
-                    console.log(res.json().info);
-                    return null;
-                }
-            })
-            .catch(this._handleError);
+            .toPromise();
+        if (response.json().result) return response.json().data;
+        else {
+            console.log(response.json().info);
+            return null;
+        }
     }
 
-    public imageUpload(toPost: FormData): Observable<String> {
+    
+
+    public async imageUpload(file: File): Promise<string> {
+        let formData: FormData = new FormData();
+        formData.append('Key', 'image')
+        formData.append('image', file);
+        console.log(formData)
         this._headers = new Headers();
-        this._headers.append('Content-Type', 'multipart/form-data');
         this._headers.append('Authorization', <string>JSON.parse(localStorage.getItem('currentUser')).token);
         this._options = new RequestOptions({ headers: this._headers });
 
-        return this._http
-            .post(this._apiURL + '/upload/image', toPost, this._options)
-            .map((res: Response) => {
-                if (res.json().result) {
-                    return res.json().data;
-                } else {
-                    console.log(res.json().info);
-                    return null;
-                }
-            })
-            .catch(this._handleError);
+        let response = await this._http
+            .post(this._apiURL + '/upload/image', formData, this._options)
+            .toPromise();
+            if (response.json().result) return response.json().data;
+            else {
+                console.log(response.json().info);
+                return null;
+            }
+            
+    }
+
+    public async publicImageUpload(file: File): Promise<string> {
+        let formData: FormData = new FormData();
+        formData.append('Key', 'image')
+        formData.append('image', file);
+        
+        this._headers = new Headers();
+        this._headers.append('Authorization', <string>JSON.parse(localStorage.getItem('currentUser')).token);
+        this._options = new RequestOptions({ headers: this._headers });
+
+        let response = await this._http
+            .post(this._apiURL + '/publicUpload/image', formData, this._options)
+            .toPromise();
+            if (response.json().result) return response.json().data;
+            else {
+                console.log(response.json().info);
+                return null;
+            }
+            
     }
 
 
 
     private _handleError(error: Response) {
-        console.error(error);
+        //console.error(error);
         return Observable.throw(error.json().error || "Server error");
     }
 }

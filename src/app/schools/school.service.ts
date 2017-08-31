@@ -9,6 +9,7 @@ import "rxjs/add/operator/catch";
 import 'rxjs/add/operator/toPromise';
 
 import { School } from "./iSchool";
+import { SchoolToPost } from "./iSchool";
 import { API } from '../../main';
 
 @Injectable()
@@ -45,19 +46,25 @@ export class SchoolService {
             return null;
         }
     }
-/*
-    public async createSchool(school: School): Observable<School>{
 
-        
-
-
+    public async createSchool(school: SchoolToPost): Promise<string>{
         var toPost = JSON.stringify({
             "Name": school.Name,
-
+            "Logo": school.Logo,
+            "ProfilePicture": school.ProfilePicture,
+            "Acronym": school.Acronym,
+            "About": school.About
         });
+        this._headers.append('Authorization', <string> JSON.parse(localStorage.getItem('currentUser')).token);
+        this._options = new RequestOptions({ headers: this._headers });
+        
+        let res = await this._http
+        .post(this._apiURL + '/school', toPost, this._options).toPromise();
+
+        return await res.json().result ? res.json().data : res.json().result;
     }
-*/
-    private handleError(error: Response) {
+
+    private _handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || "Server error");
     }

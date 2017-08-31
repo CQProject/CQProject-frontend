@@ -7,17 +7,17 @@
         <form>
             <div class="w3-left-align">
                 <label>Nome:</label>
-                <input [(ngModel)]="school.Name" class="w3-input" type="text"  name="Name" required/>
+                <input [(ngModel)]="school.Name" class="w3-input" type="text" name="Name" required/>
                 <label>Logótipo:</label>
-                <input [(ngModel)]="logo" class="w3-input" type="file" />
+                <input (change)="getLogoImage($event)" class="w3-input" type="file" required/>
                 <label>Imagem de perfil:</label>
-                <input [(ngModel)]="image" class="w3-input" type="file" />
+                <input (change)="getProfileImage($event)" class="w3-input" type="file" required/>
                 <label>Acrónimo:</label>
-                <input [(ngModel)]="school.Acronym" class="w3-input"/>
+                <input [(ngModel)]="school.Acronym" name="Acronym" class="w3-input" required/>
                 <label>Alguma informação relativa à escola:</label>
-                <textarea [(ngModel)]="school.About" class="w3-input w3-border" style="resize:none" rows="5" cols="8"></textarea>
+                <textarea [(ngModel)]="school.About" name="About" class="w3-input w3-border" style="resize:none" rows="5" cols="8" required></textarea>
             </div>
         </form>
     </div>
-    <button type="submit" class="w3-button w3-khaki w3-margin-top w3-block w3-hover-lime" (click)="createSchool(event)"><label class="w3-large">Submeter</label></button>
+    <button type="submit" class="w3-button w3-khaki w3-margin-top w3-block w3-hover-lime" (click)="createSchool()"><label class="w3-large">Submeter</label></button>
 </div>
