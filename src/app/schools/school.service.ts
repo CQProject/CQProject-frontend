@@ -45,7 +45,7 @@ export class SchoolService {
             return null;
         }
     }
-
+/*
     public async createSchool(school: School): Observable<School>{
 
         
@@ -56,7 +56,7 @@ export class SchoolService {
 
         });
     }
-
+*/
     private handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || "Server error");

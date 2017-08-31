@@ -109,6 +109,7 @@ export class ScheduleClassComponent {
 
         let smallLink = document.createElement('a');
         smallLink.setAttribute('class', 'w3-col w3-button w3-lime w3-hover-khaki');
+        smallLink.onclick = () => this.select(day, hour);
         smallLink.innerHTML = "<b>" + this.week[day][hour].Subject + "</b>";
         let smallContainer = document.getElementById(small);
         smallContainer.appendChild(smallLink);
