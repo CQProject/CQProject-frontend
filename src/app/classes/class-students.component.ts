@@ -17,7 +17,7 @@ export class ClassStudentsComponent {
 
 
     constructor(
-        private _service: ClassService,
+        private _classService: ClassService,
         private _userService: UserService,
         private _fileService: FileService,
         private _router: Router,
@@ -28,7 +28,7 @@ export class ClassStudentsComponent {
 
         let classID;
         this._route.params.subscribe(params => classID = params['id']);
-        let studentIDs = await this._service.getStudentsByClass(classID);
+        let studentIDs = await this._classService.getStudentsByClass(classID);
         for (var i = 0; i < studentIDs.length; i++) {
             this.students[i] = await this._userService.getProfile(studentIDs[i]);
         }

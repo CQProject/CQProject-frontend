@@ -1,32 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 
-import { ScheduleService } from "./schedule.service";
+import { ScheduleService } from "../utils/schedule.service";
 import { UserService } from "../users/user.service";
 import { RoomService } from "../floors/room.service";
-import {ClassService} from "../classes/class.service";
+import { ClassService } from "../classes/class.service";
 
-import { CompleteSchedule } from "./iCompleteSchedule";
-import { Schedule } from "./interfaceSchedule";
-import { Subject } from "./iSubject";
+import { CompleteSchedule } from "../utils/iCompleteSchedule";
+import { Schedule } from "../utils/interfaceSchedule";
+import { Subject } from "../utils/iSubject";
 import { UserProfile } from "../users/iUsers";
 import { Room } from "../floors/iRoom";
 import { Class } from "../classes/iClass";
 
 @Component({
     selector: "schedule-class",
-    templateUrl: "./schedule-class.component.html",
+    templateUrl: "./class-schedule.component.html",
 })
 
-export class ScheduleClassComponent {
+export class ClassScheduleComponent {
 
     week: CompleteSchedule[][];
     selected: CompleteSchedule;
-    time:string[];
-    day:string[];
+    time: string[];
+    day: string[];
 
     constructor(
-        private _service: ScheduleService,
+        private _scheduleService: ScheduleService,
         private _userService: UserService,
         private _roomService: RoomService,
         private _classService: ClassService,
@@ -35,20 +35,20 @@ export class ScheduleClassComponent {
     ) {
         this.week = [];
         for (var i = 0; i < 5; i++)this.week[i] = [];
-        this.time=["09h00-09h45", "10h05-10h50", "11h00-11h45", "13h15-14h00", "14h15-15h00"];
-        this.day=["Segunda feira", "Terça feira", "Quarta feira", "Quinta feira", "Sexta feira"];
+        this.time = ["09h00-09h45", "10h05-10h50", "11h00-11h45", "13h15-14h00", "14h15-15h00"];
+        this.day = ["Segunda feira", "Terça feira", "Quarta feira", "Quinta feira", "Sexta feira"];
     }
 
     public async ngOnInit() {
         this.setHours();
         let classID;
         this._route.params.subscribe(params => classID = params['id']);
-        let schedules = await this._service.getScheduleByClass(classID);
-        
+        let schedules = await this._scheduleService.getScheduleByClass(classID);
+
         for (let schedule of schedules) {
             await this.setSchedule(schedule);
         }
-        
+
         for (var i = 0; i < this.week.length; i++) {
             switch (i) {
                 case 0:
@@ -79,7 +79,7 @@ export class ScheduleClassComponent {
     private async setSchedule(schedule: Schedule) {
         let teacher = await this._userService.getProfile(schedule.TeacherFK);
         let room = await this._roomService.getRoom(schedule.RoomFK);
-        let subject = await this._service.getSubject(schedule.SubjectFK);
+        let subject = await this._scheduleService.getSubject(schedule.SubjectFK);
         let cla = await this._classService.getClassProfile(schedule.ClassFK);
 
         this.week[schedule.DayOfWeek - 1][schedule.StartingTime] = {
@@ -92,7 +92,7 @@ export class ScheduleClassComponent {
             TeacherFK: teacher.ID,
             Teacher: teacher.Name,
             ClassFK: schedule.ClassFK,
-            ClassName:cla.Year+cla.ClassDesc,
+            ClassName: cla.Year + cla.ClassDesc,
             RoomFK: room.ID,
             Room: room.Name
         };
@@ -115,14 +115,14 @@ export class ScheduleClassComponent {
         smallContainer.appendChild(smallLink);
     }
 
-    public setHours(){
+    public setHours() {
         let element = document.getElementById("hoursColumn");
-        var html='<div class="w3-col w3-khaki w3-border-bottom" style="height: 50px;"></div>';
-        for(let time of this.time){
+        var html = '<div class="w3-col w3-khaki w3-border-bottom" style="height: 50px;"></div>';
+        for (let time of this.time) {
             let split = time.split("-");
-            html+='<div class="w3-col w3-green w3-border-bottom" style="height: 50px;">'+split[0]+'<br>'+split[1]+'</div>'
+            html += '<div class="w3-col w3-green w3-border-bottom" style="height: 50px;">' + split[0] + '<br>' + split[1] + '</div>'
         }
-        element.innerHTML=html;
+        element.innerHTML = html;
     }
 
     public select(day: number, hour: number) {
@@ -138,7 +138,7 @@ export class ScheduleClassComponent {
         var x = document.getElementById(id);
         if (x.className.indexOf("w3-show") == -1) {
             x.className += " w3-show";
-        } else { 
+        } else {
             x.className = x.className.replace(" w3-show", "");
         }
     }

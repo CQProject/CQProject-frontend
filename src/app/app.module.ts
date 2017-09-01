@@ -10,18 +10,18 @@ import 'reflect-metadata';
 import { AppComponent } from "./app.component";
 import { AccountNavbarComponent } from "./account/account-navbar.component";
 import { AccountHomeComponent } from "./account/account-home.component";
-import { NotificationCounterComponent } from "./notifications/notification-link.component";
+import { UserProfileComponent } from "./users/user-profile.component";
 import { NotFoundComponent } from "./notfound/nfound.component";
 import { SchoolHomeComponent } from "./schools/school-home.component";
 import { SchoolFormComponent } from "./schools/school-form.component";
-import { LessonTeacherComponent } from "./lessons/lesson-teacher.component";
-import { ScheduleClassComponent } from "./schedules/schedule-class.component";
+import { NotificationCounterComponent } from "./notifications/notification-link.component";
 import { NotificationMenuComponent } from "./notifications/notification-menu.component";
-import { UserProfileComponent } from "./users/user-profile.component";
 import { FloorMapComponent } from "./floors/floor-map.component";
 import { ClassListComponent } from "./classes/class-list.component";
 import { ClassProfileComponent } from "./classes/class-profile.component";
 import { ClassStudentsComponent } from "./classes/class-students.component";
+import { ClassScheduleComponent } from "./classes/class-schedule.component";
+import { LessonListComponent } from "./lessons/lesson-list.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
@@ -32,7 +32,8 @@ import { FloorService } from "./floors/floor.service";
 import { FileService } from "./utils/files.service";
 import { ClassService } from "./classes/class.service";
 import { RoomService } from "./floors/room.service";
-import { ScheduleService } from "./schedules/schedule.service";
+import { ScheduleService } from "./utils/schedule.service";
+import { LessonService} from "./lessons/lesson.service";
 //Pipes
 
 
@@ -47,14 +48,14 @@ import { ScheduleService } from "./schedules/schedule.service";
       { path: 'home', component: AccountHomeComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       { path: 'schools', component: SchoolHomeComponent },
       { path: 'schools/create', component: SchoolFormComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] }},
-      { path: 'lessons/teacher', component: LessonTeacherComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 6] } },
       { path: 'notifications', component: NotificationMenuComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       { path: 'floor/school/:id', component: FloorMapComponent, canActivate: [AuthGuard], data: { roles: [4, 6] } },
       { path: 'user/profile/:id', component: UserProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       { path: 'class/school/:id', component: ClassListComponent, canActivate: [AuthGuard], data: { roles: [3, 6] } },
       { path: 'class/profile/:id', component: ClassProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] } },
       { path: 'student/class/:id', component: ClassStudentsComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] } },
-      { path: 'schedule/class/:id', component: ScheduleClassComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] } },
+      { path: 'schedule/class/:id', component: ClassScheduleComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] } },
+      { path: 'lessons/:id', component: LessonListComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] } },
       
       { path: '**', component: NotFoundComponent }
     ], { useHash: true })
@@ -68,8 +69,8 @@ import { ScheduleService } from "./schedules/schedule.service";
     NotFoundComponent,
     SchoolHomeComponent,
     SchoolFormComponent,
-    ScheduleClassComponent,
-    LessonTeacherComponent,
+    ClassScheduleComponent,
+    LessonListComponent,
     NotificationCounterComponent,
     NotificationMenuComponent,
     FloorMapComponent,
@@ -95,7 +96,8 @@ import { ScheduleService } from "./schedules/schedule.service";
     FileService,
     ClassService,
     ScheduleService,
-    RoomService
+    RoomService,
+    LessonService
   ],
   bootstrap: [AppComponent]
 })

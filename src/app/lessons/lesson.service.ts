@@ -9,11 +9,10 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 
 import { API } from '../../main';
-import { Schedule } from "./interfaceSchedule";
-import { Subject } from "./iSubject";
+import { Lesson } from "./iLesson";
 
 @Injectable()
-export class ScheduleService {
+export class LessonService {
 
     private _headers: Headers;
     private _options: RequestOptions;
@@ -26,21 +25,9 @@ export class ScheduleService {
         this._options = new RequestOptions({ headers: this._headers });
     }
 
-    public async getScheduleByClass(classID: Number): Promise<Schedule[]> {
+    public async getLessonBySubject(subjectID: number, classID:number): Promise<Lesson[]> {
         let response = await this._http
-            .get(this._apiURL + `/schedule/class/${classID}`, this._options)
-            .toPromise();
-
-        if (response.json().result) return response.json().data;
-        else {
-            console.log(response.json().info);
-            return null;
-        }
-    }
-
-    public async getSubject(subjectID: Number): Promise<Subject> {
-        let response = await this._http
-            .get(this._apiURL + `/subject/${subjectID}`, this._options)
+            .get(this._apiURL + `/lesson/list/${subjectID}/${classID}`, this._options)
             .toPromise();
 
         if (response.json().result) return response.json().data;

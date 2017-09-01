@@ -75,7 +75,7 @@
             <div class="w3-col m4 w3-khaki"><label class="w3-margin-left">Sala:</label></div>
             <div class="w3-col m8 w3-khaki"><label class="w3-margin-left"><b>{{selected?.Room}}</b></label></div>
             <hr class="w3-col">
-            <a class="w3-col w3-btn w3-green w3-hover-lime w3-large">Lições</a>
+            <a [routerLink]="['/lessons', selected?.ID]" class="w3-col w3-btn w3-green w3-hover-lime w3-large">Lições</a>
         </div>
     </div>
 </div>
