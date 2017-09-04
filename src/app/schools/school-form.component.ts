@@ -14,6 +14,7 @@ export class SchoolFormComponent{
     school: SchoolToPost;
     logo: File;
     profile: File;
+    editor:any;
 
     constructor(
         private _service: SchoolService,
@@ -22,6 +23,24 @@ export class SchoolFormComponent{
         private _secretaryGuard: SecretaryGuard
     ) {       
         this.school = new SchoolToPost();
+    }
+
+    public ngOnInit(){
+        tinymce.init({
+            selector: '#textarea',
+            statusbar: false,
+            menubar: false,
+            toolbar: 'fontselect fontsizeselect forecolor | bold italic underline | alignleft aligncenter alignright alignjustify | bullist | hr | subscript superscript | link | print preview',
+            plugins: ['link', "colorpicker", "textcolor", "print", "lists", "preview", "hr"],
+            skin_url: 'assets/skins/lightgray',
+            setup: editor => {
+              this.editor = editor;
+              editor.on('keyup', () => {
+                const content = editor.getContent();
+                editor.onEditorKeyup.emit(content);
+              });
+            },
+          });
     }
 
 

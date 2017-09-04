@@ -1,0 +1,90 @@
+<div class="w3-card w3-row w3-round w3-section w3-lime ">
+    <a (click)="lessLesson()" class="w3-col m1 w3-hide-small w3-btn w3-center w3-green w3-hover-khaki"><i class="fa fa-angle-left"></i></a>
+    <a (click)="lessLesson()" class="w3-col s12 w3-hide-medium w3-hide-large w3-btn w3-center w3-green w3-hover-khaki"><i class="fa fa-angle-up"></i></a>
+    <div class="w3-col m10 s12">
+        <div id="list" class="w3-row"></div>
+    </div>
+    <a (click)="moreLesson()" class="w3-col m1 w3-hide-small w3-btn w3-center w3-green w3-hover-khaki"><i class="fa fa-angle-right"></i></a>
+    <a (click)="moreLesson()" class="w3-col s12 w3-hide-medium w3-hide-large w3-btn w3-center w3-green w3-hover-khaki"><i class="fa fa-angle-down"></i></a>
+</div>
+
+<div class="w3-container w3-card-4 w3-white w3-round" style="width:100%">
+    <div class="lesson w3-row-padding w3-section">
+        <div class="w3-col s12 w3-right-align"><a class="w3-button w3-round-xxlarge w3-lime w3-hover-khaki"><i class="fa fa-edit"></i></a></div>
+        <div class="w3-col s6 m8 w3-left-align">
+            <h3>Lição nº{{selected?.Description}}</h3>
+        </div>
+        <div class="w3-col s6 m4 w3-right-align">
+            <h5>{{selected?.Day}}</h5>
+        </div>
+        <div class="w3-col w3-topbar"><br></div>
+        <div class="w3-col s12 m3 w3-rightbar w3-right-align">
+            <h4>Sumário</h4>
+        </div>
+        <div class="w3-col s12 m9 w3-left-align">
+            <p>{{selected?.Summary}}</p>
+        </div>
+        <div class="w3-col">
+            <hr>
+        </div>
+        <div class="w3-col s12 m3 w3-rightbar w3-right-align">
+            <h4>Trabalho de casa</h4>
+        </div>
+        <div class="w3-col s12 m9 w3-left-align">
+            <p>{{selected?.Homework}}</p>
+        </div>
+        <div class="w3-col">
+            <hr>
+        </div>
+        <div class="w3-col s12 m3 w3-rightbar w3-right-align">
+            <h4>Observações</h4>
+        </div>
+        <div class="w3-col s12 m9 w3-left-align">
+            <p>{{selected?.Observations}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="w3-card-4 w3-white w3-round w3-section" style="width:100%">
+    <a (click)="showClass()" class="w3-btn w3-green w3-hover-khaki w3-round" style="width: 100%">Turma</a>
+    <div id="students" class="w3-container w3-hide">
+        <hr>
+        <div class="w3-row">
+            <div class="w3-col m5 w3-hide-small w3-border-right w3-left-align">Nome</div>
+            <div class="w3-col m2 w3-hide-small w3-border-right">Presença</div>
+            <div class="w3-col m2 w3-hide-small w3-border-right">Material</div>
+            <div class="w3-col m2 w3-hide-small w3-border-right">Comportamento</div>
+            <div class="w3-col s5 w3-hide-medium w3-hide-large w3-border-right">Nome</div>
+            <div class="w3-col s2 w3-hide-medium w3-hide-large w3-border-right">P.</div>
+            <div class="w3-col s2 w3-hide-medium w3-hide-large w3-border-right">M.</div>
+            <div class="w3-col s2 w3-hide-medium w3-hide-large w3-border-right">C.</div>
+            <div class="w3-col w3-topbar"><br></div>
+        </div>
+        <div *ngFor="let student of students" class="w3-row">
+            <div class="w3-col s5 m5 w3-border-right w3-left-align">
+                <label>{{student?.Student}}</label>
+            </div>
+            <div class="w3-col s2 w3-border-right">
+                <label *ngIf="student?.Presence; else elseBlock">&#10004;</label>
+                <ng-template #elseBlock>&#10008;</ng-template>
+            </div>
+            <div class="w3-col s2 w3-border-right">
+                <label *ngIf="student?.Material; else elseBlock">&#10004;</label>
+                <ng-template #elseBlock>&#10008;</ng-template>
+            </div>
+            <div class="w3-col s2 w3-border-right">
+                <label [ngSwitch]="student?.Behavior">
+                <i *ngSwitchCase="1" class="fa fa-circle" style="color: #8B0000"></i>
+                <i *ngSwitchCase="2" class="fa fa-circle" style="color: #FF4000"></i>
+                <i *ngSwitchCase="3" class="fa fa-circle" style="color: #FFD700"></i>
+                <i *ngSwitchCase="4" class="fa fa-circle" style="color: #9ACD32"></i>
+                <i *ngSwitchDefault class="fa fa-circle" style="color: #008000;"></i>
+            </label>
+            </div>
+            <div class="w3-col s1"><a><i class="fa fa-edit w3-hover-text-green"></i></a></div>
+            <div class="w3-col">
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
