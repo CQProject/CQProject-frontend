@@ -1,17 +1,17 @@
 import { Component, OnInit, Renderer } from '@angular/core';
 import { ActivatedRoute, Resolve, Router } from '@angular/router';
-import { SchoolService } from "../schools/school.service";
-import { AssistantGuard, TeacherGuard } from '../utils/auth-guard.service';
+import { SchoolService } from "../../schools/school.service";
+import { AssistantGuard, TeacherGuard } from '../../utils/auth-guard.service';
 
-import { ClassService } from "./class.service";
+import { ClassService } from "../class.service";
 
-import { School } from '../schools/iSchool';
-import { Class } from './iClass';
-import { UserProfile} from '../users/iUsers';
+import { School } from '../../schools/iSchool';
+import { Class } from '../iClass';
+import { UserProfile} from '../../users/iUsers';
 
-@Component({ templateUrl: "./class-profile.component.html" })
+@Component({ templateUrl: "./profile.component.html" })
 
-export class ClassProfileComponent {
+export class ClassPrimaryProfileComponent {
 
     public school: School;
     public class: Class;

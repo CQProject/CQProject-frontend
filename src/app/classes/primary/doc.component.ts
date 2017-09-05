@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FileService } from "../utils/files.service";
-import { API } from '../../main';
+import { FileService } from "../../utils/files.service";
+import { API } from '../../../main';
 
 @Component({
-    selector: "doc-class",
-    templateUrl: "./doc-class.component.html"
+    selector: "doc-primary",
+    templateUrl: "./doc.component.html"
 })
 
 export class SchoolHomeComponent {

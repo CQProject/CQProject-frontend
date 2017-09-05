@@ -1,6 +1,6 @@
 export interface Schedule {
     ID: number;
-    StartingTime: number;
+    TimeFK: number;
     Duration: number;
     DayOfWeek: number;
     SubjectFK: number;

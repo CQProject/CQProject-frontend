@@ -1,17 +1,17 @@
 import { Component, OnInit, Renderer } from '@angular/core';
 import { ActivatedRoute, Resolve, Router } from '@angular/router';
 
-import { UserService } from '../users/user.service';
-import { FileService } from '../utils/files.service';
-import { ClassService } from "./class.service";
-import { UserProfile } from '../users/iUsers';
+import { UserService } from '../../users/user.service';
+import { FileService } from '../../utils/files.service';
+import { ClassService } from "../class.service";
+import { UserProfile } from '../../users/iUsers';
 
 @Component({ 
-    selector: "class-students",
-    templateUrl: "./class-students.component.html" 
+    selector: "primary-students",
+    templateUrl: "./students.component.html" 
 })
 
-export class ClassStudentsComponent {
+export class ClassPrimaryStudentsComponent {
 
     public students: UserProfile[];
 

@@ -7,7 +7,7 @@ import { UserService } from "../users/user.service";
 
 import { Lesson } from './iLesson';
 import { Presence } from './iPresence';
-import { Schedule } from "../utils/interfaceSchedule";
+import { Schedule } from "../utils/iSchedule";
 
 @Component({
     selector: "lessons",

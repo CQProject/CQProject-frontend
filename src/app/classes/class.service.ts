@@ -26,9 +26,22 @@ export class ClassService {
         this._options = new RequestOptions({ headers: this._headers });
     }
 
-    public getClassesBySchool(schoolID: number): Observable<Class[]> {
+    public getClassesByPrimarySchool(schoolID: number): Observable<Class[]> {
         return this._http
-            .get(this._apiURL + `/class/school/${schoolID}`, this._options)
+            .get(this._apiURL + `/class/primary/${schoolID}`, this._options)
+            .map((res: Response) => {
+                if (res.json().result) return res.json().data;
+                else {
+                    console.log(res.json().info);
+                    return null;
+                }
+            })
+            .catch(this._handleError);
+    }
+
+    public getClassesByKindergarten(schoolID: number): Observable<Class[]> {
+        return this._http
+            .get(this._apiURL + `/class/kindergarten/${schoolID}`, this._options)
             .map((res: Response) => {
                 if (res.json().result) return res.json().data;
                 else {
