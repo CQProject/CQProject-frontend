@@ -1,3 +1,39 @@
-
 <button (click)="download()">Download</button>
-<iframe width="500" height="600" [attr.src]="pdf" type="application/pdf"></iframe>
+<iframe width="300" height="400" [attr.src]="pdf" type="application/pdf"></iframe>
+
+<div class="w3-container w3-margin-top">
+    <div class="w3-responsive">
+        <table class="w3-table-all">
+            <tr>
+                <th>
+                    Nome do Ficheiro
+                </th>
+                <th>
+                    Disponibilizado por
+                </th>
+                <th>
+                    Data da submissão
+                </th>
+                <th>
+                    Turma
+                </th>
+                <th>
+                    Visibilidade
+                </th>
+                <th></th>
+            </tr>
+            <tr *ngFor="let document of docs">
+                <td>{{document.File}}</td>
+                <td>{{document.Teacher}}</td>
+                <td>{{document.SubmitedIn}}</td>
+                <td>{{document.Class}}</td>
+                <td>{{document.IsVisible}}</td>
+                <td>
+                    <div *ngIf="document.File.split('.')[1].includes('pdf')">
+                        <i class="fa fa-file-pdf-o" style="font-size:25px;color:darkred;"></i>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
