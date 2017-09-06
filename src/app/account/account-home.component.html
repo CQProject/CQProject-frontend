@@ -1,26 +1,31 @@
-<div class="w3-row w3-center">
-    <div class="w3-col l1 w3-container"></div>
-    <div class="w3-col l10 w3-container">
-
-        <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
-            <div id="Notification" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('Notifications');">
+<div *ngIf="_secretaryGuard.canActivate()">
+    <div class="w3-row w3-center">
+        <div class="w3-col l1 w3-container"></div>
+        <div class="w3-col l10 w3-container">
+            <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
+                <div id="Notification" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('Notifications');">
                     <label class="w3-large">Notificações</label>
-            </div>
-        </a>
-        <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
-            <div id="School" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('Schools');">
+                </div>
+            </a>
+            <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
+                <div id="School" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('Schools');">
                     <label class="w3-large">Escolas</label>
-            </div>
-        </a>
+                </div>
+            </a>
 
+        </div>
+        <div class="w3-col l1 w3-container"></div>
     </div>
-    <div class="w3-col l1 w3-container"></div>
+
+    <div id="Notifications" class="information w3-animate-bottom w3-hide">
+        <notification-menu></notification-menu>
+    </div>
+
+    <div id="Schools" class="information w3-animate-bottom w3-hide">
+        <schools-home></schools-home>
+    </div>
 </div>
 
-<div id="Notifications" class="information w3-animate-bottom w3-hide">
-    <notification-menu></notification-menu>
-</div>
-
-<div id="Schools" class="information w3-animate-bottom w3-hide">
-    <schools-home></schools-home>
+<div *ngIf="_studentGuard.canActivate()">
+    <class-profile></class-profile>
 </div>
