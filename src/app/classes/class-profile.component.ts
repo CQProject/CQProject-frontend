@@ -9,7 +9,7 @@ import { School } from '../schools/iSchool';
 import { Class } from './iClass';
 import { UserProfile} from '../users/iUsers';
 
-@Component({ templateUrl: "./class-profile.component.html" })
+@Component({ selector: 'class-profile' ,templateUrl: "./class-profile.component.html" })
 
 export class ClassProfileComponent {
 
