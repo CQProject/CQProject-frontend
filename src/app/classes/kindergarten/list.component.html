@@ -1,0 +1,5 @@
+<div *ngFor="let class of classes">
+    <a class="w3-margin w3-card-2 w3-btn w3-col s6 m4 l3 w3-animate-bottom w3-lime w3-hover-khaki" [routerLink]="['/class/kindergarten/profile', class?.ID]">
+        <h2><b>{{class?.ClassDesc}}</b></h2>
+    </a>
+</div>

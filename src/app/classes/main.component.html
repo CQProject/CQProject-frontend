@@ -1,0 +1,27 @@
+<div class="w3-card-2 w3-lime w3-row">
+    <div class="w3-col s8 w3-text-white">
+        <div class="w3-panel w3-green ">
+            <label class="w3-xxlarge">{{school?.Name}}</label>
+        </div>
+    </div>
+    <div class="w3-col s4 w3-right-align">
+       <!-- <label class="w3-margin-right w3-large">{{class?.SchoolYear}}</label> -->
+    </div>
+</div>
+
+<div class="w3-section w3-row">
+    <a class="w3-half w3-border" [routerLink]="['primary']" style="text-decoration:none">
+        <div id="option1" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding w3-border-green" (click)="chooseOption('option1');">
+            <label class="w3-large">1º Ciclo</label>
+        </div>
+    </a>
+    <a class="w3-half w3-border" [routerLink]="['kindergarten']" style="text-decoration:none">
+        <div id="option2" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('option2');">
+            <label class="w3-large">Jardim de Infância</label>
+        </div>
+    </a>
+</div>
+
+<div class="w3-animate-bottom">
+    <router-outlet></router-outlet>
+</div>

@@ -1,26 +1,59 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { DocumentService } from "../../utils/document.service";
 import { FileService } from "../../utils/files.service";
-import { API } from '../../../main';
+import { ClassService } from "../../classes/class.service";
+import { UserService } from "../../users/user.service";
+import { StudentGuard, GuardianGuard } from "../../utils/auth-guard.service";
+
+import { Document } from '../../utils/iDocument';
+import { Class } from '../../classes/iClass';
 
 @Component({
-    selector: "doc-primary",
+    selector: "class-doc",
     templateUrl: "./doc.component.html"
 })
 
-export class SchoolHomeComponent {
+export class ClassPrimaryDocumentComponent {
 
-    private pdf: any;
+    private file: any;
     private image: any;
+    private docs: any[];
 
     constructor(
         private _fileService: FileService,
-        private _route: Router,
-    ) { }
+        private _documentService: DocumentService,
+        private _classService: ClassService,
+        private _userService: UserService,
+        private _guardianGuard: GuardianGuard,
+        private _studentGuard: StudentGuard,
+        private _router: Router,
+        private _route: ActivatedRoute,
+    ) {
+    }
 
     public async ngOnInit() {
-
+        this.docs = [];
+        let classID;
+        this._route.parent.params.subscribe(params => classID = params['id']);
+        let documents = await this._documentService.getDocumentsByClass(classID);
+        for (let document of documents) {
+            let filename = document.File.split(".");
+            let teacher = await this._userService.getProfile(document.UserFK)
+            this.docs.push({
+                //quando forem dados reais alterar para 1 - 2
+                "File": filename[0] + "." + filename[1],
+                "Type": filename[1],
+                "Teacher": teacher.Name,
+                "TeacherID": teacher.ID,
+                "SubmitedIn": document.SubmitedIn,
+                "IsVisible": document.IsVisible
+            });
+        }
+        console.log(this.docs)
     }
+
 
     public show(elementID: string) {
         document.getElementById(elementID).style.display = 'block';
@@ -30,12 +63,19 @@ export class SchoolHomeComponent {
         document.getElementById(elementID).style.display = 'none';
     }
 
-    public async download() {
-        this._fileService.fileDownload("9735a9f8-4351-4a6c-b336-eb55bfc3becf.CV-Europass-20170727-Mendes-PT (1).pdf")
-            .subscribe((res) => {
-                this.pdf = res;
+    public async download(filename: string, type: string) {
+        if (type == "pdf") {
+            this.show("pdfViewer");
+            this._fileService.fileDownload(filename)
+                .subscribe((res) => {
+                    this.file = res;
+                });
+        }else{
+            this._fileService.fileDownload(filename)
+            .subscribe((res) => { 
+                this.file = res; 
             });
+        }
     }
-
 
 }

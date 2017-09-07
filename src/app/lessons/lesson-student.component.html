@@ -1,93 +1,82 @@
-<div class="w3-card w3-row w3-round w3-section w3-pale-red ">
-    <a (click)="lessLesson()" class="w3-col l2 m1 w3-hide-small w3-btn w3-center w3-hover-deep-orange"><i class="fa fa-angle-left"></i></a>
-    <a (click)="lessLesson()" class="w3-col s12 w3-hide-medium w3-hide-large w3-btn w3-center w3-hover-deep-orange"><i class="fa fa-angle-up"></i></a>
-    <div class="w3-col l8 m10 s12">
-        <div class="w3-row-padding">
-            <div class="w3-col m4 s12 list w3-hide"><a (click)="showLesson(0)" class="w3-btn  w3-hover-deep-orange">Lição 1</a></div>
-            <div class="w3-col m4 s12 list w3-hide"><a (click)="showLesson(1)" class="w3-btn  w3-hover-deep-orange">Lição 2</a></div>
-            <div class="w3-col m4 s12 list w3-hide"><a (click)="showLesson(2)" class="w3-btn  w3-hover-deep-orange">Lição 3</a></div>
-            <div class="w3-col m4 s12 list w3-hide"><a (click)="showLesson(3)" class="w3-btn  w3-hover-deep-orange">Lição 4</a></div>
-            <div class="w3-col m4 s12 list w3-hide"><a (click)="showLesson(4)" class="w3-btn  w3-hover-deep-orange">Lição 5</a></div>
-        </div>
+<div class="w3-card w3-row w3-round w3-section w3-lime ">
+    <a (click)="lessLesson()" class="w3-col m1 w3-hide-small w3-btn w3-center w3-green w3-hover-khaki"><i class="fa fa-angle-left"></i></a>
+    <a (click)="lessLesson()" class="w3-col s12 w3-hide-medium w3-hide-large w3-btn w3-center w3-green w3-hover-khaki"><i class="fa fa-angle-up"></i></a>
+    <div class="w3-col m10 s12">
+        <div id="list" class="w3-row"></div>
     </div>
-    <a (click)="moreLesson()" class="w3-col l2 m1 w3-hide-small w3-btn w3-center w3-hover-deep-orange"><i class="fa fa-angle-right"></i></a>
-    <a (click)="moreLesson()" class="w3-col s12 w3-hide-medium w3-hide-large w3-btn w3-center w3-hover-deep-orange"><i class="fa fa-angle-down"></i></a>
+    <a (click)="moreLesson()" class="w3-col m1 w3-hide-small w3-btn w3-center w3-green w3-hover-khaki"><i class="fa fa-angle-right"></i></a>
+    <a (click)="moreLesson()" class="w3-col s12 w3-hide-medium w3-hide-large w3-btn w3-center w3-green w3-hover-khaki"><i class="fa fa-angle-down"></i></a>
 </div>
 
 <div class="w3-container w3-card-4 w3-white w3-round" style="width:100%">
-    <div class="lesson w3-row-padding">
-        <div class="w3-col s6 m8">
-            <h3>Lição 1</h3>
+    <div class="lesson w3-row-padding w3-section">
+        <div class="w3-col s12 w3-right-align"><a class="w3-button w3-round-xxlarge w3-lime w3-hover-khaki"><i class="fa fa-edit"></i></a></div>
+        <div class="w3-col s6 m8 w3-left-align">
+            <h3>Lição nº{{selected?.Description}}</h3>
         </div>
         <div class="w3-col s6 m4 w3-right-align">
-            <h5>5 Setembro 2017</h5>
+            <h5>{{selected?.Day}}</h5>
         </div>
         <div class="w3-col w3-topbar"><br></div>
-        <div class="w3-col s12 m3 w3-rightbar">
+        <div class="w3-col">
+            <hr>
+        </div>
+        <div *ngIf="_guardianGuard.canActivate()" class="w3-col m5 w3-hide-small w3-border-bottom w3-left-align">Nome</div>
+        <div class="w3-col m2 w3-hide-small w3-border-bottom">Presença</div>
+        <div class="w3-col m2 w3-hide-small w3-border-bottom">Material</div>
+        <div class="w3-col m3 w3-hide-small w3-border-bottom">Comportamento</div>
+        <div *ngIf="_guardianGuard.canActivate()" class="w3-col s5 w3-hide-medium w3-hide-large w3-border-right">Nome</div>
+        <div class="w3-col s2 w3-hide-medium w3-hide-large w3-border-bottom">P.</div>
+        <div class="w3-col s2 w3-hide-medium w3-hide-large w3-border-bottom">M.</div>
+        <div class="w3-col s3 w3-hide-medium w3-hide-large w3-border-bottom">C.</div>
+        <div class="w3-col">
+            <div *ngFor="let student of selected?.Student" class="w3-row w3-panel">
+                <div *ngIf="_guardianGuard.canActivate()" class="w3-col s5 w3-left-align">
+                    <h4>{{student?.Student}}</h4>
+                </div>
+                <div class="w3-col s2 w3-section">
+                    <label *ngIf="student?.Presence; else elseBlock">&#10004;</label>
+                    <ng-template #elseBlock>&#10008;</ng-template>
+                </div>
+                <div class="w3-col s2 w3-section">
+                    <label *ngIf="student?.Material; else elseBlock">&#10004;</label>
+                    <ng-template #elseBlock>&#10008;</ng-template>
+                </div>
+                <div class="w3-col s3 w3-section">
+                    <label [ngSwitch]="student?.Behavior">
+                        <i *ngSwitchCase="1" class="fa fa-circle" style="color: #8B0000"></i>
+                        <i *ngSwitchCase="2" class="fa fa-circle" style="color: #FF4000"></i>
+                        <i *ngSwitchCase="3" class="fa fa-circle" style="color: #FFD700"></i>
+                        <i *ngSwitchCase="4" class="fa fa-circle" style="color: #9ACD32"></i>
+                        <i *ngSwitchDefault class="fa fa-circle" style="color: #008000;"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="w3-col w3-topbar"><br></div>
+        <div class="w3-col s12 m3 w3-rightbar w3-right-align">
             <h4>Sumário</h4>
         </div>
-        <div class="w3-col s12 m9">
-            <p>Sumário exemplo...</p>
+        <div class="w3-col s12 m9 w3-left-align">
+            <p>{{selected?.Summary}}</p>
         </div>
         <div class="w3-col">
             <hr>
         </div>
-        <div class="w3-col s12 m3 w3-rightbar">
+        <div class="w3-col s12 m3 w3-rightbar w3-right-align">
             <h4>Trabalho de casa</h4>
         </div>
-        <div class="w3-col s12 m9">
-            <p>Trabalho de casa exemplo exemplo...</p>
+        <div class="w3-col s12 m9 w3-left-align">
+            <p>{{selected?.Homework}}</p>
         </div>
         <div class="w3-col">
             <hr>
         </div>
-        <div class="w3-col s12 m3 w3-rightbar">
+        <div class="w3-col s12 m3 w3-rightbar w3-right-align">
             <h4>Observações</h4>
         </div>
-        <div class="w3-col s12 m9">
-            <p>Uma observação exemplo...</p>
-        </div>
-        <div class="w3-col">
-            <hr>
-        </div>
-        <div class="w3-col s12 m3"><a (click)="showClass()" class="w3-btn w3-teal">Turma</a></div>
-        <div class="w3-col s12 m6">
-            <hr>
-        </div>
-        <div class="w3-col s12 m3"><a class="w3-btn w3-teal">Editar</a></div>
-    </div>
-</div>
-
-<div class="w3-container w3-card-4 w3-white w3-round w3-section" style="width:100%">
-    <div id="students" class="w3-hide w3-row-padding">
-        <div class="w3-col">
-            <h3>Turma</h3>
-        </div>
-        <div class="w3-col m5 w3-hide-small w3-border-right">Nome</div>
-        <div class="w3-col m2 w3-hide-small w3-border-right">Presença</div>
-        <div class="w3-col m2 w3-hide-small w3-border-right">Material</div>
-        <div class="w3-col m2 w3-hide-small w3-border-right">Comportamento</div>
-        <div class="w3-col s5 w3-hide-medium w3-hide-large w3-border-right">Nome</div>
-        <div class="w3-col s2 w3-hide-medium w3-hide-large w3-border-right">P.</div>
-        <div class="w3-col s2 w3-hide-medium w3-hide-large w3-border-right">M.</div>
-        <div class="w3-col s2 w3-hide-medium w3-hide-large w3-border-right">C.</div>
-        <div class="w3-col w3-topbar"><br></div>
-
-        <div class="w3-col s5 m5 w3-border-right">
-            <p>José Santos Carvalho</p>
-        </div>
-        <div class="w3-col s2 w3-border-right">
-            <p>&#10004;</p>
-        </div>
-        <div class="w3-col s2 w3-border-right">
-            <p>&#10008;</p>
-        </div>
-        <div class="w3-col s2 w3-border-right">
-            <p><i class="fa fa-circle w3-text-green"></i></p>
-        </div>
-        <div class="w3-col s1"><a class="w3-button"><i class="fa fa-edit"></i></a></div>
-        <div class="w3-col">
-            <hr>
+        <div class="w3-col s12 m9 w3-left-align">
+            <p>{{selected?.Observations}}</p>
         </div>
     </div>
 </div>

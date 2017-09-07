@@ -25,14 +25,14 @@ export class ClassPrimaryStudentsComponent {
     ) { this.students = []; }
 
     public async ngOnInit() {
-
         let classID;
-        this._route.params.subscribe(params => classID = params['id']);
+        this._route.parent.params.subscribe(params =>classID = +params["id"]);
+
         let studentIDs = await this._classService.getStudentsByClass(classID);
         for (var i = 0; i < studentIDs.length; i++) {
             this.students[i] = await this._userService.getProfile(studentIDs[i]);
         }
-        console.log(this.students);
+        
         for (let student of this.students) {
             this._fileService.imageDownload(student.Photo)
                 .subscribe((res) => {

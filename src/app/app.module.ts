@@ -16,25 +16,33 @@ import { SchoolHomeComponent } from "./schools/school-home.component";
 import { SchoolFormComponent } from "./schools/school-form.component";
 import { NotificationCounterComponent } from "./notifications/notification-link.component";
 import { NotificationMenuComponent } from "./notifications/notification-menu.component";
-import { FloorMapComponent } from "./floors/floor-map.component";
-import { ClassListComponent } from "./classes/list.component";
+import { FloorMainComponent } from "./sensors/main.component";
+import { MapComponent } from "./sensors/map.component";
+import { SensorComponent } from "./sensors/sensor.component";
+import { ClassMainComponent } from "./classes/main.component";
 import { ClassPrimaryProfileComponent } from "./classes/primary/profile.component";
 import { ClassPrimaryStudentsComponent } from "./classes/primary/students.component";
 import { ClassPrimaryScheduleComponent } from "./classes/primary/schedule.component";
-import { LessonListComponent } from "./lessons/lesson-list.component";
+import { ClassPrimaryListComponent } from "./classes/primary/list.component";
+import { ClassKindergartenListComponent } from "./classes/kindergarten/list.component";
+import{ClassPrimaryDocumentComponent} from "./classes/primary/doc.component";
+import { LessonTeacherComponent } from "./lessons/lesson-teacher.component";
+import { LessonStudentComponent } from "./lessons/lesson-student.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
 import { AuthGuard, AdminGuard, AssistantGuard, GuardianGuard, SecretaryGuard, StudentGuard, TeacherGuard } from "./utils/auth-guard.service";
 import { UserService } from "./users/user.service";
 import { NotificationService } from "./notifications/notification.service";
-import { FloorService } from "./floors/floor.service";
+import { FloorService } from "./sensors/floor.service";
 import { FileService } from "./utils/files.service";
 import { ClassService } from "./classes/class.service";
-import { RoomService } from "./floors/room.service";
+import { RoomService } from "./sensors/room.service";
 import { ScheduleService } from "./utils/schedule.service";
-import { LessonService} from "./lessons/lesson.service";
+import { LessonService } from "./lessons/lesson.service";
 import { TimeService } from "./utils/time.service";
+import { SensorService } from "./sensors/sensor.service";
+import { DocumentService } from "./utils/document.service";
 //Pipes
 
 
@@ -48,16 +56,35 @@ import { TimeService } from "./utils/time.service";
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: AccountHomeComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       { path: 'schools', component: SchoolHomeComponent },
-      { path: 'schools/create', component: SchoolFormComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] }},
+      { path: 'schools/create', component: SchoolFormComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       { path: 'notifications', component: NotificationMenuComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
-      { path: 'floor/school/:id', component: FloorMapComponent, canActivate: [AuthGuard], data: { roles: [4, 6] } },
+      {
+        path: 'map/school/:id', component: FloorMainComponent, canActivate: [AuthGuard], data: { roles: [4, 6] },
+        children: [
+          { path: 'room/:id', component: SensorComponent },
+          { path: 'floor/:id', component: MapComponent }
+        ]
+      },
       { path: 'user/profile/:id', component: UserProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
-      { path: 'class/school/:id', component: ClassListComponent, canActivate: [AuthGuard], data: { roles: [3, 6] } },
-      { path: 'class/primary/profile/:id', component: ClassPrimaryProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] } },
-      { path: 'class/primary/student/:id', component: ClassPrimaryStudentsComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] } },
-      { path: 'class/primary/schedule/:id', component: ClassPrimaryScheduleComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] } },
-      { path: 'lessons/:id', component: LessonListComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] } },
-      
+      {
+        path: 'class/school/:id', component: ClassMainComponent, canActivate: [AuthGuard], data: { roles: [3, 6] },
+        children: [
+          { path: '', redirectTo: 'primary', pathMatch: 'full' },
+          { path: 'primary', component: ClassPrimaryListComponent },
+          { path: 'kindergarten', component: ClassKindergartenListComponent }
+        ]
+      },
+      {
+        path: 'primary/class/:id', component: ClassPrimaryProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] },
+        children: [
+          { path: '', redirectTo: 'schedule', pathMatch: 'full' },
+          { path: 'student', component: ClassPrimaryStudentsComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 6] } },
+          { path: 'schedule', component: ClassPrimaryScheduleComponent },
+          { path: 'document', component: ClassPrimaryDocumentComponent },
+          { path: 'teacher-lessons/:id', component: LessonTeacherComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 6] } },
+          { path: 'student-lessons/:id', component: LessonStudentComponent, canActivate: [AuthGuard], data: { roles: [1, 5] } }
+        ]
+      },
       { path: '**', component: NotFoundComponent }
     ], { useHash: true })
   ],
@@ -71,14 +98,20 @@ import { TimeService } from "./utils/time.service";
     SchoolHomeComponent,
     SchoolFormComponent,
     ClassPrimaryScheduleComponent,
-    LessonListComponent,
+    LessonTeacherComponent,
+    LessonStudentComponent,
     NotificationCounterComponent,
     NotificationMenuComponent,
-    FloorMapComponent,
+    MapComponent,
     UserProfileComponent,
-    ClassListComponent,
+    ClassMainComponent,
     ClassPrimaryProfileComponent,
-    ClassPrimaryStudentsComponent
+    ClassPrimaryStudentsComponent,
+    ClassKindergartenListComponent,
+    ClassPrimaryListComponent,
+    SensorComponent,
+    FloorMainComponent,
+    ClassPrimaryDocumentComponent
     //Pipe
   ],
   providers: [
@@ -99,7 +132,9 @@ import { TimeService } from "./utils/time.service";
     ScheduleService,
     RoomService,
     LessonService,
-    TimeService
+    TimeService,
+    SensorService,
+    DocumentService
   ],
   bootstrap: [AppComponent]
 })

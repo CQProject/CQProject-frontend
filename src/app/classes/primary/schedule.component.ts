@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 
 import { ScheduleService } from "../../utils/schedule.service";
 import { UserService } from "../../users/user.service";
-import { RoomService } from "../../floors/room.service";
+import { RoomService } from "../../sensors/room.service";
 import { ClassService } from "../class.service";
 import { TimeService } from "../../utils/time.service";
 
@@ -12,7 +12,7 @@ import { Time } from "../../utils/interfaceTime";
 import { Subject } from "../../utils/iSubject";
 
 import { UserProfile } from "../../users/iUsers";
-import { Room } from "../../floors/iRoom";
+import { Room } from "../../sensors/iRoom";
 import { Class } from "../iClass";
 
 @Component({
@@ -43,7 +43,7 @@ export class ClassPrimaryScheduleComponent {
 
     public async ngOnInit() {
         let classID;
-        this._route.params.subscribe(params => classID = params['id']);
+        this._route.parent.params.subscribe(params =>classID = +params["id"]);
 
         this.cla = await this._classService.getClassProfile(classID);
         this.setHours();
@@ -76,21 +76,11 @@ export class ClassPrimaryScheduleComponent {
             };
 
             switch (schedule.DayOfWeek - 1) {
-                case 0:
-                    this.insertSchedule(schedule.DayOfWeek - 1, time.Order - 1, "bigMonday", "smallMonday");
-                    break;
-                case 1:
-                    this.insertSchedule(schedule.DayOfWeek - 1, time.Order - 1, "bigTuesday", "smallTuesday");
-                    break;
-                case 2:
-                    this.insertSchedule(schedule.DayOfWeek - 1, time.Order - 1, "bigWednesday", "smallWednesday");
-                    break;
-                case 3:
-                    this.insertSchedule(schedule.DayOfWeek - 1, time.Order - 1, "bigThursday", "smallThursday");
-                    break;
-                case 4:
-                    this.insertSchedule(schedule.DayOfWeek - 1, time.Order - 1, "bigFriday", "smallFriday");
-                    break;
+                case 0: this.insertSchedule(schedule.DayOfWeek - 1, time.Order - 1, "bigMonday", "smallMonday"); break;
+                case 1: this.insertSchedule(schedule.DayOfWeek - 1, time.Order - 1, "bigTuesday", "smallTuesday"); break;
+                case 2: this.insertSchedule(schedule.DayOfWeek - 1, time.Order - 1, "bigWednesday", "smallWednesday"); break;
+                case 3: this.insertSchedule(schedule.DayOfWeek - 1, time.Order - 1, "bigThursday", "smallThursday"); break;
+                case 4: this.insertSchedule(schedule.DayOfWeek - 1, time.Order - 1, "bigFriday", "smallFriday"); break;
             }
         }
     }

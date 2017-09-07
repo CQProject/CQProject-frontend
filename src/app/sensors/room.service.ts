@@ -9,11 +9,10 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 
 import { API } from '../../main';
-import { Lesson } from "./iLesson";
-import { Presence } from "./iPresence";
+import { Room } from "./iRoom";
 
 @Injectable()
-export class LessonService {
+export class RoomService {
 
     private _headers: Headers;
     private _options: RequestOptions;
@@ -26,9 +25,9 @@ export class LessonService {
         this._options = new RequestOptions({ headers: this._headers });
     }
 
-    public async getLessonBySubject(subjectID: number, classID: number): Promise<Lesson[]> {
+    public async getRoomByFloor(floorID: number): Promise<Room[]> {
         let response = await this._http
-            .get(this._apiURL + `/lesson/list/${subjectID}/${classID}`, this._options)
+            .get(this._apiURL + `/room/floor/${floorID}`, this._options)
             .toPromise();
 
         if (response.json().result) return response.json().data;
@@ -38,33 +37,9 @@ export class LessonService {
         }
     }
 
-    public async getPresenceByTeacher(lessonID: number): Promise<Presence[]> {
+    public async getRoom(roomID: number): Promise<Room> {
         let response = await this._http
-            .get(this._apiURL + `/lesson/teacher/${lessonID}`, this._options)
-            .toPromise();
-
-        if (response.json().result) return response.json().data;
-        else {
-            console.log(response.json().info);
-            return null;
-        }
-    }
-
-    public async getPresenceByStudent(lessonID: number): Promise<Presence> {
-        let response = await this._http
-            .get(this._apiURL + `/lesson/student/${lessonID}`, this._options)
-            .toPromise();
-
-        if (response.json().result) return response.json().data;
-        else {
-            console.log(response.json().info);
-            return null;
-        }
-    }
-
-    public async getPresenceByGuardian(lessonID: number): Promise<Presence[]> {
-        let response = await this._http
-            .get(this._apiURL + `/lesson/guardian/${lessonID}`, this._options)
+            .get(this._apiURL + `/room/single/${roomID}`, this._options)
             .toPromise();
 
         if (response.json().result) return response.json().data;

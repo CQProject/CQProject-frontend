@@ -53,6 +53,21 @@ export class FileService {
             .catch(this._handleError);
     }
 
+    public async imageDownloadAsync(filename: String): Promise<any> {
+        this._headers = new Headers();
+        this._headers.append('Authorization', <string>JSON.parse(localStorage.getItem('currentUser')).token);
+        this._options = new RequestOptions({ headers: this._headers, responseType: ResponseContentType.Blob });
+
+        let response = await this._http
+        .get(this._apiURL + `/download/image/${filename}`,this._options)
+        .toPromise();
+    
+        return this._sanitizer
+        .bypassSecurityTrustResourceUrl(window.URL.createObjectURL(
+            new Blob([response.blob()], { type: response.headers.get("Content-Type") })
+        ));
+    }
+
     public fileDownload(filename: String): Observable<any> {
         this._headers = new Headers();
         this._headers.append('Authorization', <string>JSON.parse(localStorage.getItem('currentUser')).token);
@@ -93,8 +108,6 @@ export class FileService {
         }
     }
 
-    
-
     public async imageUpload(file: File): Promise<string> {
         let formData: FormData = new FormData();
         formData.append('Key', 'image')
@@ -134,8 +147,6 @@ export class FileService {
             }
             
     }
-
-
 
     private _handleError(error: Response) {
         //console.error(error);

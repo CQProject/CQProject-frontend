@@ -1,18 +1,20 @@
-<div class="w3-row w3-center ">
-  <div class="w3-col l1  w3-container"></div>
-  <div class="w3-col l10 w3-container">
-    <button *ngIf="_secretaryGuard.canActivate()" class="w3-button w3-margin-top w3-block w3-green w3-hover-lime" (click)="show('schoolForm')"><label class="w3-large">Criar uma nova escola</label></button>
-    <div *ngFor="let school of schools">
-      <a class="w3-btn w3-col s6 m4 l3 w3-animate-bottom" (click)="show(school?.ID)">
-        <div class="w3-card-2 w3-display-container">
-          <img [attr.src]="school?.ProfilePicture" style="width:100%">
-          <div class="w3-display-bottomleft w3-large w3-card-4 w3-gray">{{school?.Acronym}}</div>
-        </div>
-      </a>
-    </div>
-  </div>
-  <div class="w3-col l1  w3-container"></div>
+<div *ngIf="_secretaryGuard.canActivate() || _adminGuard.canActivate()" class="w3-margin-top">
+  <a class="w3-button w3-block w3-green w3-hover-lime" (click)="show('schoolForm')">
+      <label class="w3-large">Criar uma nova escola</label>
+  </a>
+  <hr>
 </div>
+
+
+<div *ngFor="let school of schools">
+  <a class="w3-btn w3-col s6 m4 w3-animate-bottom" (click)="show(school?.ID)">
+    <div class="w3-card-2 w3-display-container">
+      <img [attr.src]="school?.ProfilePicture" style="width:100%">
+      <div class="w3-display-bottomleft w3-large w3-card-4 w3-gray">{{school?.Acronym}}</div>
+    </div>
+  </a>
+</div>
+
 
 <div *ngFor="let school of schools">
   <div id="{{school?.ID}}" class="w3-modal">
@@ -30,14 +32,14 @@
         <img [attr.src]="school?.ProfilePicture" height="70%" width="90%" class="w3-border">
         <p>{{school?.About}}</p>
       </div>
-      <div class="w3-container w3-teal">
-        <div *ngIf="_assistantGuard.canActivate()"><button [routerLink]="['/floor/school', school?.ID]">Edifícios</button></div>
-        <div *ngIf="_secretaryGuard.canActivate()"><button [routerLink]="['/class/school', school?.ID]">Turmas</button></div>
+      <div class="w3-container w3-green w3-row">
+        <div class="w3-col s6" *ngIf="_assistantGuard.canActivate() || _adminGuard.canActivate()"><a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['/map/school', school?.ID]">Edifícios</a></div>
+        <div class="w3-col s6" *ngIf="_secretaryGuard.canActivate() || _adminGuard.canActivate()"><a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['/class/school', school?.ID]">Turmas</a></div>
       </div>
     </div>
   </div>
 </div>
 
-<div id="schoolForm" class="w3-modal" *ngIf="_secretaryGuard.canActivate()">
+<div id="schoolForm" class="w3-modal" *ngIf="_secretaryGuard.canActivate() || _adminGuard.canActivate()">
   <school-form></school-form>
 </div>

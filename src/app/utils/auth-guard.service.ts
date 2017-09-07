@@ -30,12 +30,12 @@ export class AuthGuard implements CanActivate {
 @Injectable()
 export class StudentGuard implements CanActivate {
 
-    constructor(private _router: Router) { }
+    constructor() { }
 
-    canActivate(route: ActivatedRouteSnapshot) {
+    canActivate() {
         var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
         if (user != null) {
-            return (user.roles.indexOf(1) > -1 || user.roles.indexOf(6) > -1) ? true : false;
+            return (user.roles.indexOf(1) > -1) ? true : false;
         }
         return false;
     }
@@ -44,12 +44,12 @@ export class StudentGuard implements CanActivate {
 @Injectable()
 export class TeacherGuard implements CanActivate {
 
-    constructor(private _router: Router) { }
+    constructor() { }
 
-    canActivate(route: ActivatedRouteSnapshot) {
+    canActivate() {
         var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
         if (user != null) {
-            return (user.roles.indexOf(2) > -1 || user.roles.indexOf(6) > -1) ? true : false;
+            return (user.roles.indexOf(2) > -1) ? true : false;
         }
         return false;
     }
@@ -58,12 +58,12 @@ export class TeacherGuard implements CanActivate {
 @Injectable()
 export class SecretaryGuard implements CanActivate {
 
-    constructor(private _router: Router) { }
+    constructor() { }
 
-    canActivate(route: ActivatedRouteSnapshot) {
+    canActivate() {
         var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
         if (user != null) {
-            return (user.roles.indexOf(3) > -1 || user.roles.indexOf(6) > -1) ? true : false;
+            return (user.roles.indexOf(3) > -1) ? true : false;
         }
         return false;
     }
@@ -72,12 +72,12 @@ export class SecretaryGuard implements CanActivate {
 @Injectable()
 export class AssistantGuard implements CanActivate {
 
-    constructor(private _router: Router) { }
+    constructor() { }
 
-    canActivate(route: ActivatedRouteSnapshot) {
+    canActivate() {
         var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
         if (user != null) {
-            return (user.roles.indexOf(4) > -1 || user.roles.indexOf(6) > -1) ? true : false;
+            return (user.roles.indexOf(4) > -1) ? true : false;
         }
         return false;
     }
@@ -86,12 +86,12 @@ export class AssistantGuard implements CanActivate {
 @Injectable()
 export class GuardianGuard implements CanActivate {
 
-    constructor(private _router: Router) { }
+    constructor() { }
 
-    canActivate(route: ActivatedRouteSnapshot) {
+    canActivate() {
         var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
         if (user != null) {
-            return (user.roles.indexOf(5) > -1  || user.roles.indexOf(6) > -1) ? true : false;
+            return (user.roles.indexOf(5) > -1) ? true : false;
         }
         return false;
     }
@@ -100,9 +100,9 @@ export class GuardianGuard implements CanActivate {
 @Injectable()
 export class AdminGuard implements CanActivate {
 
-    constructor(private _router: Router) { }
+    constructor() { }
 
-    canActivate(route: ActivatedRouteSnapshot) {
+    canActivate() {
         var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
         if (user != null) {
             return (user.roles.indexOf(6) > -1) ? true : false;

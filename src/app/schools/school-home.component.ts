@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SchoolService } from './school.service';
 import { School } from "./iSchool";
-import { AssistantGuard, SecretaryGuard } from "../utils/auth-guard.service";
+import { AssistantGuard, SecretaryGuard, AdminGuard } from "../utils/auth-guard.service";
 import { FileService } from "../utils/files.service";
 import { API } from '../../main';
 
@@ -20,7 +20,8 @@ export class SchoolHomeComponent {
         private _fileService: FileService,
         private _route: Router,
         private _assistantGuard: AssistantGuard,
-        private _secretaryGuard: SecretaryGuard
+        private _secretaryGuard: SecretaryGuard,
+        private _adminGuard: AdminGuard
     ) { }
 
     public async ngOnInit() {

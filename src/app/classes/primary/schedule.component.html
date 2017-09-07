@@ -56,26 +56,42 @@
 </div>
 
 <div id="scheduleModal" class="w3-modal">
-    <div class="w3-modal-content w3-card">
+    <div class="w3-modal-content w3-card" style="max-width: 500px;">
         <div class="w3-container w3-deep-orange">
             <span (click)="hide()" class="w3-btn w3-display-topright">&times;</span>
         </div>
-        <div class="w3-panel w3-row w3-left-align">
-            <div class="w3-col"><i class="w3-badge w3-green fa fa-info w3-xlarge"></i></div>
-            <div class="w3-col m4 w3-lime"><label class="w3-margin-left">Disciplina:</label></div>
-            <div class="w3-col m8 w3-lime"><label class="w3-margin-left"><b>{{selected?.Subject}}</b></label></div>
-            <div class="w3-col m4 w3-khaki"><label class="w3-margin-left">Turma:</label></div>
-            <div class="w3-col m8 w3-khaki"><label class="w3-margin-left"><b>{{selected?.ClassName}}</b></label></div>
-            <div class="w3-col m4 w3-lime"><label class="w3-margin-left">Professor:</label></div>
-            <div class="w3-col m8 w3-lime"><label class="w3-margin-left"><b>{{selected?.Teacher}}</b></label></div>
-            <div class="w3-col m4 w3-khaki"><label class="w3-margin-left">Dia da semana:</label></div>
-            <div class="w3-col m8 w3-khaki"><label class="w3-margin-left"><b>{{day[selected?.DayOfWeek-1]}}</b></label></div>
-            <div class="w3-col m4 w3-lime"><label class="w3-margin-left">Hora:</label></div>
-            <div class="w3-col m8 w3-lime"><label class="w3-margin-left"><b>{{selected?.StartTime}}</b></label></div>
-            <div class="w3-col m4 w3-khaki"><label class="w3-margin-left">Sala:</label></div>
-            <div class="w3-col m8 w3-khaki"><label class="w3-margin-left"><b>{{selected?.Room}}</b></label></div>
-            <hr class="w3-col">
-            <a [routerLink]="['/lessons', selected?.ID]" class="w3-col w3-btn w3-green w3-hover-lime w3-large">Lições</a>
+        <div class="w3-panel w3-left-align">
+            <i class="w3-badge w3-green fa fa-info w3-xlarge"></i>
+            <table class="w3-table w3-striped w3-bordered">
+                <thead>
+                    <tr class="w3-light-grey">
+                        <td>Disciplina:</td>
+                        <th>{{selected?.Subject}}</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>Turma:</td>
+                    <th>{{selected?.ClassName}}</th>
+                </tr>
+                <tr>
+                    <td>Professor:</td>
+                    <th>{{selected?.Teacher}}</th>
+                </tr>
+                <tr>
+                    <td>Dia da semana:</td>
+                    <th>{{day[selected?.DayOfWeek-1]}}</th>
+                </tr>
+                <tr>
+                    <td>Hora:</td>
+                    <th>{{selected?.StartTime}}</th>
+                </tr>
+                <tr>
+                    <td>Sala:</td>
+                    <th>{{selected?.Room}}</th>
+                </tr>
+            </table>
+            <a [routerLink]="['/primary/class', cla?.ID, 'teacher-lessons', selected?.ID]" class="w3-col w3-btn w3-green w3-hover-lime w3-large">Lições</a>
+            <a [routerLink]="['/primary/class', cla?.ID, 'student-lessons', selected?.ID]" class="w3-col w3-btn w3-green w3-hover-lime w3-large">Lições</a>
         </div>
     </div>
 </div>

@@ -1,0 +1,19 @@
+<div class="w3-card-2 w3-lime w3-row">
+    <div class="w3-col s8 w3-text-white">
+        <div class="w3-panel w3-green ">
+            <label class="w3-xxlarge">{{school?.Name}}</label>
+        </div>
+    </div>
+</div>
+
+<div class="w3-section w3-row">
+    <a *ngFor="let floor of floors; let i=index" class="w3-half w3-border" [routerLink]="['floor', floor?.ID]" style="text-decoration:none">
+        <div [attr.id]="'option'+i" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('option'+i);">
+            <label class="w3-large">{{floor?.Name}}</label>
+        </div>
+    </a>
+</div>
+
+<div class="w3-animate-bottom">
+    <router-outlet></router-outlet>
+</div>

@@ -1,12 +1,12 @@
-<div class="w3-content w3-row w3-hide-small w3-hide-medium" style="max-width:1400px;">
+<div class="w3-content w3-hide-small w3-hide-medium" style="max-width:1400px;">
     <div id="board" class="w3-col s10 w3-container w3-center"></div>
 </div>
 
 <div class="w3-content w3-hide-large w3-white">
-    <div *ngFor="let floor of sensors; let i=index">
-        <h2 class="w3-green">{{floors[i]?.Name}}</h2>
-        <div *ngFor="let sensor of floor; let j=index" class="w3-row">
-            <a (click)="info(i,j)" class="w3-col w3-btn w3-lime w3-hover-khaki">{{ sensor?.Name }}</a>
+    <div *ngFor="let floor of floors; let i=index">
+        <h2 class="w3-green">{{floor.Name}}</h2>
+        <div *ngFor="let room of floor.Rooms; let j=index" class="w3-row">
+            <a (click)="info(i,j)" class="w3-col w3-btn w3-lime w3-hover-khaki">{{ room?.Name }}</a>
         </div>
     </div>
 </div>

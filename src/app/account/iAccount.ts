@@ -4,7 +4,7 @@ export interface Account {
     token:string;
     userID: number;
     roles: number[];
-    classID:number;
+    classes:number[];
     name:string;
     photo:string;
 }

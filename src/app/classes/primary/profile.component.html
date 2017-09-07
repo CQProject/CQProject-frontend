@@ -11,23 +11,23 @@
 </div>
 
 <div class="w3-section w3-row">
-    <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
-        <div id="schedule" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding w3-border-green" (click)="chooseOption('schedules');">
+    <a class="w3-quarter w3-border" [routerLink]="['schedule']" style="text-decoration:none" >
+        <div id="option1" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding w3-border-green" (click)="chooseOption('option1');">
             <label class="w3-large">Horário</label>
         </div>
     </a>
-    <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
-        <div id="evaluation" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('evaluations');">
+    <a class="w3-quarter w3-border"  style="text-decoration:none" >
+        <div id="option2" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('option2');">
             <label class="w3-large">Avaliações</label>
         </div>
     </a>
-    <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
-        <div id="doc" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('docs');">
+    <a class="w3-quarter w3-border" [routerLink]="['document']" style="text-decoration:none" >
+        <div id="option3" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('option3');">
             <label class="w3-large">Documentos</label>
         </div>
     </a>
-    <a class="w3-quarter w3-border" style="cursor:pointer;text-decoration:none">
-        <div id="student" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('students');">
+    <a class="w3-quarter w3-border" [routerLink]="['student']" style="text-decoration:none" >
+        <div id="option4" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('option4');">
             <label class="w3-large">Alunos</label>
         </div>
     </a>
@@ -35,15 +35,6 @@
 
 
 
-<div id="schedules" class="information w3-animate-bottom w3-hide w3-show">
-    <primary-schedule></primary-schedule>
-</div>
-<div id="students" class="information w3-animate-bottom w3-hide">
-    <primary-students></primary-students>
-</div>
-<div id="docs" class="information w3-animate-bottom w3-hide">
-
-</div>
-<div id="evaluations" class="information w3-animate-bottom w3-hide">
-
+<div class="w3-animate-bottom w3-hide w3-show">
+    <router-outlet></router-outlet>
 </div>
