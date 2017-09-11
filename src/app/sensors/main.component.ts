@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { AdminGuard } from '../utils/auth-guard.service';
 import { FloorService } from './floor.service';
 import { SchoolService } from "../schools/school.service";
 
@@ -15,6 +16,7 @@ export class FloorMainComponent {
     floors:Floor[];
 
     constructor(
+        private _adminGuard : AdminGuard,
         private _schoolService: SchoolService,
         private _floorService: FloorService,
         private _route: ActivatedRoute,

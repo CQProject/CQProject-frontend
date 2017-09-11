@@ -17,7 +17,8 @@ import { SchoolFormComponent } from "./schools/school-form.component";
 import { NotificationCounterComponent } from "./notifications/notification-link.component";
 import { NotificationMenuComponent } from "./notifications/notification-menu.component";
 import { FloorMainComponent } from "./sensors/main.component";
-import { MapComponent } from "./sensors/map.component";
+import { FloorMapComponent } from "./sensors/floor-map.component";
+import {FloorFormComponent} from "./sensors/floor-form.component"
 import { SensorComponent } from "./sensors/sensor.component";
 import { ClassMainComponent } from "./classes/main.component";
 import { ClassPrimaryProfileComponent } from "./classes/primary/profile.component";
@@ -56,13 +57,14 @@ import { DocumentService } from "./utils/document.service";
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: AccountHomeComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       { path: 'schools', component: SchoolHomeComponent },
-      { path: 'schools/create', component: SchoolFormComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
+      { path: 'school/create', component: SchoolFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
       { path: 'notifications', component: NotificationMenuComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       {
-        path: 'map/school/:id', component: FloorMainComponent, canActivate: [AuthGuard], data: { roles: [4, 6] },
+        path: 'building/school/:id', component: FloorMainComponent, canActivate: [AuthGuard], data: { roles: [4, 6] },
         children: [
           { path: 'room/:id', component: SensorComponent },
-          { path: 'floor/:id', component: MapComponent }
+          { path: 'floor/:id', component: FloorMapComponent },
+          { path: 'floor-form', component: FloorFormComponent }
         ]
       },
       { path: 'user/profile/:id', component: UserProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
@@ -97,21 +99,22 @@ import { DocumentService } from "./utils/document.service";
     NotFoundComponent,
     SchoolHomeComponent,
     SchoolFormComponent,
-    ClassPrimaryScheduleComponent,
-    LessonTeacherComponent,
-    LessonStudentComponent,
     NotificationCounterComponent,
     NotificationMenuComponent,
-    MapComponent,
+    FloorMainComponent,
+    FloorMapComponent,
+    FloorFormComponent,
+    SensorComponent,
     UserProfileComponent,
     ClassMainComponent,
     ClassPrimaryProfileComponent,
     ClassPrimaryStudentsComponent,
     ClassKindergartenListComponent,
     ClassPrimaryListComponent,
-    SensorComponent,
-    FloorMainComponent,
-    ClassPrimaryDocumentComponent
+    ClassPrimaryDocumentComponent,
+    ClassPrimaryScheduleComponent,
+    LessonTeacherComponent,
+    LessonStudentComponent
     //Pipe
   ],
   providers: [

@@ -4,7 +4,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Floor } from "./iFloor";
+import { Floor, FloorToPost } from "./iFloor";
 import { Sensor } from './iSensor';
 import { Record, Resume } from './iRecords';
 import { API } from '../../main';
@@ -43,5 +43,14 @@ export class FloorService {
             console.log(response.json().info);
             return null;
         }
+    }
+
+    public async createFloor(floor: FloorToPost): Promise<boolean>{
+        var toPost = JSON.stringify({floor});
+        
+        let res = await this._http
+        .post(this._apiURL + '/floor', toPost, this._options).toPromise();
+
+        return res.json().result;
     }
 }

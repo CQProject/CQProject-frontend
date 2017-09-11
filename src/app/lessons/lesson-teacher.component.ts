@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { LessonService } from "./lesson.service";
 import { ScheduleService } from "../utils/schedule.service";
@@ -7,35 +7,33 @@ import { UserService } from "../users/user.service";
 
 import { Lesson } from './iLesson';
 import { Presence } from './iPresence';
-import { Schedule } from "../utils/iSchedule";
+import { Schedule } from "../utils/interfaceSchedule";
 
 @Component({
     selector: "lessons",
-    templateUrl: "./lesson-list.component.html"
+    templateUrl: "./lesson-teacher.component.html"
 })
 
-export class LessonListComponent {
+export class LessonTeacherComponent {
 
     index: number;
     lessons: Lesson[];
     selected: any;
     schedule: Schedule;
     students: any[];
-    behavior: string[];
 
     constructor(
-        private _service: LessonService,
+        private _lessonService: LessonService,
         private _scheduleService: ScheduleService,
         private _userService: UserService,
-        private _router: Router,
         private _route: ActivatedRoute
-    ) { this.behavior=["red"] }
+    ) { }
 
     public async ngOnInit() {
         let scheduleID;
         this._route.params.subscribe(params => scheduleID = params['id']);
         this.schedule = await this._scheduleService.getSchedule(scheduleID);
-        this.lessons = await this._service.getLessonBySubject(this.schedule.SubjectFK, this.schedule.ClassFK);
+        this.lessons = await this._lessonService.getLessonBySubject(this.schedule.SubjectFK, this.schedule.ClassFK);
         this.initLessonList();
         this.showLesson(0);
     }
@@ -82,13 +80,15 @@ export class LessonListComponent {
             Summary: this.lessons[n].Summary,
             ID: this.lessons[n].ID
         };
+        let element = document.getElementById("students");
+        element.className = element.className.replace(" w3-show", "");
     }
 
     public async showClass() {
         let element = document.getElementById("students");
         if (element.className.indexOf("w3-show") == -1) {
             element.className += " w3-show";
-            let presences = await this._service.getPresenceByTeacher(this.selected.ID);
+            let presences = await this._lessonService.getPresenceByTeacher(this.selected.ID);
             this.students=[];
             for(let presence of presences){
                 let student=await this._userService.getProfile(presence.StudentFK);
@@ -100,7 +100,6 @@ export class LessonListComponent {
                     Behavior: presence.Behavior,
                 })
             }
-            console.log(this.students);
         } else {
             element.className = element.className.replace(" w3-show", "");
         }

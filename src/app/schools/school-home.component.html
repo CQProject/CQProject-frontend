@@ -1,5 +1,5 @@
 <div *ngIf="_secretaryGuard.canActivate() || _adminGuard.canActivate()" class="w3-margin-top">
-  <a class="w3-button w3-block w3-green w3-hover-lime" (click)="show('schoolForm')">
+  <a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['/school/create']">
       <label class="w3-large">Criar uma nova escola</label>
   </a>
   <hr>
@@ -33,13 +33,9 @@
         <p>{{school?.About}}</p>
       </div>
       <div class="w3-container w3-green w3-row">
-        <div class="w3-col s6" *ngIf="_assistantGuard.canActivate() || _adminGuard.canActivate()"><a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['/map/school', school?.ID]">Edifícios</a></div>
+        <div class="w3-col s6" *ngIf="_assistantGuard.canActivate() || _adminGuard.canActivate()"><a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['/building/school', school?.ID]">Instalações</a></div>
         <div class="w3-col s6" *ngIf="_secretaryGuard.canActivate() || _adminGuard.canActivate()"><a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['/class/school', school?.ID]">Turmas</a></div>
       </div>
     </div>
   </div>
-</div>
-
-<div id="schoolForm" class="w3-modal" *ngIf="_secretaryGuard.canActivate() || _adminGuard.canActivate()">
-  <school-form></school-form>
 </div>

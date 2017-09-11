@@ -7,25 +7,28 @@ import { SecretaryGuard } from "../utils/auth-guard.service";
 import { FileService } from "../utils/files.service";
 import { API } from '../../main';
 
-@Component({ selector:"school-form",templateUrl: "./school-form.component.html" })
+@Component({
+    selector: "school-form",
+    templateUrl: "./school-form.component.html"
+})
 
-export class SchoolFormComponent{
+export class SchoolFormComponent {
 
     school: SchoolToPost;
     logo: File;
     profile: File;
-    editor:any;
+    editor: any;
 
     constructor(
         private _service: SchoolService,
         private _fileService: FileService,
         private _route: Router,
         private _secretaryGuard: SecretaryGuard
-    ) {       
+    ) {
         this.school = new SchoolToPost();
     }
 
-    public ngOnInit(){
+    public ngOnInit() {
         tinymce.init({
             selector: '#textarea',
             statusbar: false,
@@ -34,13 +37,13 @@ export class SchoolFormComponent{
             plugins: ['link', "colorpicker", "textcolor", "print", "lists", "preview", "hr"],
             skin_url: 'assets/skins/lightgray',
             setup: editor => {
-              this.editor = editor;
-              editor.on('keyup', () => {
-                const content = editor.getContent();
-                editor.onEditorKeyup.emit(content);
-              });
+                this.editor = editor;
+                editor.on('keyup', () => {
+                    const content = editor.getContent();
+                    editor.onEditorKeyup.emit(content);
+                });
             },
-          });
+        });
     }
 
 
@@ -52,19 +55,18 @@ export class SchoolFormComponent{
         document.getElementById(elementID).style.display = 'none';
     }
 
-    public getLogoImage(event){
+    public getLogoImage(event) {
         this.logo = event.target.files[0];
     }
 
-    public getProfileImage(event){
+    public getProfileImage(event) {
         this.profile = event.target.files[0];
     }
 
-    public async createSchool(){
+    public async createSchool() {
         this.school.Logo = await this._fileService.publicImageUpload(this.logo);
         this.school.ProfilePicture = await this._fileService.publicImageUpload(this.profile);
         let res = await this._service.createSchool(this.school);
-        //if(res==null)
-        await location.reload();
+        location.reload();
     }
 }

@@ -4,3 +4,9 @@ export interface Floor {
     Image: string;
     SchoolFK: number;
 }
+
+export interface FloorToPost {
+    Name: string;
+    Image: string;
+    SchoolFK: number;
+}

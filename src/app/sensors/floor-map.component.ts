@@ -14,10 +14,10 @@ import { School } from '../schools/iSchool';
 
 @Component({
     selector: "floor-map",
-    templateUrl: "./map.component.html"
+    templateUrl: "./floor-map.component.html"
 })
 
-export class MapComponent {
+export class FloorMapComponent {
 
     public floor: any;
 
