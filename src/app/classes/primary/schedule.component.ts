@@ -26,6 +26,8 @@ export class ClassPrimaryScheduleComponent {
     selected: any;
     day: string[];
     cla: Class;
+    usID: number;
+    rol: number[];
 
     constructor(
         private _scheduleService: ScheduleService,
@@ -43,13 +45,26 @@ export class ClassPrimaryScheduleComponent {
 
     public async ngOnInit() {
         let classID;
-        this._route.parent.params.subscribe(params =>classID = +params["id"]);
+        this._route.parent.params.subscribe(params => classID = +params["id"]);
+        this.rol = JSON.parse(localStorage.getItem('currentUser')).roles;
 
-        this.cla = await this._classService.getClassProfile(classID);
-        this.setHours();
+        if (!isNaN(classID)) {
 
-        let schedules = await this._scheduleService.getScheduleByClass(classID);
-        await this.setSchedule(schedules)
+            this.cla = await this._classService.getClassProfile(classID);
+            this.setHours();
+
+            let schedules = await this._scheduleService.getScheduleByClass(classID);
+            await this.setSchedule(schedules)
+        } else {
+            this.usID = JSON.parse(localStorage.getItem('currentUser')).userID;
+            let classes = await this._classService.getClassesByUser(this.usID);
+            classID = parseInt(classes[classes.length-1]);
+            this.cla = await this._classService.getClassProfile(classID);
+            this.setHours();
+
+            let schedules = await this._scheduleService.getScheduleByClass(classID);
+            await this.setSchedule(schedules)
+        }
     }
 
     private async setSchedule(schedules: Schedule[]) {
@@ -128,5 +143,13 @@ export class ClassPrimaryScheduleComponent {
         } else {
             x.className = x.className.replace(" w3-show", "");
         }
+    }
+
+    public showLessonsTeacher(){
+        this._router.navigate(['/primary/class', this.cla.ID, 'teacher-lessons', this.selected.ID])
+    }
+
+    public showLessonsStudent(){
+        this._router.navigate(['/primary/class', this.cla.ID, 'student-lessons', this.selected.ID])
     }
 }

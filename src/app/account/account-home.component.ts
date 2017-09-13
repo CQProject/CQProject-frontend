@@ -10,11 +10,17 @@ import { Account } from "./iAccount";
 
 export class AccountHomeComponent {
 
+    private userRole: number[];
+
     constructor(
         private _service: AccountService,
         private _router: Router,
         private _ngZone: NgZone,
     ) { }
+
+    public ngOnInit(){
+        this.userRole = JSON.parse(localStorage.getItem('currentUser')).roles;
+    }
 
     public chooseOption(id: string) {
         var information, tablink;

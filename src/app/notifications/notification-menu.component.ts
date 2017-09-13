@@ -136,7 +136,7 @@ export class NotificationMenuComponent {
     }
 
     public closeNotifDetails(id: string) {
-        if(id=="receivedMessages"){
+        if(id=="notifReceived"){
             window.location.reload();
         }
         var notif = document.getElementById(id + "").style.display = "none";

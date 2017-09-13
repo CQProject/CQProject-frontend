@@ -29,6 +29,8 @@ import { ClassKindergartenListComponent } from "./classes/kindergarten/list.comp
 import{ClassPrimaryDocumentComponent} from "./classes/primary/doc.component";
 import { LessonTeacherComponent } from "./lessons/lesson-teacher.component";
 import { LessonStudentComponent } from "./lessons/lesson-student.component";
+import { UserDetailsComponent} from "./users/user-details.component";
+import { StudentHomeComponent } from "./account/student-home.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
@@ -68,6 +70,7 @@ import { DocumentService } from "./utils/document.service";
         ]
       },
       { path: 'user/profile/:id', component: UserProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
+      { path: 'user/details/:id', component: UserDetailsComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },      
       {
         path: 'class/school/:id', component: ClassMainComponent, canActivate: [AuthGuard], data: { roles: [3, 6] },
         children: [
@@ -114,7 +117,9 @@ import { DocumentService } from "./utils/document.service";
     ClassPrimaryDocumentComponent,
     ClassPrimaryScheduleComponent,
     LessonTeacherComponent,
-    LessonStudentComponent
+    LessonStudentComponent,
+    UserDetailsComponent,
+    StudentHomeComponent
     //Pipe
   ],
   providers: [

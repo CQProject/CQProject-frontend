@@ -37,7 +37,7 @@ export class FileService {
             .catch(this._handleError);
     }
 
-    public imageDownload(filename: String): Observable<any> {
+    public imageDownload(filename: string): Observable<any> {
         this._headers = new Headers();
         this._headers.append('Authorization', <string>JSON.parse(localStorage.getItem('currentUser')).token);
         this._options = new RequestOptions({ headers: this._headers, responseType: ResponseContentType.Blob });

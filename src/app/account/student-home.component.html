@@ -1,0 +1,27 @@
+<div class="w3-row">
+    <div class="w3-col" style="width:200px">
+        <nav class="w3-collapse w3-white w3-animate-left"><br>
+            <div class="w3-container w3-row w3-margin-top">
+                <img class="w3-center w3-circle w3-margin" [attr.src]="profilePhoto" style="width:50%">
+                <br />
+                <span>Olá, <strong>{{profileUser?.Name}}</strong></span><br>
+                <a (click)="showNotif()" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
+                <a (click)="showProfile()" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+            </div>
+            <hr>
+            <div class="w3-bar-block">
+
+            </div>
+        </nav>
+    </div>
+    <div class="w3-rest">
+        <div class="w3-white w3-container">
+            <header class="w3-container">
+                <h3><b><i class="fa fa-dashboard"></i>Painel de Controlo</b></h3>
+            </header>
+            <div class="w3-row-padding w3-margin-bottom">
+                <primary-schedule></primary-schedule>
+            </div>
+        </div>
+    </div>
+</div>

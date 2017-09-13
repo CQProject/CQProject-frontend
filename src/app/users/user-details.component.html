@@ -1,0 +1,152 @@
+<div class="w3-row">
+    <div class="w3-col w3-white w3-card-4 w3-margin w3-padding" style="width:200px" *ngIf="!userRole?.includes(5)">
+        <img class="w3-center w3-circle" [attr.src]="profilePhoto" style="width:100%">
+        <hr />
+        <div>
+            <label for="profilePhoto" class="w3-btn w3-teal">Mudar imagem</label>
+            <input id="profilePhoto" style="visibility:hidden" type="file" />
+        </div>
+    </div>
+    <div class="w3-rest w3-white w3-margin w3-card-4 w3-padding">
+        <div class="w3-text-black">
+            <div>
+                <h2>{{profileDetails?.Name}}</h2>
+                falta fazer o put, as autorizações estão mal
+            </div>
+            <form>
+                <div class="w3-left-align">
+                    <!-- FUNCTION -->
+                    <div class="w3-row w3-margin-bottom">
+                        <div class="w3-col w3-row" style="width:90%">
+                            <div class="w3-col" style="width:30px">
+                                <i class="fa fa-briefcase fa-fw w3-margin-top w3-large w3-text-teal"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input id="Function" [(ngModel)]="profileToPost.Function" name="Function" class="w3-rest w3-input" (keyup)="showSubmit($event)"
+                                    style="border:none" value="{{profileDetails?.Function}}" readonly />
+                            </div>
+                        </div>
+                        <div *ngIf="!userRole?.includes(1)" class="w3-rest" (click)="showInput('Function')">
+                            <i class="fa fa-pencil w3-btn w3-teal"></i>
+                        </div>
+                    </div>
+                    <!-- Address -->
+                    <div class="w3-row w3-margin-bottom" *ngIf="!userRole?.includes(6)">
+                        <div class="w3-col w3-row" style="width:90%">
+                            <div class="w3-col" style="width:30px">
+                                <i class="fa fa-home fa-fw w3-margin-top w3-large w3-text-teal"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input id="Address" class="w3-rest w3-input" [(ngModel)]="profileToPost.Address" name="Address" style="border:none" value="{{profileDetails?.Address}}"
+                                    readonly />
+                            </div>
+                        </div>
+                        <div class="w3-rest" *ngIf="!userRole?.includes(1)" (click)="showInput('Address')">
+                            <i class="fa fa-pencil w3-btn w3-teal"></i>
+                        </div>
+                    </div>
+                    <!-- Email -->
+                    <div class="w3-row w3-margin-bottom">
+                        <div class="w3-col w3-row" style="width:90%">
+                            <div class="w3-col" style="width:30px">
+                                <i class="fa fa-envelope fa-fw w3-margin-top w3-large w3-text-teal"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input id="Email" class="w3-rest w3-input" [(ngModel)]="profileToPost.Email" name="Email" style="border:none" value="{{profileDetails?.Email}}"
+                                    readonly />
+                            </div>
+                        </div>
+                        <div class="w3-rest" *ngIf="!userRole?.includes(1)" (click)="showInput('Email')">
+                            <i class="fa fa-pencil w3-btn w3-teal"></i>
+                        </div>
+                    </div>
+                    <!-- FiscalNumber-->
+                    <div class="w3-row w3-margin-bottom">
+                        <div class="w3-col w3-row" style="width:90%">
+                            <div class="w3-col" style="width:30px">
+                                <i class="fa fa-credit-card fa-fw w3-margin-top w3-large w3-text-teal"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input id="FiscalNumber" class="w3-rest w3-input" [(ngModel)]="profileToPost.FiscalNumber" name="FiscalNumber" style="border:none"
+                                    value="{{profileDetails?.FiscalNumber}}" readonly />
+                            </div>
+                        </div>
+                        <div class="w3-rest" *ngIf="!userRole?.includes(1)" (click)="showInput('FiscalNumber')">
+                            <i class="fa fa-pencil w3-btn w3-teal"></i>
+                        </div>
+                    </div>
+                    <!-- CitizenCard -->
+                    <div class="w3-row w3-margin-bottom">
+                        <div class="w3-col w3-row" style="width:90%">
+                            <div class="w3-col" style="width:30px">
+                                <i class="fa fa-id-card fa-fw w3-margin-top w3-large w3-text-teal"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input id="CitizenCard" class="w3-rest w3-input" [(ngModel)]="profileToPost.CitizenCard" name="CitizenCard" style="border:none"
+                                    value="{{profileDetails?.CitizenCard}}" readonly />
+                            </div>
+                        </div>
+                        <div class="w3-rest" *ngIf="!userRole?.includes(1)" (click)="showInput('CitizenCard')">
+                            <i class="fa fa-pencil w3-btn w3-teal"></i>
+                        </div>
+                    </div>
+                    <!-- PhoneNumber -->
+                    <div class="w3-row w3-margin-bottom" *ngIf="!userRole?.includes(1)">
+                        <div class="w3-col w3-row" style="width:90%">
+                            <div class="w3-col" style="width:30px">
+                                <i class="fa fa-mobile-phone fa-fw w3-margin-top w3-large w3-text-teal"></i>
+                            </div>
+                            <div class="w3-rest">
+                                <input id="PhoneNumber" class="w3-rest w3-input" [(ngModel)]="profileToPost.PhoneNumber" name="PhoneNumber" style="border:none"
+                                    value="{{profileDetails?.PhoneNumber}}" readonly />
+                            </div>
+                        </div>
+                        <div class="w3-rest" *ngIf="!userRole?.includes(1)" (click)="showInput('PhoneNumber')">
+                            <i class="fa fa-pencil w3-btn w3-teal"></i>
+                        </div>
+                    </div>
+                    <!-- Curriculum -->
+                    <div class="w3-row w3-margin-bottom" *ngIf="!userRole?.includes(1)">
+                        <div *ngIf="!userRole?.includes(5)">
+                            <div *ngIf="!userRole?.includes(6)">
+                                <div class="w3-col w3-row" style="width:90%">
+                                    <div class="w3-col" style="width:30px">
+                                        <i class="fa fa-file-text-o fa-fw w3-margin-top w3-large w3-text-teal"></i>
+                                    </div>
+                                    <div class="w3-rest">
+                                        <input id="Curriculum" class="w3-rest w3-input" [(ngModel)]="profileToPost.Curriculum" name="Curriculum" style="border:none"
+                                            value="{{profileDetails?.Curriculum}}" readonly />
+                                    </div>
+                                </div>
+                                <div class="w3-rest" *ngIf="!userRole?.includes(1)" (click)="showInput('Curriculum')">
+                                    <i class="fa fa-pencil w3-btn w3-teal"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- DateOfBirth -->
+                    <div class="w3-row w3-margin-bottom"  *ngIf="!userRole?.includes(5)">
+                        <div *ngIf="!userRole?.includes(6)">
+                            <div class="w3-col w3-row" style="width:90%">
+                                <div class="w3-col" style="width:30px">
+                                    <i class="fa fa-birthday-cake fa-fw w3-margin-top w3-large w3-text-teal"></i>
+                                </div>
+                                <div class="w3-rest">
+                                    <input id="DateOfBirth" class="w3-rest w3-input" [(ngModel)]="profileToPost.DateOfBirth" name="DateOfBirth" style="border:none"
+                                        value="{{profileDetails?.DateOfBirth}}" readonly />
+                                </div>
+                            </div>
+                            <div class="w3-rest" *ngIf="!userRole?.includes(1)" (click)="showInput('DateOfBirth')">
+                                <i class="fa fa-pencil w3-btn w3-teal"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </form>
+            <footer>
+                <button id="submitChanges" (click)="submitChanges()" class="w3-block w3-btn w3-teal w3-card-4 w3-hide">Submeter alterações</button>
+            </footer>
+        </div>
+    </div>
+</div>

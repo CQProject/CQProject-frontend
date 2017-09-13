@@ -11,7 +11,7 @@ import { Presence } from './iPresence';
 import { Schedule } from "../utils/interfaceSchedule";
 
 @Component({
-    selector: "lessons",
+    selector: "lessons-student",
     templateUrl: "./lesson-student.component.html"
 })
 
