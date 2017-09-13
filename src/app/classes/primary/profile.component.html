@@ -26,7 +26,7 @@
             <label class="w3-large">Documentos</label>
         </div>
     </a>
-    <a class="w3-quarter w3-border" [routerLink]="['student']" style="text-decoration:none" >
+    <a *ngIf="!rol.includes(1)" class="w3-quarter w3-border" [routerLink]="['student']" style="text-decoration:none" >
         <div id="option4" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('option4');">
             <label class="w3-large">Alunos</label>
         </div>

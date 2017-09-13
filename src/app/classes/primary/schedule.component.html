@@ -90,8 +90,8 @@
                     <th>{{selected?.Room}}</th>
                 </tr>
             </table>
-            <a [routerLink]="['/primary/class', cla?.ID, 'teacher-lessons', selected?.ID]" class="w3-col w3-btn w3-green w3-hover-lime w3-large">Lições</a>
-            <a [routerLink]="['/primary/class', cla?.ID, 'student-lessons', selected?.ID]" class="w3-col w3-btn w3-green w3-hover-lime w3-large">Lições</a>
+            <a *ngIf="rol.includes(2)" (click)="showLessonsTeacher()" class="w3-col w3-btn w3-green w3-hover-lime w3-large">Lições</a>
+            <a *ngIf="rol.includes(1)" (click)="showLessonsStudent()"   class="w3-col w3-btn w3-green w3-hover-lime w3-large">Lições</a>
         </div>
     </div>
 </div>

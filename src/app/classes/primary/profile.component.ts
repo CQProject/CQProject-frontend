@@ -14,6 +14,7 @@ export class ClassPrimaryProfileComponent {
 
     public school: School;
     public class: Class;
+    public rol: number[];
 
 
     constructor(
@@ -25,8 +26,10 @@ export class ClassPrimaryProfileComponent {
     public async ngOnInit() {
         let classID;
         this._route.params.subscribe(params => classID = params['id']);
+        this.rol = JSON.parse(localStorage.getItem('currentUser')).roles;
         this.class = await this._classService.getClassProfile(classID);
         this.school = await this._schoolService.getSchool(this.class.SchoolFK);
+        
     }
 
     public chooseOption(id: string) {

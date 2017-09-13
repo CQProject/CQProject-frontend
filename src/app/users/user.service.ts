@@ -8,7 +8,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 
-import { UserProfile } from "./iUsers";
+import { UserProfile, UserDetails, UserDetailsToPost } from "./iUsers";
 import { API } from '../../main';
 
 @Injectable()
@@ -29,6 +29,28 @@ export class UserService {
         let response = await this._http
             .get(this._apiURL + `/user/profile/${userID}`, this._options)
             .toPromise();
+        if (response.json().result) return response.json().data;
+        else {
+            console.log(response.json().info);
+            return null;
+        }
+    }
+
+    public async getUserDetails(userID: number): Promise<UserDetails> {
+        let response = await this._http
+            .get(this._apiURL + `/user/detail/${userID}`, this._options)
+            .toPromise();
+        if (response.json().result) return response.json().data;
+        else {
+            console.log(response.json().info);
+            return null;
+        }
+    }
+
+    public async putUserDetails(user: UserDetailsToPost): Promise<string>{
+        let response = await this._http
+        .put(this._apiURL + `/user/profile`,JSON.stringify(user),this._options)
+        .toPromise();
         if (response.json().result) return response.json().data;
         else {
             console.log(response.json().info);

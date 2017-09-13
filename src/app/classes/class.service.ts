@@ -82,6 +82,14 @@ export class ClassService {
         return response.json().result ? response.json().data : 0;
     }
 
+    public async getClassesByUser(userID: number): Promise<string>{
+        let response = await this._http
+        .get(this._apiURL + `/class/student/${userID}`, this._options)
+        .toPromise();
+
+        return response.json().result ? response.json().data : 0;
+    }
+
     private _handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || "Server error");
