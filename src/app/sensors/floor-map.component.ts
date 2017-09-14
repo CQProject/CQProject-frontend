@@ -29,29 +29,30 @@ export class FloorMapComponent {
         private _router: Router,
         private _route: ActivatedRoute,
         private _renderer: Renderer
-    ) { }
-
-    public async ngOnInit() {
-        let floorID;
-        this._route.params.subscribe(params => floorID = params['id']);
-
+    ) {
+        _route.params.subscribe(params => {
+            this.init(params['id']);
+          });
+     }
+     
+    public async init(floorID){
         let floor = await this._floorService.getFloor(floorID);
         let rooms = await this._roomService.getRoomByFloor(floor.ID);
+
         this.floor = {
             Name: floor.Name,
             Image: await this._fileService.imageDownloadAsync(floor.Image),
             ID: floor.ID,
             Rooms: rooms
         }
-        this.createFloor();
-
         console.log(this.floor)
+        this.createFloor();
     }
 
     public createFloor() {
         var panel = document.getElementById('board');
-        panel.innerHTML = '<canvas id="canvas" class="w3-card w3-white" width="1000" height="700"></canvas><br/>'
-        var canvas: any = document.getElementById('canvas');
+        panel.innerHTML = '<canvas id="canvas'+this.floor.ID+'" class="w3-card w3-white" width="1000" height="700"></canvas><br/>'
+        var canvas: any = document.getElementById('canvas'+this.floor.ID);
         var context: CanvasRenderingContext2D = canvas.getContext("2d");
         var imageObj = new Image();
         imageObj.src = this.floor.Image.changingThisBreaksApplicationSecurity;
@@ -59,17 +60,18 @@ export class FloorMapComponent {
             // design background image
             context.drawImage(imageObj, 1, 1, 1000, 700);
             // design elements
-            console.log("length: " + this.floor.Rooms.length)
-            for (var index = 0; index < this.floor.Rooms.length; index++) {
-                context.beginPath();
-                context.arc(this.floor.Rooms[index].XCoord + 10, this.floor.Rooms[index].YCoord + 10, 15, 0, 2 * Math.PI);
-                context.stroke();
-                if (this.floor.Rooms[index].HasSensor)
-                    context.fillStyle = "#FF0000";
-                else
-                    context.fillStyle = "#000000";
-                context.fillRect(this.floor.Rooms[index].XCoord, this.floor.Rooms[index].YCoord, 20, 20);
-                context.stroke();
+            if (this.floor.Rooms != null) {
+                for (var index = 0; index < this.floor.Rooms.length; index++) {
+                    context.beginPath();
+                    context.arc(this.floor.Rooms[index].XCoord + 10, this.floor.Rooms[index].YCoord + 10, 15, 0, 2 * Math.PI);
+                    context.stroke();
+                    if (this.floor.Rooms[index].HasSensor)
+                        context.fillStyle = "#FF0000";
+                    else
+                        context.fillStyle = "#000000";
+                    context.fillRect(this.floor.Rooms[index].XCoord, this.floor.Rooms[index].YCoord, 20, 20);
+                    context.stroke();
+                }
             }
         });
 

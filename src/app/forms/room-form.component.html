@@ -1,0 +1,23 @@
+<div class="w3-container w3-white">
+    <h2>Adicionar piso</h2>
+    <form>
+        <div class="w3-left-align w3-row">
+            <label class="w3-col s3">Nome:</label>
+            <input [(ngModel)]="room.Name" class="w3-input w3-col s9" type="text" name="Name" required/>
+            <div class="w3-col"><br></div>
+            <label class="w3-col s3">Escola:</label>
+            <select class="w3-col s9"  name="school" [(ngModel)]="schools.ID" (ngModelChange)="getFloors($event)" required>
+              <option *ngFor="let school of schools" value="{{school.ID}}">{{school.Name}}</option>
+            </select>
+            <div class="w3-col"><br></div>
+            <label class="w3-col s3">Piso:</label>
+            <select class="w3-col s9" [(ngModel)]="room.FloorFK" name="FloorFK" (ngModelChange)="getMap($event)" required>
+              <option *ngFor="let floor of floors" value="{{floor.ID}}">{{floor.Name}}</option>
+            </select>
+            <div class="w3-col"><br></div>
+            <label class="w3-col s3">Posição:</label>
+            <div id="board" class="w3-col w3-container w3-center"></div>
+        </div>
+    </form>
+</div>
+<button type="submit" class="w3-button w3-khaki w3-margin-top w3-block w3-hover-lime" (click)="createRoom()"><label class="w3-large">Submeter</label></button>

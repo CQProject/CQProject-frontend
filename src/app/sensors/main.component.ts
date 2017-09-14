@@ -34,7 +34,7 @@ export class FloorMainComponent {
         var tablink = document.getElementsByClassName("tablink");
         for (var i = 0; i < tablink.length; i++)
             tablink[i].className = tablink[i].className.replace("w3-border-green", " ");
-        var element = document.getElementById(id);
+        var element = document.getElementById('option'+id);
         element.className += " w3-border-green";
     }
 }

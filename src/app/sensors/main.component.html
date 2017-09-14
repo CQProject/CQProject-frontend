@@ -6,16 +6,9 @@
     </div>
 </div>
 
-<div *ngIf="_adminGuard.canActivate()" class="w3-margin-top">
-        <a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['floor-form']">
-                <label class="w3-large">Adicionar piso</label>
-            </a>
-        <hr>
-    </div>
-
 <div class="w3-section w3-row">
     <a *ngFor="let floor of floors; let i=index" class="w3-half w3-border" [routerLink]="['floor', floor?.ID]" style="text-decoration:none">
-        <div [attr.id]="'option'+i" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('option'+i);">
+        <div [attr.id]="'option'+i" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption(i);">
             <label class="w3-large">{{floor?.Name}}</label>
         </div>
     </a>

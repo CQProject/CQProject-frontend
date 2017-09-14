@@ -79,6 +79,16 @@ export class SensorService {
             .catch(this._handleError);
     }
 
+    public async createSensor(sensor: Sensor): Promise<boolean> {
+        var toPost = JSON.stringify({
+            Name: sensor.Name,
+            RoomFK: sensor.RoomFK
+        });
+        let res = await this._http
+            .post(this._apiURL + '/sensor', toPost, this._options).toPromise();
+        return res.json().result;
+    }
+
     private _handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || "Server error");

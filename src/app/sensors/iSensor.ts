@@ -1,5 +1,5 @@
-export interface Sensor {
+export class Sensor {
     ID: number;
     Name: string;
-    FloorFK: number;
+    RoomFK: number;
 }

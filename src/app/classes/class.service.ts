@@ -1,3 +1,4 @@
+import { DateFormatter } from '@angular/common/src/pipes/intl';
 // Imports
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
@@ -88,6 +89,22 @@ export class ClassService {
         .toPromise();
 
         return response.json().result ? response.json().data : 0;
+    }
+
+    public async createClass(cla: Class): Promise<boolean> {
+        var toPost = JSON.stringify({
+            SchoolYear: cla.SchoolYear,
+            Year: new Date(Date.now()).getFullYear() + "/" + (new Date(Date.now()).getFullYear() + 1),
+            ClassDesc: cla.ClassDesc,
+            SchoolFK: cla.SchoolYear
+        });
+        /*
+        let res = await this._http
+            .post(this._apiURL + '/floor', toPost, this._options).toPromise();
+
+        return res.json().result;
+        */
+        return false;
     }
 
     private _handleError(error: Response) {

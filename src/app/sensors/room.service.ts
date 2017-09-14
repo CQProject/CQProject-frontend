@@ -49,6 +49,20 @@ export class RoomService {
         }
     }
 
+    public async createRoom(room: Room): Promise<boolean> {
+        var toPost = JSON.stringify({
+            Name: room.Name,
+            FloorFK: room.FloorFK,
+            HasSensor: false,
+            XCoord: room.XCoord,
+            YCoord: room.YCoord
+        });
+        let res = await this._http
+            .post(this._apiURL + '/room', toPost, this._options).toPromise();
+        console.log(res.json())
+        return res.json().result;
+    }
+
     private _handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || "Server error");

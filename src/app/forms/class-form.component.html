@@ -1,0 +1,22 @@
+<div class="w3-container w3-white">
+    <h2>Adicionar piso</h2>
+    <form>
+        <div class="w3-left-align w3-row">
+            <label class="w3-col s3">Turma:</label>
+            <input [(ngModel)]="class.ClassDesc" class="w3-input w3-col s9" type="text" name="ClassDesc" required/>
+            <label class="w3-col s3">Ensino primário</label>
+            <input type="checkbox" class="w3-col s1" [(ngModel)]="checked" />
+            <div ngIf="checked">
+                <label class="w3-col s2">Ano:</label>
+                <input [(ngModel)]="class.Year" class="w3-input w3-col s6" type="text" name="Year" />
+            </div>
+            <div class="w3-col"><br></div>
+            <label class="w3-col s3">Escola:</label>
+            <select [(ngModel)]="floor.SchoolFK" name="SchoolFK" class="w3-col s9">
+              <option *ngFor="let school of schools" value="{{school.ID}}">{{school.Name}}</option>
+            </select>
+            <div class="w3-col"><br></div>
+        </div>
+    </form>
+</div>
+<button type="submit" class="w3-button w3-khaki w3-margin-top w3-block w3-hover-lime" (click)="createClass()"><label class="w3-large">Submeter</label></button>

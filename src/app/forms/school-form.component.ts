@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { SchoolService } from './school.service';
-import { SchoolToPost } from "./iSchool";
-import { FileToPost } from "../utils/iFile";
+import { Component, OnInit, DoCheck } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { SchoolService } from '../schools/school.service';
+import { School } from "../schools/iSchool";
 import { SecretaryGuard } from "../utils/auth-guard.service";
 import { FileService } from "../utils/files.service";
-import { API } from '../../main';
 
 @Component({
     selector: "school-form",
@@ -14,18 +12,18 @@ import { API } from '../../main';
 
 export class SchoolFormComponent {
 
-    school: SchoolToPost;
+    school: School;
     logo: File;
     profile: File;
     editor: any;
 
     constructor(
-        private _service: SchoolService,
+        private _schoolService: SchoolService,
         private _fileService: FileService,
-        private _route: Router,
-        private _secretaryGuard: SecretaryGuard
+        private _secretaryGuard: SecretaryGuard,
+        private _route: ActivatedRoute
     ) {
-        this.school = new SchoolToPost();
+        this.school = new School();
     }
 
     public ngOnInit() {
@@ -46,7 +44,6 @@ export class SchoolFormComponent {
         });
     }
 
-
     public show(elementID: string) {
         document.getElementById(elementID).style.display = 'block';
     }
@@ -66,7 +63,7 @@ export class SchoolFormComponent {
     public async createSchool() {
         this.school.Logo = await this._fileService.publicImageUpload(this.logo);
         this.school.ProfilePicture = await this._fileService.publicImageUpload(this.profile);
-        let res = await this._service.createSchool(this.school);
-        location.reload();
+        let result = await this._schoolService.createSchool(this.school);
+        if(result) location.reload();
     }
 }

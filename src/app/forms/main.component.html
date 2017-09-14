@@ -1,0 +1,31 @@
+<div class="w3-row w3-margin-top">
+    <div *ngIf="_adminGuard.canActivate()" class="w3-col m4">
+        <a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['school']">
+            <label class="w3-large">Adicionar Escola</label>
+        </a>
+    </div>
+    <div *ngIf="_adminGuard.canActivate()" class="w3-col m4">
+        <a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['floor']">
+            <label class="w3-large">Adicionar piso</label>
+        </a>
+    </div>
+    <div *ngIf="_adminGuard.canActivate()" class="w3-col m4">
+        <a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['room']">
+            <label class="w3-large">Adicionar Sala</label>
+        </a>
+    </div>
+    <div *ngIf="_adminGuard.canActivate()" class="w3-col m4">
+        <a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['sensor']">
+            <label class="w3-large">Adicionar Sensor</label>
+        </a>
+    </div>
+    <div class="w3-col m4">
+            <a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['class']">
+                <label class="w3-large">Adicionar Turma</label>
+            </a>
+        </div>
+</div>
+<hr>
+<div class="w3-animate-bottom">
+    <router-outlet></router-outlet>
+</div>

@@ -9,7 +9,6 @@ import "rxjs/add/operator/catch";
 import 'rxjs/add/operator/toPromise';
 
 import { School } from "./iSchool";
-import { SchoolToPost } from "./iSchool";
 import { API } from '../../main';
 
 @Injectable()
@@ -47,8 +46,15 @@ export class SchoolService {
         }
     }
 
-    public async createSchool(school: SchoolToPost): Promise<boolean>{
-        var toPost = JSON.stringify({school});
+    public async createSchool(school: School): Promise<boolean>{
+        var toPost = JSON.stringify({
+            Name: school.Name,
+            Logo: school.Logo,
+            ProfilePicture : school.ProfilePicture,
+            Acronym : school.Acronym,
+            About : school.About
+        });
+        
         this._headers.append('Authorization', <string> JSON.parse(localStorage.getItem('currentUser')).token);
         this._options = new RequestOptions({ headers: this._headers });
         

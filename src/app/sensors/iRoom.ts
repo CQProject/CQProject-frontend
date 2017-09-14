@@ -1,8 +1,8 @@
-export interface Room {
+export class Room {
     ID: number;
     Name: string;
     FloorFK: number;
     HasSensor: boolean;
-    XCoord:string;
-    YCoord:string;
+    XCoord:number;
+    YCoord:number;
 }

@@ -13,22 +13,26 @@ import { AccountHomeComponent } from "./account/account-home.component";
 import { UserProfileComponent } from "./users/user-profile.component";
 import { NotFoundComponent } from "./notfound/nfound.component";
 import { SchoolHomeComponent } from "./schools/school-home.component";
-import { SchoolFormComponent } from "./schools/school-form.component";
 import { NotificationCounterComponent } from "./notifications/notification-link.component";
 import { NotificationMenuComponent } from "./notifications/notification-menu.component";
 import { FloorMainComponent } from "./sensors/main.component";
 import { FloorMapComponent } from "./sensors/floor-map.component";
-import {FloorFormComponent} from "./sensors/floor-form.component"
-import { SensorComponent } from "./sensors/sensor.component";
+import { RoomComponent } from "./sensors/room.component";
 import { ClassMainComponent } from "./classes/main.component";
 import { ClassPrimaryProfileComponent } from "./classes/primary/profile.component";
 import { ClassPrimaryStudentsComponent } from "./classes/primary/students.component";
 import { ClassPrimaryScheduleComponent } from "./classes/primary/schedule.component";
 import { ClassPrimaryListComponent } from "./classes/primary/list.component";
 import { ClassKindergartenListComponent } from "./classes/kindergarten/list.component";
-import{ClassPrimaryDocumentComponent} from "./classes/primary/doc.component";
+import { ClassPrimaryDocumentComponent } from "./classes/primary/doc.component";
 import { LessonTeacherComponent } from "./lessons/lesson-teacher.component";
 import { LessonStudentComponent } from "./lessons/lesson-student.component";
+import { MainFormComponent } from "./forms/main.component";
+import { SchoolFormComponent } from "./forms/school-form.component";
+import { FloorFormComponent } from "./forms/floor-form.component";
+import { RoomFormComponent } from "./forms/room-form.component";
+import {SensorFormComponent} from "./forms/sensor-form.component";
+import {ClassFormComponent} from "./forms/class-form.component";
 import { UserDetailsComponent} from "./users/user-details.component";
 import { StudentHomeComponent } from "./account/student-home.component";
 //Service
@@ -59,14 +63,22 @@ import { DocumentService } from "./utils/document.service";
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: AccountHomeComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       { path: 'schools', component: SchoolHomeComponent },
-      { path: 'school/create', component: SchoolFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
       { path: 'notifications', component: NotificationMenuComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
+      {
+        path: 'form', component: MainFormComponent, canActivate: [AuthGuard], data: { roles: [2, 6] },
+        children: [
+          { path: 'school', component: SchoolFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
+          { path: 'floor', component: FloorFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
+          { path: 'room', component: RoomFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
+          { path: 'sensor', component: SensorFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
+          { path: 'class', component: ClassFormComponent }
+        ]
+      },
       {
         path: 'building/school/:id', component: FloorMainComponent, canActivate: [AuthGuard], data: { roles: [4, 6] },
         children: [
-          { path: 'room/:id', component: SensorComponent },
-          { path: 'floor/:id', component: FloorMapComponent },
-          { path: 'floor-form', component: FloorFormComponent }
+          { path: 'room/:id', component: RoomComponent },
+          { path: 'floor/:id', component: FloorMapComponent }
         ]
       },
       { path: 'user/profile/:id', component: UserProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
@@ -107,7 +119,7 @@ import { DocumentService } from "./utils/document.service";
     FloorMainComponent,
     FloorMapComponent,
     FloorFormComponent,
-    SensorComponent,
+    RoomComponent,
     UserProfileComponent,
     ClassMainComponent,
     ClassPrimaryProfileComponent,
@@ -117,6 +129,11 @@ import { DocumentService } from "./utils/document.service";
     ClassPrimaryDocumentComponent,
     ClassPrimaryScheduleComponent,
     LessonTeacherComponent,
+    LessonStudentComponent,
+    MainFormComponent,
+    RoomFormComponent,
+    SensorFormComponent,
+    ClassFormComponent
     LessonStudentComponent,
     UserDetailsComponent,
     StudentHomeComponent

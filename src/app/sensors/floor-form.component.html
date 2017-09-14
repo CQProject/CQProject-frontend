@@ -1,9 +1,0 @@
-<form>
-    <div class="w3-left-align">
-        <label>Nome:</label>
-        <input [(ngModel)]="school.Name" class="w3-input" type="text" name="Name" required/>
-        <label>Planta do Piso:</label>
-        <input (change)="getImage($event)" class="w3-input" type="file" required/>
-        <button type="submit" class="w3-button w3-khaki w3-margin-top w3-block w3-hover-lime" (click)="createFloor()"><label class="w3-large">Submeter</label></button>
-    </div>
-</form>

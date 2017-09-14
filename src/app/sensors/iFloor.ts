@@ -1,12 +1,7 @@
-export interface Floor {
+export class Floor {
     ID: number;
     Name: string;
     Image: string;
     SchoolFK: number;
 }
 
-export interface FloorToPost {
-    Name: string;
-    Image: string;
-    SchoolFK: number;
-}

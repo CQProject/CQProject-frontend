@@ -14,9 +14,9 @@ import { Sensor } from "./iSensor";
 import { Record, Resume } from "./iRecords";
 import { School } from '../schools/iSchool';
 
-@Component({ templateUrl: "./sensor.component.html" })
+@Component({ templateUrl: "./room.component.html" })
 
-export class SensorComponent {
+export class RoomComponent {
 
     public selectedSensor: any;
     public sensors: Sensor[];

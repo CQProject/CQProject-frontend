@@ -1,0 +1,26 @@
+<div class="w3-container w3-white">
+    <h2>Adicionar Sensor</h2>
+    <form>
+        <div class="w3-left-align w3-row">
+            <label class="w3-col s3">Nome:</label>
+            <input [(ngModel)]="sensor.Name" class="w3-input w3-col s9" type="text" name="Name" required/>
+            <div class="w3-col"><br></div>
+            <label class="w3-col s3">Escola:</label>
+            <select class="w3-col s9"  name="school" [(ngModel)]="schools.ID" (ngModelChange)="getFloors($event)" required>
+              <option *ngFor="let school of schools" value="{{school.ID}}">{{school.Name}}</option>
+            </select>
+            <div class="w3-col"><br></div>
+            <label class="w3-col s3">Piso:</label>
+            <select class="w3-col s9" name="floor" [(ngModel)]="floors.ID"  (ngModelChange)="getRooms($event)" required>
+              <option *ngFor="let floor of floors" value="{{floor.ID}}">{{floor.Name}}</option>
+            </select>
+            <div class="w3-col"><br></div>
+            <label class="w3-col s3">Sala:</label>
+            <select class="w3-col s9" name="RoomFK" [(ngModel)]="sensor.RoomFK"  required>
+              <option *ngFor="let room of rooms" value="{{room.ID}}">{{room.Name}}</option>
+            </select>
+            <div class="w3-col"><br></div>
+        </div>
+    </form>
+</div>
+<button type="submit" class="w3-button w3-khaki w3-margin-top w3-block w3-hover-lime" (click)="createSensor()"><label class="w3-large">Submeter</label></button>

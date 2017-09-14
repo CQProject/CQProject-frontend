@@ -1,4 +1,4 @@
-export interface Class {
+export class Class {
     ID: number;
     SchoolYear: string;
     Year: string;
