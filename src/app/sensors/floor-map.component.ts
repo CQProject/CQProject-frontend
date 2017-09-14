@@ -80,9 +80,7 @@ export class FloorMapComponent {
             for (var index = 0; index < this.floor.Rooms.length; index++) {
                 if (this.isInside(mousePos, index)) {
                     if (this.floor.Rooms[index].HasSensor) {
-                        let url = "/";
-                        for (let segment of this._route.parent.url["_value"]) url += segment.path + "/";
-                        this._router.navigate([url.substring(0, url.length - 1), 'room', this.floor.Rooms[index].ID]);
+                        this.navigateTo(index);
                     }
                 }
             }
@@ -101,5 +99,13 @@ export class FloorMapComponent {
     public isInside(pos: any, index: number) {
         if (pos.x > this.floor.Rooms[index].XCoord && pos.x < this.floor.Rooms[index].XCoord + 20 && pos.y > this.floor.Rooms[index].YCoord && pos.y < this.floor.Rooms[index].YCoord + 20) return true;
         return false;
+    }
+
+    public navigateTo(index:number){
+        if (this.floor.Rooms[index].HasSensor) {
+            let url = "/";
+            for (let segment of this._route.parent.url["_value"]) url += segment.path + "/";
+            this._router.navigate([url.substring(0, url.length - 1), 'room', this.floor.Rooms[index].ID]);
+        }
     }
 }

@@ -25,15 +25,16 @@ import { ClassPrimaryScheduleComponent } from "./classes/primary/schedule.compon
 import { ClassPrimaryListComponent } from "./classes/primary/list.component";
 import { ClassKindergartenListComponent } from "./classes/kindergarten/list.component";
 import { ClassPrimaryDocumentComponent } from "./classes/primary/doc.component";
+import { ClassPrimaryEvaluationComponent } from "./classes/primary/evaluations.component";
 import { LessonTeacherComponent } from "./lessons/lesson-teacher.component";
 import { LessonStudentComponent } from "./lessons/lesson-student.component";
 import { MainFormComponent } from "./forms/main.component";
 import { SchoolFormComponent } from "./forms/school-form.component";
 import { FloorFormComponent } from "./forms/floor-form.component";
 import { RoomFormComponent } from "./forms/room-form.component";
-import {SensorFormComponent} from "./forms/sensor-form.component";
-import {ClassFormComponent} from "./forms/class-form.component";
-import { UserDetailsComponent} from "./users/user-details.component";
+import { SensorFormComponent } from "./forms/sensor-form.component";
+import { ClassFormComponent } from "./forms/class-form.component";
+import { UserDetailsComponent } from "./users/user-details.component";
 import { StudentHomeComponent } from "./account/student-home.component";
 //Service
 import { SchoolService } from "./schools/school.service";
@@ -50,6 +51,7 @@ import { LessonService } from "./lessons/lesson.service";
 import { TimeService } from "./utils/time.service";
 import { SensorService } from "./sensors/sensor.service";
 import { DocumentService } from "./utils/document.service";
+import { EvaluationService } from "./utils/evaluation.service";
 //Pipes
 
 
@@ -82,7 +84,7 @@ import { DocumentService } from "./utils/document.service";
         ]
       },
       { path: 'user/profile/:id', component: UserProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
-      { path: 'user/details/:id', component: UserDetailsComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },      
+      { path: 'user/details/:id', component: UserDetailsComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       {
         path: 'class/school/:id', component: ClassMainComponent, canActivate: [AuthGuard], data: { roles: [3, 6] },
         children: [
@@ -97,6 +99,7 @@ import { DocumentService } from "./utils/document.service";
           { path: '', redirectTo: 'schedule', pathMatch: 'full' },
           { path: 'student', component: ClassPrimaryStudentsComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 6] } },
           { path: 'schedule', component: ClassPrimaryScheduleComponent },
+          { path: 'evaluation', component: ClassPrimaryEvaluationComponent },
           { path: 'document', component: ClassPrimaryDocumentComponent },
           { path: 'teacher-lessons/:id', component: LessonTeacherComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 6] } },
           { path: 'student-lessons/:id', component: LessonStudentComponent, canActivate: [AuthGuard], data: { roles: [1, 5] } }
@@ -128,12 +131,13 @@ import { DocumentService } from "./utils/document.service";
     ClassPrimaryListComponent,
     ClassPrimaryDocumentComponent,
     ClassPrimaryScheduleComponent,
+    ClassPrimaryEvaluationComponent,
     LessonTeacherComponent,
     LessonStudentComponent,
     MainFormComponent,
     RoomFormComponent,
     SensorFormComponent,
-    ClassFormComponent
+    ClassFormComponent,
     LessonStudentComponent,
     UserDetailsComponent,
     StudentHomeComponent
@@ -159,7 +163,8 @@ import { DocumentService } from "./utils/document.service";
     LessonService,
     TimeService,
     SensorService,
-    DocumentService
+    DocumentService,
+    EvaluationService
   ],
   bootstrap: [AppComponent]
 })

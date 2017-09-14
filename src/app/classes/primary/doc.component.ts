@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { DocumentService } from "../../utils/document.service";
 import { FileService } from "../../utils/files.service";
-import { ClassService } from "../../classes/class.service";
 import { UserService } from "../../users/user.service";
 import { StudentGuard, GuardianGuard } from "../../utils/auth-guard.service";
 
@@ -24,7 +23,6 @@ export class ClassPrimaryDocumentComponent {
     constructor(
         private _fileService: FileService,
         private _documentService: DocumentService,
-        private _classService: ClassService,
         private _userService: UserService,
         private _guardianGuard: GuardianGuard,
         private _studentGuard: StudentGuard,
@@ -42,9 +40,9 @@ export class ClassPrimaryDocumentComponent {
             let filename = document.File.split(".");
             let teacher = await this._userService.getProfile(document.UserFK)
             this.docs.push({
-                //quando forem dados reais alterar para 1 - 2
-                "File": filename[0] + "." + filename[1],
-                "Type": filename[1],
+                "File": filename[1] + "." + filename[2],
+                "Filename": document.File,
+                "Type": filename[2],
                 "Teacher": teacher.Name,
                 "TeacherID": teacher.ID,
                 "SubmitedIn": document.SubmitedIn,
