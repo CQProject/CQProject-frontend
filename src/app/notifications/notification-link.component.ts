@@ -1,5 +1,5 @@
 import { concat } from 'rxjs/operator/concat';
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { Router } from "@angular/router";
 import { NotificationService } from "../notifications/notification.service";
 
@@ -16,10 +16,11 @@ export class NotificationCounterComponent {
         private _service: NotificationService,
         private _router: Router,
         private _ngZone: NgZone,
+        private _ref:ChangeDetectorRef
     ) { }
 
     public ngOnInit() {
-        this.notifications=1;
+        this.notifications=0;
         this._ngZone.runOutsideAngular(() => {
             this._check(() => {
                 // reenter the Angular zone and display done
@@ -33,6 +34,7 @@ export class NotificationCounterComponent {
             this.notifications = await this._service.count();
             console.log(this.notifications);
             window.setTimeout(() => this._check(doneCallback), 10000);
+            this._ref.detectChanges();
         } else {
             doneCallback();
         }

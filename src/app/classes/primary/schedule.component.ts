@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 
 import { ScheduleService } from "../../utils/schedule.service";
@@ -14,6 +14,7 @@ import { Subject } from "../../utils/iSubject";
 import { UserProfile } from "../../users/iUsers";
 import { Room } from "../../sensors/iRoom";
 import { Class } from "../iClass";
+declare var $: any;
 
 @Component({
     selector: "primary-schedule",
@@ -36,7 +37,8 @@ export class ClassPrimaryScheduleComponent {
         private _classService: ClassService,
         private _timeService: TimeService,
         private _router: Router,
-        private _route: ActivatedRoute
+        private _route: ActivatedRoute,
+        private _changeDetetor: ChangeDetectorRef
     ) {
         this.day = ["Segunda feira", "Terça feira", "Quarta feira", "Quinta feira", "Sexta feira"];
         this.week = [];
@@ -47,24 +49,19 @@ export class ClassPrimaryScheduleComponent {
         let classID;
         this._route.parent.params.subscribe(params => classID = +params["id"]);
         this.rol = JSON.parse(localStorage.getItem('currentUser')).roles;
+        $(window).on('hashchange', function () {
+            $('.modal-overlay').remove();
+        })
+        $(document).ready(function () {
+            $('.modal').modal({
+                dismissible: false
+            });
+        });
+        this.cla = await this._classService.getClassProfile(classID);
+        this.setHours();
 
-        if (!isNaN(classID)) {
-
-            this.cla = await this._classService.getClassProfile(classID);
-            this.setHours();
-
-            let schedules = await this._scheduleService.getScheduleByClass(classID);
-            await this.setSchedule(schedules)
-        } else {
-            this.usID = JSON.parse(localStorage.getItem('currentUser')).userID;
-            let classes = await this._classService.getClassesByUser(this.usID);
-            classID = parseInt(classes[classes.length-1]);
-            this.cla = await this._classService.getClassProfile(classID);
-            this.setHours();
-
-            let schedules = await this._scheduleService.getScheduleByClass(classID);
-            await this.setSchedule(schedules)
-        }
+        let schedules = await this._scheduleService.getScheduleByClass(classID);
+        await this.setSchedule(schedules)
     }
 
     private async setSchedule(schedules: Schedule[]) {
@@ -102,15 +99,15 @@ export class ClassPrimaryScheduleComponent {
 
     public insertSchedule(day: number, hour: number, big: string, small: string) {
         let bigLink = document.createElement('a');
-        bigLink.setAttribute('class', 'w3-col w3-button w3-hover-lime w3-border');
+        bigLink.setAttribute('class', 'col s12 btn grey darken-2 white-text');
         bigLink.onclick = () => this.select(day, hour);
-        bigLink.setAttribute('style', 'height:' + 50 * this.week[day][hour].Duration + 'px');
+        bigLink.setAttribute('style', 'height:' + 50 * this.week[day][hour].Duration + 'px;font-size:0.9rem;margin-bottom:10px;line-height:100%;padding:15px');
         bigLink.innerHTML = "<b>" + this.week[day][hour].Subject + "</b>";
         let bigContainer = document.getElementById(big);
         bigContainer.appendChild(bigLink);
 
         let smallLink = document.createElement('a');
-        smallLink.setAttribute('class', 'w3-col w3-button w3-lime w3-hover-khaki');
+        smallLink.setAttribute('class', 'col s12 btn grey darken-2 white-text');
         smallLink.onclick = () => this.select(day, hour);
         smallLink.innerHTML = "<b>" + this.week[day][hour].Subject + "</b>";
         let smallContainer = document.getElementById(small);
@@ -120,36 +117,38 @@ export class ClassPrimaryScheduleComponent {
     public async setHours() {
         let times = await this._timeService.getTimeByPrimary(this.cla.SchoolFK);
         let element = document.getElementById("hoursColumn");
-        var html = '<div class="w3-col w3-khaki w3-border-bottom" style="height: 50px;"></div>';
+        var html = '<div class="col s12 center-align" style="height: 50px;"></div>';
         for (let time of times) {
-            html += '<div class="w3-col w3-green w3-border-bottom" style="height: 50px;">' + time.StartTime + '<br>' + time.EndTime + '</div>'
+            html += '<div class="col s12 center-align" style="height: 60px;border-top:1px solid #ffffff">' + time.StartTime + '<br>' + time.EndTime + '</div>'
         }
         element.innerHTML = html;
     }
 
     public select(day: number, hour: number) {
         this.selected = this.week[day][hour];
-        document.getElementById("scheduleModal").style.display = 'block';
+        $("#scheduleModal").modal('open');
     }
 
     public hide() {
-        document.getElementById("scheduleModal").style.display = 'none';
+        $("#scheduleModal").modal('close');
     }
 
     public accordion(id) {
         var x = document.getElementById(id);
-        if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
+        if (x.className.indexOf("show") == -1) {
+            x.className += "show";
         } else {
-            x.className = x.className.replace(" w3-show", "");
+            x.className = x.className.replace(" show", "");
         }
     }
 
-    public showLessonsTeacher(){
-        this._router.navigate(['/primary/class', this.cla.ID, 'teacher-lessons', this.selected.ID])
+    public showLessonsTeacher() {
+        this._router.navigate(['/primary-class', this.cla.ID, 'teacher-lessons', this.selected.ID]);
+        $('.modal').modal('close');
     }
 
-    public showLessonsStudent(){
-        this._router.navigate(['/primary/class', this.cla.ID, 'student-lessons', this.selected.ID])
+    public showLessonsStudent() {
+        this._router.navigate(['/primary-class', this.cla.ID, 'student-lessons', this.selected.ID]);
+        $('.modal').modal('close');
     }
 }

@@ -1,0 +1,41 @@
+<div class="row" style="position:relative">
+    <div class="col s3 left-align">
+        <img [attr.src]="school?.Logo" class="responsive-img" style="max-width:300px;max-height:300px">
+    </div>
+    <div class="hide-on-med-and-down col s9 left-align">
+        <h3 class="white-text" style="position:absolute;top:20%">{{school?.Name}}</h3>
+    </div>
+    <div class="hide-on-large-only col s12 left-align">
+        <h3 class="white-text">{{school?.Name}}</h3>
+    </div>
+    <div class="row">
+        <div class="col offset-s1 s10 right-align">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="parallax-container" style="height:400px;width:100%">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <div class="parallax">
+                    <img class="responsive-image" [attr.src]="school?.ProfilePicture">
+                </div>
+                <div class="row right-align" *ngIf="_assistantGuard.canActivate() || _adminGuard.canActivate()">
+                    <div style="margin-bottom:5px">
+                        <a class="btn green darken-2" [routerLink]="['/classes/school/',school?.ID]">Ver Turmas</a>
+                        <a class="btn green darken-2" [routerLink]="['/building/school', school?.ID]">Ver Instalações</a>
+                        <a class="btn green darken-2">Editar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+        <div class="col s10 offset-s1 left-align">
+            <h4 class="white-text">Descrição:</h4>
+            <h5 class="white-text">{{school?.About}}</h5>
+        </div>
+</div>

@@ -4,8 +4,8 @@
         <div class="w3-left-align w3-row">
             <label class="w3-col s3">Turma:</label>
             <input [(ngModel)]="class.ClassDesc" class="w3-input w3-col s9" type="text" name="ClassDesc" required/>
-            <label class="w3-col">Ensino primário <input type="checkbox" [(ngModel)]="checked" [ngModelOptions]="{standalone: true}"/></label>
-            <div *ngIf="checked">
+            <label class="w3-col">Ensino primário <input type="checkbox" [(ngModel)]="checkedPrimary" [ngModelOptions]="{standalone: true}"/></label>
+            <div *ngIf="checkedPrimary">
                 <label class="w3-col s3">Ano:</label>
                 <input [(ngModel)]="class.Year" class="w3-input w3-col s9" type="text" name="Year" />
             </div>
@@ -14,6 +14,12 @@
             <select [(ngModel)]="class.SchoolFK" name="SchoolFK" class="w3-col s9">
               <option *ngFor="let school of schools" value="{{school.ID}}">{{school.Name}}</option>
             </select>
+            <div class="w3-col"><br></div>
+            <label class="w3-col s3">Adicionar alunos:</label>
+            <input (keyup)="studentsFilter($event)" />
+            <div *ngFor="let stud of studentsToShow">
+                {{stud.Name}}
+            </div>
             <div class="w3-col"><br></div>
         </div>
     </form>

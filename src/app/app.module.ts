@@ -18,12 +18,11 @@ import { NotificationMenuComponent } from "./notifications/notification-menu.com
 import { FloorMainComponent } from "./sensors/main.component";
 import { FloorMapComponent } from "./sensors/floor-map.component";
 import { RoomComponent } from "./sensors/room.component";
-import { ClassMainComponent } from "./classes/main.component";
+import { SchoolProfileComponent } from "./schools/school-profile.component";
 import { ClassPrimaryProfileComponent } from "./classes/primary/profile.component";
 import { ClassPrimaryStudentsComponent } from "./classes/primary/students.component";
 import { ClassPrimaryScheduleComponent } from "./classes/primary/schedule.component";
-import { ClassPrimaryListComponent } from "./classes/primary/list.component";
-import { ClassKindergartenListComponent } from "./classes/kindergarten/list.component";
+import { ClassListComponent } from "./classes/list.component";
 import { ClassPrimaryDocumentComponent } from "./classes/primary/doc.component";
 import { ClassPrimaryEvaluationComponent } from "./classes/primary/evaluations.component";
 import { LessonTeacherComponent } from "./lessons/lesson-teacher.component";
@@ -36,6 +35,8 @@ import { SensorFormComponent } from "./forms/sensor-form.component";
 import { ClassFormComponent } from "./forms/class-form.component";
 import { UserDetailsComponent } from "./users/user-details.component";
 import { StudentHomeComponent } from "./account/student-home.component";
+import { NotificationReceivedComponent } from "./notifications/notification-received.component";
+import { NotificationSentComponent } from "./notifications/notification-sent.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
@@ -54,7 +55,6 @@ import { DocumentService } from "./utils/document.service";
 import { EvaluationService } from "./utils/evaluation.service";
 //Pipes
 
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -65,7 +65,13 @@ import { EvaluationService } from "./utils/evaluation.service";
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: AccountHomeComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       { path: 'schools', component: SchoolHomeComponent },
-      { path: 'notifications', component: NotificationMenuComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
+      { path: 'school/:id', component: SchoolProfileComponent},
+      { path: 'notifications', component: NotificationMenuComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] }, 
+        children:[
+          { path: '', redirectTo: 'received', pathMatch: 'full' },
+          { path: 'received', component: NotificationReceivedComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] }},
+          { path: 'sent', component: NotificationSentComponent, canActivate: [AuthGuard],  data: { roles: [1, 2, 3, 4, 5, 6] }}     
+      ] },
       {
         path: 'form', component: MainFormComponent, canActivate: [AuthGuard], data: { roles: [2, 6] },
         children: [
@@ -85,16 +91,9 @@ import { EvaluationService } from "./utils/evaluation.service";
       },
       { path: 'user/profile/:id', component: UserProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       { path: 'user/details/:id', component: UserDetailsComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
+      { path: 'classes/school/:id', component: ClassListComponent, canActivate: [AuthGuard], data: { roles: [3, 6] } },
       {
-        path: 'class/school/:id', component: ClassMainComponent, canActivate: [AuthGuard], data: { roles: [3, 6] },
-        children: [
-          { path: '', redirectTo: 'primary', pathMatch: 'full' },
-          { path: 'primary', component: ClassPrimaryListComponent },
-          { path: 'kindergarten', component: ClassKindergartenListComponent }
-        ]
-      },
-      {
-        path: 'primary/class/:id', component: ClassPrimaryProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] },
+        path: 'primary-class/:id', component: ClassPrimaryProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] },
         children: [
           { path: '', redirectTo: 'schedule', pathMatch: 'full' },
           { path: 'student', component: ClassPrimaryStudentsComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 6] } },
@@ -124,11 +123,10 @@ import { EvaluationService } from "./utils/evaluation.service";
     FloorFormComponent,
     RoomComponent,
     UserProfileComponent,
-    ClassMainComponent,
+    SchoolProfileComponent,
     ClassPrimaryProfileComponent,
     ClassPrimaryStudentsComponent,
-    ClassKindergartenListComponent,
-    ClassPrimaryListComponent,
+    ClassListComponent,
     ClassPrimaryDocumentComponent,
     ClassPrimaryScheduleComponent,
     ClassPrimaryEvaluationComponent,
@@ -140,7 +138,9 @@ import { EvaluationService } from "./utils/evaluation.service";
     ClassFormComponent,
     LessonStudentComponent,
     UserDetailsComponent,
-    StudentHomeComponent
+    StudentHomeComponent,
+    NotificationReceivedComponent,
+    NotificationSentComponent
     //Pipe
   ],
   providers: [

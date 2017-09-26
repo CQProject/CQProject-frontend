@@ -1,25 +1,25 @@
-<div class="w3-container w3-white">
+<div class="container white">
     <h2>Criar uma escola</h2>
     <form>
-        <div class="w3-left-align w3-row">
-            <label class="w3-col s3">Nome:</label>
-            <input [(ngModel)]="school.Name" class="w3-input w3-col s9" type="text" name="Name" required/>
-            <div class="w3-col"><br></div>
-            <label class="w3-col s3">Logótipo:</label>
-            <input (change)="getLogoImage($event)" class="w3-input w3-col s9" type="file" required/>
-            <div class="w3-col"><br></div>
-            <label class="w3-col s3">Imagem de perfil:</label>
-            <input (change)="getProfileImage($event)" class="w3-input w3-col s9" type="file" required/>
-            <div class="w3-col"><br></div>
-            <label class="w3-col s3">Acrónimo:</label>
-            <input [(ngModel)]="school.Acronym" name="Acronym" class="w3-input w3-col s9" required/>
-            <div class="w3-col"><br></div>
-            <label class="w3-col s3">Alguma informação relativa à escola:</label>
-            <div class="w3-col s9">
-                <textarea id="textarea" [(ngModel)]="school.About" name="About" class="w3-input w3-border" style="resize:none" rows="5" cols="8" required></textarea>
+        <div class="left-align row">
+            <label class="col s3">Nome:</label>
+            <input [(ngModel)]="school.Name" class="input col s9" type="text" name="Name" required/>
+            <div class="col"><br></div>
+            <label class="col s3">Logótipo:</label>
+            <input (change)="getLogoImage($event)" class="input col s9" type="file" required/>
+            <div class="col"><br></div>
+            <label class="col s3">Imagem de perfil:</label>
+            <input (change)="getProfileImage($event)" class="input col s9" type="file" required/>
+            <div class="col"><br></div>
+            <label class="col s3">Acrónimo:</label>
+            <input [(ngModel)]="school.Acronym" name="Acronym" class="input col s9" required/>
+            <div class="col"><br></div>
+            <label class="col s3">Alguma informação relativa à escola:</label>
+            <div class="col s9">
+                <textarea id="textarea" [(ngModel)]="school.About" name="About" class="input" style="resize:none" rows="5" cols="8" required></textarea>
             </div>
-                <div class="w3-col"><br></div>
+                <div class="col"><br></div>
         </div>
     </form>
 </div>
-<button type="submit" class="w3-button w3-khaki w3-margin-top w3-block w3-hover-lime" (click)="createSchool()"><label class="w3-large">Submeter</label></button>
+<button type="submit" class="" (click)="createSchool()"><label class="">Submeter</label></button>

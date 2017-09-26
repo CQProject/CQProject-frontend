@@ -1,9 +1,11 @@
+import "materialize-css"
 import { concat } from 'rxjs/operator/concat';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from "@angular/router";
 import { AccountService } from "./account.service";
 import { Account } from "./iAccount";
 import { UserProfile } from "../users/iUsers";
+declare var $: any;
 
 @Component({
     selector: 'navbar',
@@ -27,6 +29,11 @@ export class AccountNavbarComponent {
     }
 
     public async ngOnInit() {
+        $(document).ready(function(){
+            $('.button-collapse').sideNav()
+        });
+
+
         console.log("vai verificar se está algum utilizador");
         if (JSON.parse(localStorage.getItem('currentUser')) != null) {
             console.log(JSON.parse(localStorage.getItem('currentUser')));
@@ -80,5 +87,11 @@ export class AccountNavbarComponent {
     public dropdownOut(elementID: string) {
         var element = document.getElementById(elementID);
         element.className = element.className.replace(" w3-show", "");
+    }
+
+    public closeNavMobile(){
+        $(document).ready(function(){
+            $('.button-collapse').sideNav('hide')
+        });
     }
 }

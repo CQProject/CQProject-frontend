@@ -9,6 +9,7 @@ import { UserService } from "../users/user.service";
 import { Lesson } from './iLesson';
 import { Presence } from './iPresence';
 import { Schedule } from "../utils/interfaceSchedule";
+declare var $: any;
 
 @Component({
     selector: "lessons-student",
@@ -32,6 +33,9 @@ export class LessonStudentComponent {
 
     public async ngOnInit() {
         let scheduleID;
+        $(document).ready(function(){
+            $('.collapsible').collapsible();
+          });
         this._route.params.subscribe(params => scheduleID = params['id']);
         console.log(scheduleID)
         let schedule = await this._scheduleService.getSchedule(scheduleID);
@@ -39,7 +43,7 @@ export class LessonStudentComponent {
         var student;
         if (this._studentGuard.canActivate()) {
             await this.isStudent(lessons);
-         } else {
+        } else {
             await this.isGuardian(lessons);
         }
 
@@ -56,10 +60,10 @@ export class LessonStudentComponent {
                 Observations: lesson.Observations,
                 Day: lesson.Day,
                 Student: [
-                    { 
-                        Presence: presence.Presence, 
-                        Material: presence.Material, 
-                        Behavior: presence.Behavior 
+                    {
+                        Presence: presence.Presence,
+                        Material: presence.Material,
+                        Behavior: presence.Behavior
                     }
                 ]
             })
@@ -69,14 +73,14 @@ export class LessonStudentComponent {
 
     public async isGuardian(lessons: Lesson[]) {
         for (let lesson of lessons) {
-            let students:any[] = [];
+            let students: any[] = [];
             let presences = await this._lessonService.getPresenceByGuardian(lesson.ID);
-            for(let presence of presences){
+            for (let presence of presences) {
                 let student = await this._userService.getProfile(presence.StudentFK);
                 students.push({
-                    Student: student.Name, 
-                    Presence: presence.Presence, 
-                    Material: presence.Material, 
+                    Student: student.Name,
+                    Presence: presence.Presence,
+                    Material: presence.Material,
                     Behavior: presence.Behavior
                 });
             }
@@ -94,31 +98,41 @@ export class LessonStudentComponent {
     initLessonList() {
         this.index = 0;
         var list = document.getElementById("list");
+        var ul = document.createElement("ul");
+
+        ul.setAttribute("class", "tabs");
+        $(document).ready(function () {
+            $('ul.tabs').tabs({
+                swipeable: true
+            });
+        });
+
         this.lessons.forEach((lesson, index) => {
-            var div = document.createElement("div");
-            div.setAttribute("class", index < 4 ? "w3-col m3 s12 option w3-hide w3-show" : "w3-col m3 s12 option w3-hide");
+            var li = document.createElement("li");
+            li.setAttribute("class", index < 4 ? "tab col s12 m3 option" : "tab col s12 m3 option hide");
             var anchor = document.createElement("a");
-            anchor.setAttribute("class", "w3-btn  w3-hover-khaki");
+            anchor.setAttribute("style", "font-size:0.85rem;");
             anchor.innerHTML = "Lição nº" + (this.lessons.length - index);
             anchor.onclick = () => { this.showLesson(index) };
             anchor.style.width = "100%";
-            div.appendChild(anchor);
-            list.appendChild(div);
+            li.appendChild(anchor);
+            ul.appendChild(li);
         });
+        list.appendChild(ul);
     }
     moreLesson() {
         var y = document.getElementsByClassName("option")
         if (this.index + 3 < y.length - 1) {
-            y[this.index].className = y[this.index].className.replace(" w3-show", "");
-            y[this.index + 4].className += " w3-show";
+            y[this.index].className += " hide";
+            y[this.index + 4].className = y[this.index].className.replace(" hide", "");
             this.index++;
         }
     }
     lessLesson() {
         if (this.index > 0) {
             var y = document.getElementsByClassName("option")
-            y[this.index + 3].className = y[this.index + 3].className.replace(" w3-show", "");
-            y[this.index - 1].className += " w3-show";
+            y[this.index + 3].className += " hide";
+            y[this.index - 1].className = y[this.index - 1].className.replace(" hide", "");
             this.index--;
         }
     }

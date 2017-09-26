@@ -2,6 +2,7 @@ import { concat } from 'rxjs/operator/concat';
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AccountService } from "../account/account.service";
+import { AdminGuard,AssistantGuard,GuardianGuard,SecretaryGuard,StudentGuard,TeacherGuard } from "../utils/auth-guard.service"
 import { Account } from "../account/iAccount";
 import { UserService } from "../users/user.service";
 import { UserDetails,UserDetailsToPost } from "../users/iUsers";
@@ -23,7 +24,13 @@ export class UserDetailsComponent {
         private _service: AccountService,
         private _userService: UserService,
         private _fileService: FileService,
-        private _router: Router
+        private _router: Router,
+        private _adminGuard: AdminGuard,
+        private _assistantGuard: AssistantGuard,
+        private _guardianGuard: GuardianGuard,
+        private _secretaryGuard: SecretaryGuard,
+        private _studentGuard: StudentGuard,
+        private _teacherGuard: TeacherGuard
     ) {
         this.profileToPost = new UserDetailsToPost();
     }

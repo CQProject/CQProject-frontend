@@ -1,0 +1,63 @@
+<div id="receivedMessages" class="informationNotif">
+    <div class="col l10 container offset-l1">
+        <div *ngFor="let notification of receivedNotifications" class="row">
+            <div class="card z-depth-4 col s12" style="padding:0px;border-radius:5px">
+                <header class="container green col s12" style="border-radius:5px">
+                    <div class="row">
+                        <div class="col l6 m6 s12">
+                            <h6 class="left-align"><a>{{notification?.Sender}}</a></h6>
+                        </div>
+                        <div>
+                            <h6 class="col l6 m6 s12">
+                                <div class="row">
+                                    <div class="col l10 m10 s10">
+                                        <i class="fa fa-calendar"></i><span> {{notification?.Hour}}</span>
+                                    </div>
+                                    <div class="col l2 m2 s2" style="margin-top:1%">
+                                        <div *ngIf="notification.Read"><i class="fa fa-envelope-open-o"></i></div>
+                                        <div *ngIf="!notification.Read"><i class="fa fa-envelope-o"></i></div>
+                                    </div>
+                                </div>
+                            </h6>
+                        </div>
+                    </div>
+                </header>
+                <div class="row">
+                    <div class="col s12">
+                        <span class="teal-text">{{notification?.Subject}}</span><br>
+                    </div>
+                    <div class="col s12">
+                        <h6>
+                            <button type="submit" class="btn white-text" (click)="showNotifDetails('notifReceived');readNotification(notification.ID)">Ver Notificação</button>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+<div id="notifReceived" class="modal">
+        <div class="modal-content card z-depth-4">
+            <header class="container green center-align">
+                <h3>{{notification?.Subject}}</h3>
+                <span (click)="closeNotifDetails('notifReceived')" class="btn">&times;</span>
+            </header>
+            <div class="container">
+                <div class="left-align">
+                    <p>
+                        <label class="green">Data:</label> {{notification?.Hour}}
+                    </p>
+                    <p>
+                        <label class="green">Remetente:</label> {{notification?.Sender}}
+                    </p>
+                    <p>
+                        <label class="green">Descrição:</label> {{notification?.Description}}
+                    </p>
+                    <div class="row center-align" *ngIf="notification.Approval">
+                        <a class="btn lime white-text" checked (click)="accept('notifReceived')"> <i class="fa fa-check"></i> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
