@@ -27,7 +27,8 @@
     "rxjs": "5.4.0",
     "systemjs": "0.20.12",
     "tinymce": "^4.6.6",
-    "zone.js": "^0.8.11"
+    "zone.js": "^0.8.11",
+    "materialize-css":"0.100.2"
   },
   "devDependencies": {
     "@angular/cli": "1.0.6",

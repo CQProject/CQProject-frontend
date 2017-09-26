@@ -1,82 +1,87 @@
-<div class="w3-card w3-row w3-round w3-section w3-lime ">
-    <a (click)="lessLesson()" class="w3-col m1 w3-hide-small w3-btn w3-center w3-green w3-hover-khaki"><i class="fa fa-angle-left"></i></a>
-    <a (click)="lessLesson()" class="w3-col s12 w3-hide-medium w3-hide-large w3-btn w3-center w3-green w3-hover-khaki"><i class="fa fa-angle-up"></i></a>
-    <div class="w3-col m10 s12">
-        <div id="list" class="w3-row"></div>
+<div class="row">
+    <a (click)="lessLesson()" class="col m1 hide-on-small btn center-align green"><i class="material-icons">keyboard_arrow_left</i></a>
+    <a (click)="lessLesson()" class="col s12 hide-on-med-and-up btn center-align green"><i class="material-icons">keyboard_arrow_up</i></a>
+    <div class="col m10 s12">
+        <div class="row">
+            <div id="list" class="col s12">
+            </div>
+        </div>
     </div>
-    <a (click)="moreLesson()" class="w3-col m1 w3-hide-small w3-btn w3-center w3-green w3-hover-khaki"><i class="fa fa-angle-right"></i></a>
-    <a (click)="moreLesson()" class="w3-col s12 w3-hide-medium w3-hide-large w3-btn w3-center w3-green w3-hover-khaki"><i class="fa fa-angle-down"></i></a>
+    <a (click)="moreLesson()" class="col m1 hide-on-small-only btn center-align green"><i class="material-icons">keyboard_arrow_right</i></a>
+    <a (click)="moreLesson()" class="col s12 hide-on-med-and-up btn center-align green"><i class="material-icons">keyboard_arrow_down</i></a>
 </div>
 
-<div class="w3-container w3-card-4 w3-white w3-round" style="width:100%">
-    <div class="lesson w3-row-padding w3-section">
-        <div class="w3-col s12 w3-right-align"><a class="w3-button w3-round-xxlarge w3-lime w3-hover-khaki"><i class="fa fa-edit"></i></a></div>
-        <div class="w3-col s6 m8 w3-left-align">
+<div class="container card z-depth-4 white" style="width:100%;">
+    <div class="lesson row section" style="padding:24px">
+        <div class="col s12 right-align"><a class="btn lime"><i class="material-icons">edit</i></a></div>
+        <div class="col s6 m8 left-align">
             <h3>Lição nº{{selected?.Description}}</h3>
         </div>
-        <div class="w3-col s6 m4 w3-right-align">
+        <div class="col s6 m4 right-align">
             <h5>{{selected?.Day}}</h5>
         </div>
-        <div class="w3-col w3-topbar"><br></div>
-        <div class="w3-col">
+        <div class="col s12" style="border-top:2px solid #000"><br></div>
+        <div class="col s12">
             <hr>
         </div>
-        <div *ngIf="_guardianGuard.canActivate()" class="w3-col m5 w3-hide-small w3-border-bottom w3-left-align">Nome</div>
-        <div class="w3-col m2 w3-hide-small w3-border-bottom">Presença</div>
-        <div class="w3-col m2 w3-hide-small w3-border-bottom">Material</div>
-        <div class="w3-col m3 w3-hide-small w3-border-bottom">Comportamento</div>
-        <div *ngIf="_guardianGuard.canActivate()" class="w3-col s5 w3-hide-medium w3-hide-large w3-border-right">Nome</div>
-        <div class="w3-col s2 w3-hide-medium w3-hide-large w3-border-bottom">P.</div>
-        <div class="w3-col s2 w3-hide-medium w3-hide-large w3-border-bottom">M.</div>
-        <div class="w3-col s3 w3-hide-medium w3-hide-large w3-border-bottom">C.</div>
-        <div class="w3-col">
-            <div *ngFor="let student of selected?.Student" class="w3-row w3-panel">
-                <div *ngIf="_guardianGuard.canActivate()" class="w3-col s5 w3-left-align">
+        <div *ngIf="_guardianGuard.canActivate()" class="col m5 hide-on-small-only left-align" style="border-bottom:1px solid #000">Nome</div>
+        <div class="col m2 hide-on-small-only" style="border-bottom:1px solid #F0F0F0">Presença</div>
+        <div class="col m2 hide-on-small-only" style="border-bottom:1px solid #F0F0F0">Material</div>
+        <div class="col m3 hide-on-small-only" style="border-bottom:1px solid #F0F0F0">Comportamento</div>
+        <div *ngIf="_guardianGuard.canActivate()" class="col s5 hide-on-med-and-up" style="border-right:1px solid #F0F0F0">Nome</div>
+        <div class="col s2 hide-on-med-and-up" style="border-bottom:1px solid #F0F0F0">P.</div>
+        <div class="col s2 hide-on-med-and-up" style="border-bottom:1px solid #F0F0F0">M.</div>
+        <div class="col s3 hide-on-med-and-up" style="border-bottom:1px solid #F0F0F0">C.</div>
+        <div class="col s12">
+            <div *ngFor="let student of selected?.Student">
+                <div *ngIf="_guardianGuard.canActivate()" class="col s5 left-align">
                     <h4>{{student?.Student}}</h4>
                 </div>
-                <div class="w3-col s2 w3-section">
+                <div class="col s2 section left-align" style="padding:12px">
                     <label *ngIf="student?.Presence; else elseBlock">&#10004;</label>
                     <ng-template #elseBlock>&#10008;</ng-template>
                 </div>
-                <div class="w3-col s2 w3-section">
+                <div class="col s2 section left-align" style="padding:12px">
                     <label *ngIf="student?.Material; else elseBlock">&#10004;</label>
                     <ng-template #elseBlock>&#10008;</ng-template>
                 </div>
-                <div class="w3-col s3 w3-section">
+                <div class="col s3 section left-align" style="padding:12px">
                     <label [ngSwitch]="student?.Behavior">
-                        <i *ngSwitchCase="1" class="fa fa-circle" style="color: #8B0000"></i>
-                        <i *ngSwitchCase="2" class="fa fa-circle" style="color: #FF4000"></i>
-                        <i *ngSwitchCase="3" class="fa fa-circle" style="color: #FFD700"></i>
-                        <i *ngSwitchCase="4" class="fa fa-circle" style="color: #9ACD32"></i>
-                        <i *ngSwitchDefault class="fa fa-circle" style="color: #008000;"></i>
+                        <i *ngSwitchCase="1" class="material-icons" style="color: #8B0000">brightness_1</i>
+                        <i *ngSwitchCase="2" class="material-icons" style="color: #FF4000">brightness_1</i>
+                        <i *ngSwitchCase="3" class="material-icons" style="color: #FFD700">brightness_1</i>
+                        <i *ngSwitchCase="4" class="material-icons" style="color: #9ACD32">brightness_1</i>
+                        <i *ngSwitchDefault class="material-icons" style="color: #008000;">brightness_1</i>
                     </label>
                 </div>
             </div>
         </div>
-        <div class="w3-col w3-topbar"><br></div>
-        <div class="w3-col s12 m3 w3-rightbar w3-right-align">
-            <h4>Sumário</h4>
-        </div>
-        <div class="w3-col s12 m9 w3-left-align">
-            <p>{{selected?.Summary}}</p>
-        </div>
-        <div class="w3-col">
-            <hr>
-        </div>
-        <div class="w3-col s12 m3 w3-rightbar w3-right-align">
-            <h4>Trabalho de casa</h4>
-        </div>
-        <div class="w3-col s12 m9 w3-left-align">
-            <p>{{selected?.Homework}}</p>
-        </div>
-        <div class="w3-col">
-            <hr>
-        </div>
-        <div class="w3-col s12 m3 w3-rightbar w3-right-align">
-            <h4>Observações</h4>
-        </div>
-        <div class="w3-col s12 m9 w3-left-align">
-            <p>{{selected?.Observations}}</p>
-        </div>
+        <div class="col s12" style="border-top:2px solid #f0f0f0"><br></div>
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <div class="col s12 m12 left-align collapsible-header active">
+                    <h4>Sumário</h4>
+                </div>
+                <div class="col s12 m12 right-align collapsible-body">
+                    <p>{{selected?.Summary}}</p>
+                </div>
+            </li>
+            <li>
+                <div class="col s12 m12 left-align collapsible-header">
+                    <h4>Trabalho de casa</h4>
+                </div>
+                <div class="col s12 m12 right-align collapsible-body">
+                    <p>{{selected?.Homework}}</p>
+                </div>
+            </li>
+            <li>
+                <div class="col s12 m12 left-align collapsible-header">
+                    <h4>Observações</h4>
+                </div>
+                <div class="col s12 m12 right-align collapsible-body">
+                    <p>{{selected?.Observations}}</p>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>

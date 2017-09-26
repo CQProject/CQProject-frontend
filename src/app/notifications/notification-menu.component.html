@@ -1,165 +1,24 @@
 <button (click)="getSentValidations(33)" class="w3-hide">Validações enviadas</button>
 
-<div class="w3-row w3-center w3-margin">
-    <div class="w3-col l1 w3-container"></div>
-    <div class="w3-col l10 w3-container">
-        <a class="w3-half w3-border-right" style="cursor:pointer" (click)="chooseOptionNotif('receivedMessages');getReceivedNotifications()">
-            <div id="received" class="tablinkNotif w3-green w3-text-white w3-hover-lime w3-hover-text-white w3-bottombar w3-padding w3-border-white">
-                Mensagens Recebidas
-            </div>
-        </a>
-        <a class="w3-half w3-border-left w3-dropdown-hover" style="cursor:pointer">
-            <div id="sent" class="tablinkNotif w3-green w3-text-white w3-hover-lime w3-hover-text-white w3-bottombar w3-padding" (click)="chooseOptionNotif('sentMessages');getSentNotifications()">
-                Mensagens Enviadas
-            </div>
-            <div class="w3-dropdown-content w3-bar-block w3-col w3-button w3-center">
-                <a class="w3-bar-item w3-button w3-hover-green w3-teal w3-text-white" (click)="chooseOptionNotif('sentValidations')">
-                    Validações Enviadas
-                </a></div>
-            
-        </a>
-    </div>
-    <div class="w3-col l1 w3-container"></div>
-</div>
-
-<div id="receivedMessages" class="informationNotif w3-animate-bottom w3-show">
-    <div class="w3-col l1 w3-container"></div>
-    <div class="w3-col l10 w3-container">
-        <div class="w3-container"></div>
-        <div *ngFor="let notification of receivedNotifications">
-            <div class="w3-card-4 w3-white w3-margin w3-display-container">
-                <header class="w3-container w3-green">
-                    <div class="w3-row">
-                        <div class="w3-col l6 m6 s12">
-                            <h6 class="w3-left"><a>{{notification?.Sender}}</a></h6>
-                        </div>
-                        <div>
-                            <h6 class="w3-col l6 m6 s12">
-                                <div class="w3-row">
-                                    <div class="w3-col l10 m10 s10">
-                                        <i class="fa fa-calendar"></i><span> {{notification?.Hour}}</span>
-                                    </div>
-                                    <div class="w3-col l2 m2 s2 w3-display-topright" style="margin-top:1%">
-                                        <div *ngIf="notification.Read"><i class="fa fa-envelope-open-o"></i></div>
-                                        <div *ngIf="!notification.Read"><i class="fa fa-envelope-o"></i></div>
-                                    </div>
-                                </div>
-                            </h6>
-                        </div>
-                    </div>
-                </header>
-                <div class="w3-row">
-                    <div class="w3-col w3-half">
-                        <span class="w3-padding w3-text-teal">{{notification?.Subject}}</span><br>
-                    </div>
-                    <div class="w3-col w3-half">
-                        <h6>
-                            <button type="submit" class="w3-button w3-block w3-text-teal w3-medium w3-pale-green w3-hover-green" (click)="showNotifDetails('notifReceived');readNotification(notification.ID)">Ver Notificação</button>
-                        </h6>
-                    </div>
-                </div>
-            </div>
-            <div id="notifReceived" class="w3-modal">
-                <div class="w3-modal-content w3-card-4 w3-animate-bottom">
-                    <header class="w3-container w3-green w3-center">
-                        <h3>{{notification?.Subject}}</h3>
-                        <span (click)="closeNotifDetails('notifReceived')" class="w3-button w3-display-topright w3-hover-lime w3-hover-text-white">&times;</span>
-                    </header>
-                    <div class="w3-container w3-margin">
-                        <div class="w3-margin w3-left-align">
-                            <p>
-                                <label class="w3-green">Data:</label> {{notification?.Hour}}
-                            </p>
-                            <p>
-                                <label class="w3-green">Remetente:</label> {{notification?.Sender}}
-                            </p>
-                            <p>
-                                <label class="w3-green">Descrição:</label> {{notification?.Description}}
-                            </p>
-                            <div class="w3-row w3-center" *ngIf="notification.Approval">
-                                <a class="w3-button w3-lime w3-hover-light-green w3-text-white w3-hover-text-white w3-circle" checked
-                                (click) = "accept('notifReceived')">
-                                    <i class="fa fa-check"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="w3-container"></div>
-        <div class="w3-col l1 w3-container"></div>
-    </div>
-</div>
-
-<div id="sentMessages" class="informationNotif w3-animate-bottom w3-hide">
-    <div class="w3-col l1 w3-container"></div>
-    <div class="w3-col l10 w3-container">
-        <div class="w3-container"></div>
-        <div *ngFor="let notification of sentNotifications">
-            <div class="w3-card-4 w3-white w3-margin w3-border-green">
-                <div class="">
-                    <div class="w3-row">
-                        <div class="w3-col w3-third">
-                            <b class="w3-left w3-text-teal w3-margin-left"><a><p>{{notification?.Subject}}</p></a></b>
-                        </div>
-                        <div class="w3-col w3-third">
-                            <p><span class="w3-text-teal"> {{notification?.Hour}}</span></p>
-                        </div>
-                        <div class="w3-col w3-third w3-right w3-container">
-                            <h6><button class="w3-button w3-block w3-text-teal w3-medium w3-pale-green w3-hover-green" (click)="showNotifDetails('notifSent',notification.ID)">Ver Notificação</button></h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="notifSent" class="w3-modal">
-                <div class="w3-modal-content w3-card-4 w3-animate-bottom">
-                    <header class="w3-container w3-green w3-center">
-                        <h3>{{notification?.Subject}}</h3>
-                        <span (click)="closeNotifDetails('notifSent')" class="w3-button w3-display-topright w3-hover-lime w3-hover-text-white">&times;</span>
-                    </header>
-                    <div class="w3-container w3-margin w3-left-align">
-                        <div class="w3-row w3-margin">
-                            <label class="w3-green">Data:</label> {{notification?.Hour}}
-                        </div>
-                        <div class="w3-row w3-margin">
-                            <label class="w3-green">Destinatario:</label><br />
-                            <span *ngFor="let validation of sentValidations">
-                                {{validation?.Student}}
-                            </span>
-                        </div>
-                        <div class="w3-row w3-margin">
-                            <label class="w3-green">Descrição:</label><br />{{notification?.Description}}
-                        </div>
-                        <div class="w3-row w3-margin">
-                            <label class="w3-green">Urgencia:</label>
-                            <span *ngIf="notification.Urgency"><i class="fa fa-check-circle-o"></i></span>
-                            <span *ngIf="!notification.Urgency"><i class="fa fa-times-circle-o "></i></span>                            
-                        </div>
-                        <div class="w3-row w3-margin">
-                            <label class="w3-green">Para aprovação:</label>
-                            <span *ngIf="notification.Approval"><i class="fa fa-check-circle-o"></i></span>
-                            <span *ngIf="!notification.Approval"><i class="fa fa-times-circle-o "></i></span>    
-                        </div>
-                        <div class="w3-row w3-margin">
-                            <label class="w3-green">Aprovados:</label><br />
-                            <span *ngFor="let validation of sentValidations">
-                                <span *ngIf="validation.Accepted">{{validation?.Student}}</span>
-                            </span>
-                        </div>
-                        <div class="w3-row w3-margin">
-                            <label class="w3-green">Rejeitados:</label><br />
-                            <span *ngFor="let validation of sentValidations">
-                                    <span *ngIf="!validation.Accepted">{{validation?.Student}}</span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div id="sentValidations" class="informationNotif w3-animate-bottom w3-hide">
-   Some Validations
+    Some Validations
 </div>
+
+<nav>
+    <div class="nav-wrapper">
+        <ul class="row green">
+            <li id="received" class="tablink col s6 green center-align green darken-2" (click)="chooseOption('received')" style="padding:0px">
+                <a class="col s12" [routerLink]="['received']" class="flow-text">
+                            Notificações Recebidas
+                    </a>
+            </li>
+            <li id="sent" class="tablink col s6 green center-align" (click)="chooseOption('sent')" style="padding:0px">
+                <a class="col s12" [routerLink]="['sent']" class="flow-text">
+                            Notificações Enviadas
+                    </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<router-outlet></router-outlet>
+

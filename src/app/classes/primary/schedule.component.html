@@ -1,97 +1,105 @@
-<div class="w3-hide-small ">
-    <div class="w3-row w3-card w3-round w3-khaki">
-        <div class="w3-col w3-hide-medium" style="width:10%">
-            <div id="hoursColumn" class="w3-row w3-border-right"></div>
+<div class="hide-on-small-only row">
+    <div class="row card col s10 offset-s1" style="height:300spx;background-color:white;padding:16px">
+        <div class="col hide-on-med-only" style="width:10%">
+            <div id="hoursColumn" class="row"></div>
         </div>
-        <div class="w3-col" style="width:90%">
-            <div class="w3-row">
-                <div class="w3-col" style="width:20%">
-                    <div class="w3-col w3-green w3-border-bottom" style="height: 50px;">
-                        <h4>Segunda</h4>
+        <div class="col" style="width:90%">
+            <div class="row">
+                <div class="col" style="width:20%">
+                    <div class="center-align" style="height: 50px;">
+                        <span class="flow-text">Segunda</span>
                     </div>
-                    <div id="bigMonday" class="w3-row"></div>
+                    <div id="bigMonday" class="row"></div>
                 </div>
-                <div class="w3-col" style="width:20%">
-                    <div class="w3-col w3-green w3-border-bottom" style="height: 50px;">
-                        <h4>Terça</h4>
+                <div class="col" style="width:20%">
+                    <div class="col s12 center-align" style="height: 50px;">
+                        <span class="flow-text">Terça</span>
                     </div>
-                    <div id="bigTuesday" class="w3-row"></div>
+                    <div id="bigTuesday" class="row"></div>
                 </div>
-                <div class="w3-col" style="width:20%">
-                    <div class="w3-col w3-green w3-border-bottom" style="height: 50px;">
-                        <h4>Quarta</h4>
+                <div class="col" style="width:20%">
+                    <div class="col s12 center-align" style="height: 50px;">
+                        <span class="flow-text">Quarta</span>
                     </div>
-                    <div id="bigWednesday" class="w3-row"></div>
+                    <div id="bigWednesday" class="row"></div>
                 </div>
-                <div class="w3-col" style="width:20%">
-                    <div class="w3-col w3-green w3-border-bottom" style="height: 50px;">
-                        <h4>Quinta</h4>
+                <div class="col" style="width:20%">
+                    <div class="col s12 center-align" style="height: 50px;">
+                        <span class="flow-text">Quinta</span>
                     </div>
-                    <div id="bigThursday" class="w3-row"></div>
+                    <div id="bigThursday" class="row"></div>
                 </div>
-                <div class="w3-col" style="width:20%">
-                    <div class="w3-col w3-green w3-border-bottom" style="height: 50px;">
-                        <h4>Sexta</h4>
+                <div class="col" style="width:20%">
+                    <div class="col s12 center-align" style="height: 50px;">
+                        <span class="flow-text">Sexta</span>
                     </div>
-                    <div id="bigFriday" class="w3-row"></div>
+                    <div id="bigFriday" class="row"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="w3-hide-medium w3-hide-large">
+<div class="hide-on-med-and-up">
     <div>
-        <a (click)="accordion('smallMonday')" class="w3-btn w3-col schedule w3-round w3-green">Segunda</a>
-        <div id="smallMonday" class="w3-hide w3-container w3-row"></div>
-        <a (click)="accordion('smallTuesday')" class="w3-btn w3-col schedule w3-round w3-green">Terça</a>
-        <div id="smallTuesday" class="w3-hide w3-container w3-row"></div>
-        <a (click)="accordion('smallWednesday')" class="w3-btn w3-col schedule w3-round w3-green">Quarta</a>
-        <div id="smallWednesday" class="w3-hide w3-container w3-row"></div>
-        <a (click)="accordion('smallThursday')" class="w3-btn w3-col schedule w3-round w3-green">Quinta</a>
-        <div id="smallThursday" class="w3-hide w3-container w3-row"></div>
-        <a (click)="accordion('smallFriday')" class="w3-btn w3-col schedule w3-round w3-green">Sexta</a>
-        <div id="smallFriday" class="w3-hide w3-container w3-row"></div>
+        <a (click)="accordion('smallMonday')" class="btn col schedule green">Segunda</a>
+        <div id="smallMonday" class="hide container row"></div>
+        <a (click)="accordion('smallTuesday')" class="btn col schedule green">Terça</a>
+        <div id="smallTuesday" class="hide container row"></div>
+        <a (click)="accordion('smallWednesday')" class="btn col schedule green">Quarta</a>
+        <div id="smallWednesday" class="hide container row"></div>
+        <a (click)="accordion('smallThursday')" class="btn col schedule green">Quinta</a>
+        <div id="smallThursday" class="hide container row"></div>
+        <a (click)="accordion('smallFriday')" class="btn col schedule green">Sexta</a>
+        <div id="smallFriday" class="hide container row"></div>
     </div>
 </div>
 
-<div id="scheduleModal" class="w3-modal">
-    <div class="w3-modal-content w3-card" style="max-width: 500px;">
-        <div class="w3-container w3-deep-orange">
-            <span (click)="hide()" class="w3-btn w3-display-topright">&times;</span>
+<div id="scheduleModal" class="modal bottom-sheet" style="min-height:360px;">
+    <div class="modal-content" style="padding:0px">
+        <div class="col s12 grey lighten-2 row">
+            <div class="col s10 flow-text green-text text-darken-2 center-align">
+                Disciplina: {{selected?.Subject}}
+            </div>
+            <div class="col s2 flow-text green-text text-darken-2 right-align">
+                <i (click)="hide()" class="material-icons" style="cursor:pointer">close</i>
+            </div>
         </div>
-        <div class="w3-panel w3-left-align">
-            <i class="w3-badge w3-green fa fa-info w3-xlarge"></i>
-            <table class="w3-table w3-striped w3-bordered">
-                <thead>
-                    <tr class="w3-light-grey">
-                        <td>Disciplina:</td>
-                        <th>{{selected?.Subject}}</th>
-                    </tr>
-                </thead>
-                <tr>
-                    <td>Turma:</td>
-                    <th>{{selected?.ClassName}}</th>
-                </tr>
-                <tr>
-                    <td>Professor:</td>
-                    <th>{{selected?.Teacher}}</th>
-                </tr>
-                <tr>
-                    <td>Dia da semana:</td>
-                    <th>{{day[selected?.DayOfWeek-1]}}</th>
-                </tr>
-                <tr>
-                    <td>Hora:</td>
-                    <th>{{selected?.StartTime}}</th>
-                </tr>
-                <tr>
-                    <td>Sala:</td>
-                    <th>{{selected?.Room}}</th>
-                </tr>
-            </table>
-            <a *ngIf="rol.includes(2)" (click)="showLessonsTeacher()" class="w3-col w3-btn w3-green w3-hover-lime w3-large">Lições</a>
-            <a *ngIf="rol.includes(1)" (click)="showLessonsStudent()"   class="w3-col w3-btn w3-green w3-hover-lime w3-large">Lições</a>
+        <div class="row white" style="margin:0px;">
+            <div class="col s4 offset-s4">
+                <td>Turma:</td>
+                <th>{{selected?.ClassName}}</th>
+            </div>
+        </div>
+        <div class="row white" style="margin:0px">
+                <div class="col s4 offset-s4">
+                <td>Professor:</td>
+                <th>{{selected?.Teacher}}</th>
+            </div>
+        </div>
+        <div class="row white" style="margin:0px">
+                <div class="col s4 offset-s4">
+                <td>Dia da semana:</td>
+                <th>{{day[selected?.DayOfWeek-1]}}</th>
+            </div>
+        </div>
+        <div class="row white" style="margin:0px">
+                <div class="col s4 offset-s4">
+                <td>Hora:</td>
+                <th>{{selected?.StartTime}}</th>
+            </div>
+        </div>
+        <div class="row white" style="margin:0px">
+                <div class="col s4 offset-s4">
+                <td>Sala:</td>
+                <th>{{selected?.Room}}</th>
+            </div>
+        </div>
+        <div class="row" style="margin:0px">
+            <div class="col s12">
+                <a *ngIf="rol.includes(2)" (click)="showLessonsTeacher()" class="col s12 btn green darken-2">Lições</a>
+                <a *ngIf="rol.includes(1)" (click)="showLessonsStudent()" class="col s12 btn green darken-2">Lições</a>
+            </div>
         </div>
     </div>
 </div>

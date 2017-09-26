@@ -8,6 +8,7 @@ import { StudentGuard, GuardianGuard } from "../../utils/auth-guard.service";
 
 import { Document } from '../../utils/iDocument';
 import { Class } from '../../classes/iClass';
+declare var $: any;
 
 @Component({
     selector: "class-doc",
@@ -32,6 +33,14 @@ export class ClassPrimaryDocumentComponent {
     }
 
     public async ngOnInit() {
+        $(document).ready(function () {
+            $('#pdfViewer').modal({
+                dismissible:false
+            });
+        });
+        $(window).on("hashchange",function(){
+            $('#pdfViewer').modal('close');
+        })
         this.docs = [];
         let classID;
         this._route.parent.params.subscribe(params => classID = params['id']);
@@ -52,27 +61,22 @@ export class ClassPrimaryDocumentComponent {
         console.log(this.docs)
     }
 
-
-    public show(elementID: string) {
-        document.getElementById(elementID).style.display = 'block';
-    }
-
     public hide(elementID: string) {
-        document.getElementById(elementID).style.display = 'none';
+        $('#pdfViewer').modal('close');
     }
 
     public async download(filename: string, type: string) {
         if (type == "pdf") {
-            this.show("pdfViewer");
+                $('#pdfViewer').modal('open');
             this._fileService.fileDownload(filename)
                 .subscribe((res) => {
                     this.file = res;
                 });
-        }else{
+        } else {
             this._fileService.fileDownload(filename)
-            .subscribe((res) => { 
-                this.file = res; 
-            });
+                .subscribe((res) => {
+                    this.file = res;
+                });
         }
     }
 

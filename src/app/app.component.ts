@@ -6,6 +6,8 @@ import { Component } from "@angular/core";
 })
 
 export class AppComponent{
-  team = 'Diogo Mendes | Ricardo António | David Bernardo';
+  dm = 'Diogo Mendes'
+  ra = 'Ricardo António' 
+  db = 'David Bernardo';
   today: number = Date.now();
 }

@@ -1,1 +1,2 @@
-<a [routerLink]="['/notifications']" class="w3-bar-item w3-button">Notificações <span class="w3-badge w3-small w3-green">{{notifications}}</span></a>
+<a *ngIf="notifications==0" [routerLink]="['/notifications']" class="grey-text text-darken-2"><i class="material-icons left" style="margin-right:2px">notifications</i><span class="">Sem novas notificações</span></a>
+<a *ngIf="notifications!=0" [routerLink]="['/notifications']" class="grey-text text-darken-2">Notificações<i class="material-icons left" style="margin-right:2px">notifications_active</i><span data-badge-caption="" class="new badge btn-floating pulse green darken-2">{{notifications}}</span></a>

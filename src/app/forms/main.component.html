@@ -1,29 +1,29 @@
-<div class="w3-row w3-margin-top">
-    <div *ngIf="_adminGuard.canActivate()" class="w3-col m4">
-        <a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['school']">
-            <label class="w3-large">Adicionar Escola</label>
+<div class="row" style="margin-top:50px">
+    <div *ngIf="_adminGuard.canActivate()" class="col m4">
+        <a class="btn green" [routerLink]="['school']">
+            Adicionar Escola
         </a>
     </div>
-    <div *ngIf="_adminGuard.canActivate()" class="w3-col m4">
-        <a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['floor']">
-            <label class="w3-large">Adicionar piso</label>
+    <div *ngIf="_adminGuard.canActivate()" class="col m4">
+        <a class="btn green" [routerLink]="['floor']">
+           Adicionar piso
         </a>
     </div>
-    <div *ngIf="_adminGuard.canActivate()" class="w3-col m4">
-        <a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['room']">
-            <label class="w3-large">Adicionar Sala</label>
+    <div *ngIf="_adminGuard.canActivate()" class="col m4">
+        <a class="btn green" [routerLink]="['room']">
+         Adicionar Sala
         </a>
     </div>
-    <div *ngIf="_adminGuard.canActivate()" class="w3-col m4">
-        <a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['sensor']">
-            <label class="w3-large">Adicionar Sensor</label>
+    <div *ngIf="_adminGuard.canActivate()" class="col m4">
+        <a class="btn green" [routerLink]="['sensor']">
+            Adicionar Sensor
         </a>
     </div>
-    <div class="w3-col m4">
-            <a class="w3-button w3-block w3-green w3-hover-lime" [routerLink]="['class']">
-                <label class="w3-large">Adicionar Turma</label>
+    <div class="col m4">
+        <a class="btn green m4" [routerLink]="['class']">
+                Adicionar Turma
             </a>
-        </div>
+    </div>
 </div>
 <hr>
 <div class="w3-animate-bottom">

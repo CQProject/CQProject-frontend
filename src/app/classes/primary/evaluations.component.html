@@ -1,14 +1,35 @@
-<div *ngIf="_studentGuard.canActivate(); else elseblock">
-
+<div *ngIf="_studentGuard.canActivate(); else elseblock" class="row">
+    <div class="card-panel white col s10 offset-s1">
+        <table>
+            <thead>
+                <tr>
+                    <th>Data da Avaliação:</th>
+                    <th>Disciplina:</th>
+                    <th>Objetivo da Avaliação:</th>
+                    <th>Nota:</th>
+                    <th>Professor:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let eval of evaluations; let i=index" class="row center-align">
+                    <td>{{eval?.EvaluationDate | date:'shortDate'}}</td>
+                    <td>{{eval?.Subject}}</td>
+                    <td>{{eval?.Purport}}</td>
+                    <td>{{eval?.Grade}}</td>
+                    <td>{{eval?.Teacher}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <ng-template #elseblock>
-    <div class="w3-panel w3-white">
+    <div class="card-panel white">
         <div *ngFor="let eval of evaluations; let i=index">
-            <div class="w3-row w3-left-align">
-                <label class="w3-col s4  w3-block">{{eval?.EvaluationDate | date:'shortDate'}}</label>
-                <label class="w3-col s5  w3-block">{{eval?.Subject}}</label>
-                <a (click)="select(i)" class="w3-btn w3-col s3 w3-green w3-center w3-block">Classificações</a>
+            <div class="row left-align">
+                <label class="col s4">{{eval?.EvaluationDate | date:'shortDate'}}</label>
+                <label class="col s5">{{eval?.Subject}}</label>
+                <a (click)="select(i)" class="btn col s3 green center">Classificações</a>
 
             </div>
         </div>

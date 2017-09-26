@@ -1,40 +1,29 @@
-<div class="w3-card-2 w3-lime w3-row">
-    <div class="w3-col s4 w3-text-white">
-        <div class="w3-panel w3-green ">
-            <label class="w3-xxlarge">{{class?.Year}}{{class?.ClassDesc}}</label>
-        </div>
+<nav>
+    <div class="nav-wrapper">
+        <ul class="row green">
+            <li id="schedule" class="tablink col s3 green center-align green darken-2" (click)="chooseOption('schedule')" style="padding:0px">
+                <a class="col s12" [routerLink]="['schedule']" class="flow-text">
+                        Horário
+                </a>
+            </li>
+            <li id="evaluation" class="tablink col s3 green center-align" (click)="chooseOption('evaluation')" style="padding:0px">
+                <a class="col s12" [routerLink]="['evaluation']" class="flow-text">
+                        Avaliações
+                </a>
+            </li>
+            <li id="document" class="tablink col s3 green center-align" (click)="chooseOption('document')" style="padding:0px">
+                <a class="col s12" [routerLink]="['document']" class="flow-text">
+                       Documentos
+                </a>
+            </li>
+            <li id="student" class="tablink col s3 green center-align" (click)="chooseOption('student')" style="padding:0px">
+                <a *ngIf="!_studentGuard.canActivate()" class="col" [routerLink]="['student']" class="flow-text">
+                       Alunos
+                </a>
+            </li>
+        </ul>
     </div>
-    <div class="w3-col s8 w3-right-align">
-        <h4 class="w3-margin-right"><b>{{school?.Name}}</b></h4>
-        <label class="w3-margin-right w3-large">{{class?.SchoolYear}}</label>
-    </div>
-</div>
-
-<div class="w3-section w3-row">
-    <a class="w3-quarter w3-border" [routerLink]="['schedule']" style="text-decoration:none" >
-        <div id="option1" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding w3-border-green" (click)="chooseOption('option1');">
-            <label class="w3-large">Horário</label>
-        </div>
-    </a>
-    <a class="w3-quarter w3-border" [routerLink]="['evaluation']" style="text-decoration:none" >
-        <div id="option2" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('option2');">
-            <label class="w3-large">Avaliações</label>
-        </div>
-    </a>
-    <a class="w3-quarter w3-border" [routerLink]="['document']" style="text-decoration:none" >
-        <div id="option3" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('option3');">
-            <label class="w3-large">Documentos</label>
-        </div>
-    </a>
-    <a *ngIf="!rol.includes(1)" class="w3-quarter w3-border" [routerLink]="['student']" style="text-decoration:none" >
-        <div id="option4" class="tablink w3-lime w3-hover-khaki w3-bottombar w3-padding" (click)="chooseOption('option4');">
-            <label class="w3-large">Alunos</label>
-        </div>
-    </a>
-</div>
-
-
-
-<div class="w3-animate-bottom w3-hide w3-show">
+</nav>
+<div>
     <router-outlet></router-outlet>
 </div>

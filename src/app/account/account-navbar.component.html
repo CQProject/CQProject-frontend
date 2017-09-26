@@ -1,49 +1,109 @@
-<div class="w3-bar w3-green w3-row" style="max-height: 66px;">
-  <div class="w3-col l1  w3-container"></div>
-  <div class="w3-col l10 w3-container">
-    <a [routerLink]="['home']" class="w3-bar-item w3-btn w3-lime w3-hover-khaki">
-      <h4><i class="fa fa-home w3-margin-right"></i><b>CQPROJ</b></h4>
+<nav class="white" style="max-height: 66px;margin-bottom:10px" role="navigation">
+  <div class="nav-wrapper container">
+    <a id="logo-container" [routerLink]="['home']" class="brand-logo" style="color:#444">
+      <i class="material-icons hide-on-small-only" style="font-size:2.5rem">home</i><b>CQPROJ</b>
     </a>
 
-    <div *ngIf="!authorized" class="w3-hide-medium w3-hide-small">
-      <form class="w3-padding-16">
-        <a (click)="login()" id="btUserLogin" class="w3-bar-item w3-button w3-right w3-hover-lime w3-hover-text-white w3-margin-left">Entrar</a>
-        <input class="w3-input w3-bar-item w3-right" type="password" [(ngModel)]="pass" name="pass" placeholder="Password" required>
-        <i class="fa fa-lock w3-bar-item w3-right"></i>
-        <input class="w3-input w3-bar-item w3-right " type="text" [(ngModel)]="mail" name="mail" placeholder="Email" required>
-        <i class="fa fa-user w3-bar-item w3-right"></i>
+    <ul *ngIf="!authorized" class="right hide-on-med-and-down">
+      <form>
+        <li>
+          <div class="input-field" style="margin-right:5px; width:200px">
+            <input id="mail" type="text" [(ngModel)]="mail" name="mail" class="validate black-text" required />
+            <label for="mail" class="grey-text text-darken-2">Email</label>
+          </div>
+        </li>
+        <li>
+          <div class="input-field" style="margin-left:5px; width:200px">
+            <input id="pass" type="password" [(ngModel)]="pass" name="pass" class="validate black-text" required />
+            <label for="pass" class="grey-text text-darken-2">Password</label>
+          </div>
+        </li>
+        <li *ngIf="pass && mail">
+          <a (click)="login()" id="btUserLogin" class="btn waves-effect waves-light grey darken-2">Entrar</a>
+        </li>
+        <li *ngIf="!pass || !mail">
+          <a (click)="login()" disabled id="btUserLogin" class="btn waves-effect waves-light">Entrar</a>
+        </li>
+      </form>
+    </ul>
+
+    <a href="#" class="button-collapse grey-text text-darken-2" data-activates="nav-mobile"><i class="material-icons">menu</i></a>
+
+    <div id="nav-mobile" class="side-nav hide-on-large-only" *ngIf="!authorized" style="transform:translate()">
+      <div class="row">
+        <a id="logo-container" [routerLink]="['home']" class="brand-logo" style="color:#444">
+          <b>CQPROJ</b>
+      </a>
+      </div>
+      <form>
+        <div class="row" style="margin-top:40px">
+          <div class="col s1 m1"></div>
+          <div class="input-field col s10 m10">
+            <input id="mail" type="text" [(ngModel)]="mail" name="mail" class="validate black-text" required />
+            <label for="mail" class="grey-text text-darken-2">Email</label>
+          </div>
+          <div class="col s1 m1"></div>
+        </div>
+        <div class="row">
+          <div class="col s1 m1"></div>
+          <div class="input-field col s10 m10">
+            <input id="pass" type="password" [(ngModel)]="pass" name="pass" class="validate black-text" required />
+            <label for="pass" class="grey-text text-darken-2">Password</label>
+          </div>
+          <div class="col s1 m1"></div>
+        </div>
+        <div class="row">
+          <div class="col s2 m2"></div>
+          <div class="col s3 m3" *ngIf="pass && mail">
+            <a (click)="login()" id="btUserLogin" class="btn waves-effect waves-light grey darken-2">Entrar</a>
+          </div>
+          <div class="col s3 m3" *ngIf="!pass || !mail">
+            <a (click)="login()" disabled id="btUserLogin" class="btn waves-effect waves-light">Entrar</a>
+          </div>
+          <div class="col s2 m2"></div>
+          <div class="col s3 m3">
+            <a (click)="closeNavMobile()" class="waves-effect waves-light grey darken-2 btn">Voltar</a>
+          </div>
+          <div class="col s2 m2"></div>
+        </div>
       </form>
     </div>
 
-    <div *ngIf="!authorized">
-      <div class="w3-bar-item w3-right w3-dropdown-click w3-hide-large w3-hover-blue-gray" style="max-height: 65px">
-        <a (click)="dropdown('login')" class="w3-xxlarge"><i class="fa fa-bars"></i></a>
-        <div id="login" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0">
-          <form>
-            <div class="w3-row w3-margin-top w3-margin-right w3-margin-left" style="max-width: 250px;">
-              <div class="w3-col s1 w3-large"><i class="fa fa-user w3-margin-top"></i></div>
-              <input class="w3-col s11 w3-input w3-right " type="text" [(ngModel)]="mail" name="mail" placeholder="Email" required>
-              <div class="w3-col s1 w3-large"><i class="fa fa-lock w3-margin-top"></i></div>
-              <input class="w3-col s11 w3-input w3-right" type="password" [(ngModel)]="pass" name="pass" placeholder="Password" required>
-              <a (click)="login()" id="btUserLogin" class="w3-col w3-margin-top w3-button w3-hover-blue-gray">Entrar</a>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    <ul *ngIf="authorized" class="right">
+      <li>
+        <a [routerLink]="['/user/details/', user.userID]" class="grey-text text-darken-2">
+          <i class="material-icons left" style="margin-right:5px">account_circle</i>{{user?.name}}
+        </a>
+      </li>
+      <li>
+        <notifications></notifications>
+      </li>
+      <li>
+        <a (click)="logout()" class="grey-text text-darken-2">
+            <i class="material-icons right" style="margin-left:5px">exit_to_app</i>Sair</a>
+      </li>
+    </ul>
 
-    <div *ngIf="authorized">
-      <div (mouseenter)="dropdownIn('userDropdown')" (mouseleave)="dropdownOut('userDropdown')" class="w3-bar-item w3-right w3-circle w3-hover-khaki w3-btn w3-margin-top">
-        <i class="fa fa-user-circle w3-xxlarge w3-text-black"></i>
-        <div id="userDropdown" class="w3-bar-block w3-card-4 w3-hide w3-white">
-          <a [routerLink]="['/user/details/', user.userID]" class="w3-bar-item w3-button">{{user?.name}}</a>
+    <div id="nav-mobile" class="side-nav hide-on-large-only" *ngIf="authorized" style="transform:translate()">
+      <div class="row">
+        <a id="logo-container" [routerLink]="['home']" class="brand-logo" style="color:#444">
+            <b>CQPROJ</b>
+        </a>
+      </div>
+      <ul>
+        <li>
+          <a [routerLink]="['/user/details/', user.userID]" class="grey-text text-darken-2">
+              <i class="material-icons left" style="margin-right:5px">account_circle</i>{{user?.name}}
+            </a>
+        </li>
+        <li>
           <notifications></notifications>
-          <a (click)="logout()" class="w3-bar-item w3-button">Logout</a>
-        </div>
-      </div>
-
+        </li>
+        <li>
+          <a (click)="logout()" class="grey-text text-darken-2">
+                <i class="material-icons right" style="margin-left:5px">exit_to_app</i>Sair</a>
+        </li>
+      </ul>
     </div>
-
   </div>
-  <div class="w3-col l1  w3-container"></div>
-</div>
+</nav>
