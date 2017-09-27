@@ -26,6 +26,10 @@ export class NotificationSentComponent {
         this.sentPage = 0;
     }
 
+    public ngOnInit(){
+        this.getSentNotifications();
+    }
+
     public async getSentValidations(notificationID: number) {
         this.sentValidations = [];
         let validations = await this._service.getValidationsByNotification(notificationID);

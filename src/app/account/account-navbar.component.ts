@@ -1,6 +1,6 @@
 import "materialize-css"
 import { concat } from 'rxjs/operator/concat';
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { Router } from "@angular/router";
 import { AccountService } from "./account.service";
 import { Account } from "./iAccount";
@@ -24,6 +24,7 @@ export class AccountNavbarComponent {
         private _service: AccountService,
         private _router: Router,
         private _ngZone: NgZone,
+        private _changeDetect: ChangeDetectorRef
     ) {
         this.authorized = false;
     }
@@ -75,8 +76,7 @@ export class AccountNavbarComponent {
         this.user = null;
         localStorage.removeItem('currentUser');
         this.authorized = false;
-        window.location.reload();
-        this._router.navigate(['schools']);
+        location.reload();
     }
 
     public dropdownIn(elementID: string) {

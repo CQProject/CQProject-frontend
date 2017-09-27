@@ -6,9 +6,10 @@ import { UserService } from "../users/user.service";
 import { Notification, ReceivedNotification } from "./iNotifications";
 import { Validation, SentValidation } from "./iValidations";
 import { UserProfile } from "../users/iUsers";
+declare var $: any;
 
 @Component({
-    selector:"notification-received",
+    selector: "notification-received",
     templateUrl: "./notification-received.component.html"
 })
 
@@ -17,6 +18,7 @@ export class NotificationReceivedComponent {
     receivedNotifications: ReceivedNotification[];
     receivedPage: number;
     selected: ReceivedNotification;
+    checked: boolean;
 
     constructor(
         private _service: NotificationService,
@@ -24,22 +26,31 @@ export class NotificationReceivedComponent {
         private _userService: UserService
     ) {
         this.receivedPage = 0;
+        this.checked = false;
     }
 
-    public async ngOnInit(){
+    public async ngOnInit() {
+        this.receivedNotifications = [];
         await this.getReceivedNotifications();
+        $(document).ready(function () {
+            $("#notifReceived").modal({
+                dismissible: false
+            }),
+                $(window).on("hashchange", function () {
+                    $("#notifReceived").modal('close')
+                })
+        })
     }
+
 
     public async getReceivedNotifications() {
-        this.receivedNotifications = [];
         let validations = await this._service.getValidationsByPage(this.receivedPage);
         if (validations != null) {
             for (let validation of validations) {
                 await this._getReceivedNotification(validation);
             }
         }
-
-console.log(this.receivedNotifications)
+        console.log(this.receivedNotifications)
     }
 
     private async _getReceivedNotification(validation: Validation) {
@@ -62,11 +73,21 @@ console.log(this.receivedNotifications)
         });
     }
 
-    public readNotification(notificationID: number){
+    public async readNotification(notificationID: number, index: number) {
+        this.selected = this.receivedNotifications[index];
+        $("#notifReceived").modal('open');
+        this.receivedNotifications[index].Read = true;
         this._service.read(notificationID).subscribe();
+
     }
 
     public accept(notificationID: number) {
+        console.log(this.selected)
         this._service.accept(notificationID).subscribe();
+        this.selected.Accepted = true;
+    }
+
+    public closeNotifDetails() {
+        $("#notifReceived").modal('close');
     }
 }

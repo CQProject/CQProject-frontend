@@ -13,6 +13,7 @@ import { Room } from './iRoom';
 import { Sensor } from "./iSensor";
 import { Record, Resume } from "./iRecords";
 import { School } from '../schools/iSchool';
+declare var $: any;
 
 @Component({ templateUrl: "./room.component.html" })
 
@@ -37,6 +38,13 @@ export class RoomComponent {
     public async ngOnInit() {
         let roomID;
         this._route.params.subscribe(params => roomID = params['id']);
+        $(document).ready(function () {
+            $('#bteditRemoveSensor').dropdown({
+                hover: true,
+                belowOrigin:true
+            })
+        })    
+        
         this._sensorService
             .getSensorsByRoom(roomID)
             .subscribe(data => {
@@ -44,6 +52,7 @@ export class RoomComponent {
                 console.log(data);
             });
         this.room = await this._roomService.getRoom(roomID);
+        this.info(0)
     }
 
     public info(index: number) {
@@ -74,24 +83,22 @@ export class RoomComponent {
 
     public show() {
         var x = document.getElementById("info");
-        if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
-        }
+        x.className = x.className.replace(" hide", "");
     }
 
     public hide() {
         var x = document.getElementsByClassName("accordion");
         for (let i = 0; i < x.length; i++)
-            x[i].className.replace(" w3-show", "");
+            x[i].className += " hide";
     }
 
     public accordion(id: string) {
         var x = document.getElementById(id);
-        if (x.className.indexOf("w3-show") == -1) {
+        if (x.className.includes("hide")) {
             this.history();
-            x.className += " w3-show";
+            x.className = x.className.replace(" hide", "");
         } else {
-            x.className = x.className.replace(" w3-show", "");
+            x.className += " hide";
         }
     }
 
