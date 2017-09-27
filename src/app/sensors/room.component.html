@@ -1,88 +1,90 @@
 <hr>
-<div class="w3-row">
-    <div class="w3-col w3-left-align" style="width: 15%;">
-        <a *ngFor="let sensor of sensors; let i=index" (click)="info(i)" class="w3-btn w3-lime w3-hover-khaki w3-bar-item">
-            <h4>{{sensor?.Name}}</h4>
+<div class="row">
+    <div class="col s12 left-align" style="width: 15%;">
+        <a *ngFor="let sensor of sensors; let i=index" class="btn lime col s12" (click)="info(i)">
+            <h6>{{sensor?.Name}}</h6>
         </a>
     </div>
 
-    <div id="info" class="w3-col accordion w3-card-4 w3-khaki w3-animate-bottom w3-hide" style="width: 85%;">
-        <div class="w3-container w3-row">
-            <h2 class="w3-col s11">{{selectedSensor?.Name}}</h2>
-            <div class="w3-hide-small w3-hide-medium w3-col s1 w3-dropdown-hover w3-panel w3-text-green">
-                <i class="fa fa-gear w3-xxlarge"></i>
-                <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                    <a class="w3-bar-item w3-col w3-btn w3-hover-khaki w3-small">Editar</a>
-                    <a class="w3-bar-item w3-col w3-btn w3-hover-khaki w3-small">Remover</a>
-                </div>
+    <div id="info" class="col accordion card z-depth-4" style="width: 85%;">
+        <div class="container row">
+            <h2 class="col s11">{{selectedSensor?.Name}}</h2>
+            <div id="bteditRemoveSensor" data-activates='editRemoveSensor' class="hide-on-med-and-down col s1 dropdown-button card-panel btn green white-text">
+                <i class="fa fa-cogs"></i>
+                <ul id="editRemoveSensor" class="dropdown-content card z-depth-4">
+                    <li><a class="green-text">Editar</a></li>
+                    <li><a class="green-text">Remover</a></li>
+                </ul>
             </div>
         </div>
 
-        <div class="w3-hide-small w3-hide-medium w3-row-padding">
-            <div class="w3-col" style="width: 25%;">
-                <div *ngIf="record?.Temperature" class="w3-lime w3-circle w3-panel">
-                    <i class="fa fa-thermometer w3-xlarge w3-text-green w3-center"></i>
-                    <h2 class="w3-text-gray">{{record?.Temperature}} ºC</h2>
-                    <h4 class="w3-text-white">{{average?.TemperatureAVG}} ºC</h4>
+        <div class="hide-on-med-and-down">
+            <div class="col" style="width: 25%;">
+                <div *ngIf="record?.Temperature" class="lime card-panel">
+                    <i class="fa fa-thermometer green-text" style="font-size:2.5rem"></i>
+                    <h2 class="gray-text">{{record?.Temperature}} ºC</h2>
+                    <h4 class="white-text">{{average?.TemperatureAVG}} ºC</h4>
                 </div>
             </div>
-            <div class="w3-col" style="width: 25%;">
-                <div *ngIf="record?.Humidity" class="w3-lime w3-circle w3-panel">
-                    <i class="fa fa-tint w3-xlarge w3-text-green w3-center"></i>
-                    <h2 class="w3-text-gray">{{record?.Humidity * 100 | number:'2.0'}} %</h2>
-                    <h4 class="w3-text-white">{{average?.HumidityAVG * 100 | number:'2.0'}} %</h4>
+            <div class="col" style="width: 25%;">
+                <div *ngIf="record?.Humidity" class="lime card-panel">
+                    <i class="fa fa-tint green-text center-align" style="font-size:2.5rem"></i>
+                    <h2 class="gray-text">{{record?.Humidity * 100 | number:'2.0'}} %</h2>
+                    <h4 class="white-text">{{average?.HumidityAVG * 100 | number:'2.0'}} %</h4>
                 </div>
             </div>
-            <div class="w3-col" style="width: 25%;">
-                <div *ngIf="record?.Luminosity" class="w3-lime w3-circle w3-panel">
-                    <i class="	fa fa-sun-o w3-xlarge w3-text-green w3-center"></i>
-                    <h2 class="w3-text-gray">{{record?.Luminosity}} lm</h2>
-                    <h4 class="w3-text-white">{{average?.LuminosityAVG}} lm</h4>
+            <div class="col" style="width: 25%;">
+                <div *ngIf="record?.Luminosity" class="lime card-panel">
+                    <i class="	fa fa-sun-o green-text center-align" style="font-size:2.5rem"></i>
+                    <h2 class="gray-text">{{record?.Luminosity}} lm</h2>
+                    <h4 class="white-text">{{average?.LuminosityAVG}} lm</h4>
                 </div>
             </div>
-            <div class="w3-col" style="width: 25%;">
-                <div *ngIf="record?.Energy" class="w3-lime w3-circle w3-panel">
-                    <i class="fa fa-flash w3-xlarge w3-text-green w3-center"></i>
-                    <h2 class="w3-text-gray">{{record?.Energy}} kWh</h2>
-                    <h4 class="w3-text-white">{{average?.EnergyAVG}} kWh</h4>
+            <div class="col" style="width: 25%;">
+                <div *ngIf="record?.Energy" class="lime card-panel">
+                    <i class="fa fa-flash green-text center-align" style="font-size:2.5rem"></i>
+                    <h2 class="gray-text">{{record?.Energy}} kWh</h2>
+                    <h4 class="white-text">{{average?.EnergyAVG}} kWh</h4>
                 </div>
             </div>
-            <a (click)="accordion('history')" class="w3-col w3-hide-small w3-hide-medium w3-btn w3-green w3-hover-lime">
-                <h5>Histórico</h5>
-            </a>
+            <div class="row">
+                <a (click)="accordion('history')" class="col hide-on-med-and-down btn green">
+                    <h6>Histórico</h6>
+                </a>
+            </div>
         </div>
-        <div class="w3-hide-large">
-            <div *ngIf="record?.Temperature" class="w3-lime w3-panel w3-row">
-                <i class="w3-col s2 fa fa-thermometer w3-xlarge w3-text-green w3-center"></i>
-                <label class="w3-col s5 w3-text-gray w3-xlarge">{{record?.Temperature}} ºC</label>
-                <label class="w3-col s5 w3-text-white w3-large">{{average?.TemperatureAVG}} ºC</label>
+        <div class="hide-on-large-only">
+            <div *ngIf="record?.Temperature" class="lime card-panel row">
+                <i class="col s2 fa fa-thermometer green-text center-align"></i>
+                <label class="col s5 gray-text">{{record?.Temperature}} ºC</label>
+                <label class="col s5 white-text">{{average?.TemperatureAVG}} ºC</label>
             </div>
-            <div *ngIf="record?.Humidity" class="w3-lime w3-panel w3-row">
-                <i class="w3-col s2 fa fa-tint w3-xlarge w3-text-green w3-center"></i>
-                <label class="w3-col s5 w3-text-gray w3-xlarge">{{record?.Humidity * 100 | number:'2.0'}} %</label>
-                <label class="w3-col s5 w3-text-white w3-large">{{average?.HumidityAVG * 100 | number:'2.0'}} %</label>
+            <div *ngIf="record?.Humidity" class="lime card-panel row">
+                <i class="col s2 fa fa-tint green-text center-align"></i>
+                <label class="col s5 gray-text">{{record?.Humidity * 100 | number:'2.0'}} %</label>
+                <label class="col s5 white-text">{{average?.HumidityAVG * 100 | number:'2.0'}} %</label>
             </div>
-            <div *ngIf="record?.Luminosity" class="w3-lime w3-panel w3-row">
-                <i class="w3-col s2 fa fa-sun-o w3-xlarge w3-text-green w3-center"></i>
-                <label class="w3-col s5 w3-text-gray w3-xlarge">{{record?.Luminosity}} lm</label>
-                <label class="w3-col s5 w3-text-white w3-large">{{average?.LuminosityAVG}} lm</label>
+            <div *ngIf="record?.Luminosity" class="lime card-panel row">
+                <i class="col s2 fa fa-sun-o green-text center-align"></i>
+                <label class="col s5 gray-text">{{record?.Luminosity}} lm</label>
+                <label class="col s5 white-text">{{average?.LuminosityAVG}} lm</label>
             </div>
-            <div *ngIf="record?.Energy" class="w3-lime w3-panel w3-row">
-                <i class="w3-col s2 fa fa-flash w3-xlarge w3-text-green w3-center"></i>
-                <label class="w3-col s5 w3-text-gray w3-xlarge">{{record?.Energy}} kWh</label>
-                <label class="w3-col s5 w3-text-white w3-large">{{average?.EnergyAVG}} kWh</label>
+            <div *ngIf="record?.Energy" class="lime card-panel row">
+                <i class="col s2 fa fa-flash green-text center-align"></i>
+                <label class="col s5 gray-text">{{record?.Energy}} kWh</label>
+                <label class="col s5 white-text">{{average?.EnergyAVG}} kWh</label>
             </div>
         </div>
 
-        <div id="history" class="accordion w3-container w3-hide">
+        <div id="history" class="accordion container hide">
             <br>
-            <table class="w3-table-all">
+            <table>
                 <tr>
                     <th>Data</th>
-                    <th><i class="w3-col s2 fa fa-thermometer w3-xlarge w3-text-green w3-center"></i></th>
-                    <th><i class="w3-col s2 fa fa-tint w3-xlarge w3-text-green w3-center"></i></th>
-                    <th><i class="w3-col s2 fa fa-sun-o w3-xlarge w3-text-green w3-center"></i></th>
-                    <th><i class="w3-col s2 fa fa-flash w3-xlarge w3-text-green w3-center"></i></th>
+                    <th><i class="col s2 fa fa-thermometer green-text center-align"></i></th>
+                    <th><i class="col s2 fa fa-tint green-text center-align"></i></th>
+                    <th><i class="col s2 fa fa-sun-o green-text center-align"></i></th>
+                    <th><i class="col s2 fa fa-flash green-text center-align"></i></th>
                 </tr>
                 <tr *ngFor="let hist of historic">
                     <td>{{hist?.Hour | date: 'EEE, dd MMM y - HH:mm:ss'}}</td>

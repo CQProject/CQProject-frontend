@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 import { AccountService } from "./account.service";
 import { ClassService } from "../classes/class.service";
 import { Account } from "./iAccount";
-import { AdminGuard, AssistantGuard, SecretaryGuard, StudentGuard, TeacherGuard } from "../utils/auth-guard.service";
+import { AdminGuard, AssistantGuard, SecretaryGuard, StudentGuard, TeacherGuard, GuardianGuard } from "../utils/auth-guard.service";
 
 @Component({
     templateUrl: "./account-home.component.html"
@@ -20,6 +20,8 @@ export class AccountHomeComponent {
         private _ngZone: NgZone,
         private _teacherGuard: TeacherGuard,
         private _studentGuard: StudentGuard,
+        private _guardianGuard: GuardianGuard,
+        private _adminGuard: AdminGuard,
         private _classService: ClassService
     ) { }
 
@@ -27,11 +29,17 @@ export class AccountHomeComponent {
         let usID;
         let classID;
         usID = JSON.parse(localStorage.getItem('currentUser')).userID;
+        //ver as classes pelo user ID, se for guardian é preciso ver os students
+        if(!this._guardianGuard.canActivate()){
         let classes = await this._classService.getClassesByUser(usID);
+        
         classID = parseInt(classes[classes.length - 1]);
-
+        }
         if(this._studentGuard.canActivate()){
             this._router.navigate(['primary-class/', classID])
+        }
+        if(this._adminGuard.canActivate()){
+            this._router.navigate(['schools'])
         }
     }
 

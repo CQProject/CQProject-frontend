@@ -14,6 +14,7 @@ export class FloorMainComponent {
 
     school: School;
     floors:Floor[];
+    private nCols: number;
 
     constructor(
         private _adminGuard : AdminGuard,
@@ -28,6 +29,7 @@ export class FloorMainComponent {
         this._route.params.subscribe(params => schoolID = params['id']);
         this.school = await this._schoolService.getSchool(schoolID);
         this.floors = await this._floorService.getFloorsBySchool(schoolID);
+        this.nCols = 8/this.floors.length;
     }
 
     public chooseOption(id: string) {
