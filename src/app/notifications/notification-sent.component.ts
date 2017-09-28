@@ -6,9 +6,10 @@ import { UserService } from "../users/user.service";
 import { Notification, ReceivedNotification } from "./iNotifications";
 import { Validation, SentValidation } from "./iValidations";
 import { UserProfile } from "../users/iUsers";
+declare var $:any;
 
 @Component({
-    selector:"notification-sent",
+    selector: "notification-sent",
     templateUrl: "./notification-sent.component.html"
 })
 
@@ -16,6 +17,7 @@ export class NotificationSentComponent {
 
     sentNotifications: Notification[];
     sentValidations: SentValidation[];
+    selected : Notification;
     page: number;
 
     constructor(
@@ -26,8 +28,26 @@ export class NotificationSentComponent {
         this.page = 0;
     }
 
-    public ngOnInit(){
-        this.getSentNotifications();
+    public async ngOnInit() {
+        this.sentNotifications = await this._service.getSentNotification(this.sentPage);
+        $(document).ready(function () {
+            $("#notifSent").modal({
+                dismissible: false
+            }),
+                $(window).on("hashchange", function () {
+                    $("#notifSent").modal('close')
+                })
+        })
+    }
+
+    public showNotifDetails(index:number, idNotif?: number) {
+        $("#notifSent").modal('open');
+        this.selected = this.sentNotifications[index];
+        this.getValidations(idNotif);
+    }
+
+    public closeNotifDetails() {
+        $("#notifSent").modal('close');
     }
 
     public async getValidations(notificationID: number) {
@@ -58,25 +78,5 @@ export class NotificationSentComponent {
                 });
             }
         }
-    }
-
-    public showNotifDetails(id: string, idNotif?: number) {
-        var notif = document.getElementById(id + "").style.display = "block";
-        alert(id)
-        if(id=="notifSent"){
-            this.getValidations(idNotif);
-        }
-    }
-
-    public closeNotifDetails(id: string) {
-        if(id=="notifReceived"){
-            window.location.reload();
-        }
-        var notif = document.getElementById(id + "").style.display = "none";
-    }
-
-    public async getSentNotifications() {
-        this.sentNotifications = await this._service.getSent(this.page);
-        console.log(this.sentNotifications);
     }
 }

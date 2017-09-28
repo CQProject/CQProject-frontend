@@ -4,22 +4,22 @@
             style="margin:2px;cursor:pointer" (click)="readNotification(notification.ID, i)">
             <div class="col l1 s12 m1"></div>
             <div class="col l3 m3 s12" style="margin-top:5px">
-                <span class="left-align"><a [ngClass]="notification.Read ? 'white-text' : 'black-text'">{{notification?.Sender}}</a></span>
+                <span class="left-align"><a [ngClass]="notification.Read ? 'black-text' : 'black-text'">{{notification?.Sender}}</a></span>
             </div>
             <div class="col l6 m6 s12" style="margin-top:5px">
-                <span [ngClass]="notification.Read ? 'white-text' : 'black-text'">{{notification?.Subject}}</span>
+                <span [ngClass]="notification.Read ? 'black-text' : 'black-text'">{{notification?.Subject}}</span>
             </div>
             <div class="col l2 m2 s12">
                 <div class="col s12">
-                    <i [ngClass]="notification.Read ? 'grey lighten-1 white-text' : 'white black-text'" class="fa fa-calendar"></i>
-                    <span [ngClass]="notification.Read ? 'grey lighten-1 white-text' : 'white black-text'"> {{notification?.Hour | date}}</span>
+                    <i [ngClass]="notification.Read ? 'grey lighten-1 black-text' : 'white black-text'" class="fa fa-calendar"></i>
+                    <span [ngClass]="notification.Read ? 'grey lighten-1 black-text' : 'white black-text'"> {{notification?.Hour | date}}</span>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div id="notifReceived" class="modal modal-fixed-footer" style="width:50%;height:100%">
+<div id="notifReceived" class="modal" style="width:50%;height:100%">
     <div class="modal-content" style="padding:0px">
         <header class="green">
             <div class="right-align">
