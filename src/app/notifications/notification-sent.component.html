@@ -1,16 +1,18 @@
-<div id="sentMessages" class="informationNotif">
+<div id="sentMessages" class="informationNotif" style="margin-top:5px">
     <div class="col l10 container offset-l1">
-        <div *ngFor="let notification of sentNotifications" class="row">
+        <div *ngFor="let notification of sentNotifications, let i=index" class="row grey lighten-1" (click)="showNotifDetails(i,notification.ID)"
+            style="cursor:pointer">
             <div class="col l1 s12 m1"></div>
-            <div class="row">
-                <div class="col s4">
-                    <b class="left-align teal-text"><a><p>{{notification?.Subject}}</p></a></b>
-                </div>
-                <div class="col s4">
-                    <p><span class="teal-text"> {{notification?.Hour}}</span></p>
-                </div>
-                <div class="col s4 right-align container">
-                    <h6><button class="btn teal-text green" (click)="showNotifDetails('notifSent',notification.ID)">Ver Notificação</button></h6>
+            <div class="col l6 m6 s12" style="margin-top:5px">
+                <span class="black-text">{{notification?.Subject}}</span>
+            </div>
+            <div class="col l3 m3 s12" style="margin-top:5px">
+                <span class="black-text"> {{notification?.Hour}}</span>
+            </div>
+            <div class="col l2 m2 s12">
+                <div class="col s12">
+                    <i class="black-text" class="fa fa-calendar"></i>
+                    <span class="black-text">  {{notification?.Hour | date}}</span>
                 </div>
             </div>
         </div>
@@ -18,45 +20,70 @@
 </div>
 
 <div id="notifSent" class="modal">
-    <div class="modal-content card">
-        <header class="container green center-align">
-            <h3>{{notification?.Subject}}</h3>
-            <span (click)="closeNotifDetails('notifSent')" class="btn">&times;</span>
+    <div class="modal-content" style="padding:0px">
+        <header class="green">
+            <div class="right-align">
+                <a (click)="closeNotifDetails()">
+                    <i class="material-icons white-text" style="cursor:pointer">close</i>
+                </a>
+            </div>
+            <div class="center-align" style="margin-top:-20px">
+                <h3 class="white-text">{{selected?.Subject}}</h3>
+            </div>
         </header>
-        <div class="container left-align">
-            <div class="row margin">
-                <label class="green">Data:</label> {{notification?.Hour}}
-            </div>
-            <div class="row">
-                <label class="green">Destinatario:</label><br />
-                <span *ngFor="let validation of sentValidations">
-                            {{validation?.Student}}
+        <div class="container" style="margin:20px;width:90%">
+            <div>
+                <div class="row">
+                    <div class="col s2"><b>Data:</b></div>
+                    <div class="col s10"> {{selected?.Hour}}</div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="row">
+                            <div class="col s6"><b>Destinatario:</b></div>
+                            <div class="col s6"><b>Aluno Associado:</b></div>
+                        </div>
+                        <div *ngFor="let validation of sentValidations" class="row" style="margin:0px">
+                                 <div class="col s6">{{validation.Receiver}}</div>  
+                                 <div class="col s6">{{validation?.Student}}</div>    
+                                 <div style="border-bottom:1px solid #eee"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s2"><b>Descrição:</b></div>
+                    <div class="col s10"> {{selected?.Description}}</div>
+                </div>
+                <div class="row">
+                    <div class="col s2"><b>Urgencia:</b></div>
+                    <div class="col s10">
+                        <span *ngIf="selected?.Urgency"><i class="fa fa-check-circle-o" style="font-size:1.5rem"></i></span>
+                        <span *ngIf="!selected?.Urgency"><i class="fa fa-times-circle-o" style="font-size:1.5rem"></i></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s2"><b>Para aprovação:</b></div>
+                    <div class="col s10">
+                        <span *ngIf="selected?.Approval"><i class="fa fa-check-circle-o" style="font-size:1.5rem"></i></span>
+                        <span *ngIf="!selected?.Approval"><i class="fa fa-times-circle-o" style="font-size:1.5rem"></i></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s2"><b>Aprovados:</b></div>
+                    <div class="col s10">
+                        <span *ngFor="let validation of sentValidations">
+                            <span *ngIf="validation?.Accepted">{{validation?.Student}}</span>
                         </span>
-            </div>
-            <div class="row">
-                <label class="w3-green">Descrição:</label><br />{{notification?.Description}}
-            </div>
-            <div class="row">
-                <label class="green">Urgencia:</label>
-                <span *ngIf="notification.Urgency"><i class="fa fa-check-circle-o"></i></span>
-                <span *ngIf="!notification.Urgency"><i class="fa fa-times-circle-o "></i></span>
-            </div>
-            <div class="row">
-                <label class="green">Para aprovação:</label>
-                <span *ngIf="notification.Approval"><i class="fa fa-check-circle-o"></i></span>
-                <span *ngIf="!notification.Approval"><i class="fa fa-times-circle-o "></i></span>
-            </div>
-            <div class="row">
-                <label class="green">Aprovados:</label><br />
-                <span *ngFor="let validation of sentValidations">
-                            <span *ngIf="validation.Accepted">{{validation?.Student}}</span>
-                </span>
-            </div>
-            <div class="row">
-                <label class="green">Rejeitados:</label><br />
-                <span *ngFor="let validation of sentValidations">
-                                <span *ngIf="!validation.Accepted">{{validation?.Student}}</span>
-                </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s2"><b>Rejeitados:</b></div>
+                    <div class="col s10">
+                        <span *ngFor="let validation of sentValidations">
+                    <span *ngIf="!validation?.Accepted">{{validation?.Student}}</span>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

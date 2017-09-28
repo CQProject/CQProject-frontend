@@ -1,99 +1,101 @@
 <hr>
 <div class="row">
-    <div class="col s12 left-align" style="width: 15%;">
-        <a *ngFor="let sensor of sensors; let i=index" class="btn lime col s12" (click)="info(i)">
-            <h6>{{sensor?.Name}}</h6>
-        </a>
-    </div>
-
-    <div id="info" class="col accordion card z-depth-4" style="width: 85%;">
-        <div class="container row">
-            <h2 class="col s11">{{selectedSensor?.Name}}</h2>
-            <div id="bteditRemoveSensor" data-activates='editRemoveSensor' class="hide-on-med-and-down col s1 dropdown-button card-panel btn green white-text">
-                <i class="fa fa-cogs"></i>
-                <ul id="editRemoveSensor" class="dropdown-content card z-depth-4">
-                    <li><a class="green-text">Editar</a></li>
-                    <li><a class="green-text">Remover</a></li>
-                </ul>
-            </div>
+    <div class="col s10 offset-s1">
+        <div class="col s12 left-align" style="width: 15%;">
+            <a *ngFor="let sensor of sensors; let i=index" class="btn lime col s12" (click)="info(i)">
+                <h6>{{sensor?.Name}}</h6>
+            </a>
         </div>
 
-        <div class="hide-on-med-and-down">
-            <div class="col" style="width: 25%;">
-                <div *ngIf="record?.Temperature" class="lime card-panel">
-                    <i class="fa fa-thermometer green-text" style="font-size:2.5rem"></i>
-                    <h2 class="gray-text">{{record?.Temperature}} ºC</h2>
-                    <h4 class="white-text">{{average?.TemperatureAVG}} ºC</h4>
+        <div id="info" class="col accordion card z-depth-4" style="width: 85%;">
+            <div class="container row">
+                <h2 class="col s11">{{selectedSensor?.Name}}</h2>
+                <div id="bteditRemoveSensor" data-activates='editRemoveSensor' class="hide-on-med-and-down col s1 dropdown-button card-panel btn green white-text">
+                    <i class="fa fa-cogs"></i>
+                    <ul id="editRemoveSensor" class="dropdown-content card z-depth-4">
+                        <li><a class="green-text">Editar</a></li>
+                        <li><a class="green-text">Remover</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="col" style="width: 25%;">
-                <div *ngIf="record?.Humidity" class="lime card-panel">
-                    <i class="fa fa-tint green-text center-align" style="font-size:2.5rem"></i>
-                    <h2 class="gray-text">{{record?.Humidity * 100 | number:'2.0'}} %</h2>
-                    <h4 class="white-text">{{average?.HumidityAVG * 100 | number:'2.0'}} %</h4>
-                </div>
-            </div>
-            <div class="col" style="width: 25%;">
-                <div *ngIf="record?.Luminosity" class="lime card-panel">
-                    <i class="	fa fa-sun-o green-text center-align" style="font-size:2.5rem"></i>
-                    <h2 class="gray-text">{{record?.Luminosity}} lm</h2>
-                    <h4 class="white-text">{{average?.LuminosityAVG}} lm</h4>
-                </div>
-            </div>
-            <div class="col" style="width: 25%;">
-                <div *ngIf="record?.Energy" class="lime card-panel">
-                    <i class="fa fa-flash green-text center-align" style="font-size:2.5rem"></i>
-                    <h2 class="gray-text">{{record?.Energy}} kWh</h2>
-                    <h4 class="white-text">{{average?.EnergyAVG}} kWh</h4>
-                </div>
-            </div>
-            <div class="row">
-                <a (click)="accordion('history')" class="col hide-on-med-and-down btn green">
-                    <h6>Histórico</h6>
-                </a>
-            </div>
-        </div>
-        <div class="hide-on-large-only">
-            <div *ngIf="record?.Temperature" class="lime card-panel row">
-                <i class="col s2 fa fa-thermometer green-text center-align"></i>
-                <label class="col s5 gray-text">{{record?.Temperature}} ºC</label>
-                <label class="col s5 white-text">{{average?.TemperatureAVG}} ºC</label>
-            </div>
-            <div *ngIf="record?.Humidity" class="lime card-panel row">
-                <i class="col s2 fa fa-tint green-text center-align"></i>
-                <label class="col s5 gray-text">{{record?.Humidity * 100 | number:'2.0'}} %</label>
-                <label class="col s5 white-text">{{average?.HumidityAVG * 100 | number:'2.0'}} %</label>
-            </div>
-            <div *ngIf="record?.Luminosity" class="lime card-panel row">
-                <i class="col s2 fa fa-sun-o green-text center-align"></i>
-                <label class="col s5 gray-text">{{record?.Luminosity}} lm</label>
-                <label class="col s5 white-text">{{average?.LuminosityAVG}} lm</label>
-            </div>
-            <div *ngIf="record?.Energy" class="lime card-panel row">
-                <i class="col s2 fa fa-flash green-text center-align"></i>
-                <label class="col s5 gray-text">{{record?.Energy}} kWh</label>
-                <label class="col s5 white-text">{{average?.EnergyAVG}} kWh</label>
-            </div>
-        </div>
 
-        <div id="history" class="accordion container hide">
-            <br>
-            <table>
-                <tr>
-                    <th>Data</th>
-                    <th><i class="col s2 fa fa-thermometer green-text center-align"></i></th>
-                    <th><i class="col s2 fa fa-tint green-text center-align"></i></th>
-                    <th><i class="col s2 fa fa-sun-o green-text center-align"></i></th>
-                    <th><i class="col s2 fa fa-flash green-text center-align"></i></th>
-                </tr>
-                <tr *ngFor="let hist of historic">
-                    <td>{{hist?.Hour | date: 'EEE, dd MMM y - HH:mm:ss'}}</td>
-                    <td><label *ngIf="hist?.Temperature">{{hist?.Temperature | number:'2.0'}} ºC</label></td>
-                    <td><label *ngIf="hist?.Humidity">{{hist?.Humidity* 100 | number:'2.0'}} %</label></td>
-                    <td><label *ngIf="hist?.Luminosity">{{hist?.Luminosity}} lm</label></td>
-                    <td><label *ngIf="hist?.Energy">{{hist?.Energy}} kWh</label></td>
-                </tr>
-            </table>
+            <div class="hide-on-med-and-down">
+                <div class="col" style="width: 25%;">
+                    <div *ngIf="record?.Temperature" class="lime card-panel">
+                        <i class="fa fa-thermometer green-text" style="font-size:2.5rem"></i>
+                        <h4 class="gray-text">{{record?.Temperature}} ºC</h4>
+                        <h5 class="white-text">{{average?.TemperatureAVG}} ºC</h5>
+                    </div>
+                </div>
+                <div class="col" style="width: 25%;">
+                    <div *ngIf="record?.Humidity" class="lime card-panel">
+                        <i class="fa fa-tint green-text center-align" style="font-size:2.5rem"></i>
+                        <h4 class="gray-text">{{record?.Humidity * 100 | number:'2.0'}} %</h4>
+                        <h5 class="white-text">{{average?.HumidityAVG * 100 | number:'2.0'}} %</h5>
+                    </div>
+                </div>
+                <div class="col" style="width: 25%;">
+                    <div *ngIf="record?.Luminosity" class="lime card-panel">
+                        <i class="	fa fa-sun-o green-text center-align" style="font-size:2.5rem"></i>
+                        <h4 class="gray-text">{{record?.Luminosity}} lm</h4>
+                        <h5 class="white-text">{{average?.LuminosityAVG}} lm</h5>
+                    </div>
+                </div>
+                <div class="col" style="width: 25%;">
+                    <div *ngIf="record?.Energy" class="lime card-panel">
+                        <i class="fa fa-flash green-text center-align" style="font-size:2.5rem"></i>
+                        <h4 class="gray-text">{{record?.Energy}} kWh</h4>
+                        <h5 class="white-text">{{average?.EnergyAVG}} kWh</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <a (click)="accordion('history')" class="col hide-on-med-and-down btn green">
+                        <h6>Histórico</h6>
+                    </a>
+                </div>
+            </div>
+            <div class="hide-on-large-only">
+                <div *ngIf="record?.Temperature" class="lime card-panel row">
+                    <i class="col s2 fa fa-thermometer green-text center-align"></i>
+                    <label class="col s5 gray-text">{{record?.Temperature}} ºC</label>
+                    <label class="col s5 white-text">{{average?.TemperatureAVG}} ºC</label>
+                </div>
+                <div *ngIf="record?.Humidity" class="lime card-panel row">
+                    <i class="col s2 fa fa-tint green-text center-align"></i>
+                    <label class="col s5 gray-text">{{record?.Humidity * 100 | number:'2.0'}} %</label>
+                    <label class="col s5 white-text">{{average?.HumidityAVG * 100 | number:'2.0'}} %</label>
+                </div>
+                <div *ngIf="record?.Luminosity" class="lime card-panel row">
+                    <i class="col s2 fa fa-sun-o green-text center-align"></i>
+                    <label class="col s5 gray-text">{{record?.Luminosity}} lm</label>
+                    <label class="col s5 white-text">{{average?.LuminosityAVG}} lm</label>
+                </div>
+                <div *ngIf="record?.Energy" class="lime card-panel row">
+                    <i class="col s2 fa fa-flash green-text center-align"></i>
+                    <label class="col s5 gray-text">{{record?.Energy}} kWh</label>
+                    <label class="col s5 white-text">{{average?.EnergyAVG}} kWh</label>
+                </div>
+            </div>
+
+            <div id="history" class="accordion container hide">
+                <br>
+                <table>
+                    <tr>
+                        <th>Data</th>
+                        <th><i class="col s2 fa fa-thermometer green-text center-align"></i></th>
+                        <th><i class="col s2 fa fa-tint green-text center-align"></i></th>
+                        <th><i class="col s2 fa fa-sun-o green-text center-align"></i></th>
+                        <th><i class="col s2 fa fa-flash green-text center-align"></i></th>
+                    </tr>
+                    <tr *ngFor="let hist of historic">
+                        <td>{{hist?.Hour | date: 'EEE, dd MMM y - HH:mm:ss'}}</td>
+                        <td><label *ngIf="hist?.Temperature">{{hist?.Temperature | number:'2.0'}} ºC</label></td>
+                        <td><label *ngIf="hist?.Humidity">{{hist?.Humidity* 100 | number:'2.0'}} %</label></td>
+                        <td><label *ngIf="hist?.Luminosity">{{hist?.Luminosity}} lm</label></td>
+                        <td><label *ngIf="hist?.Energy">{{hist?.Energy}} kWh</label></td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>
