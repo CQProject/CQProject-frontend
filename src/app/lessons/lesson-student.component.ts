@@ -108,17 +108,15 @@ export class LessonStudentComponent {
         });
 
         this.lessons.forEach((lesson, index) => {
-            var li = document.createElement("li");
-            li.setAttribute("class", index < 4 ? "tab col s12 m3 option" : "tab col s12 m3 option hide");
+            
             var anchor = document.createElement("a");
             anchor.setAttribute("style", "font-size:0.85rem;");
+            anchor.setAttribute("class", index < 4 ? "col s12 m3 btn option white green-text text-darken-2" : "col s12 m3 btn white green-text text-darken-2 option hide")
             anchor.innerHTML = "Lição nº" + (this.lessons.length - index);
             anchor.onclick = () => { this.showLesson(index) };
-            anchor.style.width = "100%";
-            li.appendChild(anchor);
-            ul.appendChild(li);
+            list.appendChild(anchor);
         });
-        list.appendChild(ul);
+        
     }
     moreLesson() {
         var y = document.getElementsByClassName("option")
