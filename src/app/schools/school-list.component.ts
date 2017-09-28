@@ -6,9 +6,9 @@ import { AssistantGuard, SecretaryGuard, AdminGuard } from "../utils/auth-guard.
 import { FileService } from "../utils/files.service";
 declare var $: any;
 
-@Component({ selector: "schools-home", templateUrl: "./school-home.component.html" })
+@Component({ selector: "schools-list", templateUrl: "./school-list.component.html" })
 
-export class SchoolHomeComponent {
+export class SchoolListComponent {
 
     public schools: School[];
     private pdf: any;

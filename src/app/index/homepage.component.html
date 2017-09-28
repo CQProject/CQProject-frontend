@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col s10 offset-s1">
+        <div id="noticeCarousel" class="carousel">
+            <a *ngFor="let notice of notices" class="carousel-item white" style="width:75%;height: 100%">
+                <img [attr.src]="notice.Image" style="height:80%">
+                <div class="row white">
+                    <div class="col s12 center-align">
+                        <h4 class="green-text text-darken-2 col s6">{{notice?.Title}} </h4>
+                        <h5 class="green-text text-darken-2 col s6">{{notice?.CreatedDate | date}}</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:50px">
+    <div class="col s8 offset-s2">
+        <h3 class="white-text" style="margin-left:20px">Missão <i class="fa fa-bullseye"></i></h3>
+    </div>
+    <div class="col s8 offset-s2">
+        <p class="white-text" style="margin:20px;font-size:1.5rem;text-align:justify;text-justify:inter-word">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquam turpis et ipsum imperdiet, et tempus
+            tortor malesuada. Ut purus enim, tincidunt sit amet sollicitudin quis, vestibulum et odio. Lorem ipsum dolor
+            sit amet, consectetur adipiscing elit. Etiam condimentum quis augue quis imperdiet. Nunc viverra laoreet purus,
+            et molestie sapien egestas non. Nulla posuere a tellus a condimentum. Sed nec est nulla.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col s10 offset-s1 center-align">
+        <div class=" row col s10 offset-s1"><h3 class="flow-text white-text" style="font-size:3rem">Centro Escolares <i class="material-icons white-text" style="font-size:3rem">home</i></h3></div>
+        <schools-list></schools-list>
+    </div>
+</div>

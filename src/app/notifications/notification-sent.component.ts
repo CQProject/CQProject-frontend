@@ -29,7 +29,7 @@ export class NotificationSentComponent {
     }
 
     public async ngOnInit() {
-        this.sentNotifications = await this._service.getSentNotification(this.sentPage);
+        this.sentNotifications = await this._service.getSent(this.page);
         $(document).ready(function () {
             $("#notifSent").modal({
                 dismissible: false
