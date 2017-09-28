@@ -17,15 +17,15 @@ export class NotificationSentComponent {
 
     sentNotifications: Notification[];
     sentValidations: SentValidation[];
-    sentPage: number;
     selected : Notification;
+    page: number;
 
     constructor(
         private _service: NotificationService,
         private _router: Router,
         private _userService: UserService
     ) {
-        this.sentPage = 0;
+        this.page = 0;
     }
 
     public async ngOnInit() {
@@ -43,16 +43,16 @@ export class NotificationSentComponent {
     public showNotifDetails(index:number, idNotif?: number) {
         $("#notifSent").modal('open');
         this.selected = this.sentNotifications[index];
-        this.getSentValidations(idNotif);
+        this.getValidations(idNotif);
     }
 
     public closeNotifDetails() {
         $("#notifSent").modal('close');
     }
 
-    public async getSentValidations(notificationID: number) {
+    public async getValidations(notificationID: number) {
         this.sentValidations = [];
-        let validations = await this._service.getValidationsByNotification(notificationID);
+        let validations = await this._service.getValidations(notificationID);
         for (let validation of validations) {
             let receiver = await this._userService.getProfile(validation.ReceiverFK);
             if (validation.StudentFK != null) {
@@ -78,6 +78,5 @@ export class NotificationSentComponent {
                 });
             }
         }
-        console.log(this.sentValidations);
     }
 }

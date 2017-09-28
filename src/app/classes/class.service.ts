@@ -100,7 +100,7 @@ export class ClassService {
         });
         /*
         let res = await this._http
-            .post(this._apiURL + '/floor', toPost, this._options).toPromise();
+            .post(this._apiURL + '/class/profile', toPost, this._options).toPromise();
 
         return res.json().result;
         */

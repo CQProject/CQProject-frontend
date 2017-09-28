@@ -44,21 +44,17 @@ export class NotificationReceivedComponent {
 
 
     public async getReceivedNotifications() {
-        let validations = await this._service.getValidationsByPage(this.receivedPage);
+        let validations = await this._service.getValidations(this.receivedPage);
         if (validations != null) {
             for (let validation of validations) {
                 await this._getReceivedNotification(validation);
             }
         }
-        console.log(this.receivedNotifications)
     }
 
     private async _getReceivedNotification(validation: Validation) {
-        let notification = await this._service.getReceivedNotification(validation.NotificationFK);
-        console.log("notf: " + notification.UserFK)
+        let notification = await this._service.getMessage(validation.NotificationFK);
         let sender = await this._userService.getProfile(notification.UserFK);
-        console.log("user: " + sender.ID)
-        //while(sender==null){sender = await this._userService.getProfile(notification.UserFK);}
         this.receivedNotifications.push({
             "ID": notification.ID,
             "Hour": notification.Hour,
@@ -82,7 +78,6 @@ export class NotificationReceivedComponent {
     }
 
     public accept(notificationID: number) {
-        console.log(this.selected)
         this._service.accept(notificationID).subscribe();
         this.selected.Accepted = true;
     }
