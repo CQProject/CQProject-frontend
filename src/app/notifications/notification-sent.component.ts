@@ -16,23 +16,23 @@ export class NotificationSentComponent {
 
     sentNotifications: Notification[];
     sentValidations: SentValidation[];
-    sentPage: number;
+    page: number;
 
     constructor(
         private _service: NotificationService,
         private _router: Router,
         private _userService: UserService
     ) {
-        this.sentPage = 0;
+        this.page = 0;
     }
 
     public ngOnInit(){
         this.getSentNotifications();
     }
 
-    public async getSentValidations(notificationID: number) {
+    public async getValidations(notificationID: number) {
         this.sentValidations = [];
-        let validations = await this._service.getValidationsByNotification(notificationID);
+        let validations = await this._service.getValidations(notificationID);
         for (let validation of validations) {
             let receiver = await this._userService.getProfile(validation.ReceiverFK);
             if (validation.StudentFK != null) {
@@ -58,14 +58,13 @@ export class NotificationSentComponent {
                 });
             }
         }
-        console.log(this.sentValidations);
     }
 
     public showNotifDetails(id: string, idNotif?: number) {
         var notif = document.getElementById(id + "").style.display = "block";
         alert(id)
         if(id=="notifSent"){
-            this.getSentValidations(idNotif);
+            this.getValidations(idNotif);
         }
     }
 
@@ -77,9 +76,7 @@ export class NotificationSentComponent {
     }
 
     public async getSentNotifications() {
-        this.sentNotifications = await this._service.getSentNotification(this.sentPage);
+        this.sentNotifications = await this._service.getSent(this.page);
         console.log(this.sentNotifications);
     }
-
-    
 }

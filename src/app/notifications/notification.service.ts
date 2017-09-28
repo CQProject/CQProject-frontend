@@ -34,7 +34,7 @@ export class NotificationService {
         return response.json().result ? response.json().data : 0;
     }
 
-    public async getValidationsByPage(pageID: number): Promise<Validation[]> {
+    public async getReceived(pageID: number): Promise<Validation[]> {
         let response = await this._http
             .get(this._apiURL + `/notification/received/${pageID}`, this._options)
             .toPromise();
@@ -46,9 +46,9 @@ export class NotificationService {
         }
     }
 
-    public async getValidationsByNotification(notifID: number): Promise<Validation[]> {
+    public async getSent(pageID: number): Promise<Notification[]> {
         let response = await this._http
-            .get(this._apiURL + `/validation/notification/${notifID}`, this._options)
+            .get(this._apiURL + `/notification/sent/${pageID}`, this._options)
             .toPromise();
 
         if (response.json().result) return response.json().data;
@@ -58,7 +58,7 @@ export class NotificationService {
         }
     }
 
-    public async getReceivedNotification(notifID: number): Promise<Notification> {
+    public async getMessage(notifID: number): Promise<Notification> {
         let response = await this._http
             .get(this._apiURL + `/notification/message/${notifID}`, this._options)
             .toPromise();
@@ -70,9 +70,9 @@ export class NotificationService {
         }
     }
 
-    public async getSentNotification(pageID: number): Promise<Notification[]> {
+    public async getValidations(notifID: number): Promise<Validation[]> {
         let response = await this._http
-            .get(this._apiURL + `/notification/sent/${pageID}`, this._options)
+            .get(this._apiURL + `/validation/notification/${notifID}`, this._options)
             .toPromise();
 
         if (response.json().result) return response.json().data;
