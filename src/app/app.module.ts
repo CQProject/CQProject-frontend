@@ -8,11 +8,12 @@ import 'zone.js';
 import 'reflect-metadata';
 //Component
 import { AppComponent } from "./app.component";
+import { HomepageComponent } from "./index/homepage.component";
 import { AccountNavbarComponent } from "./account/account-navbar.component";
 import { AccountHomeComponent } from "./account/account-home.component";
 import { UserProfileComponent } from "./users/user-profile.component";
 import { NotFoundComponent } from "./notfound/nfound.component";
-import { SchoolHomeComponent } from "./schools/school-home.component";
+import { SchoolListComponent } from "./schools/school-list.component";
 import { NotificationCounterComponent } from "./notifications/notification-link.component";
 import { NotificationMenuComponent } from "./notifications/notification-menu.component";
 import { FloorMainComponent } from "./sensors/main.component";
@@ -53,6 +54,7 @@ import { TimeService } from "./utils/time.service";
 import { SensorService } from "./sensors/sensor.service";
 import { DocumentService } from "./utils/document.service";
 import { EvaluationService } from "./utils/evaluation.service";
+import { NoticeService } from "./schools/notice.service";
 //Pipes
 
 @NgModule({
@@ -64,7 +66,8 @@ import { EvaluationService } from "./utils/evaluation.service";
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: AccountHomeComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
-      { path: 'schools', component: SchoolHomeComponent },
+      { path: 'homepage', component:HomepageComponent},
+      { path: 'schools', component: SchoolListComponent },
       { path: 'school/:id', component: SchoolProfileComponent},
       { path: 'notifications', component: NotificationMenuComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] }, 
         children:[
@@ -114,7 +117,7 @@ import { EvaluationService } from "./utils/evaluation.service";
     AccountNavbarComponent,
     AccountHomeComponent,
     NotFoundComponent,
-    SchoolHomeComponent,
+    SchoolListComponent,
     SchoolFormComponent,
     NotificationCounterComponent,
     NotificationMenuComponent,
@@ -140,7 +143,8 @@ import { EvaluationService } from "./utils/evaluation.service";
     UserDetailsComponent,
     StudentHomeComponent,
     NotificationReceivedComponent,
-    NotificationSentComponent
+    NotificationSentComponent,
+    HomepageComponent
     //Pipe
   ],
   providers: [
@@ -164,7 +168,8 @@ import { EvaluationService } from "./utils/evaluation.service";
     TimeService,
     SensorService,
     DocumentService,
-    EvaluationService
+    EvaluationService,
+    NoticeService
   ],
   bootstrap: [AppComponent]
 })

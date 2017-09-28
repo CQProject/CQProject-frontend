@@ -16,7 +16,7 @@ declare var $: any;
 export class NotificationReceivedComponent {
 
     receivedNotifications: ReceivedNotification[];
-    receivedPage: number;
+    page: number;
     selected: ReceivedNotification;
     checked: boolean;
 
@@ -25,7 +25,7 @@ export class NotificationReceivedComponent {
         private _router: Router,
         private _userService: UserService
     ) {
-        this.receivedPage = 0;
+        this.page = 0;
         this.checked = false;
     }
 
@@ -44,7 +44,7 @@ export class NotificationReceivedComponent {
 
 
     public async getReceivedNotifications() {
-        let validations = await this._service.getValidations(this.receivedPage);
+        let validations = await this._service.getReceived(this.page);
         if (validations != null) {
             for (let validation of validations) {
                 await this._getReceivedNotification(validation);
@@ -74,7 +74,6 @@ export class NotificationReceivedComponent {
         $("#notifReceived").modal('open');
         this.receivedNotifications[index].Read = true;
         this._service.read(notificationID).subscribe();
-
     }
 
     public accept(notificationID: number) {
