@@ -11,6 +11,7 @@ export interface UserDetails {
     ID: number, 
     Photo: string, 
     FiscalNumber: string, 
+    Password:string,
     CitizenCard: string, 
     PhoneNumber: string, 
     Address: string, 
@@ -27,6 +28,7 @@ export class UserDetailsToPost {
     ID: number;
     Photo: string; 
     FiscalNumber: string;
+    Password: string;
     CitizenCard: string ;
     PhoneNumber: string; 
     Address: string; 

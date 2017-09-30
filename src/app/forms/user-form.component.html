@@ -1,0 +1,94 @@
+<div class="container white" style="margin-bottom:25px">
+    <div class="center">
+        <h2 class="green-text text-darken-2">Adicionar um Utilizador</h2>
+    </div>
+    <div class="row">
+        <form class="col s12 left-align">
+            <div class="col s10 offset-s1">
+                <div class="row">
+                    <select [(ngModel)]="roleID" name="roleID" (change)="checked=true" class="browser-default" style="cursor:pointer">
+                           <option value="1">Estudante</option>
+                           <option value="2">Teacher</option>
+                            <option *ngIf="_adminGuard.canActivate()" value="3">Secretário</option>
+                            <option value="4">Auxiliar</option>
+                            <option value="5">Encarregado de Educação</option>
+                        </select>
+                    <label>Selecionar uma escola</label>
+                </div>
+                <div *ngIf="checked">
+                    <div class="row">
+                        <div class="col s6">
+                            <!--*************************Name*****************************************-->
+                            <div>
+                                <i class="fa fa-user"></i>
+                                <input class="input" type="text" [(ngModel)]="user.Name" name="Name" placeholder="Nome do Professor" required/>
+                            </div>
+                            <!--*************************Password*****************************************-->
+                            <div>
+                                <i class="fa fa-key"></i>
+                                <input class="input" type="password" name="Password" [(ngModel)]="user.Password" placeholder="Password" required/>
+                            </div>
+                            <div>
+                                <i class="fa fa-key"></i>
+                                <input class="input" type="password" name="confirmPassword" (keyup)="confirmPassword($event)" placeholder="Confirmar Password" required/>
+                            </div>
+                            <!--*************************Email*****************************************-->
+                            <div>
+                                <i class="fa fa-envelope"></i>
+                                <input class="input" type="text" [(ngModel)]="user.Email" name="Email" placeholder="Email" required/>
+                            </div>
+                            <!--*************************DateOfBirth*****************************************-->
+                            <div *ngIf="roleID!=5 && roleID!=6">
+                                <i class="fa fa-birthday-cake"></i>
+                                <input class="input" type="text" name="DateOfBirth" [(ngModel)]="user.DateOfBirth" placeholder="Data de Nascimento" />
+                            </div>
+                            <!--*************************Function*****************************************-->
+                            <div>
+                                <i class="fa fa-wrench"></i>
+                                <input class="input" type="text" [(ngModel)]="user.Function" name="Function" placeholder="Função" />
+                            </div>
+                        </div>
+                        <div class="col s6">
+                            <!--*************************Address*****************************************-->
+                            <div *ngIf="roleID!=6">
+                                <i class="fa fa-home"></i>
+                                <input class="input" type="text" [(ngModel)]="user.Address" name="Address" placeholder="Morada" />
+                            </div>
+                            <!--*************************CitizenCard*****************************************-->
+                            <div>
+                                <i class="fa fa-id-card"></i>
+                                <input class="input" type="text" name="CitizenCard" [(ngModel)]="user.CitizenCard" placeholder="Cartão do Cidadão" />
+                            </div>
+                            <!--*************************FiscalNumber*****************************************-->
+                            <div>
+                                <i class="fa fa-id-card-o"></i>
+                                <input class="input" type="text" name="FiscalNumber" [(ngModel)]="user.FiscalNumber" placeholder="Número de Contribuinte" />
+                            </div>
+                            <!--*************************Curriculum*****************************************-->
+                            <div *ngIf="roleID!=1 && roleID!=5 && roleID!=6">
+                                <i class="fa fa-file-text-o"></i>
+                                <input class="input" type="file" name="Curriculum" placeholder="Currículo" />
+                            </div>
+                            <!--*************************Phone Number*****************************************-->
+                            <div *ngIf="roleID!=1">
+                                <i class="fa fa-mobile"></i>
+                                <input class="w3-input" type="text" name="PhoneNumber" [(ngModel)]="user.PhoneNumber" placeholder="Número de Telefone / Telemóvel" />
+                            </div>
+                            <!--*************************Photo*****************************************-->
+                            <div *ngIf="roleID!=5">
+                                <i class="fa fa-photo"></i>
+                                <input class="input" type="file" name="Photo" placeholder="Foto" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div *ngIf="confirmed" class="center" style="padding:20px">
+            <button type="submit" class="btn waves-effect waves-light green darken-2" (click)="createUser()"><i class="material-icons right">send</i>Submeter</button>
+        </div>
+        <div *ngIf="!confirmed" class="center" style="padding:20px">
+                <button type="submit" disabled class="btn waves-effect waves-light green darken-2" (click)="createUser()"><i class="material-icons right">send</i>Submeter</button>
+            </div>
+    </div>
+</div>
