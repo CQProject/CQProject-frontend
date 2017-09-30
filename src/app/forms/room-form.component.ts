@@ -52,15 +52,15 @@ export class RoomFormComponent {
 
     public createFloor() {
         var panel = document.getElementById('board');
-        panel.innerHTML = '<canvas id="canvas" class="w3-card w3-white" width="1000" height="700"></canvas><br/>'
+        panel.innerHTML = '<canvas id="canvas" class="card white" width="945" height="700"></canvas><br/>'
         var canvas: any = document.getElementById('canvas');
         var context: CanvasRenderingContext2D = canvas.getContext("2d");
         var imageObj = new Image();
         imageObj.src = this.image.changingThisBreaksApplicationSecurity;
-        imageObj.onload = (() => context.drawImage(imageObj, 1, 1, 1000, 700));
+        imageObj.onload = (() => context.drawImage(imageObj, 1, 1, 945, 700));
 
         this._renderer.listenGlobal(canvas, 'click', (event) => {
-            context.drawImage(imageObj, 1, 1, 1000, 700);
+            context.drawImage(imageObj, 1, 1, 945, 700);
             this.getMousePos(canvas, event);
             context.beginPath();
             context.arc(this.room.XCoord + 10, this.room.YCoord + 10, 15, 0, 2 * Math.PI);

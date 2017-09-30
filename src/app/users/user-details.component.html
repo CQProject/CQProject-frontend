@@ -3,7 +3,7 @@
     <div class="col s2 white card z-depth-4" *ngIf="!_guardianGuard.canActivate()" style="margin-right:10px">
         <img class="circle responsive-img" [attr.src]="profilePhoto" style="width:100%">
         <div *ngIf="!_studentGuard.canActivate()">
-            <label for="profilePhoto" class="btn teal">Mudar imagem</label>
+            <label for="profilePhoto" class="btn green darken-2">Mudar imagem</label>
             <input id="profilePhoto" style="visibility:hidden" type="file" />
         </div>
     </div>
@@ -136,8 +136,8 @@
                     </div>
                 </div>
             </form>
-            <footer *ngIf="!_studentGuard.canActivate()">
-                <button id="submitChanges" (click)="submitChanges()" class="w3-block w3-btn w3-teal w3-card-4 w3-hide">Submeter alterações</button>
+            <footer *ngIf="!_studentGuard.canActivate()" class="center-align" style="margin-bottom:20px">
+                <button id="submitChanges" (click)="submitChanges()" class="btn green darken-2">Submeter alterações</button>
             </footer>
         </div>
     </div>

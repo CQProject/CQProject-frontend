@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminGuard } from "../utils/auth-guard.service";
+import { AdminGuard, SecretaryGuard } from "../utils/auth-guard.service";
 
 @Component({
     selector: "main-form",
@@ -9,7 +9,8 @@ import { AdminGuard } from "../utils/auth-guard.service";
 export class MainFormComponent {
 
     constructor(
-        private _adminGuard: AdminGuard
+        private _adminGuard: AdminGuard,
+        private _secretaryGuard: SecretaryGuard
     ) { }
 
     public ngOnInit() {

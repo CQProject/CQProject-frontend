@@ -76,7 +76,7 @@ import { NoticeService } from "./schools/notice.service";
           { path: 'sent', component: NotificationSentComponent, canActivate: [AuthGuard],  data: { roles: [1, 2, 3, 4, 5, 6] }}     
       ] },
       {
-        path: 'form', component: MainFormComponent, canActivate: [AuthGuard], data: { roles: [2, 6] },
+        path: 'form', component: MainFormComponent, canActivate: [AuthGuard], data: { roles: [6] },
         children: [
           { path: 'school', component: SchoolFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
           { path: 'floor', component: FloorFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },

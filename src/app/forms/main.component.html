@@ -1,31 +1,37 @@
-<div class="row" style="margin-top:50px">
-    <div *ngIf="_adminGuard.canActivate()" class="col m4">
-        <a class="btn green" [routerLink]="['school']">
-            Adicionar Escola
-        </a>
+<nav>
+    <div class="nav-wrapper">
+        <ul class="row">
+            <li class="col l1"></li>
+            <li class="col l2 s12">
+                <a [routerLink]="['school']">
+                        Adicionar Escola
+                    </a>
+            </li>
+            <li class="col l2 s12">
+                <a [routerLink]="['floor']">
+                        Adicionar piso
+                    </a>
+            </li>
+            <li class="col l2 s12">
+                <a [routerLink]="['room']">
+                        Adicionar Sala
+                    </a>
+            </li>
+            <li class="col l2 s12">
+                <a [routerLink]="['sensor']">
+                        Adicionar Sensor
+                    </a>
+            </li>
+            <li class="col l2 s12">
+                <a [routerLink]="['class']">
+                    Adicionar Turma
+                </a>
+            </li>
+            <li class="col l1"></li>
+        </ul>
     </div>
-    <div *ngIf="_adminGuard.canActivate()" class="col m4">
-        <a class="btn green" [routerLink]="['floor']">
-           Adicionar piso
-        </a>
-    </div>
-    <div *ngIf="_adminGuard.canActivate()" class="col m4">
-        <a class="btn green" [routerLink]="['room']">
-         Adicionar Sala
-        </a>
-    </div>
-    <div *ngIf="_adminGuard.canActivate()" class="col m4">
-        <a class="btn green" [routerLink]="['sensor']">
-            Adicionar Sensor
-        </a>
-    </div>
-    <div class="col m4">
-        <a class="btn green m4" [routerLink]="['class']">
-                Adicionar Turma
-            </a>
-    </div>
-</div>
+</nav>
 <hr>
-<div class="w3-animate-bottom">
+<div>
     <router-outlet></router-outlet>
 </div>

@@ -1,19 +1,33 @@
-<div class="w3-container w3-white">
-    <h2>Adicionar piso</h2>
-    <form>
-        <div class="w3-left-align w3-row">
-            <label class="w3-col s3">Nome:</label>
-            <input [(ngModel)]="floor.Name" class="w3-input w3-col s9" type="text" name="Name" required/>
-            <div class="w3-col"><br></div>
-            <label class="w3-col s3">Planta do Piso:</label>
-            <input (change)="getImage($event)" class="w3-input w3-col s9" type="file" required/>
-            <div class="w3-col"><br></div>
-            <label class="w3-col s3">Escola:</label>
-            <select [(ngModel)]="floor.SchoolFK" name="SchoolFK" class="w3-col s9">
-              <option *ngFor="let school of schools" value="{{school.ID}}">{{school.Name}}</option>
-            </select>
-            <div class="w3-col"><br></div>
-        </div>
-    </form>
+<div class="container white" style="margin-bottom:25px">
+    <div class="center">
+        <h2 class="green-text text-darken-2">Adicionar um piso</h2>
+    </div>
+    <div class="row">
+        <form class="col s12 left-align">
+            <div class="col s10 offset-s1">
+                <div class="input-field row">
+                        <input [(ngModel)]="floor.Name" type="text" name="Name" required/>
+                        <label for="Name">Nome:</label>
+                </div>
+                <div class="file-field input-field row">
+                    <div class="btn green darken-2 col s3">
+                        <span>Planta do Piso:</span>
+                        <input (change)="getImage($event)" type="file" required/>
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Nenhum ficheiro selecionado"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <select [(ngModel)]="floor.SchoolFK" name="SchoolFK" class="browser-default" style="cursor:pointer">
+                            <option *ngFor="let school of schools" value="{{school.ID}}">{{school.Name}}</option>
+                    </select>
+                    <label>Selecionar uma escola</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="center" style="padding:20px">
+        <button type="submit" class="btn waves-effect waves-light green darken-2" (click)="createFloor()"><i class="material-icons right">send</i>Submeter</button>
+    </div>
 </div>
-<button type="submit" class="w3-button w3-khaki w3-margin-top w3-block w3-hover-lime" (click)="createFloor()"><label class="w3-large">Submeter</label></button>

@@ -10,7 +10,9 @@ import 'rxjs/add/operator/toPromise';
 
 import { Floor } from "./iFloor";
 import { Sensor } from './iSensor';
+import { Room } from "./iRoom";
 import { Record, Resume } from './iRecords';
+import { RoomService } from './room.service'
 import { API } from '../../main';
 
 @Injectable()
@@ -19,8 +21,9 @@ export class SensorService {
     private _headers: Headers;
     private _options: RequestOptions;
     private readonly _apiURL = API.url;
+    private room: Room;
 
-    constructor(private _http: Http) {
+    constructor(private _http: Http, private _roomService: RoomService) {
         this._headers = new Headers();
         this._headers.append('Content-Type', 'application/json; charset=utf-8');
         this._headers.append('Authorization', <string>JSON.parse(localStorage.getItem('currentUser')).token);
@@ -86,6 +89,9 @@ export class SensorService {
         });
         let res = await this._http
             .post(this._apiURL + '/sensor', toPost, this._options).toPromise();
+        this.room = await this._roomService.getRoom(sensor.RoomFK);
+        this.room.HasSensor = true;
+        this._roomService.editRoom(this.room);
         return res.json().result;
     }
 

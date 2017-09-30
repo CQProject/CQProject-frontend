@@ -24,6 +24,7 @@ export class SensorFormComponent {
     floors: Floor[];
     rooms: Room[];
     sensor: Sensor;
+    schoolID: number;
 
 
     constructor(
@@ -54,7 +55,6 @@ export class SensorFormComponent {
     }
 
     public async createSensor() {
-        console.log(this.sensor)
         var result = await this._sensorService.createSensor(this.sensor);
         if (result) location.reload();
     }

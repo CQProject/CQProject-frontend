@@ -1,25 +1,46 @@
-<div class="container white">
-    <h2>Criar uma escola</h2>
-    <form>
-        <div class="left-align row">
-            <label class="col s3">Nome:</label>
-            <input [(ngModel)]="school.Name" class="input col s9" type="text" name="Name" required/>
-            <div class="col"><br></div>
-            <label class="col s3">Logótipo:</label>
-            <input (change)="getLogoImage($event)" class="input col s9" type="file" required/>
-            <div class="col"><br></div>
-            <label class="col s3">Imagem de perfil:</label>
-            <input (change)="getProfileImage($event)" class="input col s9" type="file" required/>
-            <div class="col"><br></div>
-            <label class="col s3">Acrónimo:</label>
-            <input [(ngModel)]="school.Acronym" name="Acronym" class="input col s9" required/>
-            <div class="col"><br></div>
-            <label class="col s3">Alguma informação relativa à escola:</label>
-            <div class="col s9">
-                <textarea id="textarea" [(ngModel)]="school.About" name="About" class="input" style="resize:none" rows="5" cols="8" required></textarea>
+<div class="container white" style="margin-bottom:25px">
+    <div class="center">
+        <h2 class="green-text text-darken-2">Adicionar uma Escola</h2>
+    </div>
+    <div class="row">
+        <form class="col s12 left-align">
+            <div class="col s10 offset-s1">
+                <div class="input-field row">
+                        <input [(ngModel)]="school.Name" id="Name" type="text" name="Name" required/>
+                        <label for="Name">Nome</label>
+                </div>
+                <div class="file-field input-field row">
+                    <div class="btn green darken-2 col s3">
+                        <span>Logotipo:</span>
+                        <input (change)="getLogoImage($event)" type="file" required/>
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Nenhum ficheiro selecionado">
+                    </div>
+                </div>
+                <div class="file-field input-field row">
+                    <div class="btn green darken-2 col s3">
+                        <span>Imagem de Perfil:</span>
+                        <input (change)="getProfileImage($event)" type="file" required/>
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Nenhum ficheiro selecionado">
+                    </div>
+                </div>
+                <div class="input-field row">
+                        <input [(ngModel)]="school.Acronym" id="Acronym" type="text" name="Acronym" required/>
+                        <label for="Acronym">Acrónimo</label>
+                </div>
+                <div class="row">
+                    <span class="col s3 grey-text">Alguma informação relativa à escola:</span>
+                    <div class="col s9">
+                        <textarea id="textarea" name="About" class="input" style="resize:none" rows="5" cols="8" required></textarea>
+                    </div>
+                </div>
             </div>
-                <div class="col"><br></div>
-        </div>
-    </form>
+        </form>
+    </div>
+    <div class="center" style="padding:20px">
+        <button type="submit" class="btn waves-effect waves-light green darken-2" (click)="createSchool()"><i class="material-icons right">send</i>Submeter</button>
+    </div>
 </div>
-<button type="submit" class="" (click)="createSchool()"><label class="">Submeter</label></button>

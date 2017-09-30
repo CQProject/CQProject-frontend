@@ -1,26 +1,35 @@
-<div class="w3-container w3-white">
-    <h2>Adicionar Sensor</h2>
-    <form>
-        <div class="w3-left-align w3-row">
-            <label class="w3-col s3">Nome:</label>
-            <input [(ngModel)]="sensor.Name" class="w3-input w3-col s9" type="text" name="Name" required/>
-            <div class="w3-col"><br></div>
-            <label class="w3-col s3">Escola:</label>
-            <select class="w3-col s9"  name="school" [(ngModel)]="schools.ID" (ngModelChange)="getFloors($event)" required>
-              <option *ngFor="let school of schools" value="{{school.ID}}">{{school.Name}}</option>
-            </select>
-            <div class="w3-col"><br></div>
-            <label class="w3-col s3">Piso:</label>
-            <select class="w3-col s9" name="floor" [(ngModel)]="floors.ID"  (ngModelChange)="getRooms($event)" required>
-              <option *ngFor="let floor of floors" value="{{floor.ID}}">{{floor.Name}}</option>
-            </select>
-            <div class="w3-col"><br></div>
-            <label class="w3-col s3">Sala:</label>
-            <select class="w3-col s9" name="RoomFK" [(ngModel)]="sensor.RoomFK"  required>
-              <option *ngFor="let room of rooms" value="{{room.ID}}">{{room.Name}}</option>
-            </select>
-            <div class="w3-col"><br></div>
+<div class="container white" style="margin-bottom:25px">
+  <div class="center">
+    <h2 class="green-text text-darken-2">Adicionar um Sensor</h2>
+  </div>
+  <div class="row">
+    <form class="col s12 left-align">
+      <div class="col s10 offset-s1">
+        <div class="input-field row">
+          <input [(ngModel)]="sensor.Name" type="text" id="Name" name="Name" required/>
+          <label for="Name">Nome:</label>
         </div>
+        <div class="row">
+          <select name="school" [(ngModel)]="schools.ID" (ngModelChange)="getFloors($event)" class="browser-default" style="cursor:pointer">
+              <option *ngFor="let school of schools" value="{{school.ID}}">{{school.Name}}</option>              </select>
+          <label>Selecionar uma escola</label>
+        </div>
+        <div class="row">
+          <select name="school" [(ngModel)]="floors.ID" (ngModelChange)="getRooms($event)" class="browser-default" style="cursor:pointer">
+            <option *ngFor="let floor of floors" value="{{floor.ID}}">{{floor.Name}}</option>
+                        </select>
+          <label>Selecionar um Piso:</label>
+        </div>
+        <div class="row">
+          <select name="RoomFK" [(ngModel)]="sensor.RoomFK" class="browser-default" style="cursor:pointer">
+                      <option *ngFor="let room of rooms" value="{{room?.ID}}">{{room?.Name}}</option>
+              </select>
+          <label>Selecionar uma Sala:</label>
+        </div>
+      </div>
     </form>
+  </div>
+  <div class="center" style="padding:20px">
+    <button type="submit" class="btn waves-effect waves-light green darken-2" (click)="createSensor()"><i class="material-icons right">send</i>Submeter</button>
+  </div>
 </div>
-<button type="submit" class="w3-button w3-khaki w3-margin-top w3-block w3-hover-lime" (click)="createSensor()"><label class="w3-large">Submeter</label></button>
