@@ -29,7 +29,11 @@ export class FloorMainComponent {
         this._route.params.subscribe(params => schoolID = params['id']);
         this.school = await this._schoolService.getSchool(schoolID);
         this.floors = await this._floorService.getFloorsBySchool(schoolID);
-        this.nCols = 8/this.floors.length;
+        if((this.floors.length%2)== 0){
+            this.nCols = 8/this.floors.length;
+        }else{
+            this.nCols = 6 / this.floors.length;
+        }
     }
 
     public chooseOption(id: string) {

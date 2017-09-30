@@ -51,14 +51,14 @@ export class FloorMapComponent {
 
     public createFloor() {
         var panel = document.getElementById('board');
-        panel.innerHTML = '<canvas id="canvas'+this.floor.ID+'" class="w3-card w3-white" width="1000" height="700"></canvas><br/>'
+        panel.innerHTML = '<canvas id="canvas'+this.floor.ID+'" class="card white" width="945" height="700"></canvas><br/>'
         var canvas: any = document.getElementById('canvas'+this.floor.ID);
         var context: CanvasRenderingContext2D = canvas.getContext("2d");
         var imageObj = new Image();
         imageObj.src = this.floor.Image.changingThisBreaksApplicationSecurity;
         imageObj.onload = (() => {
             // design background image
-            context.drawImage(imageObj, 1, 1, 1000, 700);
+            context.drawImage(imageObj, 1, 1, 945, 700);
             // design elements
             if (this.floor.Rooms != null) {
                 for (var index = 0; index < this.floor.Rooms.length; index++) {

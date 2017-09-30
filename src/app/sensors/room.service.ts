@@ -52,10 +52,25 @@ export class RoomService {
     public async createRoom(room: Room): Promise<boolean> {
         var toPost = JSON.stringify({
             Name: room.Name,
+            XCoord: room.XCoord.toFixed(0),
+            YCoord: room.YCoord.toFixed(0),
             FloorFK: room.FloorFK,
-            HasSensor: false,
-            XCoord: room.XCoord,
-            YCoord: room.YCoord
+            HasSensor: false
+        });
+        let res = await this._http
+            .post(this._apiURL + '/room', toPost, this._options).toPromise();
+        console.log(res.json())
+        return res.json().result;
+    }
+
+    public async editRoom(room: Room): Promise<boolean> {
+        var toPost = JSON.stringify({
+            ID: room.ID,
+            Name: room.Name,
+            XCoord: room.XCoord.toFixed(0),
+            YCoord: room.YCoord.toFixed(0),
+            FloorFK: room.FloorFK,
+            HasSensor: room.HasSensor
         });
         let res = await this._http
             .post(this._apiURL + '/room', toPost, this._options).toPromise();

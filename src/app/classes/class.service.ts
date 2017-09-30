@@ -93,18 +93,15 @@ export class ClassService {
 
     public async createClass(cla: Class): Promise<boolean> {
         var toPost = JSON.stringify({
-            SchoolYear: cla.SchoolYear,
-            Year: new Date(Date.now()).getFullYear() + "/" + (new Date(Date.now()).getFullYear() + 1),
+            SchoolYear: new Date(Date.now()).getFullYear() + "/" + (new Date(Date.now()).getFullYear() + 1),
+            Year: cla.SchoolYear,
             ClassDesc: cla.ClassDesc,
-            SchoolFK: cla.SchoolYear
+            SchoolFK: cla.SchoolFK
         });
-        /*
         let res = await this._http
             .post(this._apiURL + '/class/profile', toPost, this._options).toPromise();
 
         return res.json().result;
-        */
-        return false;
     }
 
     private _handleError(error: Response) {

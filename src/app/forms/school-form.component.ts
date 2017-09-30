@@ -37,8 +37,7 @@ export class SchoolFormComponent {
             setup: editor => {
                 this.editor = editor;
                 editor.on('keyup', () => {
-                    const content = editor.getContent();
-                    editor.onEditorKeyup.emit(content);
+                    this.school.About=editor.getContent();
                 });
             },
         });
