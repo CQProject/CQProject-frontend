@@ -73,7 +73,7 @@ export class RoomService {
             HasSensor: room.HasSensor
         });
         let res = await this._http
-            .post(this._apiURL + '/room', toPost, this._options).toPromise();
+            .put(this._apiURL + '/room', toPost, this._options).toPromise();
         console.log(res.json())
         return res.json().result;
     }
