@@ -1,1 +1,0 @@
-- redefinir rota no evento de click no sensor

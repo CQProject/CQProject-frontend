@@ -9,8 +9,8 @@ import { AdminGuard, SecretaryGuard } from "../utils/auth-guard.service";
 export class MainFormComponent {
 
     constructor(
-        private _adminGuard: AdminGuard,
-        private _secretaryGuard: SecretaryGuard
+        public _adminGuard: AdminGuard,
+        public _secretaryGuard: SecretaryGuard
     ) { }
 
     public ngOnInit() {

@@ -14,7 +14,7 @@ To run our project in development mode do `npm run start`. After that - it might
 ### Production
 To build it you just need to do `npm run build` and it will build the files at `/dist`. Move the `/dist` files to your server, using nginx move it to `/var/www/html`.
 
-## Team
+## CQTeam
 
 | David Bernardo      
 | Diogo Mendes        

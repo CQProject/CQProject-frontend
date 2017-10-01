@@ -25,8 +25,8 @@ export class ClassPrimaryEvaluationComponent {
         private _evaluationService: EvaluationService,
         private _userService: UserService,
         private _scheduleService: ScheduleService,
-        private _guardianGuard: GuardianGuard,
-        private _studentGuard: StudentGuard,
+        public _guardianGuard: GuardianGuard,
+        public _studentGuard: StudentGuard,
         private _router: Router,
         private _route: ActivatedRoute,
     ) { this.evaluations = []; }

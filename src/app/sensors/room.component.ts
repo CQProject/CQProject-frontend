@@ -31,7 +31,7 @@ export class RoomComponent {
         private _sensorService: SensorService,
         private _router: Router,
         private _route: ActivatedRoute,
-        private _assistantGuard: AssistantGuard,
+        public _assistantGuard: AssistantGuard,
         private _renderer: Renderer
     ) { }
 

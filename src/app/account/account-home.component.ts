@@ -18,10 +18,10 @@ export class AccountHomeComponent {
         private _service: AccountService,
         private _router: Router,
         private _ngZone: NgZone,
-        private _teacherGuard: TeacherGuard,
-        private _studentGuard: StudentGuard,
-        private _guardianGuard: GuardianGuard,
-        private _adminGuard: AdminGuard,
+        public _teacherGuard: TeacherGuard,
+        public _studentGuard: StudentGuard,
+        public _guardianGuard: GuardianGuard,
+        public _adminGuard: AdminGuard,
         private _classService: ClassService
     ) { }
 

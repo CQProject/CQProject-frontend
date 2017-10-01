@@ -20,7 +20,7 @@ export class UserFormComponent {
 
     constructor(
         private _userService: UserService,
-        private _adminGuard: AdminGuard
+        public _adminGuard: AdminGuard
     ) {
         this.checked = false;
         this.confirmed = false;

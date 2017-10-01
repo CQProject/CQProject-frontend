@@ -15,9 +15,9 @@ import { FileService } from "../utils/files.service";
 
 export class UserDetailsComponent {
 
-    private profileDetails: UserDetails;
+    public profileDetails: UserDetails;
     private profilePhoto: File;
-    private profileToPost: UserDetailsToPost;
+    public profileToPost: UserDetailsToPost;
     private userRole: number[];
 
     constructor(
@@ -25,12 +25,12 @@ export class UserDetailsComponent {
         private _userService: UserService,
         private _fileService: FileService,
         private _router: Router,
-        private _adminGuard: AdminGuard,
-        private _assistantGuard: AssistantGuard,
-        private _guardianGuard: GuardianGuard,
-        private _secretaryGuard: SecretaryGuard,
-        private _studentGuard: StudentGuard,
-        private _teacherGuard: TeacherGuard
+        public _adminGuard: AdminGuard,
+        public _assistantGuard: AssistantGuard,
+        public _guardianGuard: GuardianGuard,
+        public _secretaryGuard: SecretaryGuard,
+        public _studentGuard: StudentGuard,
+        public _teacherGuard: TeacherGuard
     ) {
         this.profileToPost = new UserDetailsToPost();
     }

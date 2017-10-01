@@ -10,12 +10,12 @@
           <label for="Name">Nome:</label>
         </div>
         <div class="row">
-          <select name="school" [(ngModel)]="schools.ID" (ngModelChange)="getFloors($event)" class="browser-default" style="cursor:pointer">
+          <select name="school" (ngModelChange)="getFloors($event)" class="browser-default" style="cursor:pointer">
               <option *ngFor="let school of schools" value="{{school.ID}}">{{school.Name}}</option>              </select>
           <label>Selecionar uma escola</label>
         </div>
         <div class="row">
-          <select name="school" [(ngModel)]="floors.ID" (ngModelChange)="getRooms($event)" class="browser-default" style="cursor:pointer">
+          <select name="school" (ngModelChange)="getRooms($event)" class="browser-default" style="cursor:pointer">
             <option *ngFor="let floor of floors" value="{{floor.ID}}">{{floor.Name}}</option>
                         </select>
           <label>Selecionar um Piso:</label>

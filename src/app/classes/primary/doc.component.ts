@@ -17,16 +17,16 @@ declare var $: any;
 
 export class ClassPrimaryDocumentComponent {
 
-    private file: any;
+    public file: any;
     private image: any;
-    private docs: any[];
+    public docs: any[];
 
     constructor(
         private _fileService: FileService,
         private _documentService: DocumentService,
-        private _userService: UserService,
-        private _guardianGuard: GuardianGuard,
-        private _studentGuard: StudentGuard,
+        public _userService: UserService,
+        public _guardianGuard: GuardianGuard,
+        public _studentGuard: StudentGuard,
         private _router: Router,
         private _route: ActivatedRoute,
     ) {

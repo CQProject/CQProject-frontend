@@ -17,7 +17,7 @@ export class FloorMainComponent {
     private nCols: number;
 
     constructor(
-        private _adminGuard : AdminGuard,
+        public _adminGuard : AdminGuard,
         private _schoolService: SchoolService,
         private _floorService: FloorService,
         private _route: ActivatedRoute,

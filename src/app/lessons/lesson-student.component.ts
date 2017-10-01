@@ -27,8 +27,8 @@ export class LessonStudentComponent {
         private _scheduleService: ScheduleService,
         private _userService: UserService,
         private _route: ActivatedRoute,
-        private _guardianGuard: GuardianGuard,
-        private _studentGuard: StudentGuard
+        public _guardianGuard: GuardianGuard,
+        public _studentGuard: StudentGuard
     ) { this.lessons = []; }
 
     public async ngOnInit() {

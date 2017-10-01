@@ -16,9 +16,9 @@ export class SchoolProfileComponent {
         private _schoolService: SchoolService,
         private _route: ActivatedRoute,
         private _fileService: FileService,
-        private _assistantGuard: AssistantGuard,
-        private _secretaryGuard: SecretaryGuard,
-        private _adminGuard: AdminGuard
+        public _assistantGuard: AssistantGuard,
+        public _secretaryGuard: SecretaryGuard,
+        public _adminGuard: AdminGuard
     ) { }
 
     public async ngOnInit() {

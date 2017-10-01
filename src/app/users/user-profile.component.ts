@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from "../users/user.service";
-import { UserProfile } from "../users/iUsers";
+import { UserDetails } from "../users/iUsers";
 
 @Component({
     templateUrl: "./user-profile.component.html"
@@ -9,7 +9,7 @@ import { UserProfile } from "../users/iUsers";
 
 export class UserProfileComponent {
 
-    public user: UserProfile;
+    public user: UserDetails;
     id: number;
 
     constructor(
@@ -21,6 +21,6 @@ export class UserProfileComponent {
 
     public async ngOnInit() {
         this._route.params.subscribe(params => this.id = +params['id']);
-        this.user = await this._userService.getProfile(this.id);
+        this.user = await this._userService.getUserDetails(this.id);
     }
 }

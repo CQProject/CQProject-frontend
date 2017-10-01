@@ -9,7 +9,7 @@
                     <label for="Name">Nome:</label>
                 </div>
                 <div class="row col s10 offset-s1">
-                    <select name="school" [(ngModel)]="schools.ID" (ngModelChange)="getFloors($event)" class="browser-default" style="cursor:pointer">
+                    <select name="school" (ngModelChange)="getFloors($event)" class="browser-default" style="cursor:pointer">
                                 <option *ngFor="let school of schools" value="{{school?.ID}}">{{school?.Name}}</option>
                         </select>
                     <label>Selecionar uma escola</label>

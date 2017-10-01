@@ -21,11 +21,11 @@ export class ClassPrimaryProfileComponent {
         private _classService: ClassService,
         private _schoolService: SchoolService,
         private _route: ActivatedRoute,
-        private _assistantGuard: AssistantGuard,
-        private _secretaryGuard: SecretaryGuard,
-        private _adminGuard: AdminGuard,
-        private _teacherGuard: TeacherGuard,
-        private _studentGuard: StudentGuard
+        public _assistantGuard: AssistantGuard,
+        public _secretaryGuard: SecretaryGuard,
+        public _adminGuard: AdminGuard,
+        public _teacherGuard: TeacherGuard,
+        public _studentGuard: StudentGuard
     ) { }
 
     public async ngOnInit() {

@@ -15,12 +15,12 @@ export class SchoolListComponent {
     private image: any;
 
     constructor(
-        private _service: SchoolService,
-        private _fileService: FileService,
-        private _route: Router,
-        private _assistantGuard: AssistantGuard,
-        private _secretaryGuard: SecretaryGuard,
-        private _adminGuard: AdminGuard
+        public _service: SchoolService,
+        public _fileService: FileService,
+        public _route: Router,
+        public _assistantGuard: AssistantGuard,
+        public _secretaryGuard: SecretaryGuard,
+        public _adminGuard: AdminGuard
     ) { }
 
     public async ngOnInit() {

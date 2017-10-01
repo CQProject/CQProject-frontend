@@ -20,7 +20,7 @@ export class SchoolFormComponent {
     constructor(
         private _schoolService: SchoolService,
         private _fileService: FileService,
-        private _secretaryGuard: SecretaryGuard,
+        public _secretaryGuard: SecretaryGuard,
         private _route: ActivatedRoute
     ) {
         this.school = new School();
