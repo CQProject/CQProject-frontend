@@ -13,4 +13,4 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 
 // Configurations
-export const API = { 'url': 'http://localhost:63980' };
+export const API = { 'url': 'http://ec2-52-14-236-74.us-east-2.compute.amazonaws.com/api' };
