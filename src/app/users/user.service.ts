@@ -69,27 +69,12 @@ export class UserService {
         }
     }
 
-    public async createUser(user: UserDetailsToPost, userRole: number): Promise<string> {
+    public async createUser(user: UserDetailsToPost): Promise<string> {
         let response = await this._http
             .post(this._apiURL + `/user`, JSON.stringify(user), this._options)
             .toPromise();
-        var userID;
-        if (response.json().result)  userID=response.json().data;
-        else {
-            console.log(response.json().info);
-            return null;
-        }
-
-        var toPost = JSON.stringify({
-            UserID :userID,
-            RoleID : userRole
-        });
-        response = await this._http
-            .post(this._apiURL + `/role`, toPost, this._options).toPromise();
-
         if (response.json().result)  return response.json().data;
         else {
-            console.log(response.json().info);
             return null;
         }
     }

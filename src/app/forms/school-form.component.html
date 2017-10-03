@@ -6,8 +6,8 @@
         <form class="col s12 left-align">
             <div class="col s10 offset-s1">
                 <div class="input-field row">
-                        <input [(ngModel)]="school.Name" id="Name" type="text" name="Name" required/>
-                        <label for="Name">Nome</label>
+                    <input [(ngModel)]="school.Name" id="Name" type="text" name="Name" required/>
+                    <label for="Name">Nome</label>
                 </div>
                 <div class="file-field input-field row">
                     <div class="btn green darken-2 col s3">
@@ -28,13 +28,53 @@
                     </div>
                 </div>
                 <div class="input-field row">
-                        <input [(ngModel)]="school.Acronym" id="Acronym" type="text" name="Acronym" required/>
-                        <label for="Acronym">Acrónimo</label>
+                    <input [(ngModel)]="school.Acronym" id="Acronym" type="text" name="Acronym" required/>
+                    <label for="Acronym">Acrónimo</label>
                 </div>
                 <div class="row">
-                    <span class="col s3 grey-text">Alguma informação relativa à escola:</span>
-                    <div class="col s9">
+                    <span class="col s12 grey-text">Alguma informação relativa à escola:</span>
+                    <div class="col s12">
                         <textarea id="textarea" name="About" class="input" style="resize:none" rows="5" cols="8" required></textarea>
+                    </div>
+                </div>
+                <hr />
+                <div class="row flow-text center">Horários</div>
+                <div class="row">
+                    <div id="primaryTime" class="col s6 center" style="border-right:1px solid #000">
+                        Horários da escola primária
+                        <div *ngFor="let time of timesPrimary, let i=index" class="row">
+                            <div class="col s4">
+                                <label>Tempo Inicial</label>
+                                <input [(ngModel)]="time.StartTime" type="time" name="time_{{i}}" required/>
+                            </div>
+                            <div class="col s1"></div>
+                            <div class="col s4">
+                                <label>Tempo Final</label>
+                                <input [(ngModel)]="time.EndTime" type="time" name="time_{{i}}" required/>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:5px">
+                            <div class="newTime"></div>
+                            <button class="btn green darken-2 left-align" (click)="newTime()">Adicionar novo tempo</button>
+                        </div>
+                    </div>
+                    <div id="kindergartenTime" class="col s5 center" style="border-left:1px solid #000">
+                        Horários do jardim de infância
+                        <div *ngFor="let time of timesKindergarten, let i=index" class="row">
+                            <div class="col s4">
+                                <label>Tempo Inicial</label>
+                                <input [(ngModel)]="time.StartTime" type="time" name="timeKindergarten_{{i}}" required/>
+                            </div>
+                            <div class="col s1"></div>
+                            <div class="col s4">
+                                <label>Tempo Final</label>
+                                <input [(ngModel)]="time.EndTime" type="time" name="timeKindergarten_{{i}}" required/>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:5px">
+                            <div class="newTime"></div>
+                            <button class="btn green darken-2 right-align" (click)="newTimeKindergarten()">Adicionar novo tempo</button>
+                        </div>
                     </div>
                 </div>
             </div>

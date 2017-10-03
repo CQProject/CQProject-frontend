@@ -8,6 +8,7 @@ import { UserService } from "../users/user.service";
 import { Lesson } from './iLesson';
 import { Presence } from './iPresence';
 import { Schedule } from "../utils/interfaceSchedule";
+declare var $:any;
 
 @Component({
     selector: "lessons",
@@ -41,31 +42,47 @@ export class LessonTeacherComponent {
     initLessonList() {
         this.index = 0;
         var list = document.getElementById("list");
-        this.lessons.forEach((lesson, index) => {
-            var div = document.createElement("div");
-            div.setAttribute("class", index < 4 ? "w3-col m3 s12 option w3-hide w3-show" : "w3-col m3 s12 option w3-hide");
+        var ul = document.createElement("ul");
+
+        ul.setAttribute("class", "tabs");
+        $(document).ready(function () {
+            $('ul.tabs').tabs({
+                swipeable: true
+            });
+        });
+        var anchor = document.createElement("a");
+        anchor.setAttribute("style", "font-size:0.85rem;");
+        anchor.setAttribute("class","col s12 m3 btn option white green-text text-darken-2")
+        anchor.innerHTML = "Criar Lição";
+        anchor.onclick = () => { this.createLesson() };
+        list.appendChild(anchor);
+        this.lessons.forEach(
+            (lesson, index) => {
             var anchor = document.createElement("a");
-            anchor.setAttribute("class", "w3-btn  w3-hover-khaki");
+            anchor.setAttribute("style", "font-size:0.85rem;");
+            if(index==0){
+                anchor.setAttribute("class", index < 3 ? "col s12 m3 btn option white green-text text-darken-2" : "col s12 m3 btn white green-text text-darken-2 option hide")
+            }else{
+                anchor.setAttribute("class", index < 3 ? "col s12 m3 btn option white green-text text-darken-2" : "col s12 m3 btn white green-text text-darken-2 option hide")                
+            }
             anchor.innerHTML = "Lição nº" + (this.lessons.length - index);
             anchor.onclick = () => { this.showLesson(index) };
-            anchor.style.width = "100%";
-            div.appendChild(anchor);
-            list.appendChild(div);
+            list.appendChild(anchor);
         });
     }
     moreLesson() {
         var y = document.getElementsByClassName("option")
         if (this.index + 3 < y.length - 1) {
-            y[this.index].className = y[this.index].className.replace(" w3-show", "");
-            y[this.index + 4].className += " w3-show";
+            y[this.index].className += " hide";
+            y[this.index + 4].className = y[this.index].className.replace(" hide", "");
             this.index++;
         }
     }
     lessLesson() {
         if (this.index > 0) {
             var y = document.getElementsByClassName("option")
-            y[this.index + 3].className = y[this.index + 3].className.replace(" w3-show", "");
-            y[this.index - 1].className += " w3-show";
+            y[this.index + 3].className += " hide";
+            y[this.index - 1].className = y[this.index - 1].className.replace(" hide", "");
             this.index--;
         }
     }
@@ -80,15 +97,23 @@ export class LessonTeacherComponent {
             Summary: this.lessons[n].Summary,
             ID: this.lessons[n].ID
         };
+        var lesson = document.getElementById("lesson");
+        if(!lesson.className.includes("hide")){
+            var lesson = document.getElementById("lesson");
+            lesson.className += "hide";
+            var lessonInfo = document.getElementById("lessonInfo");
+            lessonInfo.className = lessonInfo.className.replace(" hide","");
+        }
+
         let element = document.getElementById("students");
-        element.className = element.className.replace(" w3-show", "");
+        element.className = element.className.replace(" hide", "");
     }
 
     public async showClass() {
         let element = document.getElementById("students");
-        if (element.className.indexOf("w3-show") == -1) {
-            element.className += " w3-show";
-            let presences = await this._lessonService.getPresenceByTeacher(this.selected.ID);
+        if (element.className.includes("hide")) {
+            element.className = element.className.replace("hide ","");
+            let presences = await this._lessonService.getPresenceByTeacher(this.selected["ID"]);
             this.students=[];
             for(let presence of presences){
                 let student=await this._userService.getProfile(presence.StudentFK);
@@ -101,7 +126,15 @@ export class LessonTeacherComponent {
                 })
             }
         } else {
-            element.className = element.className.replace(" w3-show", "");
+            element.className = element.className.replace("container","");
+            element.className += "hide container";
         }
+    }
+
+    public createLesson(){
+        var lesson = document.getElementById("lesson");
+        lesson.className = lesson.className.replace("hide","");
+        var lessonInfo = document.getElementById("lessonInfo");
+        lessonInfo.className += " hide"
     }
 }

@@ -92,14 +92,17 @@ export class FileService {
     }
 
 
-    public async fileUpload(toPost: FormData): Promise<string> {
+    public async fileUpload(file: File): Promise<string> {
+        let formData: FormData = new FormData();
+        formData.append('Key', 'file')
+        formData.append('file', file);
+        console.log(formData)
         this._headers = new Headers();
-       // this._headers.append('Content-Type', 'multipart/form-data');
         this._headers.append('Authorization', <string>JSON.parse(localStorage.getItem('currentUser')).token);
         this._options = new RequestOptions({ headers: this._headers });
 
         let response = await this._http
-            .post(this._apiURL + '/upload/doc', toPost, this._options)
+            .post(this._apiURL + '/upload/doc', formData, this._options)
             .toPromise();
         if (response.json().result) return response.json().data;
         else {

@@ -106,9 +106,9 @@ export class LessonStudentComponent {
                 swipeable: true
             });
         });
+         
 
         this.lessons.forEach((lesson, index) => {
-            
             var anchor = document.createElement("a");
             anchor.setAttribute("style", "font-size:0.85rem;");
             anchor.setAttribute("class", index < 4 ? "col s12 m3 btn option white green-text text-darken-2" : "col s12 m3 btn white green-text text-darken-2 option hide")
