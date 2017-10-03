@@ -123,7 +123,7 @@ export class LessonTeacherComponent {
                     Presence: presence.Presence,
                     Material: presence.Material,
                     Behavior: presence.Behavior,
-                })
+                });
             }
         } else {
             element.className = element.className.replace("container","");
@@ -135,6 +135,8 @@ export class LessonTeacherComponent {
         var lesson = document.getElementById("lesson");
         lesson.className = lesson.className.replace("hide","");
         var lessonInfo = document.getElementById("lessonInfo");
-        lessonInfo.className += " hide"
+        if(!lessonInfo.className.includes("hide")){
+            lessonInfo.className += " hide"
+        }
     }
 }

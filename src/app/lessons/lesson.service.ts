@@ -74,6 +74,10 @@ export class LessonService {
         }
     }
 
+    public async createLesson(lesson: Lesson){
+
+    }
+
     private _handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || "Server error");
