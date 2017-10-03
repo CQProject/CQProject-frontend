@@ -39,6 +39,8 @@ import { UserDetailsComponent } from "./users/user-details.component";
 import { StudentHomeComponent } from "./account/student-home.component";
 import { NotificationReceivedComponent } from "./notifications/notification-received.component";
 import { NotificationSentComponent } from "./notifications/notification-sent.component";
+import { StudentGuardFormComponent } from "./forms/student-guardian-form.component";
+import { LessonFormComponent } from "./forms/lesson-form.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
@@ -85,7 +87,9 @@ import { NoticeService } from "./schools/notice.service";
           { path: 'room', component: RoomFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
           { path: 'sensor', component: SensorFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
           { path: 'class', component: ClassFormComponent },
-          { path: 'user', component:UserFormComponent}
+          { path: 'user', component:UserFormComponent},
+          { path: 'studguard', component:StudentGuardFormComponent},
+          { path: 'lesson', component:LessonFormComponent}
         ]
       },
       {
@@ -148,7 +152,9 @@ import { NoticeService } from "./schools/notice.service";
     NotificationReceivedComponent,
     NotificationSentComponent,
     HomepageComponent,
-    UserFormComponent
+    UserFormComponent,
+    StudentGuardFormComponent,
+    LessonFormComponent
     //Pipe
   ],
   providers: [

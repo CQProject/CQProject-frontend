@@ -61,6 +61,19 @@ export class TimeService {
         }
     }
 
+    public async createTimes(time: Time) {
+        console.log(time.StartTime)
+        let res = await this._http
+            .post(this._apiURL + '/time', time, this._options).toPromise();
+        if (res.json().result) return res.json().data;
+        else {
+            console.log(res.json().info);
+            return null;
+        }
+    }
+
+
+
     private _handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || "Server error");

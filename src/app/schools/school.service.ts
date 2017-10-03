@@ -46,22 +46,26 @@ export class SchoolService {
         }
     }
 
-    public async createSchool(school: School): Promise<boolean>{
+    public async createSchool(school: School): Promise<boolean> {
         var toPost = JSON.stringify({
             Name: school.Name,
             Logo: school.Logo,
-            ProfilePicture : school.ProfilePicture,
-            Acronym : school.Acronym,
-            About : school.About
+            ProfilePicture: school.ProfilePicture,
+            Acronym: school.Acronym,
+            About: school.About
         });
-        
-        this._headers.append('Authorization', <string> JSON.parse(localStorage.getItem('currentUser')).token);
-        this._options = new RequestOptions({ headers: this._headers });
-        
-        let res = await this._http
-        .post(this._apiURL + '/school', toPost, this._options).toPromise();
 
-        return res.json().result;
+        this._headers.append('Authorization', <string>JSON.parse(localStorage.getItem('currentUser')).token);
+        this._options = new RequestOptions({ headers: this._headers });
+
+        let res = await this._http
+            .post(this._apiURL + '/school', toPost, this._options).toPromise();
+
+        if (res.json().result) return res.json().data;
+        else {
+            console.log(res.json().info);
+            return null;
+        }
     }
 
     private _handleError(error: Response) {

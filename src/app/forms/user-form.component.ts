@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { UserService } from "../users/user.service";
+import { FileService } from "../utils/files.service";
 import { AdminGuard } from "../utils/auth-guard.service";
 
 import { UserDetailsToPost } from '../users/iUsers';
@@ -13,13 +14,15 @@ import { UserDetailsToPost } from '../users/iUsers';
 
 export class UserFormComponent {
 
-    roleID: number;
     checked: boolean;
     user: UserDetailsToPost;
     confirmed: boolean;
+    photo: any;
+    curriculum: any;
 
     constructor(
-        private _userService: UserService,
+        public _userService: UserService,
+        public _fileService: FileService,
         public _adminGuard: AdminGuard
     ) {
         this.checked = false;
@@ -27,6 +30,7 @@ export class UserFormComponent {
         this.user = new UserDetailsToPost();
     }
 
+    
     public confirmPassword(event:any){
         var confPass = event.target.value;
         if(this.user.Password!=null && confPass!=null){
@@ -40,7 +44,19 @@ export class UserFormComponent {
         }
     }
 
-    public createUser(){
-        console.log(this.user)
+    public getProfileImage(event) {
+        this.photo = event.target.files[0];
+        console.log(this.curriculum)
+    }
+
+    public getCurriculum(event){
+        this.curriculum = event.target.files[0];
+    }
+
+    public async createUser(){
+        this.user.Photo = await this._fileService.imageUpload(this.photo);
+        this.user.Curriculum = await this._fileService.fileUpload(this.curriculum);
+        let result = await this._userService.createUser(this.user);
+        if (result) location.reload();
     }
 }

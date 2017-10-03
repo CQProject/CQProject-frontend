@@ -21,7 +21,8 @@ export interface UserDetails {
     Function: string, 
     Curriculum: string,
     DateOfBirth: Date,
-    IsActive: boolean
+    IsActive: boolean,
+    RoleID: number
 }
 
 export class UserDetailsToPost {
@@ -39,4 +40,5 @@ export class UserDetailsToPost {
     Curriculum: string;
     DateOfBirth: Date;
     IsActive: boolean;
+    RoleID: number;
 }
