@@ -21,7 +21,7 @@ export class LessonFormComponent {
     lessons: number;
     schedule: Schedule;
     students: any[];
-    lesson: Lesson;
+    lesson: any;
 
     constructor(
         private _lessonService: LessonService,
@@ -29,12 +29,17 @@ export class LessonFormComponent {
         private _userService: UserService,
         private _route: ActivatedRoute
     ) {
-
     }
 
     public async ngOnInit() {
         let scheduleID;
         this._route.params.subscribe(params => scheduleID = params['id']);
+        this.lesson = {
+            Summary:null,
+            Homework:null,
+            Observations:null,
+            ScheduleFK: scheduleID
+        }
         this.schedule = await this._scheduleService.getSchedule(scheduleID);
         this.lessons = (await this._lessonService.getLessonBySubject(this.schedule.SubjectFK, this.schedule.ClassFK)).length + 1;
         await this.showClass();
@@ -51,7 +56,8 @@ export class LessonFormComponent {
                 Student: student.Name,
                 Presence: false,
                 Material: false,
-                Behavior: null,
+                Behavior: 4,
+                LessonFK:null
             });
         }
     }
@@ -60,7 +66,12 @@ export class LessonFormComponent {
         this.students[index].Behavior = behavior;
     }
 
-    public createLesson(){
-        //this._lessonService.
+    public async createLesson(){
+        var lessonID = await this._lessonService.createLesson(this.lesson);
+        for(let student of this.students){
+            student.LessonFK = lessonID;
+            await this._lessonService.createPostFaults(student);
+        }
+        window.location.reload();
     }
 }

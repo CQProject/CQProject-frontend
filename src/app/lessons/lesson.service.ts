@@ -74,8 +74,31 @@ export class LessonService {
         }
     }
 
-    public async createLesson(lesson: Lesson){
+    public async createLesson(lesson: any){
+        var toPost = JSON.stringify({
+            Summary:lesson.Summary,
+            Homework:lesson.Homework,
+            Observations:lesson.Observations,
+            Day: Date.now(),
+            ScheduleFK: lesson.ScheduleFK
+        });
+        let response = await this._http
+            .post(this._apiURL + `/lesson/summary`,toPost, this._options)
+            .toPromise();
+        if (response.json().result) return response.json().data;
+        else {
+            console.log(response.json().info);
+        }
+    }
 
+    public async createPostFaults(lessonStudent:any){
+        let response = await this._http
+        .post(this._apiURL + `/lesson/faults`,JSON.stringify(lessonStudent), this._options)
+        .toPromise();
+        if (response.json().result)  return response.json().data;
+        else {
+            console.log(response.json().info);
+        }
     }
 
     private _handleError(error: Response) {
