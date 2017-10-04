@@ -23,39 +23,42 @@
     </div>
 </div>
 
-<ng-template #elseblock>
-    <div class="card-panel white">
-        <div *ngFor="let eval of evaluations; let i=index">
-            <div class="row left-align">
-                <label class="col s4">{{eval?.EvaluationDate | date:'shortDate'}}</label>
-                <label class="col s5">{{eval?.Subject}}</label>
-                <a (click)="select(i)" class="btn col s3 green center">Classificações</a>
+<ng-template #elseblock >
+    <div class="row">
+    <div class="col s10 offset-s1">
+        <div class="card-panel white">
+            <div *ngFor="let eval of evaluations; let i=index">
+                <div class="row left-align">
+                    <label class="col s4">{{eval?.EvaluationDate | date:'shortDate'}}</label>
+                    <label class="col s5">{{eval?.Subject}}</label>
+                    <a (click)="select(i)" class="btn col s3 green center">Classificações</a>
+                </div>
+            </div>
+        </div>
 
+        <div id="evaluationModal" class="modal">
+            <div class="modal-content" style="max-width: 100%;">
+                <span (click)="closeNotifDetails()" class="btn green darken-2" style="margin-left:90%">&times;</span>
+                <div class="row panel">
+                    <h3 class="col s12 center">Classificações</h3>
+                    <h5 class="col s8 left-align">{{selected?.Subject}}</h5>
+                    <h5 class="col s4 right-align">{{selected?.EvaluationDate | date:'shortDate'}}</h5>
+                </div>
+
+                <div class="card-panel left-align">
+                    <table class="table">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Valor</th>
+                        </tr>
+                        <tr *ngFor="let student of selected?.Students">
+                            <td>{{student?.Name}}</td>
+                            <td>{{student?.Value}}</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-
-    <div id="evaluationModal" class="w3-modal">
-        <div class="w3-modal-content w3-card" style="max-width: 500px;">
-            <span (click)="hide()" class="w3-btn w3-display-topright w3-deep-orange">&times;</span>
-            <div class="w3-row w3-panel">
-                <h5 class="w3-col">Classificações</h5>
-                <h3 class="w3-col s8 w3-left-align">{{selected?.Subject}}</h3>
-                <h4 class="w3-col s4 w3-right-align">{{selected?.EvaluationDate | date:'shortDate'}}</h4>
-            </div>
-
-            <div class="w3-panel w3-left-align">
-                <table class="w3-table-all">
-                    <tr>
-                        <th>Nome</th>
-                        <th>Valor</th>
-                    </tr>
-                    <tr *ngFor="let student of selected?.Students">
-                        <td>{{student?.Name}}</td>
-                        <td>{{student?.Value}}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
     </div>
 </ng-template>

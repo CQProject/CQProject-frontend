@@ -37,6 +37,18 @@ export class EvaluationService {
         }
     }
 
+    public async getEvaluationsByTeacher(classID: number): Promise<Evaluation[]> {
+        let response = await this._http
+            .get(this._apiURL + `/evaluations/teacher/${classID}`, this._options)
+            .toPromise();
+
+        if (response.json().result) return response.json().data;
+        else {
+            console.log(response.json().info);
+            return null;
+        }
+    }
+
     public async getGrades(evaluationID: number): Promise<any> {
         let response = await this._http
             .get(this._apiURL + `/grades/evaluation/${evaluationID}`, this._options)

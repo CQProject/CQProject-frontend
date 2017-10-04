@@ -74,6 +74,7 @@ export class NotificationReceivedComponent {
         $("#notifReceived").modal('open');
         this.receivedNotifications[index].Read = true;
         this._service.read(notificationID).subscribe();
+        document.getElementById("notRecDescription").innerHTML = this.selected.Description;
     }
 
     public accept(notificationID: number) {

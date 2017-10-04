@@ -44,6 +44,7 @@ export class NotificationSentComponent {
         $("#notifSent").modal('open');
         this.selected = this.sentNotifications[index];
         this.getValidations(idNotif);
+        document.getElementById("notSentDescription").innerHTML = this.selected.Description;
     }
 
     public closeNotifDetails() {
