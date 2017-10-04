@@ -32,8 +32,6 @@ export class ClassPrimaryProfileComponent {
         let classID;
         let usID;
         this._route.params.subscribe(params => classID = params['id']);
-        this.class = await this._classService.getClassProfile(classID);
-        this.school = await this._schoolService.getSchool(this.class.SchoolFK);
 
         if (!isNaN(classID)) {
             this.class = await this._classService.getClassProfile(classID);

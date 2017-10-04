@@ -8,6 +8,7 @@ import { StudentGuard, GuardianGuard } from "../../utils/auth-guard.service";
 
 import { Evaluation } from '../../utils/iEvaluation';
 import { Class } from '../../classes/iClass';
+declare var $:any;
 
 @Component({
     selector: "class-evaluations",
@@ -19,7 +20,7 @@ export class ClassPrimaryEvaluationComponent {
     private file: any;
     private image: any;
     private evaluations: any[];
-    private selected:any;
+    private selected: any;
 
     constructor(
         private _evaluationService: EvaluationService,
@@ -32,10 +33,25 @@ export class ClassPrimaryEvaluationComponent {
     ) { this.evaluations = []; }
 
     public async ngOnInit() {
+        $(document).ready(function () {
+            $("#evaluationModal").modal({
+                dismissible: false
+            }),
+                $(window).on("hashchange", function () {
+                    $("#evaluationModal").modal('close')
+                })
+        })
+
         let classID;
         this._route.parent.params.subscribe(params => classID = params['id']);
-        let evaluations = await this._evaluationService.getEvaluationsByClass(classID);
-        for (let evaluation of evaluations) {
+        let userID = JSON.parse(localStorage.getItem('currentUser')).userID;
+        let allEvaluations = [];
+        if (this._studentGuard.canActivate()) {
+            allEvaluations = await this._evaluationService.getEvaluationsByClass(classID);
+        }else{
+            allEvaluations = await this._evaluationService.getEvaluationsByTeacher(userID);
+        }
+        for (let evaluation of allEvaluations) {
             let teacher = await this._userService.getProfile(evaluation.TeacherFK)
             let subject = await this._scheduleService.getSubject(evaluation.SubjectFK);
             let grades = await this._evaluationService.getGrades(evaluation.ID);
@@ -68,27 +84,21 @@ export class ClassPrimaryEvaluationComponent {
                     Students: students
                 });
             }
-
         }
         this.evaluations = this.evaluations.sort((a, b) => {
             if (a.EvaluationDate > b.EvaluationDate) return 1;
             if (a.EvaluationDate < b.EvaluationDate) return -1;
             return 0;
         });
-        console.log(this.evaluations)
     }
 
-    public select(id:number){
-        this.selected=this.evaluations[id];
-        this.show();
+    public select(id: number) {
+        $("#evaluationModal").modal('open');
+        this.selected = this.evaluations[id];
     }
 
-    public show() {
-        document.getElementById("evaluationModal").style.display = 'block';
-    }
-
-    public hide() {
-        document.getElementById("evaluationModal").style.display = 'none';
+    public closeNotifDetails() {
+        $("#evaluationModal").modal('close');
     }
 
 }
