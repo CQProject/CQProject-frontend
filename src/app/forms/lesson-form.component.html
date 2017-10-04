@@ -8,15 +8,15 @@
                 <h3>Lição nº {{lessons}}</h3>
             </div>
             <div class="input-field col s12">
-                <input id="summary" type="text">
+                <input [(ngModel)]="lesson.Summary" id="summary" name="summary" type="text">
                 <label for="summary">Sumários</label>
             </div>
             <div class="input-field col s12">
-                <input id="homework" type="text">
+                <input [(ngModel)]="lesson.Homework" id="homework" name="homework" type="text">
                 <label for="homework">Trabalhos de Casa</label>
             </div>
             <div class="input-field col s12">
-                <input id="observations" type="text">
+                <input [(ngModel)]="lesson.Observations" id="observations" name="observations" type="text">
                 <label for="observations">Observações</label>
             </div>
             <div class="col s12">
@@ -69,7 +69,7 @@
                                     <label for="Satisfatory{{student.StudentFK}}"></label>
                                 </p>
                                 <p style="display:inline">
-                                    <input name="{{student.StudentFK}}" (change)="chooseBehavior(i,4)" type="radio" id="Good{{student.StudentFK}}" />
+                                    <input checked name="{{student.StudentFK}}" (change)="chooseBehavior(i,4)" type="radio" id="Good{{student.StudentFK}}" />
                                     <label for="Good{{student.StudentFK}}"></label>
                                 </p>
                                 <p style="display:inline">

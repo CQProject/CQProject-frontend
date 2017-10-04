@@ -35,6 +35,7 @@ export class LessonTeacherComponent {
         this._route.params.subscribe(params => scheduleID = params['id']);
         this.schedule = await this._scheduleService.getSchedule(scheduleID);
         this.lessons = await this._lessonService.getLessonBySubject(this.schedule.SubjectFK, this.schedule.ClassFK);
+        this.orderLessonList();
         this.initLessonList();
         this.showLesson(0);
     }
@@ -138,5 +139,11 @@ export class LessonTeacherComponent {
         if(!lessonInfo.className.includes("hide")){
             lessonInfo.className += " hide"
         }
+    }
+
+    public orderLessonList(){
+        this.lessons.sort(function(a,b) {
+            return (a.ID > b.ID) ? -1 : ((b.ID > a.ID) ? 1 : 0);
+        });
     }
 }
