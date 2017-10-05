@@ -1,0 +1,42 @@
+<div class="container white" style="margin-bottom:25px">
+    <div class="center">
+        <h2 class="green-text text-darken-2">Enviar mensagem</h2>
+    </div>
+    <div class="row">
+        <form class="col s12 left-align">
+            <div class="col s10 offset-s1">
+                <div class="input-field row">
+                    <div class="col s2">
+                        Destinatário:
+                    </div>
+                    <div class="col s10">
+                        <div class="chip">
+                            <img [attr.src]="student?.Photo" class="responsive-img" style="max-height: 60px;"> {{student?.Name}}
+                        </div>
+                    </div>
+                </div>
+                <div class="input-field row">
+                    Assunto:
+                    <input [(ngModel)]="notification.Subject" type="text" name="Subject" required/>
+                </div>
+                <div class="row">
+                    <span class="col s12 grey-text">Alguma informação relativa à escola:</span>
+                    <div class="col s12">
+                        <textarea id="textareaDescription" name="Description" class="input" style="resize:none" rows="5" cols="8" required></textarea>
+                    </div>
+                </div>
+                <div class="col s5" style="margin-left:35px">
+                    <input type="checkbox" [(ngModel)]="notification.Urgency" id="Urgency" name="Urgency" />
+                    <label for="Urgency">Urgente?</label>
+                </div>
+                <div class="col s5" style="margin-left:35px">
+                    <input type="checkbox" [(ngModel)]="notification.Approval" name="Approval" id="Approval" />
+                    <label for="Approval">Para aprovar?</label>
+                </div>
+            </div>
+        </form>
+        <div class="center" style="padding:20px">
+            <button type="submit" class="btn waves-effect waves-light green darken-2" (click)="sendMessage()"><i class="material-icons right">send</i>Submeter</button>
+        </div>
+    </div>
+</div>

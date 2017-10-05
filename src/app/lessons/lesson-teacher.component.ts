@@ -53,7 +53,7 @@ export class LessonTeacherComponent {
         });
         var anchor = document.createElement("a");
         anchor.setAttribute("style", "font-size:0.85rem;");
-        anchor.setAttribute("class","col s12 m3 btn option white green-text text-darken-2")
+        anchor.setAttribute("class","col s12 m3 btn option lime white-text")
         anchor.innerHTML = "Criar Lição";
         anchor.onclick = () => { this.createLesson() };
         list.appendChild(anchor);
