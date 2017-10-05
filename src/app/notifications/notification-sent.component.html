@@ -35,7 +35,7 @@
             <div>
                 <div class="row">
                     <div class="col s2"><b>Data:</b></div>
-                    <div class="col s10"> {{selected?.Hour}}</div>
+                    <div class="col s10"> {{selected?.Hour | date}}</div>
                 </div>
                 <div class="row">
                     <div class="col s12">
@@ -44,9 +44,9 @@
                             <div class="col s6"><b>Aluno Associado:</b></div>
                         </div>
                         <div *ngFor="let validation of sentValidations" class="row" style="margin:0px">
-                                 <div class="col s6">{{validation.Receiver}}</div>  
-                                 <div class="col s6">{{validation?.Student}}</div>    
-                                 <div style="border-bottom:1px solid #eee"></div>
+                            <div class="col s6">{{validation.Receiver}}</div>
+                            <div class="col s6">{{validation?.Student}}</div>
+                            <div style="border-bottom:1px solid #eee"></div>
                         </div>
                     </div>
                 </div>
@@ -88,3 +88,20 @@
         </div>
     </div>
 </div>
+
+<!-- 
+<div class="fixed-action-btn" (click)="writeMessage()">
+    <a class="btn-floating btn-large waves-effect waves-light green darken-2"><i class="material-icons">edit</i></a>
+</div>
+
+Modal Structure 
+<div id="writeMessage" class="modal">
+    <div class="modal-content">
+        <div class="right-align">
+            <a (click)="closeWriteMessage()">
+                <i class="material-icons green-text text-darken-2" style="cursor:pointer">close</i>
+            </a>
+        </div>
+        <notification-form></notification-form>
+    </div>
+</div>-->

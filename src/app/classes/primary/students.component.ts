@@ -5,6 +5,7 @@ import { UserService } from '../../users/user.service';
 import { FileService } from '../../utils/files.service';
 import { ClassService } from "../class.service";
 import { UserProfile } from '../../users/iUsers';
+declare var $:any;
 
 @Component({ 
     selector: "primary-students",
@@ -14,6 +15,7 @@ import { UserProfile } from '../../users/iUsers';
 export class ClassPrimaryStudentsComponent {
 
     public students: UserProfile[];
+    public notification: any;
 
 
     constructor(
@@ -42,5 +44,14 @@ export class ClassPrimaryStudentsComponent {
         this.students.sort(function(a,b) {
             return (a.Name > b.Name) ? 1 : ((b.Name > a.Name) ? -1 : 0);
         }); 
+
+        this.notification = {
+            Subject: null,
+            Description: null,
+            Urgency: false,
+            Approval: false,
+            SenderFK: null,
+            ReceiverFK: null
+        }
     }
 }

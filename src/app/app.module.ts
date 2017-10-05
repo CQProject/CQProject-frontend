@@ -41,6 +41,7 @@ import { NotificationReceivedComponent } from "./notifications/notification-rece
 import { NotificationSentComponent } from "./notifications/notification-sent.component";
 import { StudentGuardFormComponent } from "./forms/student-guardian-form.component";
 import { LessonFormComponent } from "./forms/lesson-form.component";
+import { NotificationFormComponent } from "./notifications/notification-form.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
@@ -76,7 +77,8 @@ import { NoticeService } from "./schools/notice.service";
         children:[
           { path: '', redirectTo: 'received', pathMatch: 'full' },
           { path: 'received', component: NotificationReceivedComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] }},
-          { path: 'sent', component: NotificationSentComponent, canActivate: [AuthGuard],  data: { roles: [1, 2, 3, 4, 5, 6] }}     
+          { path: 'sent', component: NotificationSentComponent, canActivate: [AuthGuard],  data: { roles: [1, 2, 3, 4, 5, 6] }},
+          { path: 'sendToUser/:id', component: NotificationFormComponent} 
       ] },
       {
         path: 'form', component: MainFormComponent, canActivate: [AuthGuard], data: { roles: [6] },
@@ -154,7 +156,8 @@ import { NoticeService } from "./schools/notice.service";
     HomepageComponent,
     UserFormComponent,
     StudentGuardFormComponent,
-    LessonFormComponent
+    LessonFormComponent,
+    NotificationFormComponent
     //Pipe
   ],
   providers: [

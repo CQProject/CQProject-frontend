@@ -34,9 +34,12 @@ export class NotificationSentComponent {
             $("#notifSent").modal({
                 dismissible: false
             }),
+            $("#writeMessage").modal({
+                dismissible: false
+            }),
                 $(window).on("hashchange", function () {
                     $("#notifSent").modal('close')
-                })
+                })    
         })
     }
 
