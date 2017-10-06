@@ -3,20 +3,20 @@
         <table>
             <thead>
                 <tr>
-                    <th>Data da Avaliação:</th>
-                    <th>Disciplina:</th>
-                    <th>Objetivo da Avaliação:</th>
-                    <th>Nota:</th>
-                    <th>Professor:</th>
+                    <th>Data</th>
+                    <th>Disciplina</th>
+                    <th>Nota</th>
+                    <th>Professor</th>
+                    <th>Objetivo</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let eval of evaluations; let i=index" class="row center-align">
                     <td>{{eval?.EvaluationDate | date:'shortDate'}}</td>
                     <td>{{eval?.Subject}}</td>
-                    <td>{{eval?.Purport}}</td>
                     <td>{{eval?.Grade}}</td>
                     <td>{{eval?.Teacher}}</td>
+                    <td>{{eval?.Purport}}</td>
                 </tr>
             </tbody>
         </table>

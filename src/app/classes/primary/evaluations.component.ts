@@ -52,10 +52,10 @@ export class ClassPrimaryEvaluationComponent {
             allEvaluations = await this._evaluationService.getEvaluationsByTeacher(userID);
         }
         for (let evaluation of allEvaluations) {
-            let teacher = await this._userService.getProfile(evaluation.TeacherFK)
             let subject = await this._scheduleService.getSubject(evaluation.SubjectFK);
-            let grades = await this._evaluationService.getGrades(evaluation.ID);
             if (this._studentGuard.canActivate()) {
+                let teacher = await this._userService.getProfile(evaluation.TeacherFK);
+                let grades = await this._evaluationService.getGrades(evaluation.ID);
                 this.evaluations.push({
                     ID: evaluation.ID,
                     Purport: evaluation.Purport,
@@ -66,22 +66,12 @@ export class ClassPrimaryEvaluationComponent {
                     Grade: grades.Value
                 });
             } else {
-                let students = [];
-                for (let grade of grades) {
-                    let student = await this._userService.getProfile(grade.StudentFK);
-                    students.push({
-                        Name: student.Name,
-                        Value: grade.Value
-                    })
-                }
                 this.evaluations.push({
                     ID: evaluation.ID,
                     Purport: evaluation.Purport,
                     EvaluationDate: evaluation.EvaluationDate,
                     Subject: subject.Name,
-                    TeacherFK: teacher.ID,
-                    Teacher: teacher.Name,
-                    Students: students
+                    TeacherFK: evaluation.TeacherFK
                 });
             }
         }
@@ -90,11 +80,33 @@ export class ClassPrimaryEvaluationComponent {
             if (a.EvaluationDate < b.EvaluationDate) return -1;
             return 0;
         });
+        console.log(this.evaluations);
     }
 
-    public select(id: number) {
+    public async select(id: number) {
         $("#evaluationModal").modal('open');
-        this.selected = this.evaluations[id];
+
+        let teacher = await this._userService.getProfile(this.evaluations[id].TeacherFK);
+        let grades = await this._evaluationService.getGrades(this.evaluations[id].ID);
+
+        let students = [];
+        for (let grade of grades) {
+            let student = await this._userService.getProfile(grade.StudentFK);
+            students.push({
+                Name: student.Name,
+                Value: grade.Value
+            })
+        }
+
+        this.selected = {
+            ID: this.evaluations[id].ID,
+            Purport: this.evaluations[id].Purport,
+            EvaluationDate: this.evaluations[id].EvaluationDate,
+            Subject: this.evaluations[id].Subject,
+            TeacherFK: teacher.ID,
+            Teacher: teacher.Name,
+            Students: students
+        }
     }
 
     public closeNotifDetails() {
