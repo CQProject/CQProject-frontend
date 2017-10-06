@@ -59,6 +59,7 @@ import { SensorService } from "./sensors/sensor.service";
 import { DocumentService } from "./utils/document.service";
 import { EvaluationService } from "./utils/evaluation.service";
 import { NoticeService } from "./schools/notice.service";
+import { ParentingService } from "./users/parenting.service";
 //Pipes
 
 @NgModule({
@@ -182,7 +183,8 @@ import { NoticeService } from "./schools/notice.service";
     SensorService,
     DocumentService,
     EvaluationService,
-    NoticeService
+    NoticeService,
+    ParentingService
   ],
   bootstrap: [AppComponent]
 })

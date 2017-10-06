@@ -16,11 +16,13 @@
                     </div>
                 </div>
                 <div class="input-field row">
-                    Assunto:
-                    <input [(ngModel)]="notification.Subject" type="text" name="Subject" required/>
+                    <div class="col s12">
+                        Assunto:
+                        <input [(ngModel)]="notification.Subject" type="text" name="Subject" required/>
+                    </div>
                 </div>
                 <div class="row">
-                    <span class="col s12 grey-text">Alguma informação relativa à escola:</span>
+                    <span class="col s12">Descrição:</span>
                     <div class="col s12">
                         <textarea id="textareaDescription" name="Description" class="input" style="resize:none" rows="5" cols="8" required></textarea>
                     </div>
