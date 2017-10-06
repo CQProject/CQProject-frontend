@@ -44,20 +44,20 @@ export class RoomComponent {
                 belowOrigin:true
             })
         })    
-        
+        this.room = await this._roomService.getRoom(roomID);
         this._sensorService
             .getSensorsByRoom(roomID)
             .subscribe(data => {
                 this.sensors = data;
+                this.info(0);
                 console.log(data);
             });
-        this.room = await this._roomService.getRoom(roomID);
-        this.info(0)
     }
 
     public info(index: number) {
         this.hide();
         this.selectedSensor = this.sensors[index];
+        console.log(this.selectedSensor)
         this._sensorService
             .getSensorsValue(this.selectedSensor.ID)
             .subscribe(data => {

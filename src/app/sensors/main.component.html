@@ -3,7 +3,7 @@
         <ul class="row green darken-2">
             <li class="col s4 white-text flow-text green darken-2" style="padding:0px"><span style="margin-left:25px">{{school?.Name}}</span></li>
             <li *ngFor="let floor of floors; let i=index" class="flow-text center-align" [ngClass]="nCols != 0 ? 'col s'+nCols : null" [routerLink]="['floor', floor?.ID]" style="text-decoration:none;padding:0px;cursor:pointer">
-                <div [attr.id]="'option'+i" class="tablink green" (click)="chooseOption(i);">
+                <div [attr.id]="'option'+i" class="tablink green">
                     {{floor?.Name}}
                 </div>
             </li>

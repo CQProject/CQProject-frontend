@@ -34,13 +34,6 @@ export class FloorMainComponent {
         }else{
             this.nCols = 6 / this.floors.length;
         }
-    }
-
-    public chooseOption(id: string) {
-        var tablink = document.getElementsByClassName("tablink");
-        for (var i = 0; i < tablink.length; i++)
-            tablink[i].className = tablink[i].className.replace("w3-border-green", " ");
-        var element = document.getElementById('option'+id);
-        element.className += " w3-border-green";
+        this._router.navigate(['/building/school/',schoolID,'floor',this.floors[0].ID]);
     }
 }
