@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { NotificationService } from "./notification.service";
 import { FileService } from "./../utils/files.service";
 import { UserService } from "../users/user.service";
+import { ParentingService } from "../users/parenting.service";
 import { Notification, ReceivedNotification } from "./iNotifications";
 import { Validation, SentValidation } from "./iValidations";
 import { UserProfile } from "../users/iUsers";
@@ -24,7 +25,9 @@ export class NotificationFormComponent {
         private _userService: UserService,
         private _router: Router,
         private _route: ActivatedRoute,
-        private _fileService: FileService
+        private _fileService: FileService,
+        private _notificationService: NotificationService,
+        private _parentingService: ParentingService
     ) {
         this.notification = {
             Subject: null,
@@ -42,6 +45,7 @@ export class NotificationFormComponent {
         let SenderFK = JSON.parse(localStorage.getItem('currentUser')).userID;
         this.student = await this._userService.getProfile(ReceiverFK);
         this.student.Photo = await this._fileService.imageDownloadAsync(this.student.Photo);
+        ReceiverFK = await this._parentingService.getGuardiansByUser(ReceiverFK);
         this.notification.SenderFK = SenderFK;
         this.notification.ReceiverFK = ReceiverFK;
         tinymce.init({
@@ -60,7 +64,10 @@ export class NotificationFormComponent {
         });
     }
 
-    public sendMessage(){
-        console.log(this.notification)
+    public async sendMessage(){
+        let res = this._notificationService.sendToUser(this.notification);
+        if(res){
+            location.reload();
+        }
     }
 }
