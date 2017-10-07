@@ -34,21 +34,16 @@ export class AccountNavbarComponent {
             $('.button-collapse').sideNav()
         });
 
-
-        console.log("vai verificar se está algum utilizador");
         if (JSON.parse(localStorage.getItem('currentUser')) != null) {
-            console.log(JSON.parse(localStorage.getItem('currentUser')));
             if (await this._service.verifyToken()) {
-                console.log("token válido");
                 this.user = JSON.parse(localStorage.getItem('currentUser'));
                 this.authorized = true;
             } else {
-                console.log("token inválido");
                 this.mail = JSON.parse(localStorage.getItem('currentUser')).email;
                 this.pass = JSON.parse(localStorage.getItem('currentUser')).password;
                 this.login();
             }
-        } else { console.log("não está autenticado"); }
+        }
     }
 
     public login() {
@@ -58,7 +53,6 @@ export class AccountNavbarComponent {
                 data => {
                     this.user = data;
                     if (data != null) {
-                        console.log(data);
                         localStorage.setItem('currentUser', JSON.stringify(this.user));
                         this.authorized = true;
                         this._router.navigate(['home']);
@@ -77,16 +71,6 @@ export class AccountNavbarComponent {
         localStorage.removeItem('currentUser');
         this.authorized = false;
         location.reload();
-    }
-
-    public dropdownIn(elementID: string) {
-        var element = document.getElementById(elementID);
-        element.className += " w3-show";
-    }
-
-    public dropdownOut(elementID: string) {
-        var element = document.getElementById(elementID);
-        element.className = element.className.replace(" w3-show", "");
     }
 
     public closeNavMobile(){

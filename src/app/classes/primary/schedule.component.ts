@@ -6,6 +6,7 @@ import { UserService } from "../../users/user.service";
 import { RoomService } from "../../sensors/room.service";
 import { ClassService } from "../class.service";
 import { TimeService } from "../../utils/time.service";
+import { AdminGuard, GuardianGuard, SecretaryGuard, StudentGuard, TeacherGuard } from "../../utils/auth-guard.service";
 
 import { Schedule } from "../../utils/interfaceSchedule";
 import { Time } from "../../utils/interfaceTime";
@@ -28,7 +29,6 @@ export class ClassPrimaryScheduleComponent {
     day: string[];
     cla: Class;
     usID: number;
-    rol: number[];
 
     constructor(
         private _scheduleService: ScheduleService,
@@ -38,7 +38,12 @@ export class ClassPrimaryScheduleComponent {
         private _timeService: TimeService,
         private _router: Router,
         private _route: ActivatedRoute,
-        private _changeDetetor: ChangeDetectorRef
+        private _changeDetetor: ChangeDetectorRef,
+        public _adminGuard: AdminGuard,
+        public _guardianGuard: GuardianGuard,
+        public _studentGuard:StudentGuard,
+        public _teacherGuard:TeacherGuard,
+        public _secretaryGuard:SecretaryGuard
     ) {
         this.day = ["Segunda feira", "Terça feira", "Quarta feira", "Quinta feira", "Sexta feira"];
         this.week = [];
@@ -48,7 +53,6 @@ export class ClassPrimaryScheduleComponent {
     public async ngOnInit() {
         let classID;
         this._route.parent.params.subscribe(params => classID = +params["id"]);
-        this.rol = JSON.parse(localStorage.getItem('currentUser')).roles;
         $(window).on('hashchange', function () {
             $('.modal-overlay').remove();
         })
@@ -129,7 +133,7 @@ export class ClassPrimaryScheduleComponent {
         $("#scheduleModal").modal('open');
     }
 
-    public hide() {
+    public close() {
         $("#scheduleModal").modal('close');
     }
 

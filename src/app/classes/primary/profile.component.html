@@ -1,4 +1,4 @@
-<nav>
+<nav *ngIf="!_studentGuard.canActivate() && !_guardianGuard.canActivate()">
     <div class="nav-wrapper">
         <ul class="row green">
             <li id="schedule" class="tablink col s3 green center-align green darken-2" (click)="chooseOption('schedule')" style="padding:0px">
@@ -19,6 +19,27 @@
             <li id="student" class="tablink col s3 green center-align" (click)="chooseOption('student')" style="padding:0px">
                 <a *ngIf="!_studentGuard.canActivate()" class="col" [routerLink]="['student']" class="flow-text">
                        Alunos
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<nav *ngIf="_studentGuard.canActivate() || _guardianGuard.canActivate()">
+    <div class="nav-wrapper">
+        <ul class="row green">
+            <li id="schedule" class="tablink col s4 green center-align green darken-2" (click)="chooseOption('schedule')" style="padding:0px">
+                <a class="col s12" [routerLink]="['schedule']" class="flow-text">
+                        Horário
+                </a>
+            </li>
+            <li id="evaluation" class="tablink col s4 green center-align" (click)="chooseOption('evaluation')" style="padding:0px">
+                <a class="col s12" [routerLink]="['evaluation']" class="flow-text">
+                        Avaliações
+                </a>
+            </li>
+            <li id="document" class="tablink col s4 green center-align" (click)="chooseOption('document')" style="padding:0px">
+                <a class="col s12" [routerLink]="['document']" class="flow-text">
+                       Documentos
                 </a>
             </li>
         </ul>

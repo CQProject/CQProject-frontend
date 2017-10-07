@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col s8 offset-s2">
+        <div class="hide-on-small-only row">
+            <div *ngFor="let student of students" class="col s4 m3">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img [attr.src]="student?.Photo" class="responsive-img">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator green-text text-darken-4 center-align">{{student?.Name}}</span>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title green-text text-darken-4 center-align">{{student?.Name}}</span>
+                        <br>
+                        <div class="card-action">
+                            <a class="card-action green-text" [routerLink]="['/primary-class/', student?.ClassID]">Aulas</a>
+                        </div>
+                        <div class="card-action">
+                            <a class="card-action green-text" [routerLink]="['/user/details/', student?.UserID]">Perfil</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

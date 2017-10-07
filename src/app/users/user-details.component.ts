@@ -1,6 +1,6 @@
 import { concat } from 'rxjs/operator/concat';
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { AccountService } from "../account/account.service";
 import { AdminGuard,AssistantGuard,GuardianGuard,SecretaryGuard,StudentGuard,TeacherGuard } from "../utils/auth-guard.service"
 import { Account } from "../account/iAccount";
@@ -25,6 +25,7 @@ export class UserDetailsComponent {
         private _userService: UserService,
         private _fileService: FileService,
         private _router: Router,
+        private _route: ActivatedRoute,
         public _adminGuard: AdminGuard,
         public _assistantGuard: AssistantGuard,
         public _guardianGuard: GuardianGuard,
@@ -36,7 +37,8 @@ export class UserDetailsComponent {
     }
 
     public async ngOnInit() {
-        let userID = JSON.parse(localStorage.getItem('currentUser')).userID;
+        let userID;
+        this._route.params.subscribe(params => userID = +params["id"]);
         this.profileDetails = await this._userService.getUserDetails(userID);
         this.profileToPost = this.profileDetails;
         await this._fileService.imageDownload(this.profileDetails.Photo)

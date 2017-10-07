@@ -32,12 +32,15 @@ export class LessonStudentComponent {
     ) { this.lessons = []; }
 
     public async ngOnInit() {
-        let scheduleID;
-        $(document).ready(function(){
+        $(document).ready(function () {
+            $('ul.tabs').tabs({
+                swipeable: true
+            });
             $('.collapsible').collapsible();
-          });
+        });
+
+        let scheduleID;
         this._route.params.subscribe(params => scheduleID = params['id']);
-        console.log(scheduleID)
         let schedule = await this._scheduleService.getSchedule(scheduleID);
         let lessons = await this._lessonService.getLessonBySubject(schedule.SubjectFK, schedule.ClassFK);
         var student;
@@ -68,7 +71,6 @@ export class LessonStudentComponent {
                 ]
             })
         }
-        console.log(this.lessons)
     }
 
     public async isGuardian(lessons: Lesson[]) {
@@ -92,29 +94,21 @@ export class LessonStudentComponent {
                 Student: students
             });
         }
-        console.log(this.lessons)
     }
 
     initLessonList() {
         this.index = 0;
         var list = document.getElementById("list");
-        var ul = document.createElement("ul");
-
-        ul.setAttribute("class", "tabs");
-        $(document).ready(function () {
-            $('ul.tabs').tabs({
-                swipeable: true
-            });
-        });
-         
 
         this.lessons.forEach((lesson, index) => {
+            var li = document.createElement("li");
+            li.setAttribute("class", index < 4 ? "col s12 m3 tab option" : "col s12 m3 tab option hide");
             var anchor = document.createElement("a");
-            anchor.setAttribute("style", "font-size:0.85rem;");
-            anchor.setAttribute("class", index < 4 ? "col s12 m3 btn option white green-text text-darken-2" : "col s12 m3 btn white green-text text-darken-2 option hide")
             anchor.innerHTML = "Lição nº" + (this.lessons.length - index);
+            anchor.setAttribute("class", index == 0 ? "active green-text text-darken-2" : "green-text text-darken-2")
             anchor.onclick = () => { this.showLesson(index) };
-            list.appendChild(anchor);
+            li.appendChild(anchor);
+            list.appendChild(li);
         });
         
     }

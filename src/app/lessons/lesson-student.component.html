@@ -1,84 +1,112 @@
 <div class="row">
-    <div class="col s8 offset-s2">
-        <div class="row" style="margin-top:20px">
-            <a (click)="lessLesson()" class="col m1 hide-on-small btn center-align green"><i class="material-icons">keyboard_arrow_left</i></a>
+    <div class="col s12 l10 offset-l1">
+        <div class="row" style="margin-top:20px; cursor: pointer">
+            <a (click)="lessLesson()" class="col m1 hide-on-small-only btn green" style="height: 48px;position: relative;"><i class="material-icons" style="position: absolute; top:18%; right: 35%">keyboard_arrow_left</i></a>
             <a (click)="lessLesson()" class="col s12 hide-on-med-and-up btn center-align green"><i class="material-icons">keyboard_arrow_up</i></a>
             <div class="col m10 s12">
-                <div id="list" class="row">
-                </div>
+                <ul id="list" class="tabs"></ul>
             </div>
-            <a (click)="moreLesson()" class="col m1 hide-on-small-only btn center-align green"><i class="material-icons">keyboard_arrow_right</i></a>
+            <a (click)="moreLesson()" class="col m1 hide-on-small-only btn green" style="height: 48px;position: relative;"><i class="material-icons" style="position: absolute; top:18%;right: 35%">keyboard_arrow_right</i></a>
             <a (click)="moreLesson()" class="col s12 hide-on-med-and-up btn center-align green"><i class="material-icons">keyboard_arrow_down</i></a>
         </div>
         <div class="container card z-depth-4 white" style="width:100%;">
             <div class="lesson row section" style="padding:24px">
-                <div class="col s12 right-align"><a class="btn lime"><i class="material-icons">edit</i></a></div>
-                <div class="col s6 m8 left-align">
+                <div class="col s6 m8">
                     <h3>Lição nº{{selected?.Description}}</h3>
                 </div>
                 <div class="col s6 m4 right-align">
-                    <h5>{{selected?.Day}}</h5>
+                    <h5>{{selected?.Day | date:'dd/MM/y'}}</h5>
                 </div>
-                <div class="col s12" style="border-top:2px solid #000"><br></div>
+                <div class="col s12" style="border-top:2px solid #000"><br><br></div>
                 <div class="col s12">
-                    <hr>
-                </div>
-                <div *ngIf="_guardianGuard.canActivate()" class="col m5 hide-on-small-only left-align" style="border-bottom:1px solid #000">Nome</div>
-                <div class="col m2 hide-on-small-only" style="border-bottom:1px solid #F0F0F0">Presença</div>
-                <div class="col m2 hide-on-small-only" style="border-bottom:1px solid #F0F0F0">Material</div>
-                <div class="col m3 hide-on-small-only" style="border-bottom:1px solid #F0F0F0">Comportamento</div>
-                <div *ngIf="_guardianGuard.canActivate()" class="col s5 hide-on-med-and-up" style="border-right:1px solid #F0F0F0">Nome</div>
-                <div class="col s2 hide-on-med-and-up" style="border-bottom:1px solid #F0F0F0">P.</div>
-                <div class="col s2 hide-on-med-and-up" style="border-bottom:1px solid #F0F0F0">M.</div>
-                <div class="col s3 hide-on-med-and-up" style="border-bottom:1px solid #F0F0F0">C.</div>
-                <div class="col s12">
-                    <div *ngFor="let student of selected?.Student">
-                        <div *ngIf="_guardianGuard.canActivate()" class="col s5 left-align">
-                            <h4>{{student?.Student}}</h4>
+                    <div *ngIf="_guardianGuard.canActivate()">
+                        <div class="col m5 hide-on-small-only" style="border-bottom:1px solid #F0F0F0">Nome</div>
+                        <div class="col m2 hide-on-small-only center-align" style="border-bottom:1px solid #F0F0F0">Presença</div>
+                        <div class="col m2 hide-on-small-only center-align" style="border-bottom:1px solid #F0F0F0">Material</div>
+                        <div class="col m3 hide-on-small-only center-align" style="border-bottom:1px solid #F0F0F0">Comportamento</div>
+                        <div class="col s5 hide-on-med-and-up" style="border-right:1px solid #F0F0F0">Nome</div>
+                        <div class="col s2 hide-on-med-and-up center-align" style="border-bottom:1px solid #F0F0F0">P.</div>
+                        <div class="col s2 hide-on-med-and-up center-align" style="border-bottom:1px solid #F0F0F0">M.</div>
+                        <div class="col s3 hide-on-med-and-up center-align" style="border-bottom:1px solid #F0F0F0">C.</div>
+                        <div *ngFor="let student of selected?.Student">
+                            <div class="col s5">
+                                <h5>{{student?.Student}}</h5>
+                            </div>
+                            <div class="col s2 section center-align" style="padding:12px">
+                                <label *ngIf="student?.Presence; else elseBlock">&#10004;</label>
+                                <ng-template #elseBlock>&#10008;</ng-template>
+                            </div>
+                            <div class="col s2 section center-align" style="padding:12px">
+                                <label *ngIf="student?.Material; else elseBlock">&#10004;</label>
+                                <ng-template #elseBlock>&#10008;</ng-template>
+                            </div>
+                            <div class="col s3 section center-align" style="padding:12px">
+                                <label [ngSwitch]="student?.Behavior">
+                                    <i *ngSwitchCase="1" class="material-icons" style="color: #8B0000">brightness_1</i>
+                                    <i *ngSwitchCase="2" class="material-icons" style="color: #FF4000">brightness_1</i>
+                                    <i *ngSwitchCase="3" class="material-icons" style="color: #FFD700">brightness_1</i>
+                                    <i *ngSwitchCase="4" class="material-icons" style="color: #9ACD32">brightness_1</i>
+                                    <i *ngSwitchDefault class="material-icons" style="color: #008000;">brightness_1</i>
+                                </label>
+                            </div>
+                            <div class="col s12" style="border-top:1px solid #F0F0F0"></div>
                         </div>
-                        <div class="col s2 section left-align" style="padding:12px">
-                            <label *ngIf="student?.Presence; else elseBlock">&#10004;</label>
-                            <ng-template #elseBlock>&#10008;</ng-template>
-                        </div>
-                        <div class="col s2 section left-align" style="padding:12px">
-                            <label *ngIf="student?.Material; else elseBlock">&#10004;</label>
-                            <ng-template #elseBlock>&#10008;</ng-template>
-                        </div>
-                        <div class="col s3 section left-align" style="padding:12px">
-                            <label [ngSwitch]="student?.Behavior">
-                        <i *ngSwitchCase="1" class="material-icons" style="color: #8B0000">brightness_1</i>
-                        <i *ngSwitchCase="2" class="material-icons" style="color: #FF4000">brightness_1</i>
-                        <i *ngSwitchCase="3" class="material-icons" style="color: #FFD700">brightness_1</i>
-                        <i *ngSwitchCase="4" class="material-icons" style="color: #9ACD32">brightness_1</i>
-                        <i *ngSwitchDefault class="material-icons" style="color: #008000;">brightness_1</i>
-                    </label>
+                    </div>
+                    <div *ngIf="_studentGuard.canActivate()">
+                        <div class="col m4 hide-on-small-only center-align" style="border-bottom:1px solid #F0F0F0">Presença</div>
+                        <div class="col m4 hide-on-small-only center-align" style="border-bottom:1px solid #F0F0F0">Material</div>
+                        <div class="col m4 hide-on-small-only center-align" style="border-bottom:1px solid #F0F0F0">Comportamento</div>
+                        <div class="col s4 hide-on-med-and-up center-align" style="border-bottom:1px solid #F0F0F0">P.</div>
+                        <div class="col s4 hide-on-med-and-up center-align" style="border-bottom:1px solid #F0F0F0">M.</div>
+                        <div class="col s4 hide-on-med-and-up center-align" style="border-bottom:1px solid #F0F0F0">C.</div>
+                        <div *ngFor="let student of selected?.Student">
+                            <div class="col s4 section center-align" style="padding:12px">
+                                <label *ngIf="student?.Presence; else elseBlock">&#10004;</label>
+                                <ng-template #elseBlock>&#10008;</ng-template>
+                            </div>
+                            <div class="col s4 section center-align" style="padding:12px">
+                                <label *ngIf="student?.Material; else elseBlock">&#10004;</label>
+                                <ng-template #elseBlock>&#10008;</ng-template>
+                            </div>
+                            <div class="col s4 section center-align" style="padding:12px">
+                                <label [ngSwitch]="student?.Behavior">
+                                    <i *ngSwitchCase="1" class="material-icons" style="color: #8B0000">brightness_1</i>
+                                    <i *ngSwitchCase="2" class="material-icons" style="color: #FF4000">brightness_1</i>
+                                    <i *ngSwitchCase="3" class="material-icons" style="color: #FFD700">brightness_1</i>
+                                    <i *ngSwitchCase="4" class="material-icons" style="color: #9ACD32">brightness_1</i>
+                                    <i *ngSwitchDefault class="material-icons" style="color: #008000;">brightness_1</i>
+                                </label>
+                            </div>
+                            <div class="col s12" style="border-top:1px solid #F0F0F0"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col s12" style="border-top:2px solid #f0f0f0"><br></div>
+                <div class="col s12"><br>
+                    <hr>
+                </div>
                 <ul class="collapsible" data-collapsible="accordion">
                     <li>
-                        <div class="col s12 m12 left-align collapsible-header active">
+                        <div class="col s12 collapsible-header active">
                             <h4>Sumário</h4>
                         </div>
-                        <div class="col s12 m12 right-align collapsible-body">
-                            <p>{{selected?.Summary}}</p>
+                        <div class="col s12 collapsible-body">
+                            <p style="margin-left: 30px;">{{selected?.Summary}}</p>
                         </div>
                     </li>
                     <li>
-                        <div class="col s12 m12 left-align collapsible-header">
+                        <div class="col s12 collapsible-header">
                             <h4>Trabalho de casa</h4>
                         </div>
-                        <div class="col s12 m12 right-align collapsible-body">
-                            <p>{{selected?.Homework}}</p>
+                        <div class="col s12 collapsible-body">
+                            <p style="margin-left: 30px;">{{selected?.Homework}}</p>
                         </div>
                     </li>
                     <li>
-                        <div class="col s12 m12 left-align collapsible-header">
+                        <div class="col s12 collapsible-header">
                             <h4>Observações</h4>
                         </div>
-                        <div class="col s12 m12 right-align collapsible-body">
-                            <p>{{selected?.Observations}}</p>
+                        <div class="col s12 collapsible-body">
+                            <p style="margin-left: 30px;">{{selected?.Observations}}</p>
                         </div>
                     </li>
                 </ul>

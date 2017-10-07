@@ -36,4 +36,16 @@ export class ParentingService {
             return null;
         }
     }
+
+    public async getChildrenByUser(guardianID: number): Promise<number[]> {
+        let response = await this._http
+            .get(this._apiURL + `/children/${guardianID}`, this._options)
+            .toPromise();
+
+        if (response.json().result) return response.json().data;
+        else {
+            console.log(response.json().info);
+            return null;
+        }
+    }
 }

@@ -4,11 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import { LessonService } from "./lesson.service";
 import { ScheduleService } from "../utils/schedule.service";
 import { UserService } from "../users/user.service";
+import { TeacherGuard } from "../utils/auth-guard.service";
 
 import { Lesson } from './iLesson';
 import { Presence } from './iPresence';
 import { Schedule } from "../utils/interfaceSchedule";
-declare var $:any;
+declare var $: any;
 
 @Component({
     selector: "lessons",
@@ -27,10 +28,18 @@ export class LessonTeacherComponent {
         private _lessonService: LessonService,
         private _scheduleService: ScheduleService,
         private _userService: UserService,
-        private _route: ActivatedRoute
+        private _route: ActivatedRoute,
+        public _teacherGuard: TeacherGuard
     ) { }
 
     public async ngOnInit() {
+        $(document).ready(function () {
+            $('ul.tabs').tabs({
+                swipeable: true
+            });
+            $('.collapsible').collapsible();
+        });
+
         let scheduleID;
         this._route.params.subscribe(params => scheduleID = params['id']);
         this.schedule = await this._scheduleService.getSchedule(scheduleID);
@@ -43,25 +52,20 @@ export class LessonTeacherComponent {
     initLessonList() {
         this.index = 0;
         var list = document.getElementById("list");
-        var ul = document.createElement("ul");
-
-        ul.setAttribute("class", "tabs");
-        $(document).ready(function () {
-            $('ul.tabs').tabs({
-                swipeable: true
-            });
-        });
 
         this.lessons.forEach(
             (lesson, index) => {
-            var anchor = document.createElement("a");
-            anchor.setAttribute("style", "font-size:0.85rem;");
-            anchor.setAttribute("class", index < 4 ? "col s12 m3 btn option white green-text text-darken-2" : "col s12 m3 btn white green-text text-darken-2 option hide")                
-            anchor.innerHTML = "Lição nº" + (this.lessons.length - index);
-            anchor.onclick = () => { this.showLesson(index) };
-            list.appendChild(anchor);
-        });
+                var li = document.createElement("li");
+                li.setAttribute("class", index < 4 ? "col s12 m3 tab option" : "col s12 m3 tab option hide");
+                var anchor = document.createElement("a");
+                anchor.innerHTML = "Lição nº" + (this.lessons.length - index);
+                anchor.setAttribute("class", index == 0 ? "active green-text text-darken-2" : "green-text text-darken-2")
+                anchor.onclick = () => { this.showLesson(index) };
+                li.appendChild(anchor);
+                list.appendChild(li);
+            });
     }
+
     moreLesson() {
         var y = document.getElementsByClassName("option")
         if (this.index + 3 < y.length - 1) {
@@ -69,7 +73,6 @@ export class LessonTeacherComponent {
             y[this.index + 4].className = y[this.index].className.replace(" hide", "");
             this.index++;
         }
-        console.log(y)
     }
     lessLesson() {
         if (this.index > 0) {
@@ -78,7 +81,7 @@ export class LessonTeacherComponent {
             y[this.index - 1].className = y[this.index - 1].className.replace(" hide", "");
             this.index--;
         }
-        
+
     }
 
     showLesson(n: number) {
@@ -91,26 +94,20 @@ export class LessonTeacherComponent {
             Summary: this.lessons[n].Summary,
             ID: this.lessons[n].ID
         };
-        var lesson = document.getElementById("lesson");
-        if(!lesson.className.includes("hide")){
-            var lesson = document.getElementById("lesson");
-            lesson.className += "hide";
-            var lessonInfo = document.getElementById("lessonInfo");
-            lessonInfo.className = lessonInfo.className.replace(" hide","");
-        }
 
         let element = document.getElementById("students");
-        element.className = element.className.replace(" hide", "");
+        if (!element.className.includes("hide"))
+            element.className += "hide";
     }
 
     public async showClass() {
         let element = document.getElementById("students");
         if (element.className.includes("hide")) {
-            element.className = element.className.replace("hide ","");
+            element.className = element.className.replace("hide", "");
             let presences = await this._lessonService.getPresenceByTeacher(this.selected["ID"]);
-            this.students=[];
-            for(let presence of presences){
-                let student=await this._userService.getProfile(presence.StudentFK);
+            this.students = [];
+            for (let presence of presences) {
+                let student = await this._userService.getProfile(presence.StudentFK);
                 this.students.push({
                     StudentFK: presence.StudentFK,
                     Student: student.Name,
@@ -120,22 +117,13 @@ export class LessonTeacherComponent {
                 });
             }
         } else {
-            element.className = element.className.replace("container","");
+            element.className = element.className.replace("container", "");
             element.className += "hide container";
         }
     }
 
-    public createLesson(){
-        var lesson = document.getElementById("lesson");
-        lesson.className = lesson.className.replace("hide","");
-        var lessonInfo = document.getElementById("lessonInfo");
-        if(!lessonInfo.className.includes("hide")){
-            lessonInfo.className += " hide"
-        }
-    }
-
-    public orderLessonList(){
-        this.lessons.sort(function(a,b) {
+    public orderLessonList() {
+        this.lessons.sort(function (a, b) {
             return (a.ID > b.ID) ? -1 : ((b.ID > a.ID) ? 1 : 0);
         });
     }

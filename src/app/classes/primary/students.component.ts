@@ -44,14 +44,5 @@ export class ClassPrimaryStudentsComponent {
         this.students.sort(function(a,b) {
             return (a.Name > b.Name) ? 1 : ((b.Name > a.Name) ? -1 : 0);
         }); 
-
-        this.notification = {
-            Subject: null,
-            Description: null,
-            Urgency: false,
-            Approval: false,
-            SenderFK: null,
-            ReceiverFK: null
-        }
     }
 }

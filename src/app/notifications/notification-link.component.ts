@@ -32,7 +32,6 @@ export class NotificationCounterComponent {
     private async _check(doneCallback: () => void) {
         if (<Account>JSON.parse(localStorage.getItem('currentUser')) != null) {
             this.notifications = await this._service.count();
-            console.log(this.notifications);
             window.setTimeout(() => this._check(doneCallback), 10000);
             this._ref.detectChanges();
         } else {

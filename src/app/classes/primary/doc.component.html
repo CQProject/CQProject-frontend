@@ -1,23 +1,26 @@
 <div class="row">
-    <div class="container card col s10 offset-s1">
-        <div class="responsive">
-            <table class="table white">
+    <div class="container card col s12 l10 offset-l1">
+        <table class="responsive-table striped">
+            <thead class="hide-on-med-and-down">
                 <tr>
-                    <th></th>
-                    <th>
-                        Nome do Ficheiro
+                    <th *ngIf="!_studentGuard.canActivate() && !_guardianGuard.canActivate()">
+                        Visível aos alunos
                     </th>
-                    <th>
+                    <th colspan="2">
+                        Ficheiro
+                    </th>
+                    <th colspan="2">
                         Disponibilizado por
                     </th>
-                    <th>
-                        Data da submissão
-                    </th>
-                    <th *ngIf="!_studentGuard.canActivate() && !_guardianGuard.canActivate()">
-                        <i class="fa fa-eye"></i>
-                    </th>
+
                 </tr>
+            </thead>
+            <tbody>
                 <tr *ngFor="let doc of docs">
+                    <td *ngIf="!_studentGuard.canActivate() && !_guardianGuard.canActivate()">
+                        <label *ngIf="doc?.IsVisible; else elseBlock1"><i class="material-icons">remove_red_eye</i></label>
+                        <ng-template #elseBlock1><b><i class="material-icons">remove_red_eye</i></b></ng-template>
+                    </td>
                     <td [ngSwitch]="doc?.Type">
                         <ng-template [ngSwitchCase]="'pdf'">
                             <a><i class="fa fa-file-pdf-o" style="font-size:25px;color:darkred;"></i></a>
@@ -78,22 +81,18 @@
                         </ng-template>
                     </td>
                     <td><a (click)="download(doc?.Filename, doc?.Type)" style="cursor:pointer">{{doc?.File}}</a></td>
-                    <td>{{doc?.Teacher}}</td>
-                    <td>{{doc?.SubmitedIn | date:'shortDate'}}</td>
-                    <td *ngIf="!_studentGuard.canActivate() && !_guardianGuard.canActivate()">
-                        <label *ngIf="doc?.IsVisible; else elseBlock1">&#10004;</label>
-                        <ng-template #elseBlock1>&#10008;</ng-template>
-                    </td>
+                    <td><label style="font-weight: 0.8rem">({{doc?.SubmitedIn | date:'dd/MM/y'}})</label></td>
+                    <td>Prof. {{doc?.Teacher}}</td>
                 </tr>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
 </div>
-<div id="pdfViewer" class="modal" style="overflow-y:hidden">
-    <div class="modal-content">
-        <div class="right-align" style="margin-top:0px;padding-bottom:20px">
-            <span (click)="hide('pdfViewer')" class="btn orange darken-3">&times;</span>
+<div id="pdfViewer" class="modal bottom-sheet" style="min-height: 600px;">
+    <div class="modal-content light-green accent-1" style="min-height: 100%;position: relative">
+        <div style="position: absolute;top:5px;right: 10px;">
+            <a class="btn-floating deep-orange darken-2" (click)="close()"><i class="material-icons">close</i></a>
         </div>
-            <iframe style="width: 100%; height: 450px;" [attr.src]="file" type="application/pdf"></iframe>
+        <iframe style="width: 100%; min-height: 530px; margin-top: 10px;" [attr.src]="file" type="application/pdf"></iframe>
     </div>
 </div>

@@ -22,6 +22,7 @@ export class LessonFormComponent {
     schedule: Schedule;
     students: any[];
     lesson: any;
+    subject:any;
 
     constructor(
         private _lessonService: LessonService,
@@ -41,6 +42,7 @@ export class LessonFormComponent {
             ScheduleFK: scheduleID
         }
         this.schedule = await this._scheduleService.getSchedule(scheduleID);
+        this.subject= this._scheduleService.getSubject(this.schedule.SubjectFK);
         this.lessons = (await this._lessonService.getLessonBySubject(this.schedule.SubjectFK, this.schedule.ClassFK)).length + 1;
         await this.showClass();
     }

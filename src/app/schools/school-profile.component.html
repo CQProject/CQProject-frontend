@@ -21,11 +21,11 @@
                 <div class="parallax">
                     <img class="responsive-image" [attr.src]="school?.ProfilePicture">
                 </div>
-                <div class="row right-align" *ngIf="_assistantGuard.canActivate() || _adminGuard.canActivate()">
+                <div class="row right-align">
                     <div style="margin-bottom:5px">
-                        <a class="btn green darken-2" [routerLink]="['/classes/school/',school?.ID]">Ver Turmas</a>
-                        <a class="btn green darken-2" [routerLink]="['/building/school', school?.ID]">Ver Instalações</a>
-                        <a class="btn green darken-2">Editar</a>
+                        <a *ngIf="_secretaryGuard.canActivate() || _adminGuard.canActivate()" class="btn green darken-2" [routerLink]="['/classes/school/',school?.ID]">Ver Turmas</a>
+                        <a *ngIf="_assistantGuard.canActivate() || _adminGuard.canActivate()" class="btn green darken-2" [routerLink]="['/building/school', school?.ID]">Ver Instalações</a>
+                        <a *ngIf="_adminGuard.canActivate()" class="btn green darken-2">Editar</a>
                     </div>
                 </div>
             </div>

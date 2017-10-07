@@ -8,13 +8,20 @@ export class AuthGuard implements CanActivate {
     constructor(private _router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot) {
-        var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
-        if (user != null) {
-            let roles = route.data["roles"] as Array<Number>;
-            return (roles != null && this._verifyMatch(roles, user.roles)) ? true : false;
+        try {
+            var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
+            if (user != null) {
+                let roles = route.data["roles"] as Array<Number>;
+                if(roles != null && this._verifyMatch(roles, user.roles)){
+                    return true;
+                }
+            }
+            this._router.navigate(['homepage']);
+            return false;
         }
-        this._router.navigate(['schools']);
-        return false;
+        catch (ex) {
+            return false;
+        }
     }
 
     private _verifyMatch(arr1: Array<Number>, arr2: Array<Number>): Boolean {
@@ -33,11 +40,16 @@ export class StudentGuard implements CanActivate {
     constructor() { }
 
     canActivate() {
-        var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
-        if (user != null) {
-            return (user.roles.indexOf(1) > -1) ? true : false;
+        try {
+            var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
+            if (user != null) {
+                return (user.roles.indexOf(1) > -1) ? true : false;
+            }
+            return false;
         }
-        return false;
+        catch (ex) {
+            return false;
+        }
     }
 }
 
@@ -47,11 +59,16 @@ export class TeacherGuard implements CanActivate {
     constructor() { }
 
     canActivate() {
-        var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
-        if (user != null) {
-            return (user.roles.indexOf(2) > -1) ? true : false;
+        try {
+            var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
+            if (user != null) {
+                return (user.roles.indexOf(2) > -1) ? true : false;
+            }
+            return false;
         }
-        return false;
+        catch (ex) {
+            return false;
+        }
     }
 }
 
@@ -61,12 +78,18 @@ export class SecretaryGuard implements CanActivate {
     constructor() { }
 
     canActivate() {
-        var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
-        if (user != null) {
-            return (user.roles.indexOf(3) > -1) ? true : false;
+        try {
+            var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
+            if (user != null) {
+                return (user.roles.indexOf(3) > -1) ? true : false;
+            }
+            return false;
         }
-        return false;
+        catch (ex) {
+            return false;
+        }
     }
+
 }
 
 @Injectable()
@@ -75,11 +98,16 @@ export class AssistantGuard implements CanActivate {
     constructor() { }
 
     canActivate() {
-        var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
-        if (user != null) {
-            return (user.roles.indexOf(4) > -1) ? true : false;
+        try {
+            var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
+            if (user != null) {
+                return (user.roles.indexOf(4) > -1) ? true : false;
+            }
+            return false;
         }
-        return false;
+        catch (ex) {
+            return false;
+        }
     }
 }
 
@@ -89,11 +117,16 @@ export class GuardianGuard implements CanActivate {
     constructor() { }
 
     canActivate() {
-        var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
-        if (user != null) {
-            return (user.roles.indexOf(5) > -1) ? true : false;
+        try {
+            var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
+            if (user != null) {
+                return (user.roles.indexOf(5) > -1) ? true : false;
+            }
+            return false;
         }
-        return false;
+        catch (ex) {
+            return false;
+        }
     }
 }
 
@@ -103,10 +136,15 @@ export class AdminGuard implements CanActivate {
     constructor() { }
 
     canActivate() {
-        var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
-        if (user != null) {
-            return (user.roles.indexOf(6) > -1) ? true : false;
+        try {
+            var user = <Account>JSON.parse(localStorage.getItem('currentUser'));
+            if (user != null) {
+                return (user.roles.indexOf(6) > -1) ? true : false;
+            }
+            return false;
         }
-        return false;
+        catch (ex) {
+            return false;
+        }
     }
 }

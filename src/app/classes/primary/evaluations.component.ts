@@ -8,7 +8,7 @@ import { StudentGuard, GuardianGuard } from "../../utils/auth-guard.service";
 
 import { Evaluation } from '../../utils/iEvaluation';
 import { Class } from '../../classes/iClass';
-declare var $:any;
+declare var $: any;
 
 @Component({
     selector: "class-evaluations",
@@ -17,10 +17,9 @@ declare var $:any;
 
 export class ClassPrimaryEvaluationComponent {
 
-    private file: any;
-    private image: any;
     private evaluations: any[];
     private selected: any;
+    public values=["Mau", "Não Satisfaz", "Satisfaz", "Satisfaz Bem", "Bom"];
 
     constructor(
         private _evaluationService: EvaluationService,
@@ -37,24 +36,21 @@ export class ClassPrimaryEvaluationComponent {
             $("#evaluationModal").modal({
                 dismissible: false
             }),
-                $(window).on("hashchange", function () {
-                    $("#evaluationModal").modal('close')
-                })
+            $(window).on("hashchange", function () {
+                $("#evaluationModal").modal('close')
+            }),
+            $('.collapsible').collapsible();
         })
 
         let classID;
         this._route.parent.params.subscribe(params => classID = params['id']);
         let userID = JSON.parse(localStorage.getItem('currentUser')).userID;
-        let allEvaluations = [];
-        if (this._studentGuard.canActivate()) {
-            allEvaluations = await this._evaluationService.getEvaluationsByClass(classID);
-        }else{
-            allEvaluations = await this._evaluationService.getEvaluationsByTeacher(userID);
-        }
-        for (let evaluation of allEvaluations) {
+        let evaluations = await this._evaluationService.getEvaluationsByClass(classID);
+
+        for (let evaluation of evaluations) {
             let subject = await this._scheduleService.getSubject(evaluation.SubjectFK);
+            let teacher = await this._userService.getProfile(evaluation.TeacherFK);
             if (this._studentGuard.canActivate()) {
-                let teacher = await this._userService.getProfile(evaluation.TeacherFK);
                 let grades = await this._evaluationService.getGrades(evaluation.ID);
                 this.evaluations.push({
                     ID: evaluation.ID,
@@ -63,7 +59,7 @@ export class ClassPrimaryEvaluationComponent {
                     Subject: subject.Name,
                     TeacherFK: teacher.ID,
                     Teacher: teacher.Name,
-                    Grade: grades.Value
+                    Grade: this.values[grades.Value-1]
                 });
             } else {
                 this.evaluations.push({
@@ -71,7 +67,8 @@ export class ClassPrimaryEvaluationComponent {
                     Purport: evaluation.Purport,
                     EvaluationDate: evaluation.EvaluationDate,
                     Subject: subject.Name,
-                    TeacherFK: evaluation.TeacherFK
+                    TeacherFK: evaluation.TeacherFK,
+                    Teacher:teacher.Name
                 });
             }
         }
@@ -80,13 +77,17 @@ export class ClassPrimaryEvaluationComponent {
             if (a.EvaluationDate < b.EvaluationDate) return -1;
             return 0;
         });
-        console.log(this.evaluations);
+
+        if (this._studentGuard.canActivate()) {
+            let elements = document.getElementsByClassName("purportDescr");
+            for (let i = 0; i < this.evaluations.length; i++) {
+                elements[i].innerHTML = this.evaluations[i].Purport;
+            }
+        }
     }
 
     public async select(id: number) {
         $("#evaluationModal").modal('open');
-
-        let teacher = await this._userService.getProfile(this.evaluations[id].TeacherFK);
         let grades = await this._evaluationService.getGrades(this.evaluations[id].ID);
 
         let students = [];
@@ -94,22 +95,22 @@ export class ClassPrimaryEvaluationComponent {
             let student = await this._userService.getProfile(grade.StudentFK);
             students.push({
                 Name: student.Name,
-                Value: grade.Value
+                Value: this.values[grade.Value-1]
             })
         }
 
         this.selected = {
             ID: this.evaluations[id].ID,
-            Purport: this.evaluations[id].Purport,
             EvaluationDate: this.evaluations[id].EvaluationDate,
             Subject: this.evaluations[id].Subject,
-            TeacherFK: teacher.ID,
-            Teacher: teacher.Name,
+            TeacherFK:this.evaluations[id].TeacherFK,
+            Teacher: this.evaluations[id].Teacher,
             Students: students
         }
+        document.getElementById("purportDescr").innerHTML = this.evaluations[id].Purport;
     }
 
-    public closeNotifDetails() {
+    public close() {
         $("#evaluationModal").modal('close');
     }
 

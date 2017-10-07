@@ -19,7 +19,7 @@
     </div>
 </div>
 
-<div id="notifReceived" class="modal" style="width:50%;height:100%">
+<div id="notifReceived" class="modal">
     <div class="modal-content" style="padding:0px">
         <header class="green">
             <div class="right-align">
@@ -42,8 +42,8 @@
                     <div class="col s10">{{selected?.Sender}}</div>
                 </div>
                 <div class="row">
-                    <div class="col s2"><b>Descrição:</b></div>
-                    <div class="col s10" id="notRecDescription"></div>
+                    <div class="col s12"><b>Descrição:</b></div>
+                    <div class="col s12" id="notRecDescription"></div>
                 </div>
                 <div class="row" *ngIf="selected?.Approval" style="position:relative">
                     <div class="col s10 offset-s1 center-align">

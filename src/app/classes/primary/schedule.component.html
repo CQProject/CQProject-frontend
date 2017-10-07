@@ -55,15 +55,13 @@
     </div>
 </div>
 
-<div id="scheduleModal" class="modal bottom-sheet" style="min-height:360px;">
-    <div class="modal-content" style="padding:0px">
-        <div class="col s12 grey lighten-2 row">
-            <div class="col s10 flow-text green-text text-darken-2 center-align">
-                Disciplina: {{selected?.Subject}}
-            </div>
-            <div class="col s2 flow-text green-text text-darken-2 right-align">
-                <i (click)="hide()" class="material-icons" style="cursor:pointer">close</i>
-            </div>
+<div id="scheduleModal" class="modal bottom-sheet" style="min-height:370px;">
+    <div class="modal-content" style="min-height: 100%;position: relative">
+        <div style="position: absolute;top:5px;right: 10px;">
+            <a class="btn-floating deep-orange darken-2" (click)="close()"><i class="material-icons">close</i></a>
+        </div>
+        <div class="flow-text green-text text-darken-2 center-align">
+            Disciplina: {{selected?.Subject}}
         </div>
         <div class="row white" style="margin:0px;">
             <div class="col s4 offset-s4">
@@ -72,33 +70,34 @@
             </div>
         </div>
         <div class="row white" style="margin:0px">
-                <div class="col s4 offset-s4">
+            <div class="col s4 offset-s4">
                 <td>Professor:</td>
                 <th>{{selected?.Teacher}}</th>
             </div>
         </div>
         <div class="row white" style="margin:0px">
-                <div class="col s4 offset-s4">
+            <div class="col s4 offset-s4">
                 <td>Dia da semana:</td>
                 <th>{{day[selected?.DayOfWeek-1]}}</th>
             </div>
         </div>
         <div class="row white" style="margin:0px">
-                <div class="col s4 offset-s4">
+            <div class="col s4 offset-s4">
                 <td>Hora:</td>
                 <th>{{selected?.StartTime}}</th>
             </div>
         </div>
         <div class="row white" style="margin:0px">
-                <div class="col s4 offset-s4">
+            <div class="col s4 offset-s4">
                 <td>Sala:</td>
                 <th>{{selected?.Room}}</th>
             </div>
         </div>
         <div class="row" style="margin:0px">
             <div class="col s12">
-                <a *ngIf="rol.includes(2)" (click)="showLessonsTeacher()" class="col s12 btn green darken-2">Lições</a>
-                <a *ngIf="rol.includes(1)" (click)="showLessonsStudent()" class="col s12 btn green darken-2">Lições</a>
+                <a *ngIf="_adminGuard.canActivate() || _teacherGuard.canActivate() || _secretaryGuard.canActivate()" (click)="showLessonsTeacher()"
+                    class="col s12 btn green darken-2">Lições</a>
+                <a *ngIf="_studentGuard.canActivate() || _guardianGuard.canActivate()" (click)="showLessonsStudent()" class="col s12 btn green darken-2">Lições</a>
             </div>
         </div>
     </div>

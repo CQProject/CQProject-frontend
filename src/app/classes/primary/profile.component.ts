@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { AssistantGuard, TeacherGuard, SecretaryGuard, AdminGuard, StudentGuard } from "../../utils/auth-guard.service";
+import { AssistantGuard, TeacherGuard, SecretaryGuard, AdminGuard, StudentGuard, GuardianGuard } from "../../utils/auth-guard.service";
 import { SchoolService } from "../../schools/school.service";
 import { ClassService } from "../class.service";
 
@@ -25,7 +25,8 @@ export class ClassPrimaryProfileComponent {
         public _secretaryGuard: SecretaryGuard,
         public _adminGuard: AdminGuard,
         public _teacherGuard: TeacherGuard,
-        public _studentGuard: StudentGuard
+        public _studentGuard: StudentGuard,
+        public _guardianGuard: GuardianGuard
     ) { }
 
     public async ngOnInit() {

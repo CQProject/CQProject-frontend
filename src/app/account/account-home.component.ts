@@ -7,60 +7,40 @@ import { Account } from "./iAccount";
 import { AdminGuard, AssistantGuard, SecretaryGuard, StudentGuard, TeacherGuard, GuardianGuard } from "../utils/auth-guard.service";
 
 @Component({
-    templateUrl: "./account-home.component.html"
+    template: ""
 })
 
 export class AccountHomeComponent {
 
-    private userRole: number[];
-
     constructor(
-        private _service: AccountService,
         private _router: Router,
-        private _ngZone: NgZone,
         public _teacherGuard: TeacherGuard,
         public _studentGuard: StudentGuard,
         public _guardianGuard: GuardianGuard,
         public _adminGuard: AdminGuard,
+        public _assistantGuard: AssistantGuard,
+        public _secretaryGuard: SecretaryGuard,
         private _classService: ClassService
     ) { }
 
-    public async ngOnInit(){
-        let usID;
-        let classID;
-        usID = JSON.parse(localStorage.getItem('currentUser')).userID;
-        //ver as classes pelo user ID, se for guardian é preciso ver os students
-        if(!this._guardianGuard.canActivate()){
-        let classes = await this._classService.getClassesByUser(usID);
-        
-        classID = parseInt(classes[classes.length - 1]);
+    public async ngOnInit() {
+        if (this._studentGuard.canActivate()) {
+            let usID = JSON.parse(localStorage.getItem('currentUser')).userID;
+            let classes = await this._classService.getClassesByUser(usID);
+            this._router.navigate(['primary-class/', parseInt(classes[classes.length - 1])])
+        } else if (this._teacherGuard.canActivate()) {
+
+        } else if (this._guardianGuard.canActivate()) {
+            this._router.navigate(['children/', JSON.parse(localStorage.getItem('currentUser')).userID])
+        } else if (this._secretaryGuard.canActivate()) {
+            this._router.navigate(['schools']);
+        } else if (this._assistantGuard.canActivate()) {
+
+        } else if (this._adminGuard.canActivate()) {
+            this._router.navigate(['schools']);
+        } else {
+            this._router.navigate(['homepage']);
         }
-        if(this._studentGuard.canActivate()){
-            this._router.navigate(['primary-class/', classID])
-        }
-        if(this._adminGuard.canActivate()){
-            this._router.navigate(['schools'])
-        }
+
     }
-
-    public chooseOption(id: string) {
-        var information, tablink;
-        information = document.getElementsByClassName("information");
-        for (var i = 0; i < information.length; i++) {
-            if (information[i].id == id) {
-                information[i].className = information[i].className.replace(" w3-hide", " w3-show");
-            } else {
-                information[i].className = information[i].className.replace(" w3-show", " w3-hide");
-            }
-        }
-        tablink = document.getElementsByClassName("tablink");
-        for (var i = 0; i < tablink.length; i++) {
-            tablink[i].className = tablink[i].className.replace("w3-border-green", " ");
-            if (id.includes(tablink[i].id)) {
-                tablink[i].className += " w3-border-green";
-            }
-        }
-    }
-
-
 }

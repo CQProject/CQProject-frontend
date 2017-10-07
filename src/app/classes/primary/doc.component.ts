@@ -58,10 +58,9 @@ export class ClassPrimaryDocumentComponent {
                 "IsVisible": document.IsVisible
             });
         }
-        console.log(this.docs)
     }
 
-    public hide(elementID: string) {
+    public close(elementID: string) {
         $('#pdfViewer').modal('close');
     }
 

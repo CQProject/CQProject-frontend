@@ -42,6 +42,7 @@ import { NotificationSentComponent } from "./notifications/notification-sent.com
 import { StudentGuardFormComponent } from "./forms/student-guardian-form.component";
 import { LessonFormComponent } from "./forms/lesson-form.component";
 import { NotificationFormComponent } from "./notifications/notification-form.component";
+import { ChildrenListComponent } from "./users/children-list.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
@@ -71,16 +72,18 @@ import { ParentingService } from "./users/parenting.service";
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: AccountHomeComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
-      { path: 'homepage', component:HomepageComponent},
+      { path: 'homepage', component: HomepageComponent },
       { path: 'schools', component: SchoolListComponent },
-      { path: 'school/:id', component: SchoolProfileComponent},
-      { path: 'notifications', component: NotificationMenuComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] }, 
-        children:[
+      { path: 'school/:id', component: SchoolProfileComponent },
+      {
+        path: 'notifications', component: NotificationMenuComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] },
+        children: [
           { path: '', redirectTo: 'received', pathMatch: 'full' },
-          { path: 'received', component: NotificationReceivedComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] }},
-          { path: 'sent', component: NotificationSentComponent, canActivate: [AuthGuard],  data: { roles: [1, 2, 3, 4, 5, 6] }},
-          { path: 'sendToUser/:id', component: NotificationFormComponent} 
-      ] },
+          { path: 'received', component: NotificationReceivedComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
+          { path: 'sent', component: NotificationSentComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
+          { path: 'sendToUser/:id', component: NotificationFormComponent }
+        ]
+      },
       {
         path: 'form', component: MainFormComponent, canActivate: [AuthGuard], data: { roles: [6] },
         children: [
@@ -90,9 +93,8 @@ import { ParentingService } from "./users/parenting.service";
           { path: 'room', component: RoomFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
           { path: 'sensor', component: SensorFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
           { path: 'class', component: ClassFormComponent },
-          { path: 'user', component:UserFormComponent},
-          { path: 'studguard', component:StudentGuardFormComponent},
-          { path: 'lesson', component:LessonFormComponent}
+          { path: 'user', component: UserFormComponent },
+          { path: 'studguard', component: StudentGuardFormComponent }
         ]
       },
       {
@@ -104,6 +106,7 @@ import { ParentingService } from "./users/parenting.service";
       },
       { path: 'user/profile/:id', component: UserProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       { path: 'user/details/:id', component: UserDetailsComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
+      { path: 'children/:id', component: ChildrenListComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 5, 6] } },
       { path: 'classes/school/:id', component: ClassListComponent, canActivate: [AuthGuard], data: { roles: [3, 6] } },
       {
         path: 'primary-class/:id', component: ClassPrimaryProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] },
@@ -114,7 +117,8 @@ import { ParentingService } from "./users/parenting.service";
           { path: 'evaluation', component: ClassPrimaryEvaluationComponent },
           { path: 'document', component: ClassPrimaryDocumentComponent },
           { path: 'teacher-lessons/:id', component: LessonTeacherComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 6] } },
-          { path: 'student-lessons/:id', component: LessonStudentComponent, canActivate: [AuthGuard], data: { roles: [1, 5] } }
+          { path: 'student-lessons/:id', component: LessonStudentComponent, canActivate: [AuthGuard], data: { roles: [1, 5] } },
+          { path: 'form-lesson/:id', component: LessonFormComponent, canActivate: [AuthGuard], data: { roles: [2] } }
         ]
       },
       { path: '**', component: NotFoundComponent }
@@ -158,7 +162,8 @@ import { ParentingService } from "./users/parenting.service";
     UserFormComponent,
     StudentGuardFormComponent,
     LessonFormComponent,
-    NotificationFormComponent
+    NotificationFormComponent,
+    ChildrenListComponent
     //Pipe
   ],
   providers: [

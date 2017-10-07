@@ -1,107 +1,111 @@
 <div class="row">
-    <div class="col s2">
-            <div style="margin-top:50%" (click)="createLesson()">
-                    <a class="btn-large green darken-2">Adicionar Lição
-                    </a>
-                </div>
-    </div>
-    <div class="col s8">
-        <div class="row" style="margin-top:20px">
-            <a (click)="lessLesson()" class="col m1 hide-on-small btn center-align green"><i class="material-icons">keyboard_arrow_left</i></a>
+    <div class="col s12 l10 offset-l1">
+
+        <div *ngIf="_teacherGuard.canActivate()" style="position: relative; height: 70px;">
+            <div class="fixed-action-btn horizontal" style="position: absolute; display: inline-block; top: 24px; right: 0%">
+                <a class="btn-floating btn-large lime z-depth-4"><i class="large material-icons">menu</i></a>
+                <ul>
+                    <li><a class="hide-on-small-only btn green darken-2 right">Editar Lição</a></li>
+                    <li><a [routerLink]="['/primary-class/', schedule?.ClassFK,'form-lesson', schedule?.ID]" class=" hide-on-small-only btn green darken-2 right">Adicionar Lição</a></li>
+                    <li><a class="hide-on-med-and-up btn-floating green darken-2"><i class="material-icons">edit</i></a></li>
+                    <li><a [routerLink]="['/primary-class/', schedule?.ClassFK,'form-lesson', schedule?.ID]" class="hide-on-med-and-up btn-floating green darken-2"><i class="material-icons">add</i></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:20px; cursor: pointer">
+            <a (click)="lessLesson()" class="col m1 hide-on-small-only btn green" style="height: 48px;position: relative;"><i class="material-icons" style="position: absolute; top:18%; right: 35%">keyboard_arrow_left</i></a>
             <a (click)="lessLesson()" class="col s12 hide-on-med-and-up btn center-align green"><i class="material-icons">keyboard_arrow_up</i></a>
             <div class="col m10 s12">
-                <div id="list" class="row">
-                </div>
+                <ul id="list" class="tabs"></ul>
             </div>
-            <a (click)="moreLesson()" class="col m1 hide-on-small-only btn center-align green"><i class="material-icons">keyboard_arrow_right</i></a>
+            <a (click)="moreLesson()" class="col m1 hide-on-small-only btn green" style="height: 48px;position: relative;"><i class="material-icons" style="position: absolute; top:18%;right: 35%">keyboard_arrow_right</i></a>
             <a (click)="moreLesson()" class="col s12 hide-on-med-and-up btn center-align green"><i class="material-icons">keyboard_arrow_down</i></a>
         </div>
-        <div class="container card z-depth-4 white" style="width:100%;">
-            <lesson-form id="lesson" class="hide"></lesson-form>
-            <div class="row section" id="lessonInfo" style="padding:24px">
-                <div class="col s12 right-align"><a class="btn lime"><i class="material-icons">edit</i></a></div>
-                <div class="col s6 m8 left-align">
+
+        <div class="card z-depth-4 white" style="width:100%;">
+            <div class="row" id="lessonInfo" style="padding:24px">
+                <div class="col s6 m8">
                     <h3>Lição nº{{selected?.Description}}</h3>
                 </div>
                 <div class="col s6 m4 right-align">
-                    <h5>{{selected?.Day | date}}</h5>
+                    <h5>{{selected?.Day | date:'dd/MM/y'}}</h5>
                 </div>
-                <div class="col s12" style="border-top:2px solid #000"><br></div>
-                <div class="col s12">
-                    <hr>
-                </div>
-                <div class="col s12" style="border-top:2px solid #f0f0f0"><br></div>
-                <ul class="collapsible" data-collapsible="accordion">
-                    <li>
-                        <div class="col s12 m12 left-align collapsible-header active">
-                            <h4>Sumário</h4>
-                        </div>
-                        <div class="col s12 m12 right-align collapsible-body">
-                            <p>{{selected?.Summary}}</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="col s12 m12 left-align collapsible-header">
-                            <h4>Trabalho de casa</h4>
-                        </div>
-                        <div class="col s12 m12 right-align collapsible-body">
-                            <p>{{selected?.Homework}}</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="col s12 m12 left-align collapsible-header">
-                            <h4>Observações</h4>
-                        </div>
-                        <div class="col s12 m12 right-align collapsible-body">
-                            <p>{{selected?.Observations}}</p>
-                        </div>
-                    </li>
-                </ul>
-                <div class="white" style="width:100%">
+                <div class="col s12" style="border-top:2px solid #000">
+                    <br>
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header active">
+                                <h4>Sumário</h4>
+                            </div>
+                            <div class="collapsible-body">
+                                <p style="margin-left: 30px;">{{selected?.Summary}}</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">
+                                <h4>Trabalho de casa</h4>
+                            </div>
+                            <div class="collapsible-body">
+                                <p style="margin-left: 30px;">{{selected?.Homework}}</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">
+                                <h4>Observações</h4>
+                            </div>
+                            <div class="collapsible-body">
+                                <p style="margin-left: 30px;">{{selected?.Observations}}</p>
+                            </div>
+                        </li>
+                    </ul><br><br>
                     <a (click)="showClass()" class="btn green" style="width: 100%">Turma</a>
-                    <div id="students" class="hide container">
-                        <div class="row">
-                            <div class="col m5 hide-on-small-only left-align" style="border-bottom:1px solid #F0F0F0">Nome</div>
-                            <div class="col m2 hide-on-small-only" style="border-bottom:1px solid #F0F0F0">Presença</div>
-                            <div class="col m2 hide-on-small-only" style="border-bottom:1px solid #F0F0F0">Material</div>
-                            <div class="col m3 hide-on-small-only" style="border-bottom:1px solid #F0F0F0">Comportamento</div>
-                            <div class="col s5 hide-on-med-and-up" style="border-right:1px solid #F0F0F0">Nome</div>
-                            <div class="col s2 hide-on-med-and-up" style="border-bottom:1px solid #F0F0F0">P.</div>
-                            <div class="col s2 hide-on-med-and-up" style="border-bottom:1px solid #F0F0F0">M.</div>
-                            <div class="col s3 hide-on-med-and-up" style="border-bottom:1px solid #F0F0F0">C.</div>
-                            <div class="col s12">
-                            </div>
-                            <div *ngFor="let student of students" class="row">
-                                <div class="col s5 m5 left-align">
-                                    <label>{{student?.Student}}</label>
-                                </div>
-                                <div class="col s2" style="margin-left:30px">
-                                    <label *ngIf="student?.Presence; else elseBlock">&#10004;</label>
-                                    <ng-template #elseBlock>&#10008;</ng-template>
-                                </div>
-                                <div class="col s2">
-                                    <label *ngIf="student?.Material; else elseBlock">&#10004;</label>
-                                    <ng-template #elseBlock>&#10008;</ng-template>
-                                </div>
-                                <div class="col s2">
-                                    <label [ngSwitch]="student?.Behavior">
-                                <i *ngSwitchCase="1" class="fa fa-circle" style="color: #8B0000"></i>
-                                <i *ngSwitchCase="2" class="fa fa-circle" style="color: #FF4000"></i>
-                                <i *ngSwitchCase="3" class="fa fa-circle" style="color: #FFD700"></i>
-                                <i *ngSwitchCase="4" class="fa fa-circle" style="color: #9ACD32"></i>
-                                <i *ngSwitchDefault class="fa fa-circle" style="color: #008000;"></i>
-                            </label>
-                                </div>
-                            </div>
-                            <div class="col s1"><a><i class="fa fa-edit"></i></a></div>
-                            <div class="col">
-                                <hr>
-                            </div>
-                        </div>
+                    <div id="students" class="container hide">
+                        <br>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="hide-on-small-only">Nome</th>
+                                    <th class="hide-on-small-only center-align">Presença</th>
+                                    <th class="hide-on-small-only center-align">Material</th>
+                                    <th class="hide-on-small-only center-align">Comportamento</th>
+                                    <th *ngIf="_teacherGuard.canActivate()" class="hide-on-small-only center-align"></th>
+                                    <th class="hide-on-med-and-up">Nome</th>
+                                    <th class="hide-on-med-and-up center-align">P.</th>
+                                    <th class="hide-on-med-and-up center-align">M.</th>
+                                    <th class="hide-on-med-and-up center-align">C.</th>
+                                    <th *ngIf="_teacherGuard.canActivate()" class="hide-on-med-and-up center-align"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let student of students">
+                                    <td>{{student?.Student}}</td>
+                                    <td class="center-align">
+                                        <label *ngIf="student?.Presence; else elseBlock">&#10004;</label>
+                                        <ng-template #elseBlock>&#10008;</ng-template>
+                                    </td>
+                                    <td class="center-align">
+                                        <label *ngIf="student?.Material; else elseBlock">&#10004;</label>
+                                        <ng-template #elseBlock>&#10008;</ng-template>
+                                    </td>
+                                    <td class="center-align">
+                                        <label [ngSwitch]="student?.Behavior">
+                                                    <i *ngSwitchCase="1" class="fa fa-circle" style="color: #8B0000"></i>
+                                                    <i *ngSwitchCase="2" class="fa fa-circle" style="color: #FF4000"></i>
+                                                    <i *ngSwitchCase="3" class="fa fa-circle" style="color: #FFD700"></i>
+                                                    <i *ngSwitchCase="4" class="fa fa-circle" style="color: #9ACD32"></i>
+                                                    <i *ngSwitchDefault class="fa fa-circle" style="color: #008000;"></i>
+                                                </label>
+                                    </td>
+                                    <td *ngIf="_teacherGuard.canActivate()" class="center-align">
+                                        <a class="green"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col s2"></div>
 </div>
