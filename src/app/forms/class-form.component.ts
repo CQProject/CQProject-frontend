@@ -1,4 +1,4 @@
-import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ClassService } from '../classes/class.service';
@@ -9,6 +9,7 @@ import { UserService } from "../users/user.service";
 import { School } from "../schools/iSchool";
 import { Class } from '../classes/iClass';
 import { UserProfile } from '../users/iUsers';
+declare var $: any;
 
 @Component({
     selector: "class-form",
@@ -21,22 +22,47 @@ export class ClassFormComponent {
     class: Class;
     checkedPrimary: boolean;
     schoolID: School;
+    students: UserProfile[];
 
     constructor(
         private _classService: ClassService,
         private _schoolService: SchoolService,
         private _fileService: FileService,
         private _userService: UserService,
-        private _route: ActivatedRoute, 
+        private _route: ActivatedRoute,
         private changeDetected: ChangeDetectorRef
     ) { this.class = new Class(); }
 
     public async ngOnInit() {
+        this.students = [];
+        let studentsToShow={};
+        this.students = [];
         this.schools = await this._schoolService.getSchools();
+        this.students = await this._classService.getStudentsWithoutClass();
+
+        $.each(this.students, function(index,value){
+            studentsToShow[value.Name]=null
+        })
+
+        $(document).ready(function () {
+            $('.chips-autocomplete').material_chip({
+                autocompleteOptions: {
+                    data: studentsToShow,
+                    limit: Infinity,
+                    minLength: 1
+                }
+            })
+        });
     }
 
     public async createClass() {
-        var result = await this._classService.createClass(this.class);
-        if (result) location.reload();
+        var classID = await this._classService.createClass(this.class);
+        let studs = $(".chips-autocomplete").material_chip('data');
+        for(let stud of studs){
+           let studentID = this.students.filter(student => student.Name == stud["tag"])[0].ID;
+           let res = await this._classService.addUserToClass(classID, studentID);
+           console.log(res)
+        }
     }
+
 }
