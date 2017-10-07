@@ -51,12 +51,7 @@ export class LessonTeacherComponent {
                 swipeable: true
             });
         });
-        var createLesson = document.createElement("a");
-        createLesson.setAttribute("style", "font-size:0.85rem;");
-        createLesson.setAttribute("class","col s12 m3 btn lime white-text")
-        createLesson.innerHTML = "Criar Lição";
-        createLesson.onclick = () => { this.createLesson() };
-        
+
         this.lessons.forEach(
             (lesson, index) => {
             var anchor = document.createElement("a");
