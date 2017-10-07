@@ -51,21 +51,12 @@ export class LessonTeacherComponent {
                 swipeable: true
             });
         });
-        var anchor = document.createElement("a");
-        anchor.setAttribute("style", "font-size:0.85rem;");
-        anchor.setAttribute("class","col s12 m3 btn option lime white-text")
-        anchor.innerHTML = "Criar Lição";
-        anchor.onclick = () => { this.createLesson() };
-        list.appendChild(anchor);
+
         this.lessons.forEach(
             (lesson, index) => {
             var anchor = document.createElement("a");
             anchor.setAttribute("style", "font-size:0.85rem;");
-            if(index==0){
-                anchor.setAttribute("class", index < 3 ? "col s12 m3 btn option white green-text text-darken-2" : "col s12 m3 btn white green-text text-darken-2 option hide")
-            }else{
-                anchor.setAttribute("class", index < 3 ? "col s12 m3 btn option white green-text text-darken-2" : "col s12 m3 btn white green-text text-darken-2 option hide")                
-            }
+            anchor.setAttribute("class", index < 4 ? "col s12 m3 btn option white green-text text-darken-2" : "col s12 m3 btn white green-text text-darken-2 option hide")                
             anchor.innerHTML = "Lição nº" + (this.lessons.length - index);
             anchor.onclick = () => { this.showLesson(index) };
             list.appendChild(anchor);
@@ -78,6 +69,7 @@ export class LessonTeacherComponent {
             y[this.index + 4].className = y[this.index].className.replace(" hide", "");
             this.index++;
         }
+        console.log(y)
     }
     lessLesson() {
         if (this.index > 0) {
@@ -86,6 +78,7 @@ export class LessonTeacherComponent {
             y[this.index - 1].className = y[this.index - 1].className.replace(" hide", "");
             this.index--;
         }
+        
     }
 
     showLesson(n: number) {

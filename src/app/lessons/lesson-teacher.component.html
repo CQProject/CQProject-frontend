@@ -1,5 +1,11 @@
 <div class="row">
-    <div class="col s8 offset-s2">
+    <div class="col s2">
+            <div style="margin-top:50%" (click)="createLesson()">
+                    <a class="btn-large green darken-2">Adicionar Lição
+                    </a>
+                </div>
+    </div>
+    <div class="col s8">
         <div class="row" style="margin-top:20px">
             <a (click)="lessLesson()" class="col m1 hide-on-small btn center-align green"><i class="material-icons">keyboard_arrow_left</i></a>
             <a (click)="lessLesson()" class="col s12 hide-on-med-and-up btn center-align green"><i class="material-icons">keyboard_arrow_up</i></a>
@@ -97,4 +103,5 @@
             </div>
         </div>
     </div>
+    <div class="col s2"></div>
 </div>
