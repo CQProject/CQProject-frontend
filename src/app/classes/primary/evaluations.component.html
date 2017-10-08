@@ -24,40 +24,65 @@
 <ng-template #elseblock>
     <div class="row">
         <div class="card-panel white col s12 l10 offset-l1">
-            <ul>
+            <ul class="hide-on-small-only">
                 <li *ngFor="let eval of evaluations; let i=index" class="row valign-wrapper">
-                    <h6 class="col s2"><b>{{eval?.EvaluationDate | date:'dd/MM/y'}}</b></h6>
-                    <h5 class="col s4">{{eval?.Subject}}</h5>
-                    <h6 class="col s5">Prof. {{eval?.Teacher}}</h6>
-                    <div class="col s1">
-                        <a class="btn-floating green" (click)="select(i)"><i class="material-icons">info_outline</i></a>
+                    <h6 class="col m2"><b>{{eval?.EvaluationDate | date:'dd/MM/y'}}</b></h6>
+                    <h5 class="col m4">{{eval?.Subject}}</h5>
+                    <h6 class="col m5">Prof. {{eval?.Teacher}}</h6>
+                    <div class="col m1">
+                        <a *ngIf="eval?.Able" class="btn-floating green" (click)="select(i)"><i class="material-icons">info_outline</i></a>
+                        <a *ngIf="!eval?.Able" class="btn-floating disabled"><i class="material-icons">info_outline</i></a>
                     </div>
                 </li>
             </ul>
+            <div *ngFor="let eval of evaluations; let i=index" class="hide-on-med-and-up">
+                <div class="row valign-wrapper">
+                    <h6 class="col s6"><b>{{eval?.EvaluationDate | date:'dd/MM/y'}}</b></h6>
+                    <h5 class="col s6">{{eval?.Subject}}</h5>
+                </div>
+                <div class="row valign-wrapper">
+                    <h6 class="col s10">Prof. {{eval?.Teacher}}</h6>
+                    <div class="col s2">
+                        <a *ngIf="eval?.Able" class="btn-floating green" (click)="select(i)"><i class="material-icons">info_outline</i></a>
+                        <a *ngIf="!eval?.Able" class="btn-floating disabled"><i class="material-icons">info_outline</i></a>
+                    </div>
+                </div>
+                <hr>
+            </div>
         </div>
     </div>
-    <div id="evaluationModal" class="modal bottom-sheet" style="min-height: 300px">
-        <div class="modal-content light-green accent-1" style="position: relative;min-height: 100%">
+    <div id="evaluationModal" class="modal bottom-sheet" style="min-height: 400px;">
+        <div class="modal-content light-green accent-1" style="position: relative;">
             <div style="position: absolute;top:5px;right: 10px;">
                 <a class="btn-floating deep-orange darken-2" (click)="close()"><i class="material-icons">close</i></a>
             </div>
-            <div class="container row">
-                <div class="col s6">
-                    <h5 class="center">{{selected?.EvaluationDate | date:'dd/MM/y'}}</h5>
-                    <h4 class="center">{{selected?.Subject}}</h4>
-                    <h5 class="center">Prof. {{selected?.Teacher}}</h5>
-                    <hr>
-                    <h5 class="center">Objetivos</h5>
-                    <div id="purportDescr"></div>
+            <div class="row">
+                <div class="center col s12 m3">
+                    <h5>{{selected?.EvaluationDate | date:'dd/MM/y'}}</h5>
                 </div>
-                <div class="card-panel col s6">
+                <div class="center col s12 m4">
+                    <h4>{{selected?.Subject}}</h4>
+                </div>
+                <div class="center col s12 m5">
+                    <h5>Prof. {{selected?.Teacher}}</h5>
+                </div>
+                <div class="col s12">
+                    <hr>
+                </div>
+                <div class="col s12 m7">
+                    <h5 class="center">Objetivos</h5>
+                    <div class="card-panel" id="purportDescr" style="height: 200px; overflow-y:scroll"></div>
+                </div>
+                <div class="col s12 m4 offset-m1">
                     <h5 class="center">Classificações</h5>
-                    <table class="table">
-                        <tr *ngFor="let student of selected?.Students">
-                            <td>{{student?.Name}}</td>
-                            <th>{{student?.Value}}</th>
-                        </tr>
-                    </table>
+                    <div class="card-panel" style="height: 200px; overflow-y:scroll">
+                        <table class="table">
+                            <tr *ngFor="let student of selected?.Students">
+                                <td>{{student?.Name}}</td>
+                                <th>{{student?.Value}}</th>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

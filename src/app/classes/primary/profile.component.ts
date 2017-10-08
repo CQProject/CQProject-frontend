@@ -40,7 +40,7 @@ export class ClassPrimaryProfileComponent {
         } else {
             usID = JSON.parse(localStorage.getItem('currentUser')).userID;
             let classes = await this._classService.getClassesByUser(usID);
-            classID = parseInt(classes[classes.length - 1]);
+            classID = classes[classes.length - 1];
             this.class = await this._classService.getClassProfile(classID);
             this.school = await this._schoolService.getSchool(this.class.SchoolFK);
         }

@@ -35,10 +35,10 @@ export class ClassPrimaryDocumentComponent {
     public async ngOnInit() {
         $(document).ready(function () {
             $('#pdfViewer').modal({
-                dismissible:false
+                dismissible: false
             });
         });
-        $(window).on("hashchange",function(){
+        $(window).on("hashchange", function () {
             $('#pdfViewer').modal('close');
         })
         this.docs = [];
@@ -64,9 +64,9 @@ export class ClassPrimaryDocumentComponent {
         $('#pdfViewer').modal('close');
     }
 
-    public async download(filename: string, type: string) {
+    public async show(filename: string, type: string) {
         if (type == "pdf") {
-                $('#pdfViewer').modal('open');
+            $('#pdfViewer').modal('open');
             this._fileService.fileDownload(filename)
                 .subscribe((res) => {
                     this.file = res;
@@ -77,6 +77,13 @@ export class ClassPrimaryDocumentComponent {
                     this.file = res;
                 });
         }
+    }
+
+    public async download(filename: string, type: string) {
+        this._fileService.fileDownload(filename)
+            .subscribe((res) => {
+                this.file = res;
+            });
     }
 
 }

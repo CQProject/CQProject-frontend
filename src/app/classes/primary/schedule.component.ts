@@ -24,11 +24,12 @@ declare var $: any;
 
 export class ClassPrimaryScheduleComponent {
 
-    week: any[][];
-    selected: any;
-    day: string[];
-    cla: Class;
-    usID: number;
+    private week: any[][];
+    public selected: any;
+    public day = ["Segunda feira", "Terça feira", "Quarta feira", "Quinta feira", "Sexta feira"];
+    public cla: Class;
+    private usID: number;
+    public able:boolean;
 
     constructor(
         private _scheduleService: ScheduleService,
@@ -44,15 +45,13 @@ export class ClassPrimaryScheduleComponent {
         public _studentGuard:StudentGuard,
         public _teacherGuard:TeacherGuard,
         public _secretaryGuard:SecretaryGuard
-    ) {
-        this.day = ["Segunda feira", "Terça feira", "Quarta feira", "Quinta feira", "Sexta feira"];
+    ) {;
         this.week = [];
         for (var i = 0; i < this.day.length; i++)this.week[i] = [];
+        this.usID=JSON.parse(localStorage.getItem('currentUser')).userID;
     }
 
     public async ngOnInit() {
-        let classID;
-        this._route.parent.params.subscribe(params => classID = +params["id"]);
         $(window).on('hashchange', function () {
             $('.modal-overlay').remove();
         })
@@ -61,14 +60,16 @@ export class ClassPrimaryScheduleComponent {
                 dismissible: false
             });
         });
+        
+        let classID;
+        this._route.parent.params.subscribe(params => classID = +params["id"]);
         this.cla = await this._classService.getClassProfile(classID);
         this.setHours();
-
-        let schedules = await this._scheduleService.getScheduleByClass(classID);
-        await this.setSchedule(schedules)
+        await this.setSchedule()
     }
 
-    private async setSchedule(schedules: Schedule[]) {
+    private async setSchedule() {
+        let schedules = await this._scheduleService.getScheduleByClass(this.cla.ID);
         for (let schedule of schedules) {
 
             let teacher = await this._userService.getProfile(schedule.TeacherFK);
@@ -130,6 +131,7 @@ export class ClassPrimaryScheduleComponent {
 
     public select(day: number, hour: number) {
         this.selected = this.week[day][hour];
+        this.able= (this._teacherGuard.canActivate() && this.usID!=this.selected.TeacherFK)?false:true;
         $("#scheduleModal").modal('open');
     }
 

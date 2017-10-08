@@ -56,47 +56,42 @@
 </div>
 
 <div id="scheduleModal" class="modal bottom-sheet" style="min-height:370px;">
-    <div class="modal-content" style="min-height: 100%;position: relative">
+    <div class="modal-content light-green accent-1" style="min-height: 100%;position: relative">
         <div style="position: absolute;top:5px;right: 10px;">
             <a class="btn-floating deep-orange darken-2" (click)="close()"><i class="material-icons">close</i></a>
         </div>
-        <div class="flow-text green-text text-darken-2 center-align">
-            Disciplina: {{selected?.Subject}}
-        </div>
-        <div class="row white" style="margin:0px;">
-            <div class="col s4 offset-s4">
-                <td>Turma:</td>
-                <th>{{selected?.ClassName}}</th>
-            </div>
-        </div>
-        <div class="row white" style="margin:0px">
-            <div class="col s4 offset-s4">
-                <td>Professor:</td>
-                <th>{{selected?.Teacher}}</th>
-            </div>
-        </div>
-        <div class="row white" style="margin:0px">
-            <div class="col s4 offset-s4">
-                <td>Dia da semana:</td>
-                <th>{{day[selected?.DayOfWeek-1]}}</th>
-            </div>
-        </div>
-        <div class="row white" style="margin:0px">
-            <div class="col s4 offset-s4">
-                <td>Hora:</td>
-                <th>{{selected?.StartTime}}</th>
-            </div>
-        </div>
-        <div class="row white" style="margin:0px">
-            <div class="col s4 offset-s4">
-                <td>Sala:</td>
-                <th>{{selected?.Room}}</th>
-            </div>
+        <div class="container">
+            <table class="striped white">
+                <thead>
+                    <tr>
+                        <td>Disciplina:</td>
+                        <th>{{selected?.Subject}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Professor:</td>
+                        <th>{{selected?.Teacher}}</th>
+                    </tr>
+                    <tr>
+                        <td>Dia da semana:</td>
+                        <th>{{day[selected?.DayOfWeek-1]}}</th>
+                    </tr>
+                    <tr>
+                        <td>Hora:</td>
+                        <th>{{selected?.StartTime}}</th>
+                    </tr>
+                    <tr>
+                        <td>Sala:</td>
+                        <th>{{selected?.Room}}</th>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div class="row" style="margin:0px">
             <div class="col s12">
-                <a *ngIf="_adminGuard.canActivate() || _teacherGuard.canActivate() || _secretaryGuard.canActivate()" (click)="showLessonsTeacher()"
-                    class="col s12 btn green darken-2">Lições</a>
+                <a *ngIf="_adminGuard.canActivate() || _secretaryGuard.canActivate() || able" (click)="showLessonsTeacher()" class="col s12 btn green darken-2">Lições</a>
+                <a *ngIf="!able" class="col s12 btn green darken-2 disabled">Lições</a>
                 <a *ngIf="_studentGuard.canActivate() || _guardianGuard.canActivate()" (click)="showLessonsStudent()" class="col s12 btn green darken-2">Lições</a>
             </div>
         </div>

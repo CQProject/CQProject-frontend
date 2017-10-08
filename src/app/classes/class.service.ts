@@ -83,11 +83,19 @@ export class ClassService {
         return response.json().result ? response.json().data : 0;
     }
 
-    public async getClassesByUser(userID: number): Promise<string>{
+    public async getClassesByUser(userID: number): Promise<number[]>{
         let response = await this._http
         .get(this._apiURL + `/class/student/${userID}`, this._options)
         .toPromise();
 
+        return response.json().result ? response.json().data : 0;
+    }
+
+    public async getClassesByTeacher(userID: number): Promise<number[]>{
+        let response = await this._http
+        .get(this._apiURL + `/class/teacher/${userID}`, this._options)
+        .toPromise();
+        
         return response.json().result ? response.json().data : 0;
     }
 

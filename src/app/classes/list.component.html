@@ -27,11 +27,10 @@
             <div *ngIf="primary_classes!=null" class="col offset-s2 s8">
                 <div *ngFor="let class of primary_classes" class="col s4">
                     <a class="col s12 btn green darken-2" style="margin-top:5px" [routerLink]="['/primary-class/', class?.ID]">
-                <b>{{class?.Year}} {{class?.ClassDesc}}</b>
-            </a>
+                        <b>{{class?.Year}} {{class?.ClassDesc}}</b>
+                    </a>
                 </div>
             </div>
-
         </div>
     </div>
     <div id="showClassesOfKindergarten" class="col s12 center-align">

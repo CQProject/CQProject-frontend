@@ -27,15 +27,15 @@ export class AccountHomeComponent {
         if (this._studentGuard.canActivate()) {
             let usID = JSON.parse(localStorage.getItem('currentUser')).userID;
             let classes = await this._classService.getClassesByUser(usID);
-            this._router.navigate(['primary-class/', parseInt(classes[classes.length - 1])])
+            this._router.navigate(['primary-class/', classes[classes.length - 1]])
         } else if (this._teacherGuard.canActivate()) {
-
+            this._router.navigate(['classes/teacher/', JSON.parse(localStorage.getItem('currentUser')).userID])
         } else if (this._guardianGuard.canActivate()) {
             this._router.navigate(['children/', JSON.parse(localStorage.getItem('currentUser')).userID])
         } else if (this._secretaryGuard.canActivate()) {
             this._router.navigate(['schools']);
         } else if (this._assistantGuard.canActivate()) {
-
+            this._router.navigate(['schools']);
         } else if (this._adminGuard.canActivate()) {
             this._router.navigate(['schools']);
         } else {

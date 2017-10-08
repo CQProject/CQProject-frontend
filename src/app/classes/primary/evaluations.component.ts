@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EvaluationService } from "../../utils/evaluation.service";
 import { ScheduleService } from "../../utils/schedule.service";
 import { UserService } from "../../users/user.service";
-import { StudentGuard, GuardianGuard } from "../../utils/auth-guard.service";
+import { StudentGuard, GuardianGuard, TeacherGuard } from "../../utils/auth-guard.service";
 
 import { Evaluation } from '../../utils/iEvaluation';
 import { Class } from '../../classes/iClass';
@@ -26,6 +26,7 @@ export class ClassPrimaryEvaluationComponent {
         private _userService: UserService,
         private _scheduleService: ScheduleService,
         public _guardianGuard: GuardianGuard,
+        private _teacherGuard:TeacherGuard,
         public _studentGuard: StudentGuard,
         private _router: Router,
         private _route: ActivatedRoute,
@@ -68,7 +69,8 @@ export class ClassPrimaryEvaluationComponent {
                     EvaluationDate: evaluation.EvaluationDate,
                     Subject: subject.Name,
                     TeacherFK: evaluation.TeacherFK,
-                    Teacher:teacher.Name
+                    Teacher:teacher.Name,
+                    Able:(this._teacherGuard.canActivate() && userID!=evaluation.TeacherFK)?false:true
                 });
             }
         }
@@ -84,6 +86,7 @@ export class ClassPrimaryEvaluationComponent {
                 elements[i].innerHTML = this.evaluations[i].Purport;
             }
         }
+        console.log(this.evaluations)
     }
 
     public async select(id: number) {
