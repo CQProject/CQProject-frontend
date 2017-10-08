@@ -76,6 +76,7 @@ import { ParentingService } from "./users/parenting.service";
       { path: 'homepage', component: HomepageComponent },
       { path: 'schools', component: SchoolListComponent },
       { path: 'school/:id', component: SchoolProfileComponent },
+      { path: 'form-school', component: SchoolFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
       {
         path: 'notifications', component: NotificationMenuComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] },
         children: [
@@ -86,14 +87,9 @@ import { ParentingService } from "./users/parenting.service";
         ]
       },
       {
-        path: 'form', component: MainFormComponent, canActivate: [AuthGuard], data: { roles: [6] },
+        path: 'form', component: MainFormComponent, canActivate: [AuthGuard], data: { roles: [3, 6] },
         children: [
-          { path: '', redirectTo: 'school', pathMatch: 'full' },
-          { path: 'school', component: SchoolFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
-          { path: 'floor', component: FloorFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
-          { path: 'room', component: RoomFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
-          { path: 'sensor', component: SensorFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
-          { path: 'class', component: ClassFormComponent },
+          { path: '', redirectTo: 'user', pathMatch: 'full' },
           { path: 'user', component: UserFormComponent },
           { path: 'studguard', component: StudentGuardFormComponent }
         ]
@@ -102,7 +98,10 @@ import { ParentingService } from "./users/parenting.service";
         path: 'building/school/:id', component: FloorMainComponent, canActivate: [AuthGuard], data: { roles: [4, 6] },
         children: [
           { path: 'room/:id', component: RoomComponent },
-          { path: 'floor/:id', component: FloorMapComponent }
+          { path: 'floor/:id', component: FloorMapComponent },
+          { path: 'form-floor', component: FloorFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
+          { path: 'floor/:id/addroom', component: RoomFormComponent, canActivate: [AuthGuard], data: { roles: [6] } },
+          { path: 'floor/:id/addsensor', component: SensorFormComponent, canActivate: [AuthGuard], data: { roles: [6] } }
         ]
       },
       { path: 'user/profile/:id', component: UserProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
@@ -110,6 +109,7 @@ import { ParentingService } from "./users/parenting.service";
       { path: 'children/:id', component: ChildrenListComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 5, 6] } },
       { path: 'classes/teacher/:id', component: ClassListTeacherComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 5, 6] } },
       { path: 'classes/school/:id', component: ClassListComponent, canActivate: [AuthGuard], data: { roles: [3, 6] } },
+      { path: 'school/addclass/:id', component: ClassFormComponent, canActivate: [AuthGuard], data: { roles: [3, 6] } },
       {
         path: 'primary-class/:id', component: ClassPrimaryProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 5, 6] },
         children: [
@@ -120,7 +120,7 @@ import { ParentingService } from "./users/parenting.service";
           { path: 'document', component: ClassPrimaryDocumentComponent },
           { path: 'teacher-lessons/:id', component: LessonTeacherComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 6] } },
           { path: 'student-lessons/:id', component: LessonStudentComponent, canActivate: [AuthGuard], data: { roles: [1, 5] } },
-          { path: 'form-lesson/:id', component: LessonFormComponent, canActivate: [AuthGuard], data: { roles: [2] } }
+          { path: 'form-lesson/:id', component: LessonFormComponent, canActivate: [AuthGuard], data: { roles: [2] } },
         ]
       },
       { path: '**', component: NotFoundComponent }

@@ -1,3 +1,13 @@
+<nav class="green darken-2">
+    <div class="nav-wrapper container">
+        <label class="brand-logo" style="padding:0px"><span style="margin-left:25px">{{school?.Name}}</span></label>
+        <ul class="right">
+            <li><a class="btn lime" [routerLink]="['/school/addclass/', school?.ID]">Adicionar turma</a></li>
+        </ul>
+    </div>
+</nav>
+<br>
+
 <div class="container white" style="margin-bottom:25px">
     <div class="center">
         <h2 class="green-text text-darken-2">Adicionar uma Turma</h2>
@@ -21,12 +31,6 @@
                         <input [(ngModel)]="class.SchoolYear" type="text" id="SchoolYear" name="SchoolYear" required/>
                         <label for="SchoolYear">Ano Escolar ( ex. 3º )":</label>
                     </div>
-                </div>
-                <div class="row">
-                    <select [(ngModel)]="class.SchoolFK" name="SchoolFK" class="browser-default" style="cursor:pointer">
-                                <option *ngFor="let school of schools" value="{{school.ID}}">{{school.Name}}</option>
-                        </select>
-                    <label>Selecionar uma escola</label>
                 </div>
             </div>
         </form>

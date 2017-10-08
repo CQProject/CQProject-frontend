@@ -1,3 +1,11 @@
+<nav class="green darken-2">
+        <div class="nav-wrapper container">
+            <label class="brand-logo" style="padding:0px"><span style="margin-left:25px">{{school?.Name}}</span></label>
+            <ul class="right">
+                <li><h5>{{class?.Year}}{{class?.ClassDesc}}</h5></li>
+            </ul>
+        </div>
+    </nav>
 <nav *ngIf="!_studentGuard.canActivate() && !_guardianGuard.canActivate()">
     <div class="nav-wrapper">
         <ul class="row green">

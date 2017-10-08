@@ -8,18 +8,7 @@
                     <input [(ngModel)]="room.Name" type="text" id="Name" name="Name" required/>
                     <label for="Name">Nome:</label>
                 </div>
-                <div class="row col s10 offset-s1">
-                    <select name="school" (ngModelChange)="getFloors($event)" class="browser-default" style="cursor:pointer">
-                                <option *ngFor="let school of schools" value="{{school?.ID}}">{{school?.Name}}</option>
-                        </select>
-                    <label>Selecionar uma escola</label>
-                </div>
-                <div class="row col s10 offset-s1">
-                    <select name="school" [(ngModel)]="room.FloorFK" (ngModelChange)="getMap($event)" class="browser-default" style="cursor:pointer">
-                                <option *ngFor="let floor of floors" value="{{floor?.ID}}">{{floor?.Name}}</option>
-                        </select>
-                    <label>Selecionar um Piso:</label>
-                </div>
+                
                 <div class="row">
                     <div id="board" class="col container center">
                     </div>

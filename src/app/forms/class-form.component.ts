@@ -17,22 +17,22 @@ import { UserProfile } from '../users/iUsers';
 
 export class ClassFormComponent {
 
-    schools: School[];
+    school: School;
     class: Class;
     checkedPrimary: boolean;
-    schoolID: School;
 
     constructor(
         private _classService: ClassService,
         private _schoolService: SchoolService,
-        private _fileService: FileService,
-        private _userService: UserService,
         private _route: ActivatedRoute, 
         private changeDetected: ChangeDetectorRef
     ) { this.class = new Class(); }
 
     public async ngOnInit() {
-        this.schools = await this._schoolService.getSchools();
+        let schoolID
+        this._route.params.subscribe(params => schoolID = params['id']);
+        this.class.SchoolFK=schoolID;
+        this.school = await this._schoolService.getSchool(schoolID);
     }
 
     public async createClass() {

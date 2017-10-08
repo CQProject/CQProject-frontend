@@ -15,7 +15,6 @@ import { Floor } from "../sensors/iFloor";
 
 export class FloorFormComponent {
 
-    schools: School[];
     floor: Floor;
     image: File;
 
@@ -27,7 +26,7 @@ export class FloorFormComponent {
     ) { this.floor = new Floor(); }
 
     public async ngOnInit() {
-        this.schools = await this._schoolService.getSchools();
+        this._route.parent.params.subscribe(params => this.floor.SchoolFK = params['id']);
     }
 
     public getImage(event) {

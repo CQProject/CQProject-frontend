@@ -17,8 +17,6 @@ export class UserDetailsComponent {
 
     public profileDetails: UserDetails;
     private profilePhoto: File;
-    public profileToPost: UserDetailsToPost;
-    private userRole: number[];
 
     constructor(
         private _service: AccountService,
@@ -32,33 +30,14 @@ export class UserDetailsComponent {
         public _secretaryGuard: SecretaryGuard,
         public _studentGuard: StudentGuard,
         public _teacherGuard: TeacherGuard
-    ) {
-        this.profileToPost = new UserDetailsToPost();
-    }
+    ) { }
 
     public async ngOnInit() {
         let userID;
         this._route.params.subscribe(params => userID = +params["id"]);
         this.profileDetails = await this._userService.getUserDetails(userID);
-        this.profileToPost = this.profileDetails;
         await this._fileService.imageDownload(this.profileDetails.Photo)
             .subscribe((res) => { this.profilePhoto = res; });
-        this.userRole = JSON.parse(localStorage.getItem('currentUser')).roles;
-    }
-
-    public showInput(id: string) {
-        var input = <HTMLElement>document.querySelector("#" + id);
-        input.removeAttribute("readonly");
-        input.removeAttribute("style");
-        input.className += " w3-animate-right w3-border";
-    }
-
-    public showSubmit(event: any){
-        var btn = <HTMLElement> document.querySelector("#submitChanges");
-        btn.className = btn.className.replace("w3-hide","w3-show");
-    }
-
-    public async submitChanges(){
-        let res = await this._userService.putUserDetails(this.profileToPost);
+        console.log(this.profileDetails)
     }
 }

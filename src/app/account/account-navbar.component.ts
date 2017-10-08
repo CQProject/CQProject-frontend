@@ -1,4 +1,5 @@
-import "materialize-css"
+import { AdminGuard, SecretaryGuard } from '../utils/auth-guard.service';
+import 'materialize-css';
 import { concat } from 'rxjs/operator/concat';
 import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { Router } from "@angular/router";
@@ -24,7 +25,9 @@ export class AccountNavbarComponent {
         private _service: AccountService,
         private _router: Router,
         private _ngZone: NgZone,
-        private _changeDetect: ChangeDetectorRef
+        private _changeDetect: ChangeDetectorRef,
+        public _secretaryGuard: SecretaryGuard,
+        public _adminGuard: AdminGuard
     ) {
         this.authorized = false;
     }

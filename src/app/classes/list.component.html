@@ -1,3 +1,12 @@
+<nav class="green darken-2">
+    <div class="nav-wrapper container">
+        <label class="brand-logo" style="padding:0px"><span style="margin-left:25px">{{school?.Name}}</span></label>
+        <ul class="right">
+            <li><a class="btn lime" [routerLink]="['/school/addclass', school?.ID]">Adicionar turma</a></li>
+        </ul>
+    </div>
+</nav>
+<br>
 <div class="row">
     <div class="col s12">
         <ul class="tabs">
@@ -16,6 +25,7 @@
                 </a>
             </li>
         </ul>
+        <br>
     </div>
     <div id="showClassesOfPrimary" class="col s12">
         <div class="row">

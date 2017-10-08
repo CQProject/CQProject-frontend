@@ -1,8 +1,17 @@
+<nav class="green darken-2">
+    <div class="nav-wrapper container">
+        <label class="brand-logo" style="padding:0px"><span style="margin-left:25px">{{school?.Name}}</span></label>
+        <ul class="right">
+            <li><a class="btn lime" [routerLink]="['form-floor']">Adicionar piso</a></li>
+        </ul>
+    </div>
+</nav>
+
 <nav>
     <div class="nav-wrapper">
         <ul class="row green darken-2">
-            <li class="col s4 white-text flow-text green darken-2" style="padding:0px"><span style="margin-left:25px">{{school?.Name}}</span></li>
-            <li *ngFor="let floor of floors; let i=index" class="flow-text center-align" [ngClass]="nCols != 0 ? 'col s'+nCols : null" [routerLink]="['floor', floor?.ID]" style="text-decoration:none;padding:0px;cursor:pointer">
+            <li *ngFor="let floor of floors; let i=index" class="flow-text center-align" [ngClass]="nCols != 0 ? 'col s'+nCols : null"
+                [routerLink]="['floor', floor?.ID]" style="text-decoration:none;padding:0px;cursor:pointer">
                 <div [attr.id]="'option'+i" class="tablink green">
                     {{floor?.Name}}
                 </div>
@@ -10,6 +19,7 @@
         </ul>
     </div>
 </nav>
+
 
 <div>
     <router-outlet></router-outlet>

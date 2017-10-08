@@ -1,17 +1,17 @@
 <div class="row">
   <div class="col offset-s1 s10">
-    <div *ngIf="_secretaryGuard.canActivate() || _adminGuard.canActivate()" class="right-align">
+    <div *ngIf="_adminGuard.canActivate()" class="right-align">
 
       <div class="hide-on-med-and-up fixed-action-btn horizontal">
-        <a class="btn-floating red" [routerLink]="['/form']">
+        <a class="btn-floating red" [routerLink]="['/form-school']">
      <i class="material-icons">add</i>
   </a>
         <ul>
           <li class="white">Adicionar Escola</li>
         </ul>
       </div>
-      <div class="right-align">
-        <a class="btn green darken-1" [routerLink]="['/form']">
+      <div class="right-align hide-on-small-only">
+        <a class="btn green darken-1" [routerLink]="['/form-school']">
         <label class="white-text">Criar uma nova escola</label>
     </a>
       </div>

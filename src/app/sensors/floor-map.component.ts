@@ -43,7 +43,8 @@ export class FloorMapComponent {
             Name: floor.Name,
             Image: await this._fileService.imageDownloadAsync(floor.Image),
             ID: floor.ID,
-            Rooms: rooms
+            Rooms: rooms,
+            SchoolFK: floor.SchoolFK
         }
         console.log(this.floor)
         this.createFloor();

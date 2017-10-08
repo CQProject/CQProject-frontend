@@ -20,8 +20,6 @@ import { Room } from '../sensors/iRoom';
 
 export class SensorFormComponent {
 
-    schools: School[];
-    floors: Floor[];
     rooms: Room[];
     sensor: Sensor;
     schoolID: number;
@@ -37,20 +35,12 @@ export class SensorFormComponent {
         private _renderer: Renderer
     ) { 
         this.sensor = new Sensor(); 
-        this.schools=[];
-        this.floors=[];
         this.rooms=[];
     }
 
     public async ngOnInit() {
-        this.schools = await this._schoolService.getSchools();
-    }
-
-    public async getFloors(schoolID: number) {
-        this.floors = await this._floorService.getFloorsBySchool(schoolID);
-    }
-
-    public async getRooms(floorID: number) {
+        let floorID
+        this._route.params.subscribe(params => floorID = params['id']);
         this.rooms = await this._roomService.getRoomByFloor(floorID);
     }
 

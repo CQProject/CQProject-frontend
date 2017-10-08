@@ -18,12 +18,6 @@
                         <input class="file-path validate" type="text" placeholder="Nenhum ficheiro selecionado"/>
                     </div>
                 </div>
-                <div class="row">
-                    <select [(ngModel)]="floor.SchoolFK" name="SchoolFK" class="browser-default" style="cursor:pointer">
-                            <option *ngFor="let school of schools" value="{{school.ID}}">{{school.Name}}</option>
-                    </select>
-                    <label>Selecionar uma escola</label>
-                </div>
             </div>
         </form>
     </div>

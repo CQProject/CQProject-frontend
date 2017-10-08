@@ -29,11 +29,7 @@ export class FloorMainComponent {
         this._route.params.subscribe(params => schoolID = params['id']);
         this.school = await this._schoolService.getSchool(schoolID);
         this.floors = await this._floorService.getFloorsBySchool(schoolID);
-        if((this.floors.length%2)== 0){
-            this.nCols = 8/this.floors.length;
-        }else{
-            this.nCols = 6 / this.floors.length;
-        }
+        this.nCols = 12/this.floors.length;
         this._router.navigate(['/building/school/',schoolID,'floor',this.floors[0].ID]);
     }
 }

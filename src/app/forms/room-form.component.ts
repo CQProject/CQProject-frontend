@@ -18,8 +18,6 @@ import { Room } from '../sensors/iRoom';
 
 export class RoomFormComponent {
 
-    schools: School[];
-    floors: Floor[];
     room: Room;
     image: any;
 
@@ -34,20 +32,10 @@ export class RoomFormComponent {
     ) { this.room = new Room(); }
 
     public async ngOnInit() {
-        this.schools = await this._schoolService.getSchools();
-    }
-
-    public async getFloors(schoolID: number) {
-        console.log("getFloors")
-        this.floors = await this._floorService.getFloorsBySchool(schoolID);
-    }
-
-    public async getMap(floorID: number) {
-        this.floors.forEach(element => {
-            if (element.ID == floorID) this.image = element.Image;
-        });
-        this.image = await this._fileService.imageDownloadAsync(this.image);
-        this.createFloor()
+        this._route.params.subscribe(params => this.room.FloorFK = params['id']);
+        let floor = await this._floorService.getFloor(this.room.FloorFK);
+        this.image = await this._fileService.imageDownloadAsync(floor.Image);
+        this.createFloor();
     }
 
     public createFloor() {

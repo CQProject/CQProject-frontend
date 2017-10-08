@@ -10,17 +10,6 @@
           <label for="Name">Nome:</label>
         </div>
         <div class="row">
-          <select name="school" (ngModelChange)="getFloors($event)" class="browser-default" style="cursor:pointer">
-              <option *ngFor="let school of schools" value="{{school.ID}}">{{school.Name}}</option>              </select>
-          <label>Selecionar uma escola</label>
-        </div>
-        <div class="row">
-          <select name="school" (ngModelChange)="getRooms($event)" class="browser-default" style="cursor:pointer">
-            <option *ngFor="let floor of floors" value="{{floor.ID}}">{{floor.Name}}</option>
-                        </select>
-          <label>Selecionar um Piso:</label>
-        </div>
-        <div class="row">
           <select name="RoomFK" [(ngModel)]="sensor.RoomFK" class="browser-default" style="cursor:pointer">
                       <option *ngFor="let room of rooms" value="{{room?.ID}}">{{room?.Name}}</option>
               </select>
