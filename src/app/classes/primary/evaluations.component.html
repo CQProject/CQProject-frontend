@@ -23,19 +23,29 @@
 
 <ng-template #elseblock>
     <div class="row">
-        <div class="card-panel white col s12 l10 offset-l1">
-            <ul class="hide-on-small-only">
+        <div class="col s12 l10 offset-l1">
+
+            <div *ngIf="_adminGuard.canActivate() || _secretaryGuard.canActivate()" style="position: relative; height: 70px;">
+                <div class="fixed-action-btn horizontal" style="position: absolute; display: inline-block; top: 24px; right: 0%">
+                    <a class="btn-floating btn-large lime z-depth-4"><i class="large material-icons">menu</i></a>
+                    <ul>
+                        <li><a class=" hide-on-small-only btn green darken-2 right">Adicionar Avaliação</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <ul class="card-panel white hide-on-small-only" style="margin-top:30px">
                 <li *ngFor="let eval of evaluations; let i=index" class="row valign-wrapper">
                     <h6 class="col m2"><b>{{eval?.EvaluationDate | date:'dd/MM/y'}}</b></h6>
                     <h5 class="col m4">{{eval?.Subject}}</h5>
                     <h6 class="col m5">Prof. {{eval?.Teacher}}</h6>
                     <div class="col m1">
-                        <a *ngIf="eval?.Able" class="btn-floating green" (click)="select(i)"><i class="material-icons">info_outline</i></a>
+                        <a *ngIf="eval?.Able" class="btn-floating grey darken-2" (click)="select(i)"><i class="material-icons">info_outline</i></a>
                         <a *ngIf="!eval?.Able" class="btn-floating disabled"><i class="material-icons">info_outline</i></a>
                     </div>
                 </li>
             </ul>
-            <div *ngFor="let eval of evaluations; let i=index" class="hide-on-med-and-up">
+            <div *ngFor="let eval of evaluations; let i=index" class="card-panel white hide-on-med-and-up">
                 <div class="row valign-wrapper">
                     <h6 class="col s6"><b>{{eval?.EvaluationDate | date:'dd/MM/y'}}</b></h6>
                     <h5 class="col s6">{{eval?.Subject}}</h5>
@@ -43,7 +53,7 @@
                 <div class="row valign-wrapper">
                     <h6 class="col s10">Prof. {{eval?.Teacher}}</h6>
                     <div class="col s2">
-                        <a *ngIf="eval?.Able" class="btn-floating green" (click)="select(i)"><i class="material-icons">info_outline</i></a>
+                        <a *ngIf="eval?.Able" class="btn-floating grey darken-2" (click)="select(i)"><i class="material-icons">info_outline</i></a>
                         <a *ngIf="!eval?.Able" class="btn-floating disabled"><i class="material-icons">info_outline</i></a>
                     </div>
                 </div>

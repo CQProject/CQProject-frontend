@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DocumentService } from "../../utils/document.service";
 import { FileService } from "../../utils/files.service";
 import { UserService } from "../../users/user.service";
-import { StudentGuard, GuardianGuard } from "../../utils/auth-guard.service";
+import { AdminGuard, GuardianGuard, SecretaryGuard, StudentGuard } from '../../utils/auth-guard.service';
 
 import { Document } from '../../utils/iDocument';
 import { Class } from '../../classes/iClass';
@@ -27,6 +27,8 @@ export class ClassPrimaryDocumentComponent {
         public _userService: UserService,
         public _guardianGuard: GuardianGuard,
         public _studentGuard: StudentGuard,
+        public _secretaryGuard: SecretaryGuard,
+        public _adminGuard: AdminGuard,
         private _router: Router,
         private _route: ActivatedRoute,
     ) {

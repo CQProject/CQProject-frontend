@@ -33,8 +33,10 @@ export class ClassPrimaryStudentsComponent {
         this._route.parent.params.subscribe(params =>this.classID = +params["id"]);
 
         let studentIDs = await this._classService.getStudentsByClass(this.classID);
+        console.log(studentIDs)
         for (var i = 0; i < studentIDs.length; i++) {
             this.students[i] = await this._userService.getProfile(studentIDs[i]);
+            console.log(this.students[i]);
         }
         
         for (let student of this.students) {

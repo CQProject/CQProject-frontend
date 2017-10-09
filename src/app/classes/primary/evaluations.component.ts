@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EvaluationService } from "../../utils/evaluation.service";
 import { ScheduleService } from "../../utils/schedule.service";
 import { UserService } from "../../users/user.service";
-import { StudentGuard, GuardianGuard, TeacherGuard } from "../../utils/auth-guard.service";
+import { AdminGuard, GuardianGuard, SecretaryGuard, StudentGuard, TeacherGuard } from '../../utils/auth-guard.service';
 
 import { Evaluation } from '../../utils/iEvaluation';
 import { Class } from '../../classes/iClass';
@@ -28,6 +28,8 @@ export class ClassPrimaryEvaluationComponent {
         public _guardianGuard: GuardianGuard,
         private _teacherGuard:TeacherGuard,
         public _studentGuard: StudentGuard,
+        public _adminGuard: AdminGuard,
+        public _secretaryGuard: SecretaryGuard,
         private _router: Router,
         private _route: ActivatedRoute,
     ) { this.evaluations = []; }

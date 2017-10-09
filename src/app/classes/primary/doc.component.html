@@ -1,94 +1,106 @@
 <div class="row">
-    <div class="container card col s12 l10 offset-l1">
-        <table class="responsive-table striped">
-            <thead class="hide-on-med-and-down">
-                <tr>
-                    <th *ngIf="!_studentGuard.canActivate() && !_guardianGuard.canActivate()">
-                        Visível aos alunos
-                    </th>
-                    <th colspan="2">
-                        Ficheiro
-                    </th>
-                    <th colspan="2">
-                        Disponibilizado por
-                    </th>
+    <div class="col s12 l10 offset-l1">
 
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let doc of docs">
-                    <td *ngIf="!_studentGuard.canActivate() && !_guardianGuard.canActivate()">
-                        <label *ngIf="doc?.IsVisible; else elseBlock1"><i class="material-icons">remove_red_eye</i></label>
-                        <ng-template #elseBlock1><b><i class="material-icons">remove_red_eye</i></b></ng-template>
-                    </td>
-                    <td [ngSwitch]="doc?.Type">
-                        <ng-template [ngSwitchCase]="'pdf'">
-                            <a><i class="fa fa-file-pdf-o" style="font-size:25px;color:darkred;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'zip'">
-                            <a><i class="fa fa-file-archive-o" style="font-size:25px;color:darkmagenta;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'rar'">
-                            <a><i class="fa fa-file-archive-o" style="font-size:25px;color:darkmagenta;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'doc'">
-                            <a><i class="fa fa-file-word-o" style="font-size:25px;color:darkblue;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'docx'">
-                            <a><i class="fa fa-file-word-o" style="font-size:25px;color:darkblue;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'odt'">
-                            <a><i class="fa fa-file-word-o" style="font-size:25px;color:darkblue;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'xls'">
-                            <a><i class="fa fa-file-excel-o" style="font-size:25px;color:darkgreen;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'xlsx'">
-                            <a><i class="fa fa-file-excel-o" style="font-size:25px;color:darkgreen;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'ods'">
-                            <a><i class="fa fa-file-excel-o" style="font-size:25px;color:darkgreen;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'ppt'">
-                            <a><i class="fa fa-file-powerpoint-o" style="font-size:25px;color:darkorange;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'pptx'">
-                            <a><i class="fa fa-file-powerpoint-o" style="font-size:25px;color:darkorange;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'odp'">
-                            <a><i class="fa fa-file-powerpoint-o" style="font-size:25px;color:darkorange;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'avi'">
-                            <a><i class="fa fa-file-video-o" style="font-size:25px;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'mpeg'">
-                            <a><i class="fa fa-file-video-o" style="font-size:25px;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'mp4'">
-                            <a><i class="fa fa-file-video-o" style="font-size:25px;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'mpega'">
-                            <a><i class="fa fa-file-audio-o" style="font-size:25px;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'mp3'">
-                            <a><i class="fa fa-file-audio-o" style="font-size:25px;"></i></a>
-                        </ng-template>
-                        <ng-template [ngSwitchCase]="'wav'">
-                            <a><i class="fa fa-file-audio-o" style="font-size:25px;"></i></a>
-                        </ng-template>
-                        <ng-template ngSwitchDefault>
-                            <a><i class="fa fa-file-file-o" style="font-size:25px;"></i></a>
-                        </ng-template>
-                    </td>
-                    <td>
-                        <a class="hide-on-med-and-down" (click)="show(doc?.Filename, doc?.Type)" style="cursor:pointer">{{doc?.File}}</a>
-                        <a class="hide-on-large-only" (click)="download(doc?.Filename, doc?.Type)" style="cursor:pointer">{{doc?.File}}</a>
-                    </td>
-                    <td><label style="font-weight: 0.8rem">({{doc?.SubmitedIn | date:'dd/MM/y'}})</label></td>
-                    <td>Prof. {{doc?.Teacher}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div *ngIf="_adminGuard.canActivate() || _secretaryGuard.canActivate()" style="position: relative; height: 70px;">
+            <div class="fixed-action-btn horizontal" style="position: absolute; display: inline-block; top: 24px; right: 0%">
+                <a class="btn-floating btn-large lime z-depth-4"><i class="large material-icons">menu</i></a>
+                <ul>
+                    <li><a class=" hide-on-small-only btn green darken-2 right">Adicionar Documento</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top:30px">
+            <table class="responsive-table striped">
+                <thead class="hide-on-med-and-down">
+                    <tr>
+                        <th *ngIf="!_studentGuard.canActivate() && !_guardianGuard.canActivate()">
+                            Visível aos alunos
+                        </th>
+                        <th colspan="2">
+                            Ficheiro
+                        </th>
+                        <th colspan="2">
+                            Disponibilizado por
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let doc of docs">
+                        <td *ngIf="!_studentGuard.canActivate() && !_guardianGuard.canActivate()">
+                            <label *ngIf="doc?.IsVisible; else elseBlock1"><i class="material-icons">remove_red_eye</i></label>
+                            <ng-template #elseBlock1><b><i class="material-icons">remove_red_eye</i></b></ng-template>
+                        </td>
+                        <td [ngSwitch]="doc?.Type">
+                            <ng-template [ngSwitchCase]="'pdf'">
+                                <a><i class="fa fa-file-pdf-o" style="font-size:25px;color:darkred;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'zip'">
+                                <a><i class="fa fa-file-archive-o" style="font-size:25px;color:darkmagenta;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'rar'">
+                                <a><i class="fa fa-file-archive-o" style="font-size:25px;color:darkmagenta;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'doc'">
+                                <a><i class="fa fa-file-word-o" style="font-size:25px;color:darkblue;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'docx'">
+                                <a><i class="fa fa-file-word-o" style="font-size:25px;color:darkblue;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'odt'">
+                                <a><i class="fa fa-file-word-o" style="font-size:25px;color:darkblue;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'xls'">
+                                <a><i class="fa fa-file-excel-o" style="font-size:25px;color:darkgreen;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'xlsx'">
+                                <a><i class="fa fa-file-excel-o" style="font-size:25px;color:darkgreen;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'ods'">
+                                <a><i class="fa fa-file-excel-o" style="font-size:25px;color:darkgreen;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'ppt'">
+                                <a><i class="fa fa-file-powerpoint-o" style="font-size:25px;color:darkorange;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'pptx'">
+                                <a><i class="fa fa-file-powerpoint-o" style="font-size:25px;color:darkorange;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'odp'">
+                                <a><i class="fa fa-file-powerpoint-o" style="font-size:25px;color:darkorange;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'avi'">
+                                <a><i class="fa fa-file-video-o" style="font-size:25px;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'mpeg'">
+                                <a><i class="fa fa-file-video-o" style="font-size:25px;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'mp4'">
+                                <a><i class="fa fa-file-video-o" style="font-size:25px;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'mpega'">
+                                <a><i class="fa fa-file-audio-o" style="font-size:25px;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'mp3'">
+                                <a><i class="fa fa-file-audio-o" style="font-size:25px;"></i></a>
+                            </ng-template>
+                            <ng-template [ngSwitchCase]="'wav'">
+                                <a><i class="fa fa-file-audio-o" style="font-size:25px;"></i></a>
+                            </ng-template>
+                            <ng-template ngSwitchDefault>
+                                <a><i class="fa fa-file-file-o" style="font-size:25px;"></i></a>
+                            </ng-template>
+                        </td>
+                        <td>
+                            <a class="hide-on-med-and-down" (click)="show(doc?.Filename, doc?.Type)" style="cursor:pointer">{{doc?.File}}</a>
+                            <a class="hide-on-large-only" (click)="download(doc?.Filename, doc?.Type)" style="cursor:pointer">{{doc?.File}}</a>
+                        </td>
+                        <td><label style="font-weight: 0.8rem">({{doc?.SubmitedIn | date:'dd/MM/y'}})</label></td>
+                        <td>Prof. {{doc?.Teacher}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <div id="pdfViewer" class="modal bottom-sheet hide-on-med-and-down" style="min-height: 600px;">

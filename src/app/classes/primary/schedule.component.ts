@@ -124,7 +124,7 @@ export class ClassPrimaryScheduleComponent {
         let element = document.getElementById("hoursColumn");
         var html = '<div class="col s12 center-align" style="height: 50px;"></div>';
         for (let time of times) {
-            html += '<div class="col s12 center-align" style="height: 60px;border-top:1px solid #ffffff">' + time.StartTime + '<br>' + time.EndTime + '</div>'
+            html += '<div class="col s12 center-align" style="height: 60px;border-top:1px solid #A0A0A0">' + time.StartTime + '<br>' + time.EndTime + '</div>'
         }
         element.innerHTML = html;
     }

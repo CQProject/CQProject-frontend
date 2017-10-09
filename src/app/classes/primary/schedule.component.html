@@ -1,39 +1,51 @@
 <div class="hide-on-small-only row">
-    <div class="row card col s10 offset-s1" style="height:300spx;background-color:white;padding:16px">
-        <div class="col hide-on-med-only" style="width:10%">
-            <div id="hoursColumn" class="row"></div>
-        </div>
-        <div class="col" style="width:90%">
-            <div class="row">
-                <div class="col" style="width:20%">
-                    <div class="center-align" style="height: 50px;">
-                        <span class="flow-text">Segunda</span>
+    <div class="col s12 l10 offset-l1">
+
+            <div *ngIf="_adminGuard.canActivate() || _secretaryGuard.canActivate()" style="position: relative; height: 70px;">
+                    <div class="fixed-action-btn horizontal" style="position: absolute; display: inline-block; top: 24px; right: 0%">
+                        <a class="btn-floating btn-large lime z-depth-4"><i class="large material-icons">menu</i></a>
+                        <ul>
+                            <li><a class=" hide-on-small-only btn green darken-2 right">Adicionar Aula</a></li>
+                        </ul>
                     </div>
-                    <div id="bigMonday" class="row"></div>
                 </div>
-                <div class="col" style="width:20%">
-                    <div class="col s12 center-align" style="height: 50px;">
-                        <span class="flow-text">Terça</span>
+
+        <div class="row card" style="margin-top:30px; padding-top: 20px;">
+            <div class="col hide-on-med-only" style="width:10%">
+                <div id="hoursColumn" class="row"></div>
+            </div>
+            <div class="col" style="width:90%">
+                <div class="row">
+                    <div class="col" style="width:20%">
+                        <div class="center-align" style="height: 50px;">
+                            <span class="flow-text">Segunda</span>
+                        </div>
+                        <div id="bigMonday" class="row"></div>
                     </div>
-                    <div id="bigTuesday" class="row"></div>
-                </div>
-                <div class="col" style="width:20%">
-                    <div class="col s12 center-align" style="height: 50px;">
-                        <span class="flow-text">Quarta</span>
+                    <div class="col" style="width:20%">
+                        <div class="col s12 center-align" style="height: 50px;">
+                            <span class="flow-text">Terça</span>
+                        </div>
+                        <div id="bigTuesday" class="row"></div>
                     </div>
-                    <div id="bigWednesday" class="row"></div>
-                </div>
-                <div class="col" style="width:20%">
-                    <div class="col s12 center-align" style="height: 50px;">
-                        <span class="flow-text">Quinta</span>
+                    <div class="col" style="width:20%">
+                        <div class="col s12 center-align" style="height: 50px;">
+                            <span class="flow-text">Quarta</span>
+                        </div>
+                        <div id="bigWednesday" class="row"></div>
                     </div>
-                    <div id="bigThursday" class="row"></div>
-                </div>
-                <div class="col" style="width:20%">
-                    <div class="col s12 center-align" style="height: 50px;">
-                        <span class="flow-text">Sexta</span>
+                    <div class="col" style="width:20%">
+                        <div class="col s12 center-align" style="height: 50px;">
+                            <span class="flow-text">Quinta</span>
+                        </div>
+                        <div id="bigThursday" class="row"></div>
                     </div>
-                    <div id="bigFriday" class="row"></div>
+                    <div class="col" style="width:20%">
+                        <div class="col s12 center-align" style="height: 50px;">
+                            <span class="flow-text">Sexta</span>
+                        </div>
+                        <div id="bigFriday" class="row"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,6 +100,7 @@
                 </tbody>
             </table>
         </div>
+        <br>
         <div class="row" style="margin:0px">
             <a *ngIf="_teacherGuard.canActivate() && able" (click)="showLessonsTeacher()" class="col s12 btn green darken-2">Lições</a>
             <a *ngIf="_adminGuard.canActivate() || _secretaryGuard.canActivate()" (click)="showLessonsTeacher()" class="col s12 btn green darken-2">Lições</a>

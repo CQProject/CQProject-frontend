@@ -11,7 +11,6 @@ import { AppComponent } from "./app.component";
 import { HomepageComponent } from "./index/homepage.component";
 import { AccountNavbarComponent } from "./account/account-navbar.component";
 import { AccountHomeComponent } from "./account/account-home.component";
-import { UserProfileComponent } from "./users/user-profile.component";
 import { NotFoundComponent } from "./notfound/nfound.component";
 import { SchoolListComponent } from "./schools/school-list.component";
 import { NotificationCounterComponent } from "./notifications/notification-link.component";
@@ -36,16 +35,15 @@ import { SensorFormComponent } from "./forms/sensor-form.component";
 import { ClassFormComponent } from "./forms/class-form.component";
 import { UserFormComponent } from "./forms/user-form.component";
 import { UserDetailsComponent } from "./users/user-details.component";
-import { StudentHomeComponent } from "./account/student-home.component";
 import { NotificationReceivedComponent } from "./notifications/notification-received.component";
 import { NotificationSentComponent } from "./notifications/notification-sent.component";
 import { StudentGuardFormComponent } from "./forms/student-guardian-form.component";
 import { LessonFormComponent } from "./forms/lesson-form.component";
 import { NotificationFormComponent } from "./notifications/notification-form.component";
 import { ChildrenListComponent } from "./users/children-list.component";
-import { TeacherListComponent } from "./users/teacher-list.component";
 import { ClassListTeacherComponent } from "./classes/list-teacher.component";
 import { UserClassFormComponent } from "./forms/user-class-form.component";
+import { TeacherListComponent } from "./users/teacher-list.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
@@ -91,7 +89,7 @@ import { ParentingService } from "./users/parenting.service";
       {
         path: 'users', component: MainFormComponent, canActivate: [AuthGuard], data: { roles: [3, 6] },
         children: [
-          { path: '', redirectTo: 'addUser', pathMatch: 'full' },
+          { path: '', redirectTo: 'user', pathMatch: 'full' },
           { path: 'addUser', component: UserFormComponent },
           { path: 'addStudguard', component: StudentGuardFormComponent },
           { path: 'teachers', component:TeacherListComponent}
@@ -107,7 +105,6 @@ import { ParentingService } from "./users/parenting.service";
           { path: 'floor/:id/addsensor', component: SensorFormComponent, canActivate: [AuthGuard], data: { roles: [6] } }
         ]
       },
-      { path: 'user/profile/:id', component: UserProfileComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       { path: 'user/details/:id', component: UserDetailsComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
       { path: 'children/:id', component: ChildrenListComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 5, 6] } },
       { path: 'classes/teacher/:id', component: ClassListTeacherComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 5, 6] } },
@@ -145,7 +142,6 @@ import { ParentingService } from "./users/parenting.service";
     FloorMapComponent,
     FloorFormComponent,
     RoomComponent,
-    UserProfileComponent,
     SchoolProfileComponent,
     ClassPrimaryProfileComponent,
     ClassPrimaryStudentsComponent,
@@ -161,7 +157,6 @@ import { ParentingService } from "./users/parenting.service";
     ClassFormComponent,
     LessonStudentComponent,
     UserDetailsComponent,
-    StudentHomeComponent,
     NotificationReceivedComponent,
     NotificationSentComponent,
     HomepageComponent,
