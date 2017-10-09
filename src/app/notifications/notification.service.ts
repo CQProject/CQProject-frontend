@@ -107,7 +107,7 @@ export class NotificationService {
             "Urgency": notification.Urgency,
             "Approval": notification.Approval,
             "SenderFK": notification.SenderFK,
-            "ReceiverFK": notification.ReceiverFK[0]
+            "ReceiverFK": notification.ReceiverFK
         });
         let response = await this._http
         .post(this._apiURL + `/notification/user`,toPost, this._options)
