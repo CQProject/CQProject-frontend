@@ -1,6 +1,6 @@
 import { Sensor } from '../sensors/iSensor';
 import { forEach } from '@angular/router/src/utils/collection';
-import { Component, OnInit, Renderer } from '@angular/core';
+import { Component, OnInit, Renderer,ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { SensorService } from '../sensors/sensor.service';
@@ -32,6 +32,7 @@ export class SensorFormComponent {
         private _sensorService:SensorService,
         private _fileService: FileService,
         private _route: ActivatedRoute,
+        private _changeDetetor:ChangeDetectorRef,
         private _renderer: Renderer
     ) { 
         this.sensor = new Sensor(); 
@@ -46,7 +47,8 @@ export class SensorFormComponent {
 
     public async createSensor() {
         var result = await this._sensorService.createSensor(this.sensor);
-        if (result) location.reload();
+        this.sensor = new Sensor();
+        this._changeDetetor.detectChanges();
     }
 
 }

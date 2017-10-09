@@ -37,6 +37,7 @@ export class ClassFormComponent {
 
     public async createClass() {
         var result = await this._classService.createClass(this.class);
-        if (result) location.reload();
+        this.class = new Class();
+        this.changeDetected.detectChanges();
     }
 }

@@ -2,6 +2,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'materialize-css';
+import { toast } from 'materialize-css';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -73,9 +75,12 @@ export class UserService {
         let response = await this._http
             .post(this._apiURL + `/user`, JSON.stringify(user), this._options)
             .toPromise();
-        if (response.json().result)  return response.json().data;
+        if (response.json().result)  {
+            toast("Utilizador criado com sucesso",4000,"lime");
+            return response.json().data;
+        }
         else {
-            return null;
+            toast(response.json().info,4000,"red");
         }
     }
 
@@ -84,10 +89,12 @@ export class UserService {
         let response = await this._http
             .put(this._apiURL + `/user/profile`, JSON.stringify(user), this._options)
             .toPromise();
-        if (response.json().result) return response.json().data;
+        if (response.json().result) {
+            toast("Utilizador editado com sucesso",4000,"lime");
+            return response.json().data;
+        }
         else {
-            console.log(response.json().info);
-            return null;
+            toast(response.json().info,4000,"red");
         }
     }
 

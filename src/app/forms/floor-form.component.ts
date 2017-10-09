@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { FloorService } from '../sensors/floor.service';
@@ -22,7 +22,8 @@ export class FloorFormComponent {
         private _floorService: FloorService,
         private _schoolService: SchoolService,
         private _fileService: FileService,
-        private _route: ActivatedRoute
+        private _route: ActivatedRoute,
+        private _changeDetetor:ChangeDetectorRef
     ) { this.floor = new Floor(); }
 
     public async ngOnInit() {
@@ -36,6 +37,7 @@ export class FloorFormComponent {
     public async createFloor() {
         this.floor.Image = await this._fileService.imageUpload(this.image);
         var result = await this._floorService.createFloor(this.floor);
-        if(result) location.reload();
+        this.floor = new Floor();
+        this._changeDetetor.detectChanges();
     }
 }

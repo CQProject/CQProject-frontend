@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { LessonService } from "./../lessons/lesson.service";
@@ -23,25 +23,25 @@ export class LessonFormComponent {
     students: any[];
     lesson: any;
     subject:any;
-
+    scheduleID: number;
     constructor(
         private _lessonService: LessonService,
         private _scheduleService: ScheduleService,
         private _userService: UserService,
-        private _route: ActivatedRoute
+        private _route: ActivatedRoute,
+        private _changeDetetor: ChangeDetectorRef
     ) {
     }
 
     public async ngOnInit() {
-        let scheduleID;
-        this._route.params.subscribe(params => scheduleID = params['id']);
+        this._route.params.subscribe(params => this.scheduleID = params['id']);
         this.lesson = {
             Summary:null,
             Homework:null,
             Observations:null,
-            ScheduleFK: scheduleID
+            ScheduleFK: this.scheduleID
         }
-        this.schedule = await this._scheduleService.getSchedule(scheduleID);
+        this.schedule = await this._scheduleService.getSchedule(this.scheduleID);
         this.subject= this._scheduleService.getSubject(this.schedule.SubjectFK);
         this.lessons = (await this._lessonService.getLessonBySubject(this.schedule.SubjectFK, this.schedule.ClassFK)).length + 1;
         await this.showClass();
@@ -74,6 +74,12 @@ export class LessonFormComponent {
             student.LessonFK = lessonID;
             await this._lessonService.createPostFaults(student);
         }
-        window.location.reload();
+        this.lesson = {
+            Summary:null,
+            Homework:null,
+            Observations:null,
+            ScheduleFK: this.scheduleID
+        }
+        this._changeDetetor.detectChanges();
     }
 }

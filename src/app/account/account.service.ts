@@ -2,6 +2,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'materialize-css';
+import { toast } from 'materialize-css';
 
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
@@ -46,7 +48,7 @@ export class AccountService {
                         "photo": data.photo
                     }
                 } else {
-                    console.log(res.json().info);
+                    toast(res.json().info, 4000,'red')
                     return null;
                 }
             })

@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SchoolService } from '../schools/school.service';
 import { School } from "../schools/iSchool";
@@ -29,6 +29,7 @@ export class SchoolFormComponent {
         private _fileService: FileService,
         public _secretaryGuard: SecretaryGuard,
         public _timeService: TimeService,
+        public _changeDetetor: ChangeDetectorRef,
         private _route: ActivatedRoute
     ) {
         this.school = new School();
@@ -111,5 +112,8 @@ export class SchoolFormComponent {
         }else{
             return null;
         }
+        this.school = new School();
+        tinymce.activeEditor.setContent("");
+        this._changeDetetor.detectChanges();
     }
 }

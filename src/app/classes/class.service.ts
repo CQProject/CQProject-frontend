@@ -3,6 +3,8 @@ import { DateFormatter } from '@angular/common/src/pipes/intl';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'materialize-css';
+import { toast } from 'materialize-css';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -117,7 +119,11 @@ export class ClassService {
         let res = await this._http
             .post(this._apiURL + '/class/profile', toPost, this._options).toPromise();
 
-        return res.json().result;
+            if (res.json().result) { toast("Classe criada com sucesso",4000,'green');return null}
+            else {
+                toast(res.json().info,4000,'red');
+                return null;
+            }
     }
 
     public async addUserToClass(classID: number, userID: number): Promise<boolean> {
@@ -128,9 +134,12 @@ export class ClassService {
         let res = await this._http
             .post(this._apiURL + '/class/user', toPost, this._options).toPromise();
 
-        if (res.json().result) return res.json().data;
+        if (res.json().result) {
+            toast("Utilizador adicionado com sucesso",4000,'lime');
+            return null;
+        }
         else {
-            console.log(res.json().info);
+            toast(res.json().info,4000,'red');
             return null;
         }
     }

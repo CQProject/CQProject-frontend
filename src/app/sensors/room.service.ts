@@ -2,6 +2,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'materialize-css';
+import { toast } from 'materialize-css';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -60,7 +62,7 @@ export class RoomService {
         let res = await this._http
             .post(this._apiURL + '/room', toPost, this._options).toPromise();
         console.log(res.json())
-        return res.json().result;
+        return toast("Sala criada com sucesso",4000,'lime');
     }
 
     public async editRoom(room: Room): Promise<boolean> {
@@ -74,8 +76,7 @@ export class RoomService {
         });
         let res = await this._http
             .put(this._apiURL + '/room', toPost, this._options).toPromise();
-        console.log(res.json())
-        return res.json().result;
+            return toast("Sala editada com sucesso",4000,'lime');
     }
 
     private _handleError(error: Response) {
