@@ -1,53 +1,65 @@
 <div class="row">
-    <div class="col s1"></div>
-    <div class="col s2 white card z-depth-4" *ngIf="!_guardianGuard.canActivate() && profileDetails?.Photo!=null" style="margin-right:10px">
-        <img class="circle responsive-img" [attr.src]="profilePhoto" style="width:100%">
-    </div>
-    <div class="col s8 white card z-depth-4">
-        <div class="black-text">
-            <table>
-                <thead>
-                    <tr>
-                        <th colspan="2" class="center"><h3>{{profileDetails?.Name}}</h3></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngIf="profileDetails?.PhoneNumber!=null">
-                        <td><i class="material-icons">phone</i></td>
-                        <th>{{profileDetails?.PhoneNumber}}</th>
-                    </tr>
-                    <tr *ngIf="profileDetails?.Email!=null">
-                        <td><i class="material-icons">email</i></td>
-                        <th>{{profileDetails?.Email}}</th>
-                    </tr>
-                    <tr *ngIf="profileDetails?.Address!=null">
-                        <td><i class="material-icons">home</i></td>
-                        <th>{{profileDetails?.Address}}</th>
-                    </tr>
-                    <tr *ngIf="profileDetails?.DateOfBirth!=null">
-                        <td><i class="fa fa-birthday-cake fa-fw"></i></td>
-                        <th>{{profileDetails?.DateOfBirth | date:'dd/MM/y'}}</th>
-                    </tr>
-                    <tr *ngIf="profileDetails?.Function!=null">
-                        <td><i class="material-icons">account_circle</i></td>
-                        <th>{{profileDetails?.Function}}</th>
-                    </tr>
-                    <tr *ngIf="profileDetails?.Curriculum!=null">
-                        <td><i class="fa fa-file-text-o fa-fw"></i></td>
-                        <th>{{profileDetails?.Curriculum}}</th>
-                    </tr>
-                    <tr *ngIf="profileDetails?.CitizenCard!=null">
-                        <td><i class="fa fa-id-card fa-fw"></i></td>
-                        <th>{{profileDetails?.CitizenCard}}</th>
-                    </tr>
-                    <tr *ngIf="profileDetails?.FiscalNumber!=null">
-                        <td> <i class="fa fa-credit-card fa-fw"></i></td>
-                        <th>{{profileDetails?.FiscalNumber}}</th>
-                    </tr>
-                </tbody>
-            </table>
-
+    <div class="col s12 l10 offset-l1">
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="white card z-depth-4" *ngIf="!_guardianGuard.canActivate() && profileDetails?.Photo!=null" style="margin-right:10px">
+                    <img class="circle responsive-img" [attr.src]="profilePhoto" style="width:100%">
+                </div>
+                <div class="white card z-depth-4 black-text">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="2" class="center">
+                                    <h3>{{profileDetails?.Name}}</h3>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="profileDetails?.PhoneNumber!=null">
+                                <td><i class="material-icons">phone</i></td>
+                                <th>{{profileDetails?.PhoneNumber}}</th>
+                            </tr>
+                            <tr *ngIf="profileDetails?.Email!=null">
+                                <td><i class="material-icons">email</i></td>
+                                <th>{{profileDetails?.Email}}</th>
+                            </tr>
+                            <tr *ngIf="profileDetails?.Address!=null">
+                                <td><i class="material-icons">home</i></td>
+                                <th>{{profileDetails?.Address}}</th>
+                            </tr>
+                            <tr *ngIf="profileDetails?.DateOfBirth!=null">
+                                <td><i class="fa fa-birthday-cake fa-fw"></i></td>
+                                <th>{{profileDetails?.DateOfBirth | date:'dd/MM/y'}}</th>
+                            </tr>
+                            <tr *ngIf="profileDetails?.Function!=null">
+                                <td><i class="material-icons">account_circle</i></td>
+                                <th>{{profileDetails?.Function}}</th>
+                            </tr>
+                            <tr *ngIf="profileDetails?.Curriculum!=null">
+                                <td><i class="fa fa-file-text-o fa-fw"></i></td>
+                                <th>{{profileDetails?.Curriculum}}</th>
+                            </tr>
+                            <tr *ngIf="profileDetails?.CitizenCard!=null">
+                                <td><i class="fa fa-id-card fa-fw"></i></td>
+                                <th>{{profileDetails?.CitizenCard}}</th>
+                            </tr>
+                            <tr *ngIf="profileDetails?.FiscalNumber!=null">
+                                <td> <i class="fa fa-credit-card fa-fw"></i></td>
+                                <th>{{profileDetails?.FiscalNumber}}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div *ngIf="_teacherGuard.canActivate()" class="col s12 m8">
+                <div class="center green white-text flow-text">As minhas turmas</div>
+                <class-list-teacher></class-list-teacher>
+            </div>
+            <div *ngIf="_guardianGuard.canActivate()" class="col s12 m8">
+                <div class="center green white-text flow-text">Os meus educandos</div>
+                <children-list></children-list>
+            </div>
         </div>
+
     </div>
-    <div class="col s1"></div>
 </div>

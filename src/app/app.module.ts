@@ -28,7 +28,7 @@ import { ClassPrimaryDocumentComponent } from "./classes/primary/doc.component";
 import { ClassPrimaryEvaluationComponent } from "./classes/primary/evaluations.component";
 import { LessonTeacherComponent } from "./lessons/lesson-teacher.component";
 import { LessonStudentComponent } from "./lessons/lesson-student.component";
-import { MainFormComponent } from "./forms/main.component";
+import { MainFormComponent } from "./users/main.component";
 import { SchoolFormComponent } from "./forms/school-form.component";
 import { FloorFormComponent } from "./forms/floor-form.component";
 import { RoomFormComponent } from "./forms/room-form.component";
@@ -43,6 +43,7 @@ import { StudentGuardFormComponent } from "./forms/student-guardian-form.compone
 import { LessonFormComponent } from "./forms/lesson-form.component";
 import { NotificationFormComponent } from "./notifications/notification-form.component";
 import { ChildrenListComponent } from "./users/children-list.component";
+import { TeacherListComponent } from "./users/teacher-list.component";
 import { ClassListTeacherComponent } from "./classes/list-teacher.component";
 import { UserClassFormComponent } from "./forms/user-class-form.component";
 //Service
@@ -88,11 +89,12 @@ import { ParentingService } from "./users/parenting.service";
         ]
       },
       {
-        path: 'form', component: MainFormComponent, canActivate: [AuthGuard], data: { roles: [3, 6] },
+        path: 'users', component: MainFormComponent, canActivate: [AuthGuard], data: { roles: [3, 6] },
         children: [
-          { path: '', redirectTo: 'user', pathMatch: 'full' },
-          { path: 'user', component: UserFormComponent },
-          { path: 'studguard', component: StudentGuardFormComponent }
+          { path: '', redirectTo: 'addUser', pathMatch: 'full' },
+          { path: 'addUser', component: UserFormComponent },
+          { path: 'addStudguard', component: StudentGuardFormComponent },
+          { path: 'teachers', component:TeacherListComponent}
         ]
       },
       {
@@ -169,7 +171,8 @@ import { ParentingService } from "./users/parenting.service";
     NotificationFormComponent,
     ChildrenListComponent,
     ClassListTeacherComponent,
-    UserClassFormComponent
+    UserClassFormComponent,
+    TeacherListComponent
     //Pipe
   ],
   providers: [

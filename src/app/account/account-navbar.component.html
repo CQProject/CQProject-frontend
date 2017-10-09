@@ -71,7 +71,7 @@
 
     <ul *ngIf="authorized" class="right">
         <li *ngIf="_adminGuard.canActivate() || _secretaryGuard.canActivate()">
-            <a [routerLink]="['/form']" class="grey-text text-darken-2">
+            <a [routerLink]="['/users']" class="grey-text text-darken-2">
               <i class="material-icons left" style="margin-right:5px">group_add</i>Utilizadores
             </a>
           </li>
