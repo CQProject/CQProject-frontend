@@ -8,10 +8,10 @@ import { ParentingService } from "../users/parenting.service";
 import { Notification, ReceivedNotification } from "./iNotifications";
 import { Validation, SentValidation } from "./iValidations";
 import { UserProfile } from "../users/iUsers";
-declare var $:any;
+declare var $: any;
 
 @Component({
-    selector:"notification-form",
+    selector: "notification-form",
     templateUrl: "./notification-form.component.html"
 })
 
@@ -20,7 +20,7 @@ export class NotificationFormComponent {
     public student: UserProfile;
     public notification: any;
     editor: any;
-    
+
     constructor(
         private _userService: UserService,
         private _router: Router,
@@ -44,8 +44,16 @@ export class NotificationFormComponent {
         this._route.params.subscribe(params => ReceiverFK = +params["id"]);
         let SenderFK = JSON.parse(localStorage.getItem('currentUser')).userID;
         this.student = await this._userService.getProfile(ReceiverFK);
-        this.student.Photo = await this._fileService.imageDownloadAsync(this.student.Photo);
-        ReceiverFK = await this._parentingService.getGuardiansByUser(ReceiverFK);
+        try{
+            this.student.Photo = await this._fileService.imageDownloadAsync(this.student.Photo);
+        }catch(Exception){
+            
+        }
+        let res = await this._parentingService.getGuardiansByUser(ReceiverFK);
+        if(res!=null){
+            ReceiverFK = res[0];
+            console.log(ReceiverFK)
+        }
         this.notification.SenderFK = SenderFK;
         this.notification.ReceiverFK = ReceiverFK;
         tinymce.init({
@@ -58,15 +66,15 @@ export class NotificationFormComponent {
             setup: editor => {
                 this.editor = editor;
                 editor.on('keyup', () => {
-                    this.notification.Description=editor.getContent();
+                    this.notification.Description = editor.getContent();
                 });
             },
         });
     }
 
-    public async sendMessage(){
+    public async sendMessage() {
         let res = this._notificationService.sendToUser(this.notification);
-        if(res){
+        if (res) {
             location.reload();
         }
     }
