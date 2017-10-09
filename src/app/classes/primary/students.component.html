@@ -1,6 +1,14 @@
 <div class="hide-on-small-only row">
-    <div class="row card col s12 l10 offset-l1" style="height:100%;background-color:white;padding:16px">
-        <div class=" center">
+    <div class="row col s12 l10 offset-l1">
+        <div *ngIf="_adminGuard.canActivate() || _secretaryGuard.canActivate()" style="position: relative; height: 70px;">
+            <div class="fixed-action-btn horizontal" style="position: absolute; display: inline-block; top: 24px; right: 0%">
+                <a class="btn-floating btn-large lime z-depth-4"><i class="large material-icons">menu</i></a>
+                <ul>
+                    <li><a [routerLink]="['/primary-class/', classID,'form-addstudent']" class=" hide-on-small-only btn green darken-2 right">Adicionar Aluno</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="center" style="height:100%;margin-top:20px">
             <div *ngFor="let student of students">
                 <div class="row card green">
                     <div class=" col s5 m3 l2 container">

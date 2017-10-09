@@ -89,11 +89,9 @@
             </table>
         </div>
         <div class="row" style="margin:0px">
-            <div class="col s12">
-                <a *ngIf="_adminGuard.canActivate() || _secretaryGuard.canActivate() || able" (click)="showLessonsTeacher()" class="col s12 btn green darken-2">Lições</a>
-                <a *ngIf="!able" class="col s12 btn green darken-2 disabled">Lições</a>
-                <a *ngIf="_studentGuard.canActivate() || _guardianGuard.canActivate()" (click)="showLessonsStudent()" class="col s12 btn green darken-2">Lições</a>
-            </div>
+            <a *ngIf="_teacherGuard.canActivate() && able" (click)="showLessonsTeacher()" class="col s12 btn green darken-2">Lições</a>
+            <a *ngIf="_adminGuard.canActivate() || _secretaryGuard.canActivate()" (click)="showLessonsTeacher()" class="col s12 btn green darken-2">Lições</a>
+            <a *ngIf="_studentGuard.canActivate() || _guardianGuard.canActivate()" (click)="showLessonsStudent()" class="col s12 btn green darken-2">Lições</a>
         </div>
     </div>
 </div>

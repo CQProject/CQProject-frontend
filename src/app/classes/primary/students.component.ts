@@ -1,3 +1,4 @@
+import { AdminGuard, SecretaryGuard } from '../../utils/auth-guard.service';
 import { Component, OnInit, Renderer } from '@angular/core';
 import { ActivatedRoute, Resolve, Router } from '@angular/router';
 
@@ -16,21 +17,22 @@ export class ClassPrimaryStudentsComponent {
 
     public students: UserProfile[];
     public notification: any;
-
+    public classID;
 
     constructor(
         private _classService: ClassService,
         private _userService: UserService,
         private _fileService: FileService,
+        public _adminGuard: AdminGuard,
+        public _secretaryGuard: SecretaryGuard,
         private _router: Router,
         private _route: ActivatedRoute,
     ) { this.students = []; }
 
     public async ngOnInit() {
-        let classID;
-        this._route.parent.params.subscribe(params =>classID = +params["id"]);
+        this._route.parent.params.subscribe(params =>this.classID = +params["id"]);
 
-        let studentIDs = await this._classService.getStudentsByClass(classID);
+        let studentIDs = await this._classService.getStudentsByClass(this.classID);
         for (var i = 0; i < studentIDs.length; i++) {
             this.students[i] = await this._userService.getProfile(studentIDs[i]);
         }

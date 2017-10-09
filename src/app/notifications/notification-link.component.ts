@@ -1,3 +1,4 @@
+import { StudentGuard } from '../utils/auth-guard.service';
 import { concat } from 'rxjs/operator/concat';
 import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { Router } from "@angular/router";
@@ -14,6 +15,7 @@ export class NotificationCounterComponent {
 
     constructor(
         private _service: NotificationService,
+        public _studentGuard: StudentGuard,
         private _router: Router,
         private _ngZone: NgZone,
         private _ref:ChangeDetectorRef

@@ -1,5 +1,6 @@
 import { AdminGuard, SecretaryGuard } from '../utils/auth-guard.service';
 import 'materialize-css';
+import { toast } from 'materialize-css';
 import { concat } from 'rxjs/operator/concat';
 import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { Router } from "@angular/router";
@@ -59,6 +60,7 @@ export class AccountNavbarComponent {
                         localStorage.setItem('currentUser', JSON.stringify(this.user));
                         this.authorized = true;
                         this._router.navigate(['home']);
+                        toast('Bem Vindo', 4000)
                     } else {
                         console.log("Credenciais incorretas")
                     }

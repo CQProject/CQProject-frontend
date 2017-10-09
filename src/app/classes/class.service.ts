@@ -99,6 +99,14 @@ export class ClassService {
         return response.json().result ? response.json().data : 0;
     }
 
+    public async getStudentsWithoutClass(): Promise<UserProfile[]> {
+        let response = await this._http
+            .get(this._apiURL + `/user/student-without-class`, this._options)
+            .toPromise();
+
+        return response.json().result ? response.json().data : 0;
+    }
+
     public async createClass(cla: Class): Promise<boolean> {
         var toPost = JSON.stringify({
             SchoolYear: new Date(Date.now()).getFullYear() + "/" + (new Date(Date.now()).getFullYear() + 1),
@@ -110,6 +118,21 @@ export class ClassService {
             .post(this._apiURL + '/class/profile', toPost, this._options).toPromise();
 
         return res.json().result;
+    }
+
+    public async addUserToClass(classID: number, userID: number): Promise<boolean> {
+        var toPost = JSON.stringify({
+            ClassID: classID,
+            UserID: userID
+        });
+        let res = await this._http
+            .post(this._apiURL + '/class/user', toPost, this._options).toPromise();
+
+        if (res.json().result) return res.json().data;
+        else {
+            console.log(res.json().info);
+            return null;
+        }
     }
 
     private _handleError(error: Response) {

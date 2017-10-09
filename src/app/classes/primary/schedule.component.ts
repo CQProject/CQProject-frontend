@@ -131,7 +131,7 @@ export class ClassPrimaryScheduleComponent {
 
     public select(day: number, hour: number) {
         this.selected = this.week[day][hour];
-        this.able= (this._teacherGuard.canActivate() && this.usID!=this.selected.TeacherFK)?false:true;
+        this.able= (this.usID==this.selected.TeacherFK)?true:false;
         $("#scheduleModal").modal('open');
     }
 
