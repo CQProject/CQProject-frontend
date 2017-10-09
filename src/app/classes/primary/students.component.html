@@ -23,36 +23,12 @@
                             <p>{{student?.Email}}</p>
                         </div>
                         <div class="card-action">
-                            <a class="left" [routerLink]="['/user/details',student.ID]">Perfil</a>
-                            <a class="right" [routerLink]="['/notifications/sendToUser',student.ID]">Enviar mensagem</a>
+                            <a *ngIf="_adminGuard.canActivate() || _secretaryGuard.canActivate()" class="left" [routerLink]="['/user/details',student?.ID]">Perfil</a>
+                            <a class="right" [routerLink]="['/notifications/sendToUser',student?.ID]">Enviar mensagem</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--
-            <div *ngFor="let student of students" style="height: 75px;padding-top: 10px;" class="col s6">
-                <div class="row card" style="height:100%;">
-                    <div class=" col s4 m3 valign-wrapper" style="height:100%;">
-                        <img [attr.src]="student?.Photo" class="responsive-img" style="height:90%;">
-                    </div>
-                    <div class="col s4 m5 left-align valign-wrapper" style="height:100%;">
-                        <div>
-                            <span><b>Nome:</b> {{student?.Name}}</span><br>
-                            <span><b>Email:</b> {{student?.Email}}</span>
-                        </div>
-                    </div>
-                    <div *ngIf="_adminGuard.canActivate() || _secretaryGuard.canActivate()" class="col s4 btn grey darken-2" style="height: 100%">
-                        <a class="white-text" [routerLink]="['/user/details',student.ID]">Perfil</a><br>
-                        <a class="white-text" [routerLink]="['/notifications/sendToUser',student.ID]">Enviar mensagem</a>
-                    </div>
-                    <a *ngIf="!_adminGuard.canActivate() && !_secretaryGuard.canActivate()" class="col s4 btn grey darken-2 center" style="height: 100%"
-                        [routerLink]="['/notifications/sendToUser',student.ID]">
-                        <p>Enviar mensagem</p>
-                    </a>
-
-                </div>
-            </div>
-        -->
         </div>
     </div>
 </div>

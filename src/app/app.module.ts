@@ -42,8 +42,10 @@ import { LessonFormComponent } from "./forms/lesson-form.component";
 import { NotificationFormComponent } from "./notifications/notification-form.component";
 import { ChildrenListComponent } from "./users/children-list.component";
 import { ClassListTeacherComponent } from "./classes/list-teacher.component";
+import { ClassListStudentComponent } from "./classes/list-student.component";
 import { UserClassFormComponent } from "./forms/user-class-form.component";
 import { TeacherListComponent } from "./users/teacher-list.component";
+import { ParentListComponent } from "./users/parents-list.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
@@ -106,8 +108,6 @@ import { ParentingService } from "./users/parenting.service";
         ]
       },
       { path: 'user/details/:id', component: UserDetailsComponent, canActivate: [AuthGuard], data: { roles: [1, 2, 3, 4, 5, 6] } },
-      { path: 'children/:id', component: ChildrenListComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 5, 6] } },
-      { path: 'classes/teacher/:id', component: ClassListTeacherComponent, canActivate: [AuthGuard], data: { roles: [2, 3, 5, 6] } },
       { path: 'classes/school/:id', component: ClassListComponent, canActivate: [AuthGuard], data: { roles: [3, 6] } },
       { path: 'school/addclass/:id', component: ClassFormComponent, canActivate: [AuthGuard], data: { roles: [3, 6] } },
       {
@@ -167,7 +167,9 @@ import { ParentingService } from "./users/parenting.service";
     ChildrenListComponent,
     ClassListTeacherComponent,
     UserClassFormComponent,
-    TeacherListComponent
+    TeacherListComponent,
+    ParentListComponent,
+    ClassListStudentComponent
     //Pipe
   ],
   providers: [

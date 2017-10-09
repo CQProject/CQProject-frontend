@@ -8,36 +8,36 @@ import { Class } from '../classes/iClass';
 declare var $: any;
 
 
-@Component({ selector: 'class-list-teacher', templateUrl: "./list-teacher.component.html" })
+@Component({ selector: 'class-list-student', templateUrl: "./list-student.component.html" })
 
-export class ClassListTeacherComponent {
+export class ClassListStudentComponent {
 
     public classes: any[];
-    public hasClass:boolean;
+    public hasClass: boolean;
 
     constructor(
         private _classService: ClassService,
         private _schoolService: SchoolService,
         private _router: Router,
         private _route: ActivatedRoute
-    ) { this.classes=[]; }
+    ) { this.classes = []; }
 
     public async ngOnInit() {
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('ul.tabs').tabs({
-                swipeable:true
+                swipeable: true
             });
-          });
+        });
         let userID;
         this._route.params.subscribe(params => userID = params['id']);
-        let classs = await this._classService.getClassesByTeacher(userID);
-        this.hasClass=classs.length>0?true:false;
-        for(let cla of classs){
+        let classs = await this._classService.getClassesByUser(userID);
+        this.hasClass = classs.length > 0 ? true : false;
+        for (let cla of classs) {
             let clas = await this._classService.getClassProfile(cla);
             let school = await this._schoolService.getSchool(clas.SchoolFK);
             this.classes.push({
-                Class: clas.Year+clas.ClassDesc,
-                ID:clas.ID,
+                Class: clas.Year + clas.ClassDesc,
+                ID: clas.ID,
                 School: school.Name
             })
         }

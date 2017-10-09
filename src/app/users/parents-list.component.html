@@ -1,0 +1,27 @@
+<div class="container">
+    <div *ngIf="hasGuardian">
+        <div class="center green white-text flow-text">Encarregados de Educação</div><br>
+        <div *ngIf="_adminGuard.canActivate() || _secretaryGuard.canActivate()" style="position: relative; height: 70px;">
+            <div class="fixed-action-btn horizontal" style="position: absolute; display: inline-block; right: 0%">
+                <a class="btn-floating btn-large green z-depth-4"><i class="large material-icons">mail</i></a>
+                <ul>
+                    <li><a [routerLink]="['/notifications/sendToUser',studentID]" class=" hide-on-small-only btn lime darken-2 right">Enviar mensagem a todos os Enc. Educação</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div *ngFor="let parent of parents" class="card horizontal ">
+        <div class="card-image valign-wrapper">
+            <img [attr.src]="parent?.Photo" class="responsive-img" style="height: 100px">
+        </div>
+        <div class="card-stacked">
+            <div class="card-content left-align">
+                <h5>{{parent?.Name}}</h5>
+            </div>
+            <div class="card-action">
+                <a class="left green-text text-darken-2" [routerLink]="['/user/details/', parent?.ID]">Perfil</a>
+                <a class="right green-text text-darken-2" [routerLink]="['/notifications/sendToUser',parent?.ID]">Enviar Mensagem</a>
+            </div>
+        </div>
+    </div>
+</div>

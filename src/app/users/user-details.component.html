@@ -2,8 +2,8 @@
     <div class="col s12 l10 offset-l1">
         <div class="row">
             <div class="col s12 m4">
-                <div class="white card z-depth-4" *ngIf="!_guardianGuard.canActivate() && profileDetails?.Photo!=null" style="margin-right:10px">
-                    <img class="circle responsive-img" [attr.src]="profilePhoto" style="width:100%">
+                <div class="white card z-depth-4 center" *ngIf="profileDetails?.Photo!=null">
+                    <img class="circle responsive-img" [attr.src]="profilePhoto">
                 </div>
                 <div class="white card z-depth-4 black-text">
                     <table>
@@ -51,14 +51,19 @@
                     </table>
                 </div>
             </div>
-            <div *ngIf="_teacherGuard.canActivate()" class="col s12 m8">
-                <div class="center green white-text flow-text">As minhas turmas</div>
-                <class-list-teacher></class-list-teacher>
+            <div class="col s12 m8">
+                <div *ngIf="_teacherGuard.canActivate() || _secretaryGuard.canActivate() || _adminGuard.canActivate()">
+                    <class-list-teacher></class-list-teacher>
+                </div>
+                <div *ngIf="_guardianGuard.canActivate() || _secretaryGuard.canActivate() || _adminGuard.canActivate()">
+                    <children-list></children-list>
+                </div>
+                <div *ngIf="_studentGuard.canActivate() || _secretaryGuard.canActivate() || _adminGuard.canActivate()">
+                    <class-list-student></class-list-student>
+                    <parent-list></parent-list>
+                </div>
             </div>
-            <div *ngIf="_guardianGuard.canActivate()" class="col s12 m8">
-                <div class="center green white-text flow-text">Os meus educandos</div>
-                <children-list></children-list>
-            </div>
+
         </div>
 
     </div>
