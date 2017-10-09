@@ -2,6 +2,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'materialize-css';
+import { toast } from 'materialize-css';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -92,7 +94,7 @@ export class SensorService {
         this.room = await this._roomService.getRoom(sensor.RoomFK);
         this.room.HasSensor = true;
         this._roomService.editRoom(this.room);
-        return res.json().result;
+        return toast("Sensor criado com sucesso",4000,'lime');
     }
 
     private _handleError(error: Response) {

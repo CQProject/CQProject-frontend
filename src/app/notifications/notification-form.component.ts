@@ -1,5 +1,5 @@
 import { concat } from 'rxjs/operator/concat';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { NotificationService } from "./notification.service";
 import { FileService } from "./../utils/files.service";
@@ -27,7 +27,8 @@ export class NotificationFormComponent {
         private _route: ActivatedRoute,
         private _fileService: FileService,
         private _notificationService: NotificationService,
-        private _parentingService: ParentingService
+        private _parentingService: ParentingService,
+        private _changeDetetor: ChangeDetectorRef
     ) {
         this.notification = {
             Subject: null,
@@ -74,8 +75,15 @@ export class NotificationFormComponent {
 
     public async sendMessage() {
         let res = this._notificationService.sendToUser(this.notification);
-        if (res) {
-            location.reload();
+        this.notification = {
+            Subject: null,
+            Description: null,
+            Urgency: false,
+            Approval: false,
+            SenderFK: null,
+            ReceiverFK: null
         }
+        tinymce.activeEditor.setContent("");
+        this._changeDetetor.detectChanges();
     }
 }

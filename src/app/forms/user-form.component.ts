@@ -23,7 +23,8 @@ export class UserFormComponent {
     constructor(
         public _userService: UserService,
         public _fileService: FileService,
-        public _adminGuard: AdminGuard
+        public _adminGuard: AdminGuard,
+        public _changeDetetor: ChangeDetectorRef
     ) {
         this.checked = false;
         this.confirmed = false;
@@ -57,6 +58,7 @@ export class UserFormComponent {
         this.user.Photo = await this._fileService.imageUpload(this.photo);
         this.user.Curriculum = await this._fileService.fileUpload(this.curriculum);
         let result = await this._userService.createUser(this.user);
-        if (result) location.reload();
+        this.user = new UserDetailsToPost();
+        this._changeDetetor.detectChanges();
     }
 }

@@ -1,5 +1,5 @@
 import { forEach } from '@angular/router/src/utils/collection';
-import { Component, OnInit, Renderer } from '@angular/core';
+import { Component, OnInit, Renderer,ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { RoomService } from '../sensors/room.service';
@@ -28,6 +28,7 @@ export class RoomFormComponent {
         private _roomService: RoomService,
         private _fileService: FileService,
         private _route: ActivatedRoute,
+        private _changeDetetor: ChangeDetectorRef,
         private _renderer: Renderer
     ) { this.room = new Room(); }
 
@@ -72,7 +73,8 @@ export class RoomFormComponent {
 
     public async createRoom() {
         var result = await this._roomService.createRoom(this.room)
-        if (result) location.reload();
+        this.room = new Room();
+        this._changeDetetor.detectChanges();
     }
 
 }

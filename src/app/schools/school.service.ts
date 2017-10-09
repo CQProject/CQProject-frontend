@@ -2,6 +2,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'materialize-css';
+import { toast } from 'materialize-css';
 
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
@@ -61,9 +63,12 @@ export class SchoolService {
         let res = await this._http
             .post(this._apiURL + '/school', toPost, this._options).toPromise();
 
-        if (res.json().result) return res.json().data;
+        if (res.json().result) {
+            toast("Escola criada com sucesso",4000,'lime')
+            return res.json().data;
+        }
         else {
-            console.log(res.json().info);
+            toast(res.json().info,4000,'lime');
             return null;
         }
     }

@@ -2,6 +2,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'materialize-css';
+import { toast } from 'materialize-css';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -85,9 +87,13 @@ export class LessonService {
         let response = await this._http
             .post(this._apiURL + `/lesson/summary`,toPost, this._options)
             .toPromise();
-        if (response.json().result) return response.json().data;
+        if (response.json().result) {
+            toast("Lição criada com sucesso", 4000,'lime');
+            return response.json().data;
+        }
         else {
-            console.log(response.json().info);
+            toast(response.json().info, 4000,'red');
+            return null;
         }
     }
 
@@ -97,7 +103,7 @@ export class LessonService {
         .toPromise();
         if (response.json().result)  return response.json().data;
         else {
-            console.log(response.json().info);
+            toast(response.json().info, 4000,'red')
         }
     }
 

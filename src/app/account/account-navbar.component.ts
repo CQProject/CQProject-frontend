@@ -60,13 +60,13 @@ export class AccountNavbarComponent {
                         localStorage.setItem('currentUser', JSON.stringify(this.user));
                         this.authorized = true;
                         this._router.navigate(['home']);
-                        toast('Bem Vindo', 4000)
+                        toast('Bem Vindo', 4000,'lime')
                     } else {
-                        console.log("Credenciais incorretas")
+                        
                     }
                 },
                 error => {
-                    console.log("Impossível entrar no sistema");
+                    
                 });
         }
     }
@@ -75,6 +75,7 @@ export class AccountNavbarComponent {
         this.user = null;
         localStorage.removeItem('currentUser');
         this.authorized = false;
+        toast('Saída efetuada com sucesso', 4000,'lime')
         location.reload();
     }
 

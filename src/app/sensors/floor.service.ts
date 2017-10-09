@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
+import 'materialize-css';
+import { toast } from 'materialize-css';
 
 import { Floor} from "./iFloor";
 import { Sensor } from './iSensor';
@@ -54,6 +56,6 @@ export class FloorService {
         let res = await this._http
         .post(this._apiURL + '/floor', toPost, this._options).toPromise();
 
-        return res.json().result;
+        return toast("Escola criada com sucesso",4000,'lime');
     }
 }

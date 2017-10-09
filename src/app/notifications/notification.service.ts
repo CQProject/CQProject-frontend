@@ -2,6 +2,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'materialize-css';
+import { toast } from 'materialize-css';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -95,7 +97,7 @@ export class NotificationService {
         return this._http
             .post(this._apiURL + '/notification/class', toPost, this._options)
             .map((response: Response) => {
-                response.json().result ? console.log("Notificação enviada com sucesso") : console.log(response.json().info);
+                response.json().result ? toast("Notificação enviada com sucesso",4000,'lime') : toast(response.json().info,4000,'red');
             })
             .catch(this._handleError);
     }
@@ -113,9 +115,12 @@ export class NotificationService {
         .post(this._apiURL + `/notification/user`,toPost, this._options)
         .toPromise();
 
-    if (response.json().result) return response.json().data;
+    if (response.json().result) {
+        toast("Notificação enviada com sucesso",4000,'lime');
+        return response.json().data;
+    }
     else {
-        console.log(response.json().info);
+        toast(response.json().info,4000,'red')
         return null;
     }
         
@@ -134,7 +139,7 @@ export class NotificationService {
         return this._http
             .put(this._apiURL + `/notification/accept/${notificationID}`, null, this._options)
             .map((response: Response) => {
-                response.json().result ? console.log("Notificação aceite com sucesso") : console.log(response.json().info);
+                response.json().result ? toast("Aceitada com sucesso",4000,'lime')  : toast(response.json().info,4000,'red');
             })
             .catch(this._handleError);
     }
