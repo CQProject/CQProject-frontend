@@ -1,0 +1,37 @@
+<nav class="green darken-2">
+    <div class="nav-wrapper">
+        <ul class="row">
+            <li class="col l1"></li>
+            <li class="col l2 s12 center">
+                <a [routerLink]="['addUser']">
+                        Registar Utilizador
+                    </a>
+            </li>
+            <li class="col l2 s12 center">
+                <a [routerLink]="['addStudguard']">
+                    Adicionar parentesco
+                </a>
+            </li>
+            <li class="col l2 s12 center">
+                <a [routerLink]="['teachers']">
+                    Listar Professores
+                </a>
+            </li>
+            <li class="col l2 s12 center">
+                <a [routerLink]="['addStudguard']">
+                    Listar Assistentes
+                </a>
+            </li>
+            <li class="col l2 s12 center">
+                <a [routerLink]="['addStudguard']">
+                    Listar Secretários
+                </a>
+            </li>
+            <li class="col l1"></li>
+        </ul>
+    </div>
+</nav>
+<hr>
+<div>
+    <router-outlet></router-outlet>
+</div>
