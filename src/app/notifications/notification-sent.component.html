@@ -21,18 +21,17 @@
 
 <div id="notifSent" class="modal">
     <div class="modal-content" style="padding:0px">
-        <header class="green">
-            <div class="right-align">
-                <a (click)="closeNotifDetails()">
-                    <i class="material-icons white-text" style="cursor:pointer">close</i>
-                </a>
-            </div>
-            <div class="center-align" style="margin-top:-20px">
-                <h3 class="white-text">{{selected?.Subject}}</h3>
-            </div>
-        </header>
-        <div class="container" style="margin:20px;width:90%">
+            <header style="position: relative">
+                    <a class="btn-floating deep-orange darken-2" (click)="closeNotifDetails()" style="position:absolute; right: 10px;">
+                        <i class="material-icons white-text" style="cursor:pointer">close</i>
+                    </a>
+                </header>
+        <div class="container" style="margin:20px; padding-top: 10px;">
             <div>
+                <div class="row">
+                    <div class="col s2"><b>Asunto:</b></div>
+                    <div class="col s10"><b>{{selected?.Subject}}</b></div>
+                </div>
                 <div class="row">
                     <div class="col s2"><b>Data:</b></div>
                     <div class="col s10"> {{selected?.Hour | date}}</div>

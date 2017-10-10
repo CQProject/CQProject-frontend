@@ -1,18 +1,18 @@
-<div class="container white" style="margin-bottom:25px">
-    <div class="center">
-        <h2 class="green-text text-darken-2">Adicionar uma sala</h2>
+<div class="container white" style="margin-top:25px">
+    <div class="center" style="padding-top: 20px;">
+        <h4 class="green-text text-darken-2">Adicionar uma sala</h4>
     </div>
     <div class="row">
         <form class="col s12 left-align">
-                <div class="input-field row col s10 offset-s1">
-                    <input [(ngModel)]="room.Name" type="text" id="Name" name="Name" required/>
-                    <label for="Name">Nome:</label>
+            <div class="input-field row col s10 offset-s1">
+                <input [(ngModel)]="room.Name" type="text" id="Name" name="Name" required/>
+                <label for="Name">Nome:</label>
+            </div>
+
+            <div class="row">
+                <div id="board" class="col container center">
                 </div>
-                
-                <div class="row">
-                    <div id="board" class="col container center">
-                    </div>
-                </div>
+            </div>
         </form>
     </div>
     <div class="center" style="padding:20px">
