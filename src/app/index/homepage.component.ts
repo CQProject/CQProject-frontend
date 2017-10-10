@@ -25,6 +25,5 @@ export class HomepageComponent {
         $(document).ready(function () {
             $('#noticeCarousel').carousel();
         });
-
     }
 }

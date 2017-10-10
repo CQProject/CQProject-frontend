@@ -29,7 +29,7 @@ export class AccountHomeComponent {
             let classes = await this._classService.getClassesByUser(usID);
             this._router.navigate(['primary-class/', classes[classes.length - 1]])
         } else if (this._teacherGuard.canActivate()) {
-            this._router.navigate(['classes/teacher/', JSON.parse(localStorage.getItem('currentUser')).userID])
+            this._router.navigate(['user/details/', JSON.parse(localStorage.getItem('currentUser')).userID])
         } else if (this._guardianGuard.canActivate()) {
             this._router.navigate(['children/', JSON.parse(localStorage.getItem('currentUser')).userID])
         } else if (this._secretaryGuard.canActivate()) {
