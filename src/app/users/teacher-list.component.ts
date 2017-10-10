@@ -16,7 +16,7 @@ declare var $: any;
 export class TeacherListComponent {
 
     public teachersID: any[];
-    public teachers: UserProfile[];
+    public teachers: any[];
 
     constructor(
         private _classService: ClassService,
@@ -24,16 +24,25 @@ export class TeacherListComponent {
         private _fileService: FileService,
         private _router: Router,
         private _route: ActivatedRoute,
-    ) { this.teachersID = [];this.teachers=[]; }
+    ) { this.teachersID = []; this.teachers = []; }
 
-    public async ngOnInit(){
+    public async ngOnInit() {
         let userID = JSON.parse(localStorage.getItem('currentUser')).userID;
         let nPages = await this._userService.getUsersCount(2);
-        for(var i = 0; i < nPages; i++){
-            this.teachersID = this.teachersID.concat(await this._userService.getUsersByPage(i,2));
+        for (var i = 0; i < nPages; i++) {
+            this.teachersID = this.teachersID.concat(await this._userService.getUsersByPage(i, 2));
         }
-        for(var i = 0; i < this.teachersID.length; i++){
-            this.teachers.push(await this._userService.getProfile(this.teachersID[i]))
+        for (var i = 0; i < this.teachersID.length; i++) {
+            let teacher = await this._userService.getProfile(this.teachersID[i])
+            console.log(teacher);
+            let photo = await this._fileService.imageDownloadAsync(teacher.Photo);
+            this.teachers.push({
+                Email:teacher.Email,
+                Function:teacher.Function,
+                ID:teacher.ID,
+                Name:teacher.Name,
+                Photo:photo
+            });
         }
     }
 }

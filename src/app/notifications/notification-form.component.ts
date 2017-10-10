@@ -1,5 +1,5 @@
 import { concat } from 'rxjs/operator/concat';
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { NotificationService } from "./notification.service";
 import { FileService } from "./../utils/files.service";
@@ -86,4 +86,8 @@ export class NotificationFormComponent {
         tinymce.activeEditor.setContent("");
         this._changeDetetor.detectChanges();
     }
+
+    ngOnDestroy() {
+		tinymce.remove(this.editor);
+	}
 }
