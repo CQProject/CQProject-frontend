@@ -34,4 +34,15 @@ export class NoticeService {
             return null;
         }
     }
+
+    public async getNewsBySchool(schoolID:number,pageID:number): Promise<Notice[]> {
+        let response = await this._http
+            .get(this._apiURL + `/notice/school/${schoolID}/${pageID}`, this._options)
+            .toPromise();
+        if (response.json().result) return response.json().data;
+        else {
+            console.log(response.json().info);
+            return null;
+        }
+    }
 }
