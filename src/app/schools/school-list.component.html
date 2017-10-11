@@ -22,7 +22,7 @@
       <div class="col s12 m6 l6 center-align">
         <div class="card">
           <div class="card-image">
-            <img [attr.src]="school?.ProfilePicture">
+            <img [attr.src]="school?.ProfilePicture" style="height: 280px;">
             <span class="flow-text">{{school?.Name}}</span>
             <a class="btn-floating halfway-fab green darken-1" [routerLink]="['/school', school?.ID]" style="bottom:20px">
                 <i class="material-icons">info_outline</i>

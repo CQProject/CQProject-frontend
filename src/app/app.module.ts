@@ -46,6 +46,8 @@ import { ClassListStudentComponent } from "./classes/list-student.component";
 import { UserClassFormComponent } from "./forms/user-class-form.component";
 import { TeacherListComponent } from "./users/teacher-list.component";
 import { ParentListComponent } from "./users/parents-list.component";
+import { AssistantListComponent } from "./users/assistants-list.component";
+import { SecretaryListComponent } from "./users/secretary-list.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
@@ -94,7 +96,9 @@ import { ParentingService } from "./users/parenting.service";
           { path: '', redirectTo: 'user', pathMatch: 'full' },
           { path: 'addUser', component: UserFormComponent },
           { path: 'addStudguard', component: StudentGuardFormComponent },
-          { path: 'teachers', component:TeacherListComponent}
+          { path: 'teachers', component:TeacherListComponent},
+          { path: 'assistants', component:AssistantListComponent},
+          { path: 'secretary', component:SecretaryListComponent}
         ]
       },
       {
@@ -169,7 +173,9 @@ import { ParentingService } from "./users/parenting.service";
     UserClassFormComponent,
     TeacherListComponent,
     ParentListComponent,
-    ClassListStudentComponent
+    ClassListStudentComponent,
+    AssistantListComponent,
+    SecretaryListComponent
     //Pipe
   ],
   providers: [

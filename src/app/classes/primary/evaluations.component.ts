@@ -19,14 +19,14 @@ export class ClassPrimaryEvaluationComponent {
 
     private evaluations: any[];
     private selected: any;
-    public values=["Mau", "Não Satisfaz", "Satisfaz", "Satisfaz Bem", "Bom"];
+    public values = ["Mau", "Não Satisfaz", "Satisfaz", "Satisfaz Bem", "Bom"];
 
     constructor(
         private _evaluationService: EvaluationService,
         private _userService: UserService,
         private _scheduleService: ScheduleService,
         public _guardianGuard: GuardianGuard,
-        private _teacherGuard:TeacherGuard,
+        private _teacherGuard: TeacherGuard,
         public _studentGuard: StudentGuard,
         public _adminGuard: AdminGuard,
         public _secretaryGuard: SecretaryGuard,
@@ -39,10 +39,10 @@ export class ClassPrimaryEvaluationComponent {
             $("#evaluationModal").modal({
                 dismissible: false
             }),
-            $(window).on("hashchange", function () {
-                $("#evaluationModal").modal('close')
-            }),
-            $('.collapsible').collapsible();
+                $(window).on("hashchange", function () {
+                    $("#evaluationModal").modal('close')
+                }),
+                $('.collapsible').collapsible();
         })
 
         let classID;
@@ -62,7 +62,7 @@ export class ClassPrimaryEvaluationComponent {
                     Subject: subject.Name,
                     TeacherFK: teacher.ID,
                     Teacher: teacher.Name,
-                    Grade: this.values[grades.Value-1]
+                    Grade: this.values[grades.Value - 1]
                 });
             } else {
                 this.evaluations.push({
@@ -71,8 +71,8 @@ export class ClassPrimaryEvaluationComponent {
                     EvaluationDate: evaluation.EvaluationDate,
                     Subject: subject.Name,
                     TeacherFK: evaluation.TeacherFK,
-                    Teacher:teacher.Name,
-                    Able:(this._teacherGuard.canActivate() && userID!=evaluation.TeacherFK)?false:true
+                    Teacher: teacher.Name,
+                    Able: (this._teacherGuard.canActivate() && userID != evaluation.TeacherFK) ? false : true
                 });
             }
         }
@@ -100,15 +100,18 @@ export class ClassPrimaryEvaluationComponent {
             let student = await this._userService.getProfile(grade.StudentFK);
             students.push({
                 Name: student.Name,
-                Value: this.values[grade.Value-1]
+                Value: this.values[grade.Value - 1]
             })
         }
+        students.sort(function (a, b) {
+            return (a.Name > b.Name) ? 1 : ((b.Name > a.Name) ? -1 : 0);
+        });
 
         this.selected = {
             ID: this.evaluations[id].ID,
             EvaluationDate: this.evaluations[id].EvaluationDate,
             Subject: this.evaluations[id].Subject,
-            TeacherFK:this.evaluations[id].TeacherFK,
+            TeacherFK: this.evaluations[id].TeacherFK,
             Teacher: this.evaluations[id].Teacher,
             Students: students
         }

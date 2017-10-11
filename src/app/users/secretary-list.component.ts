@@ -9,14 +9,14 @@ import { ParentingService } from './parenting.service';
 declare var $: any;
 
 @Component({
-    selector: "teacher-list",
-    templateUrl: "./teacher-list.component.html"
+    selector: "secretary-list",
+    templateUrl: "./secretary-list.component.html"
 })
 
-export class TeacherListComponent {
+export class SecretaryListComponent {
 
-    public teachersID: any[];
-    public teachers: any[];
+    public secretariesID: any[];
+    public secretary: any[];
 
     constructor(
         private _classService: ClassService,
@@ -24,18 +24,18 @@ export class TeacherListComponent {
         private _fileService: FileService,
         private _router: Router,
         private _route: ActivatedRoute,
-    ) { this.teachersID = []; this.teachers = []; }
+    ) { this.secretariesID = []; this.secretary = []; }
 
     public async ngOnInit() {
         let userID = JSON.parse(localStorage.getItem('currentUser')).userID;
-        let nPages = await this._userService.getUsersCount(2);
+        let nPages = await this._userService.getUsersCount(3);
         for (var i = 0; i < nPages; i++) {
-            this.teachersID = this.teachersID.concat(await this._userService.getUsersByPage(i, 2));
+            this.secretariesID = this.secretariesID.concat(await this._userService.getUsersByPage(i, 3));
         }
-        for (var i = 0; i < this.teachersID.length; i++) {
-            let teacher = await this._userService.getProfile(this.teachersID[i])
+        for (var i = 0; i < this.secretariesID.length; i++) {
+            let teacher = await this._userService.getProfile(this.secretariesID[i])
             let photo = await this._fileService.imageDownloadAsync(teacher.Photo);
-            this.teachers.push({
+            this.secretary.push({
                 Email:teacher.Email,
                 Function:teacher.Function,
                 ID:teacher.ID,

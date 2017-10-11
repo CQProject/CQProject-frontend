@@ -1,22 +1,22 @@
 <div class="container white" style="margin-bottom:25px">
     <div class="center" style="padding-top: 20px">
-        <h4 class="green-text text-darken-2">Listagem de Professores.</h4>
+        <h4 class="green-text text-darken-2">Listagem de Auxiliares de Educação.</h4>
     </div>
     <div class="row">
         <form class="col s12 left-align">
             <div class="col s10 offset-s1">
 
-                    <div *ngFor="let teacher of teachers" class="card horizontal row">
+                    <div *ngFor="let assistant of assistants" class="card horizontal row">
                         <div class="card-image valign-wrapper col s3">
-                            <img [attr.src]="teacher?.Photo" class="responsive-img" style="height: 100px">
+                            <img [attr.src]="assistant?.Photo" class="responsive-img" style="height: 100px">
                         </div>
                         <div class="card-stacked col s9">
                             <div class="card-content left-align">
-                                <h5>{{teacher?.Name}}</h5>
+                                <h5>{{assistant?.Name}}</h5>
                             </div>
                             <div class="card-action">
-                                <a class="left green-text text-darken-2" [routerLink]="['/user/details/', teacher?.ID]">Perfil</a>
-                                <a class="right green-text text-darken-2" [routerLink]="['/notifications/sendToUser',teacher?.ID]">Enviar Mensagem</a>
+                                <a class="left green-text text-darken-2" [routerLink]="['/user/details/', assistant?.ID]">Perfil</a>
+                                <a class="right green-text text-darken-2" [routerLink]="['/notifications/sendToUser',assistant?.ID]">Enviar Mensagem</a>
                             </div>
                         </div>
                     </div>

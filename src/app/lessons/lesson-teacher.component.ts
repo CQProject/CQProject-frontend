@@ -116,6 +116,8 @@ export class LessonTeacherComponent {
                     Behavior: presence.Behavior,
                 });
             }
+            this.orderStudentlist()
+
         } else {
             element.className = element.className.replace("container", "");
             element.className += "hide container";
@@ -125,6 +127,12 @@ export class LessonTeacherComponent {
     public orderLessonList() {
         this.lessons.sort(function (a, b) {
             return (a.ID > b.ID) ? -1 : ((b.ID > a.ID) ? 1 : 0);
+        });
+    }
+
+    public orderStudentlist(){
+        this.students.sort(function (a, b) {
+            return (a.Student > b.Student) ? 1 : ((b.Student > a.Student) ? -1 : 0);
         });
     }
 }

@@ -14,48 +14,43 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="parallax-container" style="height:400px;width:100%">
-        <div class="section no-pad-bot">
-            <div class="container">
-                <div class="parallax">
-                    <img class="responsive-image" [attr.src]="school?.ProfilePicture">
-                </div>
-                <div class="row right-align">
-                    <div style="margin-bottom:5px">
-                        <a *ngIf="_secretaryGuard.canActivate() || _adminGuard.canActivate()" class="btn green darken-2" [routerLink]="['/classes/school/',school?.ID]">Ver Turmas</a>
-                        <a *ngIf="_assistantGuard.canActivate() || _adminGuard.canActivate()" class="btn green darken-2" [routerLink]="['/building/school', school?.ID]">Ver Instalações</a>
-                        <a *ngIf="_adminGuard.canActivate()" class="btn green darken-2">Editar</a>
-                    </div>
+<div class="parallax-container" style="height:400px;width:100%">
+    <div class="section no-pad-bot">
+        <div class="container">
+            <div class="parallax">
+                <img class="responsive-image" [attr.src]="school?.ProfilePicture">
+            </div>
+            <div class=" right-align">
+                <div style="margin-bottom:5px">
+                    <a *ngIf="_secretaryGuard.canActivate() || _adminGuard.canActivate()" class="btn green darken-2" [routerLink]="['/classes/school/',school?.ID]">Ver Turmas</a>
+                    <a *ngIf="_assistantGuard.canActivate() || _adminGuard.canActivate()" class="btn green darken-2" [routerLink]="['/building/school', school?.ID]">Ver Instalações</a>
+                    <a *ngIf="_adminGuard.canActivate()" class="btn green darken-2">Editar</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col s8 left-align">
-        <div class="row" style="padding:20px">
-            <div class="col s12">
-                <h5 class="card" id="schoolDescription"></h5>
+<div id="noticeCarousel" class="carousel center" style="margin-top: -80px;">
+    <div *ngFor="let notice of notices" class="carousel-item">
+        <div class="card">
+            <div class="card-image">
+                <img [attr.src]="notice.Image" class="responsive-img">
+                <span class="card-title">{{notice?.CreatedDate | date}}</span>
+            </div>
+            <div class="card-content">
+                <p>{{notice?.Title}}</p>
             </div>
         </div>
     </div>
-    <div class="col s4">
-        <div class="row" style="padding:20px;height:225px">
-            <div class="col s12 center" style="height:225px">
-               <button type="submit" class="btn waves-effect waves-light green darken-2">Ver mais</button>
-                <div style="margin-top:-115px;height:225px">
-                    <div *ngFor="let notice of notices">
-                    <div id="noticeCarousel" class="carousel">
-                        <a *ngFor="let notice of notices" class="carousel-item white" style="height:150px;margin:0px">
-                                <img [attr.src]="notice.Image">
-                                <span class="green-text text-darken-2 col s6">{{notice?.Title}} </span>
-                                <span class="green-text text-darken-2 col s6">{{notice?.CreatedDate | date}}</span>
-                            </a>
-                    </div>
-                </div></div>
-            </div>
-        </div>
+</div>
+<div class="center">
+    <button type="submit" class="btn waves-effect waves-light green darken-2">Ver mais</button>
+</div>
+
+<br>
+<div class="row">
+    <div class="container card col s10 offset-s1" style="padding:20px;">
+        <div id="schoolDescription"></div>
     </div>
 </div>

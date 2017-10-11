@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col s10 offset-s1">
         <div class="col s12 left-align" style="width: 15%;">
-            <a *ngFor="let sensor of sensors; let i=index" class="btn lime col s12" (click)="info(i)">
+            <a *ngFor="let sensor of sensors; let i=index" class="btn lime col s12" (click)="info(i)" style="margin-top: 5px;">
                 <h6>{{sensor?.Name}}</h6>
             </a>
         </div>
