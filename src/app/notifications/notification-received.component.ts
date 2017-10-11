@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { NotificationService } from "./notification.service";
 import { UserService } from "../users/user.service";
-import { Notification, ReceivedNotification } from "./iNotifications";
-import { Validation, SentValidation } from "./iValidations";
+import { Notification } from "./iNotifications";
+import { Validation } from "./iValidations";
 import { UserProfile } from "../users/iUsers";
 declare var $: any;
 
@@ -15,9 +15,9 @@ declare var $: any;
 
 export class NotificationReceivedComponent {
 
-    receivedNotifications: ReceivedNotification[];
+    receivedNotifications: any[];
     page: number;
-    selected: ReceivedNotification;
+    selected: any;
     checked: boolean;
 
     constructor(
@@ -53,20 +53,42 @@ export class NotificationReceivedComponent {
     }
 
     private async _getReceivedNotification(validation: Validation) {
+        console.log(validation);
         let notification = await this._service.getMessage(validation.NotificationFK);
         let sender = await this._userService.getProfile(notification.UserFK);
-        this.receivedNotifications.push({
-            "ID": notification.ID,
-            "Hour": notification.Hour,
-            "Subject": notification.Subject,
-            "Description": notification.Description,
-            "Urgency": notification.Urgency,
-            "Approval": notification.Approval,
-            "Sender": sender.Name,
-            "SenderFK": sender.ID,
-            "Accepted": validation.Accepted,
-            "Read": validation.Read
-        });
+        if(validation.StudentFK!=null){
+            let student = await this._userService.getProfile(validation.StudentFK);
+            this.receivedNotifications.push({
+                "ID": notification.ID,
+                "Hour": notification.Hour,
+                "Subject": notification.Subject,
+                "Description": notification.Description,
+                "Urgency": notification.Urgency,
+                "Approval": notification.Approval,
+                "Sender": sender.Name,
+                "SenderFK": sender.ID,
+                "Accepted": validation.Accepted,
+                "Read": validation.Read,
+                "StudentFK": student.ID,
+                "Student":student.Name
+            });
+        }else{
+            this.receivedNotifications.push({
+                "ID": notification.ID,
+                "Hour": notification.Hour,
+                "Subject": notification.Subject,
+                "Description": notification.Description,
+                "Urgency": notification.Urgency,
+                "Approval": notification.Approval,
+                "Sender": sender.Name,
+                "SenderFK": sender.ID,
+                "Accepted": validation.Accepted,
+                "Read": validation.Read,
+                "StudentFK": null,
+                "Student":null
+            });
+        }
+        
     }
 
     public async readNotification(notificationID: number, index: number) {

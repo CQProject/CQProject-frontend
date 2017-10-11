@@ -5,8 +5,8 @@ import { NotificationService } from "./notification.service";
 import { FileService } from "./../utils/files.service";
 import { UserService } from "../users/user.service";
 import { ParentingService } from "../users/parenting.service";
-import { Notification, ReceivedNotification } from "./iNotifications";
-import { Validation, SentValidation } from "./iValidations";
+import { Notification } from "./iNotifications";
+import { Validation } from "./iValidations";
 import { UserProfile } from "../users/iUsers";
 declare var $: any;
 
@@ -17,7 +17,7 @@ declare var $: any;
 
 export class NotificationFormComponent {
 
-    public student: UserProfile;
+    public user: UserProfile;
     public notification: any;
     editor: any;
 
@@ -36,27 +36,28 @@ export class NotificationFormComponent {
             Urgency: false,
             Approval: false,
             SenderFK: null,
-            ReceiverFK: null
+            ReceiverFK: null,
+            StudentFK:null
         }
     }
 
     public async ngOnInit() {
-        let ReceiverFK;
+        let ReceiverFK, StudentFK;
         this._route.params.subscribe(params => ReceiverFK = +params["id"]);
         let SenderFK = JSON.parse(localStorage.getItem('currentUser')).userID;
-        this.student = await this._userService.getProfile(ReceiverFK);
-        try{
-            this.student.Photo = await this._fileService.imageDownloadAsync(this.student.Photo);
-        }catch(Exception){
-            
+        this.user = await this._userService.getProfile(ReceiverFK);
+        if(this.user.Photo!=null){
+            this.user.Photo = await this._fileService.imageDownloadAsync(this.user.Photo);
         }
         let res = await this._parentingService.getGuardiansByUser(ReceiverFK);
         if(res!=null){
+            StudentFK = ReceiverFK;
             ReceiverFK = res[0];
             console.log(ReceiverFK)
         }
         this.notification.SenderFK = SenderFK;
         this.notification.ReceiverFK = ReceiverFK;
+        this.notification.StudentFK= StudentFK;
         tinymce.init({
             selector: '#textareaDescription',
             statusbar: false,
@@ -74,7 +75,7 @@ export class NotificationFormComponent {
     }
 
     public async sendMessage() {
-        let res = this._notificationService.sendToUser(this.notification);
+        let res = await this._notificationService.sendToUser(this.notification);
         this.notification = {
             Subject: null,
             Description: null,

@@ -58,7 +58,7 @@
                 <div *ngIf="_guardianGuard.canActivate() || _secretaryGuard.canActivate() || _adminGuard.canActivate()">
                     <children-list></children-list>
                 </div>
-                <div *ngIf="_studentGuard.canActivate() || _secretaryGuard.canActivate() || _adminGuard.canActivate()">
+                <div *ngIf="_studentGuard.canActivate()">
                     <class-list-student></class-list-student>
                     <parent-list></parent-list>
                 </div>

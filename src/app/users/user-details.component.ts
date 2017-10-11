@@ -2,10 +2,10 @@ import { concat } from 'rxjs/operator/concat';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { AccountService } from "../account/account.service";
-import { AdminGuard,AssistantGuard,GuardianGuard,SecretaryGuard,StudentGuard,TeacherGuard } from "../utils/auth-guard.service"
+import { AdminGuard, AssistantGuard, GuardianGuard, SecretaryGuard, StudentGuard, TeacherGuard } from "../utils/auth-guard.service"
 import { Account } from "../account/iAccount";
 import { UserService } from "../users/user.service";
-import { UserDetails,UserDetailsToPost } from "../users/iUsers";
+import { UserDetails, UserDetailsToPost } from "../users/iUsers";
 import { FileService } from "../utils/files.service";
 
 @Component({
@@ -36,8 +36,9 @@ export class UserDetailsComponent {
         let userID;
         this._route.params.subscribe(params => userID = +params["id"]);
         this.profileDetails = await this._userService.getUserDetails(userID);
-        await this._fileService.imageDownload(this.profileDetails.Photo)
-            .subscribe((res) => { this.profilePhoto = res; });
-        console.log(this.profileDetails)
+        if (this.profileDetails.Photo != null) {
+            await this._fileService.imageDownload(this.profileDetails.Photo)
+                .subscribe((res) => { this.profilePhoto = res; });
+        }
     }
 }

@@ -10,7 +10,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 
-import { Notification, ReceivedNotification } from "./iNotifications";
+import { Notification } from "./iNotifications";
 import { Validation, SentValidation } from "./iValidations";
 import { API } from '../../main';
 
@@ -109,7 +109,8 @@ export class NotificationService {
             "Urgency": notification.Urgency,
             "Approval": notification.Approval,
             "SenderFK": notification.SenderFK,
-            "ReceiverFK": notification.ReceiverFK
+            "ReceiverFK": notification.ReceiverFK,
+            "StudentFK": notification.StudentFK
         });
         let response = await this._http
         .post(this._apiURL + `/notification/user`,toPost, this._options)

@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { NotificationService } from "./notification.service";
 import { UserService } from "../users/user.service";
-import { Notification, ReceivedNotification } from "./iNotifications";
-import { Validation, SentValidation } from "./iValidations";
+import { Notification } from "./iNotifications";
+import { Validation } from "./iValidations";
 import { UserProfile } from "../users/iUsers";
 declare var $:any;
 
@@ -15,9 +15,9 @@ declare var $:any;
 
 export class NotificationMenuComponent {
 
-    receivedNotifications: ReceivedNotification[];
+    receivedNotifications: any[];
     sentNotifications: Notification[];
-    sentValidations: SentValidation[];
+    sentValidations: any[];
     receivedPage: number;
     sentPage: number;
 
