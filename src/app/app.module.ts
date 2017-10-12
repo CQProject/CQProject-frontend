@@ -48,6 +48,7 @@ import { TeacherListComponent } from "./users/teacher-list.component";
 import { ParentListComponent } from "./users/parents-list.component";
 import { AssistantListComponent } from "./users/assistants-list.component";
 import { SecretaryListComponent } from "./users/secretary-list.component";
+import { SchoolEventsComponent } from "./schools/school-events.component";
 //Service
 import { SchoolService } from "./schools/school.service";
 import { AccountService } from "./account/account.service";
@@ -174,6 +175,7 @@ import { ParentingService } from "./users/parenting.service";
     TeacherListComponent,
     ParentListComponent,
     ClassListStudentComponent,
+    SchoolEventsComponent,
     AssistantListComponent,
     SecretaryListComponent
     //Pipe

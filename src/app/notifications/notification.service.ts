@@ -11,7 +11,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 
 import { Notification } from "./iNotifications";
-import { Validation, SentValidation } from "./iValidations";
+import { Validation} from "./iValidations";
 import { API } from '../../main';
 
 @Injectable()

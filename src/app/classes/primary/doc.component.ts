@@ -62,7 +62,7 @@ export class ClassPrimaryDocumentComponent {
         }
     }
 
-    public close(elementID: string) {
+    public close() {
         $('#pdfViewer').modal('close');
     }
 

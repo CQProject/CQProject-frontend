@@ -2,11 +2,11 @@
     <div class="col s10 offset-s1">
         <div id="noticeCarousel" class="carousel">
             <a *ngFor="let notice of notices" class="carousel-item white" style="width:75%;height: 100%">
-                <img [attr.src]="notice.Image" style="height:80%">
+                <img [attr.src]="notice.Image" style="height:85%">
                 <div class="row white">
                     <div class="col s12 center-align">
-                        <h4 class="green-text text-darken-2 col s6">{{notice?.Title}} </h4>
-                        <h5 class="green-text text-darken-2 col s6">{{notice?.CreatedDate | date}}</h5>
+                        <h5 class="green-text text-darken-2 col s6">{{notice?.Title}} </h5>
+                        <p class="green-text text-darken-2 col s6">{{notice?.CreatedDate | date}}</p>
                     </div>
                 </div>
             </a>
@@ -26,7 +26,7 @@
 </div>
 <div class="row">
     <div class="col s10 offset-s1 center-align">
-        <div class=" row col s10 offset-s1"><h3 class="flow-text white-text" style="font-size:3rem">Centro Escolares <i class="material-icons white-text" style="font-size:3rem">home</i></h3></div>
+        <div class=" row col s10 offset-s1"><h3 class="flow-text white-text" style="font-size:3rem">Centros Escolares <i class="material-icons white-text" style="font-size:3rem">home</i></h3></div>
         <schools-list></schools-list>
     </div>
 </div>
